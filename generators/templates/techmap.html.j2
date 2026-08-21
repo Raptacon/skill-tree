@@ -1,0 +1,165 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Raptacon 3200 - Skill Tree Map</title>
+<style>
+  @page { size: letter landscape; margin: 0.4in; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    color: #1a1a1a;
+    background: #fff;
+  }
+  h1 { font-size: 28px; margin: 0 0 2px; }
+  .subtitle { color: #666; font-size: 12px; margin-bottom: 14px; }
+
+  .baseline-banner {
+    border: 2px solid #1a1a1a;
+    border-radius: 8px;
+    padding: 8px 14px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    background: #f5f5f5;
+  }
+  .baseline-banner .label {
+    font-weight: 700;
+    font-size: 13px;
+    flex: 0 0 auto;
+  }
+  .chip {
+    display: inline-block;
+    background: #fff;
+    border: 1px solid #bbb;
+    border-radius: 999px;
+    padding: 2px 9px;
+    font-size: 11px;
+  }
+
+  .example-path {
+    border: 2px dashed #1a6fb0;
+    border-radius: 8px;
+    padding: 8px 14px;
+    margin-bottom: 14px;
+    background: #f5faff;
+    font-size: 12px;
+    color: #333;
+  }
+  .example-path b { color: #1a6fb0; }
+
+  table.grid {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 18px;
+    table-layout: fixed;
+  }
+  table.grid th, table.grid td {
+    border: 1px solid #ccc;
+    vertical-align: top;
+    padding: 6px 8px;
+  }
+  table.grid th {
+    background: #1a1a1a;
+    color: #fff;
+    font-size: 12px;
+    text-align: left;
+  }
+  table.grid td.lane-label {
+    background: #eee;
+    font-weight: 700;
+    font-size: 12px;
+    width: 110px;
+  }
+  table.grid td.lane-label.specialization {
+    background: #f5faff;
+  }
+  table.grid td.lane-label .spec-note {
+    display: block;
+    font-weight: 400;
+    font-size: 9px;
+    color: #1a6fb0;
+    margin-top: 2px;
+  }
+  table.grid td.cell {
+    font-size: 10px;
+  }
+  table.grid td.cell .skill-chip {
+    display: block;
+    background: #fafafa;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 2px 5px;
+    margin-bottom: 3px;
+  }
+  table.grid td.cell:empty::after,
+  table.grid td.cell.no-skills::after {
+    content: "-";
+    color: #ccc;
+  }
+
+  .hybrids-section h2 { font-size: 15px; margin-bottom: 8px; }
+  .hybrid-cards { display: flex; flex-wrap: wrap; gap: 10px; }
+  .hybrid-card {
+    border: 2px dashed #1a6fb0;
+    border-radius: 8px;
+    padding: 6px 12px;
+    background: #f5faff;
+    font-size: 11px;
+  }
+  .hybrid-card .name { font-weight: 700; color: #1a6fb0; }
+  footer { margin-top: 14px; font-size: 9px; color: #999; }
+</style>
+</head>
+<body>
+  <h1>Raptacon 3200 - Skill Tree Map</h1>
+  <div class="subtitle">Every tree, every tier, in one picture. Read left to right: Baseline first, then increasing tier per tree; hybrid nodes bridge two trees at Journeyman.</div>
+
+  <div class="baseline-banner">
+    <span class="label">BASELINE (everyone starts here):</span>
+    {% for s in baseline_skills %}<span class="chip">{{ s }}</span>{% endfor %}
+  </div>
+
+  <div class="example-path">
+    Example: a brand-new student finishes <b>Baseline</b>, picks Electronics and Programming, reaches
+    <b>Journeyman</b> in both, and is then eligible for the <b>Controls</b> hybrid node (see below) on the way to Expert.
+  </div>
+
+  <table class="grid">
+    <tr>
+      <th style="background:#fff;"></th>
+      {% for t in tier_names %}<th>{{ t }}</th>{% endfor %}
+    </tr>
+    {% for lane in lanes %}
+    <tr>
+      <td class="lane-label {{ 'specialization' if lane.kind == 'specialization' }}">
+        {{ lane.name }}
+        {% if lane.kind == "specialization" %}<span class="spec-note">via {{ lane.parent_trees | join(" / ") }}</span>{% endif %}
+      </td>
+      {% for col in lane.columns %}
+      <td class="cell {{ 'no-skills' if not col.skills }}">
+        {% for s in col.skills %}<span class="skill-chip">{{ s }}</span>{% endfor %}
+      </td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+  </table>
+
+  <div class="hybrids-section">
+    <h2>Hybrid nodes (require Journeyman in each parent tree)</h2>
+    <div class="hybrid-cards">
+      {% for h in hybrids %}
+      <div class="hybrid-card">
+        <span class="name">{{ h.name }}</span> = {{ h.parents | join(" + ") }} (Journeyman){% if h.hours %} &middot; {{ h.hours }} hrs{% endif %}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <footer>Generated from data/*.yml - not a system of record. Hybrid connections are labeled, not drawn as literal lines, in this version.</footer>
+</body>
+</html>

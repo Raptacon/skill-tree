@@ -1,0 +1,28 @@
+# Shared 0-4 tier ladder, reused by every tiered tree.
+# min_hours are illustrative defaults - mentors calibrate per skill/tier,
+# individual skills.yml entries may override via their own min_hours field.
+tiers:
+  - id: 0
+    name: Baseline
+    verification: mentor_signoff
+    min_hours_default: 10
+  - id: 1
+    name: Novice
+    verification: mentor_signoff
+    supervision: direct
+    min_hours_default: 25
+  - id: 2
+    name: Journeyman
+    verification: practical_test
+    supervision: direct
+    min_hours_default: 60
+  - id: 3
+    name: Expert
+    verification: portfolio_review
+    requires_taught_tier: 1
+    min_hours_default: 150
+  - id: 4
+    name: Master
+    verification: portfolio_review
+    requires_taught_tier: 2
+    min_hours_default: 300

@@ -1,0 +1,170 @@
+tree: programming
+# Resources link to the team's existing Skills-Challenges training repo
+# (github.com/Raptacon/Skills-Challenges) and, once a student is ready,
+# the real 2026 competition codebase (github.com/Raptacon/Robot-2026).
+skills:
+  # --- Tier 0: brand new to Python and/or brand new to FIRST ---
+  - id: prog-py-variables
+    tier: 0
+    name: "Python: Variables and Types"
+    resources:
+      - type: repo
+        url: https://github.com/Raptacon/Skills-Challenges
+        path: cone_drill_west_coast/homework/intro_to_py_new_programmer/01_variables_and_types.py
+        label: Intro to Python homework 1 (use intro_to_py_intermediate/ instead if you already know some Python)
+
+  - id: prog-py-conditionals
+    tier: 0
+    name: "Python: If / Else"
+    resources:
+      - type: repo
+        url: https://github.com/Raptacon/Skills-Challenges
+        path: cone_drill_west_coast/homework/intro_to_py_new_programmer/02_if_else.py
+        label: Intro to Python homework 2
+
+  - id: prog-py-loops
+    tier: 0
+    name: "Python: Loops"
+    resources:
+      - type: repo
+        url: https://github.com/Raptacon/Skills-Challenges
+        path: cone_drill_west_coast/homework/intro_to_py_new_programmer/03_loops.py
+        label: Intro to Python homework 3
+
+  - id: prog-py-functions
+    tier: 0
+    name: "Python: Functions"
+    resources:
+      - type: repo
+        url: https://github.com/Raptacon/Skills-Challenges
+        path: cone_drill_west_coast/homework/intro_to_py_new_programmer/04_functions.py
+        label: Intro to Python homework 4
+
+  - id: prog-py-classes
+    tier: 0
+    name: "Python: Classes"
+    resources:
+      - type: repo
+        url: https://github.com/Raptacon/Skills-Challenges
+        path: cone_drill_west_coast/homework/intro_to_py_new_programmer/05_classes.py
+        label: Intro to Python homework 5
+
+  - id: prog-intro-first-wpilib
+    tier: 0
+    name: Intro to FIRST and WPILib
+    description: What FRC/WPILib/RobotPy are, how a robot.py is structured
+    resources:
+      - type: doc
+        url: https://robotpy.readthedocs.io/en/stable/index.html
+        label: RobotPy documentation
+
+  # --- Tier 1: Novice ---
+  - id: prog-single-side-drive
+    tier: 1
+    name: Drive One Side of a Robot
+    description: Motor groups, an XboxController, and reading a joystick axis
+    resources:
+      - type: repo
+        url: https://github.com/Raptacon/Skills-Challenges
+        path: cone_drill_west_coast/challenge_step_1
+        label: Cone Drill - Step 1
+
+  - id: prog-drivetrain-subsystem
+    tier: 1
+    name: Build a Drivetrain Subsystem
+    description: Organizing motors/sensors into a subsystem class, tank drive
+    resources:
+      - type: repo
+        url: https://github.com/Raptacon/Skills-Challenges
+        path: cone_drill_west_coast/challenge_step_2
+        label: Cone Drill - Step 2
+
+  # --- Tier 2: Journeyman ---
+  - id: prog-arcade-drive-buttons
+    tier: 2
+    name: Arcade Drive and Button Bindings
+    description: Second drive interface, switching drive modes on a button press
+    resources:
+      - type: repo
+        url: https://github.com/Raptacon/Skills-Challenges
+        path: cone_drill_west_coast/challenge_step_3
+        label: Cone Drill - Step 3
+
+  - id: prog-autonomous-routines
+    tier: 2
+    name: Basic Autonomous Routines
+    description: Time-based (open-loop) autonomous actions
+    resources:
+      - type: repo
+        url: https://github.com/Raptacon/Skills-Challenges
+        path: cone_drill_west_coast/challenge_step_4
+        label: Cone Drill - Step 4
+
+  - id: prog-state-machines
+    tier: 2
+    name: State Machines
+    description: Reacting to a sensor (breakbeam) by driving robot/LED state transitions
+    resources:
+      - type: repo
+        url: https://github.com/Raptacon/Skills-Challenges
+        path: state_machines/challenge_step_1
+        label: State Machines - Step 1 (breakbeam + addressable LEDs)
+      - type: repo
+        url: https://github.com/Raptacon/Skills-Challenges
+        path: state_machines/challenge_step_2
+        label: "State Machines - Step 2 (StatefulAutonomous)"
+
+  # confirm min_hours/verification with mentor - PID/closed-loop control isn't
+  # actually covered by a Skills-Challenges step yet (challenge_step_4's docs
+  # explicitly defer it) - this stays aspirational until a real challenge
+  # step exists.
+  - id: prog-pid-basics
+    tier: 2
+    name: PID and Closed-Loop Control Basics
+    resources: []
+
+  # --- Tier 3: Expert ---
+  - id: prog-vision
+    tier: 3
+    name: Vision Processing
+    resources:
+      - type: repo
+        url: https://github.com/Raptacon/Robot-2026
+        path: photonUtils.py
+        label: Robot-2026's PhotonVision helper - real reference, not a tutorial
+
+  - id: prog-contribute-robot-2026
+    tier: 3
+    name: Contribute to Robot-2026
+    description: >-
+      Set up the real dev environment, then read and extend a real subsystem
+      and add a command that uses it.
+    resources:
+      - type: repo
+        url: https://github.com/Raptacon/Robot-2026
+        path: README.md
+        label: Robot-2026 setup (Installation section)
+      - type: repo
+        url: https://github.com/Raptacon/Robot-2026
+        path: subsystem/mechanisms/simple_motor_subsystem.py
+        label: SimpleMotorSubsystem - a small, well-commented real subsystem to model a new one on
+      - type: repo
+        url: https://github.com/Raptacon/Robot-2026
+        path: commands
+        label: commands/ - real command examples to model a new one on
+
+  - id: prog-custom-code
+    tier: 3
+    name: Custom Code for a New Mechanism
+    resources: []
+
+  # --- Tier 4: Master ---
+  - id: prog-software-architecture
+    tier: 4
+    name: Software Architecture
+    description: Designing a reusable abstraction, not just a single feature
+    resources:
+      - type: repo
+        url: https://github.com/Raptacon/Robot-2026
+        path: utils/input/factory.py
+        label: "Robot-2026's InputFactory - a real example of an architecture-level abstraction"

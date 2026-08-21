@@ -1,0 +1,26 @@
+# Hand-written example: brand-new intake student who already came in with some
+# tool/electronics exposure (not formally tier-verified yet, just picked up).
+name: First LastName
+grad_year: 2029
+progress:
+  baseline:
+    hours: 10
+    passed: true   # completed intake: forms, fees, safety videos, team orientation
+  manufacturing:
+    hours: 90
+    tier_verified: 0
+    skills_completed:
+      - mfg-handtools-1
+      - mfg-handtools-2
+      - mfg-power-tool-basics
+      - mfg-heavy-machinery-1     # "definitely knows bandsaw" - band saw, chop saw, drill press, sander
+      - mfg-component-mounting   # "some assembly"
+  electronics:
+    hours: 35
+    tier_verified: 0
+    skills_completed:
+      - elec-safe-wiring
+interests:
+  - business   # flagged interest, no progress logged yet - business tree has no gated content
+hybrids_awarded: []
+badges: []

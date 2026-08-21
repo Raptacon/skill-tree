@@ -1,0 +1,186 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>{{ name }} - Raptacon 3200 Progress Report</title>
+<style>
+  @page { size: letter portrait; margin: 0.5in; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+    padding: 28px;
+    color: #1a1a1a;
+  }
+  h1 { font-size: 30px; margin: 0; }
+  .meta { color: #666; font-size: 13px; margin-bottom: 6px; }
+  .interests { font-size: 12px; color: #777; margin-bottom: 16px; }
+
+  .tree-row {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 14px;
+  }
+  .tree-row .tree-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+  .tree-row .tree-name { font-weight: 700; font-size: 16px; }
+  .tree-row .rank-name { font-size: 12px; font-weight: 700; color: #1a6fb0; text-transform: uppercase; }
+
+  .ladder { display: flex; gap: 4px; margin-bottom: 10px; }
+  .ladder .rank-pill {
+    flex: 1;
+    text-align: center;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 5px 2px;
+    border-radius: 5px;
+    border: 2px solid #ccc;
+    color: #999;
+  }
+  .ladder .rank-pill.achieved { border-color: #2e7d32; background: #e8f5e9; color: #2e7d32; }
+  .ladder .rank-pill.current { border-color: #1a6fb0; background: #1a6fb0; color: #fff; }
+
+  .hours-line { font-size: 12px; color: #555; margin-bottom: 4px; }
+  .known-skills { font-size: 11px; color: #2e7d32; margin-bottom: 8px; }
+
+  .next-up {
+    background: #f5faff;
+    border: 1px dashed #1a6fb0;
+    border-radius: 6px;
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+  .next-up .headline { font-weight: 700; color: #1a6fb0; margin-bottom: 4px; }
+  .progress-bar {
+    height: 8px;
+    border-radius: 4px;
+    background: #ddd;
+    overflow: hidden;
+    margin: 4px 0 6px;
+  }
+  .progress-bar .fill { height: 100%; background: #1a6fb0; }
+  .next-up ul { margin: 4px 0 0 18px; padding: 0; }
+  .next-up li { margin-bottom: 2px; }
+
+  .maxed {
+    background: #fff8e1;
+    border: 1px dashed #b8860b;
+    border-radius: 6px;
+    padding: 8px 10px;
+    font-size: 12px;
+    color: #8a6d00;
+  }
+
+  .pass-badge {
+    display: inline-block;
+    background: #2e7d32;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 4px;
+  }
+
+  .opportunities-section, .badges-section { margin-top: 18px; }
+  .opportunities-section h2, .badges-section h2 { font-size: 15px; margin-bottom: 8px; }
+  .opp-card {
+    display: inline-block;
+    border: 2px dashed #1a6fb0;
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 12px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    background: #f5faff;
+  }
+  .opp-card.ready { border-color: #2e7d32; background: #e8f5e9; }
+  .opp-card .name { font-weight: 700; color: #1a6fb0; }
+  .opp-card.ready .name { color: #2e7d32; }
+
+  .badge-pill {
+    display: inline-block;
+    background: #f0f0f0;
+    border-radius: 999px;
+    padding: 4px 12px;
+    font-size: 12px;
+    margin-right: 6px;
+    margin-bottom: 6px;
+  }
+  .hybrid-pill { background: #e6f0fa; color: #1a6fb0; font-weight: 600; }
+  footer { margin-top: 24px; font-size: 10px; color: #999; }
+</style>
+</head>
+<body>
+  <h1>{{ name }}</h1>
+  <div class="meta">{% if grad_year %}Class of {{ grad_year }} &middot; {% endif %}Raptacon 3200 progress report</div>
+  {% if interests %}<div class="interests">Interested in: {{ interests | join(", ") }}</div>{% endif %}
+
+  {% for row in tree_rows %}
+  <div class="tree-row">
+    {% if row.tiered %}
+    <div class="tree-head">
+      <span class="tree-name">{{ row.name }}</span>
+      <span class="rank-name">{{ row.rank_name }}</span>
+    </div>
+    <div class="ladder">
+      {% for r in row.ranks %}
+      <div class="rank-pill {{ 'current' if r.current else ('achieved' if r.achieved else '') }}">{{ r.name }}</div>
+      {% endfor %}
+    </div>
+    <div class="hours-line">{{ row.hours }} hrs logged</div>
+    {% if row.known_skills %}<div class="known-skills">Already knows: {{ row.known_skills | join(", ") }}</div>{% endif %}
+
+    {% if row.next_up %}
+    <div class="next-up">
+      <div class="headline">Next up: reach {{ row.next_up.name }}</div>
+      {% if row.next_up.hours_target %}
+      <div class="progress-bar"><div class="fill" style="width: {{ row.next_up.hours_pct }}%;"></div></div>
+      <div>{{ row.next_up.hours_have }} / {{ row.next_up.hours_target }} hrs{% if row.next_up.hours_pct >= 100 %} (met){% endif %}</div>
+      {% endif %}
+      <div>Verified by <b>{{ row.next_up.verification }}</b>{% if row.next_up.supervision %} &middot; {{ row.next_up.supervision }} supervision until then{% endif %}</div>
+      {% if row.next_up.requires_taught_tier %}<div>Must have certified someone at Tier {{ row.next_up.requires_taught_tier }} first</div>{% endif %}
+      {% if row.next_up.remaining_skills %}
+      <div>Remaining skills:</div>
+      <ul>{% for s in row.next_up.remaining_skills %}<li>{{ s }}</li>{% endfor %}</ul>
+      {% endif %}
+    </div>
+    {% elif row.maxed %}
+    <div class="maxed">Maxed this tree at Master. The strongest next move: help certify a Novice or Journeyman.</div>
+    {% endif %}
+    {% else %}
+    <div class="tree-head"><span class="tree-name">{{ row.name }}</span></div>
+    <div class="hours-line">{{ row.hours }} hrs logged
+      {% if row.passed %}&middot; <span class="pass-badge">PASSED</span>{% endif %}
+    </div>
+    {% endif %}
+  </div>
+  {% endfor %}
+
+  {% if opportunities %}
+  <div class="opportunities-section">
+    <h2>Hybrid opportunities</h2>
+    {% for o in opportunities %}
+    <div class="opp-card {{ 'ready' if o.ready }}">
+      <span class="name">{{ o.name }}</span>
+      {% if o.ready %} - ready now, ask a mentor to award it{% else %} - have {{ o.have | join(" + ") }}, still need Journeyman in {{ o.missing | join(" + ") }}{% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if hybrid_badges or badges %}
+  <div class="badges-section">
+    <h2>Badges</h2>
+    {% for h in hybrid_badges %}<span class="badge-pill hybrid-pill">{{ h }}</span>{% endfor %}
+    {% for b in badges %}<span class="badge-pill">{{ b }}</span>{% endfor %}
+  </div>
+  {% endif %}
+
+  <footer>Generated from data/students/*.yml - not a system of record.</footer>
+</body>
+</html>

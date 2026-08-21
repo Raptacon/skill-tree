@@ -1,0 +1,149 @@
+tree: manufacturing
+
+# Per-tier hour targets specific to this tree (overrides tiers.yml's generic defaults).
+# Source: mentor's handwritten baseline draft (scan.pdf), 2026-08-11.
+tier_hours_override:
+  1: 7    # Novice
+  2: 8    # Journeyman (20 hrs cumulative through end of Journeyman)
+
+skills:
+  # --- Novice (tier 1) - direct supervision ---
+  - id: mfg-handtools-1
+    tier: 1
+    name: Handtools I
+    description: Hammers, wrenches, etc.
+    supervision: direct
+    resources: []
+
+  - id: mfg-handtools-2
+    tier: 1
+    name: Handtools II
+    description: Punches
+    supervision: direct
+    resources: []
+
+  - id: mfg-power-tool-basics
+    tier: 1
+    name: Power Tool Basics
+    description: Drill vs. impact driver; torque; speed; driver; rivet tool
+    supervision: direct
+    resources: []
+
+  - id: mfg-screw-nail-basics
+    tier: 1
+    name: Screw and Nail Basics
+    description: Sizes, types, when to use
+    supervision: direct
+    resources: []
+
+  - id: mfg-measurement-gdt
+    tier: 1
+    name: Measurement and GD&T
+    description: Tape, ruler, caliper, triangle, levels, T-square
+    supervision: direct
+    resources: []
+
+  - id: mfg-body-materials
+    tier: 1
+    name: Body Materials
+    description: Wood, polycarbonate, acrylic, aluminum, etc.
+    supervision: direct
+    resources: []
+
+  - id: mfg-technical-drawings
+    tier: 1
+    name: Read Technical Drawings
+    supervision: direct
+    resources: []
+
+  # --- Journeyman (tier 2) - direct supervision ---
+  - id: mfg-heavy-machinery-1
+    tier: 2
+    name: Heavy Machinery I
+    description: Band saw, chop saw, drill press, sander
+    supervision: direct
+    resources: []
+
+  - id: mfg-heavy-machinery-2
+    tier: 2
+    name: Heavy Machinery II
+    description: Milling machine
+    supervision: direct
+    resources: []
+
+  - id: mfg-adv-power-tools
+    tier: 2
+    name: Adv. Power Tools
+    description: Dremel, pneumatics, jigsaw
+    supervision: direct
+    resources: []
+
+  # confirm tier override with mentor: scan marks this with superscript "1" while grouped
+  # under Journeyman - reading that as "this one actually certifies at Novice."
+  - id: mfg-cnc-intro
+    tier: 1
+    name: Introduction to CNC Tables
+    supervision: direct
+    resources: []
+
+  - id: mfg-tapping
+    tier: 2
+    name: Tapping
+    description: Adding screw holes
+    supervision: direct
+    resources: []
+
+  # --- Hybrid: Manufacturing + Electronics Journeyman (see data/hybrids.yml: fab-assembly) ---
+  - id: mfg-component-mounting
+    tier: 2
+    name: Electronic Component Mounting
+    description: Motors, power distribution, etc.
+    part_of_hybrid: fab-assembly
+    resources: []
+
+  # --- Hybrid: Manufacturing + Design Journeyman (see data/hybrids.yml: dfm) ---
+  - id: mfg-model-clearances
+    tier: 2
+    name: Analyzing Model for Clearances
+    part_of_hybrid: dfm
+    resources: []
+
+  - id: mfg-update-measurements
+    tier: 2
+    name: Updating Measurements
+    part_of_hybrid: dfm
+    resources: []
+
+  - id: mfg-3d-slicing
+    tier: 2
+    name: Slicing for 3D Printers
+    part_of_hybrid: dfm
+    resources: []
+
+  # confirm tier override with mentor: scan marks this with superscript "3" as a side-note
+  # next to the Design hybrid - reading that as "this one actually certifies at Expert."
+  - id: mfg-tool-path-cnc
+    tier: 3
+    name: Tool Path for CNC
+    part_of_hybrid: dfm
+    resources: []
+
+  # --- Hybrid: Manufacturing + Programming Journeyman (see data/hybrids.yml: mechatronics) ---
+  - id: mfg-sensor-mounting
+    tier: 2
+    name: Sensor Placement and Mounting
+    part_of_hybrid: mechatronics
+    resources: []
+
+  # --- Expert (tier 3) - unsupervised ---
+  - id: mfg-unsupervised-execution
+    tier: 3
+    name: Unsupervised Execution of Prior Skills
+    supervision: none
+    resources: []
+
+  - id: mfg-report-defects
+    tier: 3
+    name: Recognize and Report Material Defects
+    supervision: none
+    resources: []

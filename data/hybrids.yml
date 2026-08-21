@@ -1,0 +1,47 @@
+# Cross-tree hybrid nodes: require partial (Journeyman, tier 2) progress in 2+ trees.
+# `skills` lists which skill ids (from data/skills/<tree>.yml) this hybrid actually certifies.
+hybrids:
+  - id: controls
+    name: Controls
+    requires:
+      - {tree: electronics, tier: 2}
+      - {tree: programming, tier: 2}
+    skills: []
+
+  - id: packaging
+    name: Packaging
+    requires:
+      - {tree: design, tier: 2}
+      - {tree: electronics, tier: 2}
+    skills: []
+
+  - id: fab-assembly
+    name: Fab Assembly
+    requires:
+      - {tree: manufacturing, tier: 2}
+      - {tree: electronics, tier: 2}
+    hours: 2
+    skills:
+      - mfg-component-mounting
+
+  - id: dfm
+    name: DFM
+    requires:
+      - {tree: manufacturing, tier: 2}
+      - {tree: design, tier: 2}
+    hours: 8
+    skills:
+      - mfg-model-clearances
+      - mfg-update-measurements
+      - mfg-3d-slicing
+      - mfg-tool-path-cnc
+      - design-tolerancing-fits
+
+  - id: mechatronics
+    name: Mechatronics
+    requires:
+      - {tree: manufacturing, tier: 2}
+      - {tree: programming, tier: 2}
+    hours: 1
+    skills:
+      - mfg-sensor-mounting

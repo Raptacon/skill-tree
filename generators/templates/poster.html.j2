@@ -1,0 +1,195 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Raptacon 3200 - {{ tree_name }} Skill Tree</title>
+<style>
+  @page { size: letter portrait; margin: 0.4in; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+    padding: 24px;
+    color: #1a1a1a;
+    background: #fff;
+  }
+  h1 {
+    font-size: 40px;
+    margin: 0 0 4px;
+    letter-spacing: 0.02em;
+  }
+  .subtitle {
+    color: #555;
+    margin-bottom: 24px;
+    font-size: 14px;
+  }
+  .tier-row {
+    border: 2px solid #1a1a1a;
+    border-radius: 10px;
+    margin-bottom: 18px;
+    overflow: hidden;
+    page-break-inside: avoid;
+  }
+  .tier-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: #1a1a1a;
+    color: #fff;
+    padding: 10px 16px;
+  }
+  .tier-header .tier-name {
+    font-size: 20px;
+    font-weight: 700;
+    flex: 0 0 auto;
+    min-width: 140px;
+  }
+  .tier-header .tier-meta {
+    font-size: 12px;
+    line-height: 1.5;
+    flex: 1 1 auto;
+    color: #ddd;
+  }
+  .tier-header .tier-meta b { color: #fff; }
+  .supervision-badge {
+    display: inline-block;
+    background: #c0392b;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 4px;
+    margin-right: 8px;
+  }
+  .tier-header img.qr {
+    width: 56px;
+    height: 56px;
+    background: #fff;
+    border-radius: 4px;
+    flex: 0 0 auto;
+  }
+  .skills-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 12px;
+    background: #fafafa;
+  }
+  .skill-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 8px 10px;
+    background: #fff;
+    min-width: 140px;
+    flex: 1 1 140px;
+    max-width: 220px;
+  }
+  .skill-card .name {
+    font-weight: 600;
+    font-size: 13px;
+    margin-bottom: 2px;
+  }
+  .skill-card .desc {
+    font-size: 11px;
+    color: #666;
+  }
+  .skill-card .hybrid-tag {
+    display: inline-block;
+    margin-top: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    color: #1a6fb0;
+    background: #e6f0fa;
+    border-radius: 4px;
+    padding: 1px 6px;
+  }
+  .hybrids-section {
+    margin-top: 28px;
+  }
+  .hybrids-section h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  .hybrid-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .hybrid-card {
+    border: 2px dashed #1a6fb0;
+    border-radius: 10px;
+    padding: 10px 14px;
+    min-width: 200px;
+    background: #f5faff;
+  }
+  .hybrid-card .name {
+    font-weight: 700;
+    color: #1a6fb0;
+    font-size: 14px;
+  }
+  .hybrid-card .other-trees {
+    font-size: 12px;
+    color: #444;
+    margin: 4px 0;
+  }
+  .hybrid-card .skills-list {
+    font-size: 11px;
+    color: #666;
+  }
+  footer {
+    margin-top: 24px;
+    font-size: 10px;
+    color: #999;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+  <h1>{{ tree_name }}</h1>
+  <div class="subtitle">
+    Raptacon 3200 Skill Tree - schema-driven draft
+    {% if kind == "specialization" %}&middot; <b>Specialization</b> - not a primary subteam pick, reached through progress in another tree{% endif %}
+  </div>
+
+  {% for row in tier_rows %}
+  <div class="tier-row">
+    <div class="tier-header">
+      <div class="tier-name">{{ row.name }}</div>
+      <div class="tier-meta">
+        {% if row.supervision %}<span class="supervision-badge">{{ row.supervision }} supervision</span>{% endif %}
+        <b>{{ row.hours }} hrs</b> &middot; verified by <b>{{ row.verification }}</b>
+        {% if row.requires_taught_tier %} &middot; must have certified someone at Tier {{ row.requires_taught_tier }}{% endif %}
+      </div>
+      <img class="qr" src="{{ row.qr }}" title="{{ row.qr_url }}">
+    </div>
+    <div class="skills-grid">
+      {% for s in row.skills %}
+      <div class="skill-card">
+        <div class="name">{{ s.name }}</div>
+        {% if s.description %}<div class="desc">{{ s.description }}</div>{% endif %}
+        {% if s.hybrid_name %}<div class="hybrid-tag">{{ s.hybrid_name }}</div>{% endif %}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endfor %}
+
+  {% if hybrids %}
+  <div class="hybrids-section">
+    <h2>Hybrid nodes touching {{ tree_name }}</h2>
+    <div class="hybrid-cards">
+      {% for h in hybrids %}
+      <div class="hybrid-card">
+        <div class="name">{{ h.name }}</div>
+        <div class="other-trees">+ Journeyman in {{ h.other_trees | join(", ") }}{% if h.hours %} &middot; {{ h.hours }} hrs{% endif %}</div>
+        {% if h.skills %}<div class="skills-list">{{ h.skills | join(" &middot; ") }}</div>{% endif %}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+  <footer>Generated from data/skills/*.yml - not a system of record. QR links are placeholders pending mentor resource links.</footer>
+</body>
+</html>
