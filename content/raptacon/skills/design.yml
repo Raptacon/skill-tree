@@ -18,6 +18,12 @@ skills:
     description: Views, dimensions, and a title block on a basic drawing
     resources: []
 
+  - id: design-reproducing-drawing
+    tier: 1
+    name: Modeling a Drawing
+    description: Modeling a 3D part accurately from a 2D drawing
+    resources: []
+
   # --- Tier 2: Journeyman ---
   - id: design-full-cad-assemblies
     tier: 2
