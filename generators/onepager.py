@@ -140,6 +140,11 @@ def validate_context(context):
                 msg += "hours cannot be negative\n"
         except TypeError:
             msg += "hours must be an int\n"
+            
+        if tree_row.get("name", None) == "Baseline":
+            passed = tree_row.get("passed")
+            if not isinstance(passed, bool):
+                msg += "passed must be a bool\n"
     return msg
 
 def main():
