@@ -145,6 +145,13 @@ def validate_context(context):
             passed = tree_row.get("passed")
             if not isinstance(passed, bool):
                 msg += "passed must be a bool\n"
+        else:
+            tier_verified = tree_row.get("tiered")
+            try:
+                if tier_verified < 0 or tier_verified > 4:
+                    msg += "tier_verified must be a number between 0 and 4\n"
+            except TypeError:
+                msg += "tier_verified must be an int\n"
     return msg
 
 def main():
