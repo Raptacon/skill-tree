@@ -130,6 +130,9 @@ def validate_context(context):
     name = context.get("name", None) 
     if name is None:
         msg += "expected a name, got none\n"
+    grad_year = context.get("grad_year", None)
+    if grad_year is None:
+        msg += "expected grad year, got none\n"
     return msg
 
 def main():
