@@ -133,6 +133,10 @@ def validate_context(context):
     grad_year = context.get("grad_year", None)
     if grad_year is None:
         msg += "expected grad year, got none\n"
+    for _, tree_row in enumerate(context.get("tree_rows", None)):
+        hours = tree_row.get("hours")
+        if hours < 0:
+            msg += "hours cannot be negative\n"
     return msg
 
 def main():
