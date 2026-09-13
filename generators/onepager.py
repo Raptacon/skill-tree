@@ -126,10 +126,11 @@ def build_context(student_id):
     }
 
 def validate_context(context):
+    msg = ""
     name = context.get("name", None) 
     if name is None:
-        return False
-    return True
+        msg += "expected a name, got none\n"
+    return msg
 
 def main():
     if len(sys.argv) != 2:
@@ -137,8 +138,9 @@ def main():
     student_id = sys.argv[1]
     context = build_context(student_id)
         
-    if validate_context(context) is False:
-        raise SystemExit("validating context failed")
+    validation = validate_context(context)
+    if validation != "":
+        raise SystemExit(validation)
         
     env = Environment(loader=FileSystemLoader(common.TEMPLATES))
     common.write_html(env, "onepager.html.j2", f"{student_id}_onepager.html", **build_context(student_id))
