@@ -135,8 +135,11 @@ def validate_context(context):
         msg += "expected grad year, got none\n"
     for _, tree_row in enumerate(context.get("tree_rows", None)):
         hours = tree_row.get("hours")
-        if hours < 0:
-            msg += "hours cannot be negative\n"
+        try:
+            if hours < 0:
+                msg += "hours cannot be negative\n"
+        except TypeError:
+            msg += "hours must be an int\n"
     return msg
 
 def main():
