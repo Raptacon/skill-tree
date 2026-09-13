@@ -125,12 +125,21 @@ def build_context(student_id):
         "opportunities": hybrid_opportunities(student, trees, hybrids),
     }
 
+def validate_context(context):
+    name = context.get("name", None) 
+    if name is None:
+        return False
+    return True
 
 def main():
     if len(sys.argv) != 2:
         raise SystemExit("usage: onepager.py <student_id>")
     student_id = sys.argv[1]
-
+    context = build_context(student_id)
+        
+    if validate_context(context) is False:
+        raise SystemExit("validating context failed")
+        
     env = Environment(loader=FileSystemLoader(common.TEMPLATES))
     common.write_html(env, "onepager.html.j2", f"{student_id}_onepager.html", **build_context(student_id))
 
