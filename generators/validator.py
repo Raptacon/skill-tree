@@ -35,7 +35,7 @@ def validate_onepager(student_id):
             else:
                 # we are likely outside baseline tree
                 # verify tier_verified
-                tier_verified = tree_value.get("tiered")
+                tier_verified = tree_value.get("tier_verified")
                 try:
                     if tier_verified < 0 or tier_verified > 4:
                         msg += "tier_verified must be a number between 0 and 4\n"
