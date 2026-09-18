@@ -130,9 +130,8 @@ def main():
     if len(sys.argv) != 2:
         raise SystemExit("usage: onepager.py <student_id>")
     student_id = sys.argv[1]
-    context = build_context(student_id)
         
-    validation = validator.validate_context(context)
+    validation = validator.validate_onepager(student_id)
     if validation != "":
         raise SystemExit(validation)
         
