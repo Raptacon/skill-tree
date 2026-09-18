@@ -19,6 +19,7 @@ def validate_onepager(student_id):
             msg += "expected grad year, got none\n"
         
         for tree in student.get("progress").values():
+            # verify hours
             hours = tree.get("hours")
             try:
                 if hours < 0:
@@ -27,10 +28,13 @@ def validate_onepager(student_id):
                 msg += "hours must be an int\n"
                 
             if tree.get("name", None) == "Baseline":
+                # verify the one value in baseline tree
                 passed = tree.get("passed")
                 if not isinstance(passed, bool):
                     msg += "passed must be a bool\n"
             else:
+                # we are likely outside baseline tree
+                # verify tier_verified
                 tier_verified = tree.get("tiered")
                 try:
                     if tier_verified < 0 or tier_verified > 4:
