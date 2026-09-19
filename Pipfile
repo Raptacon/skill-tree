@@ -8,6 +8,7 @@ pyyaml = "*"
 jinja2 = "*"
 qrcode = "*"
 pillow = "*"
+pydantic = "*"
 
 [dev-packages]
 
