@@ -131,9 +131,7 @@ def main():
         raise SystemExit("usage: onepager.py <student_id>")
     student_id = sys.argv[1]
         
-    validation = validator.validate_onepager(student_id)
-    if validation != "":
-        raise SystemExit(validation)
+    validator.validate_onepager(student_id)
         
     env = Environment(loader=FileSystemLoader(common.TEMPLATES))
     common.write_html(env, "onepager.html.j2", f"{student_id}_onepager.html", **build_context(student_id))
