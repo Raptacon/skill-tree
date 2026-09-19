@@ -8,6 +8,9 @@ import yaml
 class OnePager(BaseModel):
     name: str
     grad_year: int
+    progress: dict[str, dict]
+    interests: list[str]
+    badges: list[str]
 
 def validate_onepager(student_id): 
     student = common.load_yaml(f"students/{student_id}.yml")
