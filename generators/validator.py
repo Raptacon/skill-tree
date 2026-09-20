@@ -1,13 +1,13 @@
 import os
 
-from pydantic import BaseModel
+from pydantic import BaseModel, NonNegativeInt
 
 import common
 import yaml
 
 class OnePager(BaseModel):
     name: str
-    grad_year: int
+    grad_year: NonNegativeInt
     progress: dict[str, dict]
     interests: list[str]
     badges: list[str]
