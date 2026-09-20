@@ -5,10 +5,16 @@ from pydantic import BaseModel, NonNegativeInt
 import common
 import yaml
 
+class Progress(BaseModel):
+    hours: NonNegativeInt
+    passed: bool | None = None
+    tier_verified: NonNegativeInt | None = None
+    skills_completed: list[str] | None = None
+
 class OnePager(BaseModel):
     name: str
     grad_year: NonNegativeInt
-    progress: dict[str, dict]
+    progress: dict[str, Progress]
     interests: list[str]
     badges: list[str]
 
