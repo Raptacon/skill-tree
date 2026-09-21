@@ -14,8 +14,8 @@ class Baseline(BaseModel):
 class Progress(BaseModel):
     model_config = ConfigDict(extra='forbid')
     hours: NonNegativeInt
-    tier_verified: NonNegativeInt | None = None
-    skills_completed: list[str] | None = None
+    tier_verified: NonNegativeInt
+    skills_completed: list[str]
 
 class OnePager(BaseModel):
     name: str
