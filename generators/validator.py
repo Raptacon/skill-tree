@@ -6,12 +6,12 @@ from pydantic import BaseModel, ConfigDict, Field, NonNegativeInt, model_validat
 import common
 import yaml
 
-class Baseline(BaseModel):
+class BaselineTree(BaseModel):
     model_config = ConfigDict(extra='forbid')
     hours: NonNegativeInt
     passed: bool
     
-class Progress(BaseModel):
+class ProgressTree(BaseModel):
     model_config = ConfigDict(extra='forbid')
     hours: NonNegativeInt
     tier_verified: NonNegativeInt = Field(le=4)
@@ -20,7 +20,7 @@ class Progress(BaseModel):
 class OnePager(BaseModel):
     name: str
     grad_year: NonNegativeInt
-    progress: dict[str, Union[Baseline, Progress]]
+    progress: dict[str, Union[BaselineTree, ProgressTree]]
     interests: list[str]
     badges: list[str]
 
