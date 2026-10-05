@@ -49,10 +49,7 @@ def build_tree_row(tree, tree_id, progress, tiers, top_tier):
         }
 
     known_skills = [skills_by_id[sid]["name"] for sid in completed_ids if sid in skills_by_id]
-    try:
-        rank_name = tiers[tier_verified]["name"] if tier_verified > 0 else "Not yet ranked"
-    except KeyError as e:
-        raise SystemExit(f"tier verified: expected a number from 0 to 4; got {e}")
+    rank_name = tiers[tier_verified]["name"] if tier_verified > 0 else "Not yet ranked"
 
     return {
         "name": tree["name"],
@@ -131,9 +128,7 @@ def main():
         raise SystemExit("usage: onepager.py <student_id>")
     student_id = sys.argv[1]
         
-    validation = validator.validate_onepager(student_id)
-    if validation != "":
-        raise SystemExit(validation)
+    validator.validate_onepager(student_id)
         
     env = Environment(loader=FileSystemLoader(common.TEMPLATES))
     common.write_html(env, "onepager.html.j2", f"{student_id}_onepager.html", **build_context(student_id))
