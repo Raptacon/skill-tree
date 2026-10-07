@@ -23,6 +23,16 @@ class OnePager(BaseModel):
     progress: dict[str, Union[BaselineTree, ProgressTree]]
     interests: list[str]
     badges: list[str]
+    
+    @model_validator(mode="after")
+    def verify_completed_skills_exist(self):
+        for tree_name, tree_value in self.progress.items():
+            if tree_name == "baseline":
+                continue
+            for skill in tree_value.skills_completed:
+                if not is_skill_valid(tree_name, skill):
+                    raise ValueError(f"'{skill}' is an invalid completed skill for tree '{tree_name}'")
+        return self 
 
 def validate_onepager(student_id): 
     student = common.load_yaml(f"students/{student_id}.yml")
