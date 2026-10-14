@@ -1,0 +1,364 @@
+# Onboarding - the first tree every team member works through, every season.
+#
+# DRAFT v2 schema (tmp/adr/0001, 0004). One file, items inline, each tagged with
+# the roles it applies to; renderers produce one checklist per role, and a person
+# with several roles sees the union.
+#
+# Item fields
+#   id          global, stable, never reused (progress is recorded against it)
+#   name / description
+#   section     which section below it renders under
+#   roles       list of role ids, or {role, when: <condition>} for conditional
+#   actor       role that actually does it, when different from who it's for
+#               (a parent signs the FIRST consent *for* their student)
+#   kind        check | count | hours | score | signature | external
+#   target      for count/hours; pass_score for score
+#   verify      method: auto | self | signoff | signature | score
+#               by:     {role: x} | {person: "@github"} | {any_of: [...]}
+#               source: where `auto` reads from (Master Roster tab/column)
+#               claim:  true = person self-reports, a verifier confirms
+#   renews      season | permanent | event
+#   visibility  public | team | mentors | self
+#   requires    [item-id, {hours: N}, ...]
+#   required    default true; false = recommended, not blocking
+#   status      active (default) | draft = not live, shown greyed for review
+#   resources   [{type: doc|video|form|link, label, url?}]
+#
+# Authorship (tree-level defaults; any item may override with its own values)
+#   authored_by [{name, github}]  first + last name and GitHub username - credit
+#               where credit is due, and who to ask. No emails (keeps student
+#               contact info out of the repo)
+#   created_at  YYYY-MM-DD, set once
+#   updated_at  YYYY-MM-DD, bump on any change (CI will check a PR that edits an
+#               item also bumps this, and warn when it's old enough to be stale)
+#
+# Assessment (optional; see trees/tools.yml)
+#   practical   {summary, steps: [...]} - the exact hands-on task a verifier has
+#               the person perform, in order
+
+tree:
+  id: onboarding
+  name: Onboarding
+  kind: onboarding
+  authored_by:
+    - {name: Chris Hirsch, github: ChrisHirsch}
+  created_at: 2026-10-13
+  updated_at: 2026-10-13
+  description: >-
+    Everything you need to be a fully on-boarded member of Raptacon 3200 this
+    season - what you need depends on your role. Most items check themselves off
+    automatically from the team roster; the rest a mentor signs off.
+
+sections:
+  - {id: join, name: Join the Team}
+  - {id: paperwork, name: Paperwork}
+  - {id: first, name: FIRST Registration}
+  - {id: district, name: School District (CCSD)}
+  - {id: safety, name: Safety}
+  - {id: connected, name: Get Connected}
+  - {id: started, name: Get Started}
+  - {id: help, name: Help the Team}
+  - {id: travel, name: Travel}
+
+items:
+  # ---------------------------------------------------------------- join
+  - id: onb-raptacon-signup
+    name: Sign up with Raptacon
+    description: Fill out this season's Raptacon sign-up form for your role (new or returning).
+    section: join
+    roles: [student, parent, mentor, volunteer, board]
+    kind: check
+    verify: {method: auto, source: {tab: "<role roster tab>", where: "Status = Active"}}
+    renews: season
+    visibility: team
+    resources:
+      - {type: form, label: Student sign-up form}
+      - {type: form, label: Parent sign-up form}
+      - {type: form, label: Mentor / Volunteer sign-up form}
+
+  - id: onb-dues
+    name: Team dues
+    description: >-
+      Dues paid in full, OR a payment plan or waiver arranged with the treasurer -
+      either counts as done. Nobody but you, your parents and the treasurer sees this.
+    section: join
+    roles: [student]
+    actor: parent
+    kind: check
+    verify:
+      method: auto
+      source: {tab: Balances, where: "Category = Dues and Balance Due <= 0"}
+      by: {role: treasurer}    # treasurer records plans/waivers
+    renews: season
+    visibility: self
+
+  # ---------------------------------------------------------------- paperwork
+  - id: onb-handbook
+    name: Read and sign the team handbook
+    description: >-
+      Read this season's Raptacon handbook and sign the acknowledgment. Students
+      and their parent/guardian each sign.
+    section: paperwork
+    roles: [student, parent, mentor, volunteer, board]
+    kind: signature
+    verify: {method: signature, source: {form: handbook-acknowledgment}}
+    renews: season
+    visibility: team
+    resources:
+      - {type: doc, label: "Raptacon Handbook (this season)"}     # TODO gdoc link
+      - {type: form, label: Handbook acknowledgment form}         # TODO build (plan Phase 1)
+
+  - id: onb-emergency-info
+    name: Emergency contact and medical info on file
+    section: paperwork
+    roles: [student, mentor, volunteer, parent]
+    kind: check
+    verify:
+      method: auto
+      source: {tab: "<role roster tab>", columns: [Emergency Contact Name, Emergency Contact Phone]}
+    renews: season
+    visibility: mentors
+    notes: Parent form doesn't collect emergency contact yet (onboarding-system PLAN item 5).
+
+  - id: onb-photo-release
+    name: Photo / media release answered
+    description: Yes or no are both fine - we just need an answer on file.
+    section: paperwork
+    roles: [student]          # TODO adults too?
+    kind: check
+    verify: {method: auto, source: {tab: Students_Active, columns: [Photo/Media Release]}}
+    renews: season
+    visibility: mentors
+
+  # ---------------------------------------------------------------- FIRST
+  - id: onb-first-dashboard
+    name: Registered in the FIRST Dashboard
+    description: Create/renew your FIRST account and join team 3200's roster.
+    section: first
+    roles: [student, mentor]
+    kind: external
+    verify: {method: signoff, claim: true, by: {role: lead-mentor}}
+    renews: season
+    visibility: team
+    resources:
+      - {type: link, label: FIRST Dashboard, url: "https://my.firstinspires.org/Dashboard/"}
+
+  - id: onb-first-consent
+    name: FIRST Consent & Release form signed
+    description: >-
+      Required by FIRST every season. A parent/guardian signs it for the student in
+      the FIRST Dashboard - students, remind your parent; parents, this one's yours.
+    section: first
+    roles: [student, parent]
+    actor: parent
+    kind: external
+    requires: [onb-first-dashboard]
+    verify: {method: signoff, claim: true, by: {role: lead-mentor}}   # lead mentor sees consent status in the Dashboard
+    renews: season
+    visibility: team
+
+  - id: onb-first-ypp
+    name: FIRST Youth Protection screening
+    description: FIRST's Youth Protection Program screening for adults working with students.
+    section: first
+    roles: [mentor]
+    kind: external
+    requires: [onb-first-dashboard]
+    verify: {method: signoff, claim: true, by: {role: lead-mentor}}
+    renews: season          # TODO confirm FIRST's screening validity period
+    visibility: mentors
+    notes: >-
+      FIRST requires it for Lead Mentor 1/2 (condition first-lead-mentor). TODO decide
+      whether Raptacon requires it for all mentors - drafted as all mentors.
+
+  - id: onb-first-mentor-training
+    name: FIRST mentor training
+    section: first
+    roles: [mentor]
+    kind: external
+    verify: {method: signoff, claim: true, by: {role: lead-mentor}}
+    renews: season
+    visibility: team
+    status: draft
+    notes: TODO which FIRST trainings exactly.
+
+  # ---------------------------------------------------------------- district
+  - id: onb-ccsd-volunteer-forms
+    name: CCSD volunteer forms
+    section: district
+    roles:
+      - {role: mentor, when: ccsd-volunteer}
+      - {role: volunteer, when: ccsd-volunteer}
+      - {role: parent, when: ccsd-volunteer}
+      - {role: board, when: ccsd-volunteer}
+    kind: external
+    verify: {method: signoff, claim: true, by: {role: lead-mentor}}
+    renews: season
+    visibility: mentors
+
+  - id: onb-ccsd-fingerprinting
+    name: CCSD fingerprinting
+    description: Becomes available after 150 volunteer hours.
+    section: district
+    roles:
+      - {role: mentor, when: ccsd-volunteer}
+      - {role: volunteer, when: ccsd-volunteer}
+      - {role: parent, when: ccsd-volunteer}
+    kind: external
+    requires: [onb-ccsd-volunteer-forms, {hours: 150}]
+    verify: {method: signoff, claim: true, by: {role: lead-mentor}}
+    renews: permanent       # TODO confirm with CCSD
+    visibility: mentors
+
+  - id: onb-background-check
+    name: Background check complete
+    section: district
+    roles:
+      - mentor
+      - {role: parent, when: chaperone}
+      - {role: volunteer, when: chaperone}
+    kind: check
+    verify: {method: auto, source: {tab: MentorsVolunteers_Active, where: "Background Check Status = Completed"}}
+    renews: season          # TODO confirm policy; may be the same thing as CCSD forms
+    visibility: mentors
+
+  # ---------------------------------------------------------------- safety
+  - id: onb-safety-test
+    name: Safety test passed
+    description: Mentors take the same test as students.
+    section: safety
+    roles: [student, mentor]
+    kind: score
+    pass_score: null        # TODO
+    verify:
+      method: signoff       # v1: mentor confirms the Schoology result; v2 = auto-graded team quiz
+      claim: true
+      by: {any_of: [{role: safety-officer}, {role: lead-mentor}]}
+    renews: season
+    visibility: team
+    resources:
+      - {type: link, label: Safety test (Schoology)}   # TODO link
+
+  - id: onb-shop-orientation
+    name: Shop safety orientation
+    description: >-
+      Walkthrough with a mentor: PPE, e-stops, fire extinguisher, first aid, hair and
+      loose clothing, shop rules. Bring your own safety glasses.
+    section: safety
+    roles: [student, mentor]
+    kind: check
+    requires: [onb-safety-test]
+    verify: {method: signoff, by: {any_of: [{role: safety-officer}, {role: lead-mentor}]}}
+    renews: season
+    visibility: public
+
+  # ---------------------------------------------------------------- connected
+  - id: onb-discord
+    name: Join the team Discord
+    section: connected
+    roles: [student, parent, mentor, volunteer, board]
+    kind: check
+    verify: {method: self}
+    renews: permanent
+    visibility: team
+
+  - id: onb-calendar
+    name: Subscribe to the team calendar
+    section: connected
+    roles: [student, parent, mentor, volunteer, board]
+    kind: check
+    verify: {method: self}
+    renews: permanent
+    visibility: team
+
+  - id: onb-github
+    name: GitHub account linked
+    description: Create a GitHub account and add your username to your sign-up form.
+    section: connected
+    roles: [student, mentor]
+    kind: check
+    verify: {method: auto, source: {tab: "<role roster tab>", columns: [GitHub Username]}}
+    renews: permanent
+    visibility: team
+
+  # ---------------------------------------------------------------- started
+  - id: onb-presence-hours
+    name: First 10 hours at the shop
+    description: Check in and out at meetings - hours come straight from the check-in system.
+    section: started
+    roles: [student]
+    kind: hours
+    target: 10
+    verify: {method: auto, source: {tab: CheckIns, sum: "Duration (min)"}}
+    renews: season
+    visibility: public
+
+  - id: onb-choose-track
+    name: Choose your track
+    description: >-
+      Shadow each subteam, then pick a primary tree and meet its lead. You can
+      switch or add more later. This unlocks the Baseline tree.
+    section: started
+    roles: [student]
+    kind: check
+    requires: [onb-shop-orientation]
+    verify:
+      method: signoff
+      by: {any_of: [{role: subteam-lead}, {role: lead-mentor}]}
+    renews: season
+    visibility: public
+
+  # ---------------------------------------------------------------- help
+  - id: onb-saturday-food
+    name: Sign up for Saturday food (2 minimum)
+    description: Bring food for at least two Saturday build sessions this season.
+    section: help
+    roles: [parent]
+    kind: count
+    target: 2
+    verify:
+      method: signoff       # v1: food coordinator records from SignUpGenius
+      by: {role: food-coordinator}
+    renews: season
+    visibility: team
+
+  - id: onb-mentor-verifier
+    name: Approved to sign off a tree
+    description: >-
+      Lead mentor approves you to verify skills in one or more trees. Recorded per
+      tree; this is what lets you sign students off.
+    section: help
+    roles: [mentor]
+    required: false
+    kind: check
+    requires: [onb-first-ypp, onb-safety-test]
+    verify: {method: signoff, by: {role: lead-mentor}}
+    renews: permanent
+    visibility: team
+
+  - id: onb-board-orientation
+    name: Board orientation
+    description: Board-specific onboarding - roles, bylaws, finances, meeting cadence.
+    section: help
+    roles: [board]
+    kind: check
+    verify: {method: signoff, by: {role: board-chair}}
+    renews: season
+    visibility: team
+    status: draft
+    notes: TODO define with the board. Candidates - bylaws review, conflict-of-interest disclosure, financial controls.
+
+  # ---------------------------------------------------------------- travel
+  - id: onb-trip-paperwork
+    name: Trip paperwork approved
+    description: Per trip - permission, medical and travel forms for that event.
+    section: travel
+    roles:
+      - {role: student, when: travels}
+      - {role: parent, when: chaperone}
+      - {role: mentor, when: travels}
+      - {role: volunteer, when: travels}
+    kind: check
+    verify: {method: auto, source: {tab: Travel_Paperwork, where: "Status = Approved"}}
+    renews: event
+    visibility: mentors

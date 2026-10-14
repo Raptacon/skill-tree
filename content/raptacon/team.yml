@@ -1,0 +1,19 @@
+# Team-level settings. Everything team-specific that isn't a role, item or tree.
+team:
+  number: 3200
+  name: Raptacon
+
+# When annual (`renews: season`) items reset. Provisional: start of the CCSD
+# school year. Kept here, in one place, so it can change without touching any tree.
+season:
+  starts: {month: 8, day: 1}     # TODO confirm - align with onboarding-system Rollover.gs
+  label: "{start_year}-{end_year_short}"   # e.g. 2026-27
+
+# Named events for `renews: event` items (e.g. trip paperwork). Mirrors TRIPS in
+# raptacon-onboarding-system's Config.gs - keep in sync until one reads the other.
+events:
+  - {id: kcmt, name: KCMT}
+  - {id: utah, name: Utah}
+  - {id: denver, name: Denver}
+  - {id: az, name: AZ}
+  - {id: st-louis, name: St. Louis}

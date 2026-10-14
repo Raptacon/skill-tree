@@ -1,0 +1,24 @@
+# Who holds each sign-off role this season - so a student reading a tree (web
+# page or printed checklist) sees "ask Jane D. or Sam K." instead of just a role
+# name. Roles are defined in roles.yml; items reference roles, never people
+# directly, so a lead changing mid-season is a one-line PR here instead of an
+# edit to every item.
+#
+# People are identified by name + GitHub username only (no emails, no school
+# IDs). The progress system maps GitHub username -> roster Person Key using the
+# roster's "GitHub Username" column, to check that a sign-off came from someone
+# allowed to give it.
+#
+# Season-scoped: add a new block each season instead of editing the old one, so
+# past sign-offs can still be traced to who held the role at the time.
+
+seasons:
+  2026-27:
+    - role: subteam-lead
+      tree: manufacturing
+      holders:
+        - {name: Sasha Crouse, github: TODO}
+        - {name: Snort Hirsch, github: TODO}
+    - role: lead-mentor
+      holders:
+        - {name: Chris Hirsch, github: ChrisHirsch}

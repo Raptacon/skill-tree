@@ -1,0 +1,96 @@
+# Roles, conditions and sign-off roles. See tmp/adr/0001 and 0004.
+#
+# member_roles - what kind of team member someone is. A person can hold several
+#   (parent + mentor + board is common); their onboarding is the union of every
+#   role's items, de-duplicated by item id.
+# conditions   - situational flags that switch extra items on via an item's `when:`,
+#   without inventing a new role for each situation.
+# signoff_roles - assignments that let someone verify items (`verify.by`). Holding
+#   one is separate from membership: a lead mentor is a `mentor` who has also been
+#   assigned `lead-mentor`.
+#
+# `source` says where membership comes from in the Master Roster (Google Sheets,
+# raptacon-onboarding-system). TODO marks ones with no roster source yet.
+
+member_roles:
+  - id: student
+    name: Student
+    description: High-school team member.
+    person_key: school_id
+    source: {tab: Students_Active}
+
+  - id: parent
+    name: Parent / Guardian
+    description: Parent or guardian of one or more students on the team.
+    person_key: email
+    source: {tab: Parents_Active}
+
+  - id: mentor
+    name: Mentor
+    description: Adult who works directly with students, on a subteam or in the shop.
+    person_key: email
+    source: {tab: MentorsVolunteers_Active, column: Role Type, values: [Mentor, Both]}
+
+  - id: volunteer
+    name: Volunteer
+    description: >-
+      Adult who helps the team in ways that aren't working with students -
+      driving the robot to a competition, event logistics, and so on.
+    person_key: email
+    source: {tab: MentorsVolunteers_Active, column: Role Type, values: [Volunteer, Both]}
+
+  - id: board
+    name: Board Member
+    description: >-
+      Member of the team's board. Not necessarily a parent. Onboarding is similar to
+      a parent's, plus board-specific training.
+    person_key: email
+    source: TODO   # no board tab/column in the roster yet
+
+conditions:
+  - id: chaperone
+    name: Chaperones overnight trips
+    applies_to: [parent, mentor, volunteer]
+    source: TODO   # e.g. Parents_Active "Volunteer Interest" contains Travel & Logistics
+  - id: travels
+    name: Attending a trip/event
+    applies_to: [student, parent, mentor, volunteer]
+    source: {tab: Travel_Paperwork}
+  - id: ccsd-volunteer
+    name: Registered as a CCSD school volunteer
+    applies_to: [parent, mentor, volunteer, board]
+    source: TODO
+  - id: first-lead-mentor
+    name: FIRST Lead Mentor 1 or 2 for the team
+    applies_to: [mentor]
+    source: TODO
+
+signoff_roles:
+  - id: lead-mentor
+    name: Lead Mentor
+    description: Can sign off any onboarding item and authorize other verifiers.
+  - id: safety-officer
+    name: Safety Mentor
+    description: Signs off safety tests and shop orientation.
+  - id: treasurer
+    name: Treasurer
+    description: Confirms dues, payment plans and waivers.
+  - id: subteam-lead
+    name: Subteam Lead
+    scoped: tree    # assigned per tree, e.g. {role: subteam-lead, tree: manufacturing}
+    description: >-
+      Student or mentor (co-)lead for a subteam/tree. Usually two co-leads per tree;
+      either one can sign off. Who holds it this season is in assignments.yml.
+  - id: food-coordinator
+    name: Food Coordinator
+    description: Tracks Saturday food sign-ups.
+  - id: board-chair
+    name: Board Chair
+    description: Signs off board-specific onboarding.
+
+# Who may see a person's status for an item (`visibility:` on each item).
+visibility_levels:
+  - id: public      # wall board, leaderboard
+  - id: team        # anyone on the team, signed in
+  - id: mentors     # mentors, board, admins
+  - id: self        # the person, their parent/guardian, admins

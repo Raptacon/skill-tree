@@ -1,0 +1,60 @@
+# Tool Certifications - one card per shop tool (or tool family). A student must
+# hold a tool's certification before using it, so these are the hard safety
+# gates the technical trees build on (tmp/requirements.md R4; Phase 2 spec
+# "tool access is a hard safety gate, no override").
+#
+# A `certification` tree: no tier ladder, each item stands alone and is
+# reachable from one or more parent trees. Schema/fields as in onboarding.yml.
+#
+# First item doubles as the first end-to-end test of a technical item: it
+# depends on onboarding items across trees (onb-safety-test,
+# onb-shop-orientation), and is signed off by a scoped role.
+
+tree:
+  id: tools
+  name: Tool Certifications
+  kind: certification
+  parent_trees: [manufacturing]
+  description: >-
+    Hands-on sign-offs for each tool in the shop. Get certified on a tool before
+    you use it on your own - a mentor or certified lead watches you use it safely
+    and signs you off.
+  authored_by:
+    - {name: Chris Hirsch, github: ChrisHirsch}
+  created_at: 2026-10-13
+  updated_at: 2026-10-13
+
+sections:
+  - {id: hand-power, name: Hand Power Tools}
+
+items:
+  - id: tool-drill-driver
+    name: Drills & Drivers
+    description: >-
+      Cordless drill and impact driver: when to use which, picking and seating
+      bits, clutch/torque and speed settings, pilot holes, clamping the work
+      (never hold it in your hand), battery swap and charging, PPE. Demonstrate
+      drilling a clean hole and driving a screw to depth without stripping it.
+    section: hand-power
+    roles: [student, mentor]
+    kind: check
+    requires: [onb-safety-test, onb-shop-orientation]
+    verify:
+      method: signoff
+      by: {role: subteam-lead, tree: manufacturing}   # the manufacturing co-leads - see assignments.yml
+    practical:
+      summary: >-
+        Done in front of a manufacturing co-lead, start to finish, with no help -
+        putting everything back is part of the test.
+      steps:
+        - Get the drill from its spot in the robotics room.         # TODO exact location
+        - Get a charged battery from its spot and seat it.          # TODO exact location
+        - Pick the correct drill bit for the hole.                  # TODO which bit/size
+        - Drill the hole straight, to the marked depth.             # TODO depth + test material
+        - Switch to the driver with the correct Phillips bit.       # TODO which bit
+        - Drive the screw in flush without stripping the head.
+        - Put the drill, battery and bits back where they belong.
+    renews: season            # annual refresher
+    visibility: public        # sticker-board worthy
+    related: [mfg-power-tool-basics]   # v1 Manufacturing tier-1 skill this splits out of
+    resources: []             # TODO short video + photo of where each item lives
