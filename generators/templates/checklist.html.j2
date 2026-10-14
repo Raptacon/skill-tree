@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>{{ tree.name }} - {{ role_names | join(" + ") }} - {{ team.name }} {{ team.number }}</title>
+<style>
+  @page { size: letter portrait; margin: 0.5in; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+    padding: 28px;
+    color: #1a1a1a;
+    max-width: 8.5in;
+  }
+  h1 { font-size: 28px; margin: 0; }
+  .meta { color: #666; font-size: 13px; margin-bottom: 8px; }
+  .intro { font-size: 13px; color: #333; margin-bottom: 14px; }
+  .name-line { font-size: 13px; margin-bottom: 18px; }
+  .name-line span { display: inline-block; border-bottom: 1px solid #999; width: 3.2in; }
+
+  h2 {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #1a6fb0;
+    border-bottom: 2px solid #1a6fb0;
+    padding-bottom: 3px;
+    margin: 18px 0 8px;
+  }
+  .item {
+    display: flex;
+    gap: 10px;
+    padding: 7px 0;
+    border-bottom: 1px solid #eee;
+    break-inside: avoid;
+  }
+  .box {
+    flex: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #1a1a1a;
+    border-radius: 3px;
+    margin-top: 1px;
+  }
+  .body { flex: 1; }
+  .title { font-weight: 700; font-size: 14px; }
+  .desc { font-size: 12px; color: #444; margin: 2px 0; }
+  .how { font-size: 12px; color: #1a6fb0; }
+  .tags { margin-top: 3px; }
+  .tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 1px 7px;
+    border-radius: 999px;
+    background: #f0f0f0;
+    color: #555;
+    margin-right: 4px;
+  }
+  .tag.cond { background: #fff8e1; color: #8a6d00; }
+  .tag.private { background: #fdecea; color: #a12a1f; }
+  .tag.optional { background: #e8f5e9; color: #2e7d32; }
+  .note { font-size: 12px; font-style: italic; color: #8a6d00; }
+  .item.draft { opacity: 0.45; }
+  .item.draft .title::after { content: " (coming soon)"; font-weight: 400; font-size: 11px; }
+  .practical { font-size: 12px; margin: 4px 0 2px; }
+  .practical ol { margin: 2px 0 0 18px; padding: 0; }
+  .resources { font-size: 11px; color: #555; margin-top: 2px; }
+  .resources a { color: #1a6fb0; }
+  footer { margin-top: 24px; font-size: 10px; color: #999; }
+</style>
+</head>
+<body>
+  <h1>{{ tree.name }}: {{ role_names | join(" + ") }}</h1>
+  <div class="meta">{{ team.name }} {{ team.number }} &middot; {{ season }} season &middot; {{ count }} item{{ 's' if count != 1 }}</div>
+  {% if tree.description %}<div class="intro">{{ tree.description }}</div>{% endif %}
+  <div class="name-line">Name: <span></span></div>
+
+  {% for section in sections %}
+  <h2>{{ section.name }}</h2>
+  {% for item in section.entries %}
+  <div class="item{% if item.draft %} draft{% endif %}">
+    <div class="box"></div>
+    <div class="body">
+      <div class="title">{{ item.name }}</div>
+      {% if item.actor_note %}<div class="note">{{ item.actor_note }}</div>{% endif %}
+      {% if item.description %}<div class="desc">{{ item.description }}</div>{% endif %}
+      {% if item.practical %}
+      <div class="practical">{{ item.practical.summary }}
+        <ol>{% for step in item.practical.steps %}<li>{{ step }}</li>{% endfor %}</ol>
+      </div>
+      {% endif %}
+      <div class="how">&#10148; {{ item.how }}</div>
+      <div class="tags">
+        {% for c in item.conditions %}<span class="tag cond">Only if: {{ c }}</span>{% endfor %}
+        {% if item.target %}<span class="tag">{{ item.target }}</span>{% endif %}
+        {% if item.renews %}<span class="tag">{{ item.renews }}</span>{% endif %}
+        {% if item.private %}<span class="tag private">{{ item.private }}</span>{% endif %}
+        {% if item.optional %}<span class="tag optional">Optional</span>{% endif %}
+        {% for a in item.after %}<span class="tag">After: {{ a }}</span>{% endfor %}
+      </div>
+      {% set links = item.resources | selectattr("label") | list %}
+      {% if links %}
+      <div class="resources">
+        {% for r in links %}{% if r.url %}<a href="{{ r.url }}">{{ r.label }}</a>{% else %}{{ r.label }}{% endif %}{% if not loop.last %} &middot; {% endif %}{% endfor %}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+  {% endfor %}
+  {% endfor %}
+
+  <footer>Generated from content/raptacon/trees/{{ tree.id }}.yml. Progress is tracked in the team roster, not on this sheet.</footer>
+</body>
+</html>
