@@ -117,7 +117,7 @@
 </head>
 <body>
   <h1>{{ name }}</h1>
-  <div class="meta">{% if grad_year %}Class of {{ grad_year }} &middot; {% endif %}Raptacon 3200 progress report</div>
+  <div class="meta">{% if grad_year %}Class of {{ grad_year }} &middot; {% endif %}Raptacon 3200 progress report{% if student_id %} &middot; ID {{ student_id }}{% endif %}</div>
   {% if interests %}<div class="interests">Interested in: {{ interests | join(", ") }}</div>{% endif %}
 
   {% for row in tree_rows %}
@@ -181,6 +181,6 @@
   </div>
   {% endif %}
 
-  <footer>Generated from data/students/*.yml - not a system of record.</footer>
+  <footer>Generated from content/raptacon/students/*.yml - not a system of record.</footer>
 </body>
 </html>

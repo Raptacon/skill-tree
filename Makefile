@@ -16,7 +16,7 @@ techmap:
 	$(PYTHON) generators/techmap.py
 
 validate:
-	$(PYTHON) -c "import yaml, glob; [yaml.safe_load(open(f)) for f in glob.glob('data/**/*.yml', recursive=True)]; print('all yaml valid')"
+	$(PYTHON) -c "import yaml, glob; [yaml.safe_load(open(f)) for f in glob.glob('content/**/*.yml', recursive=True)]; print('all yaml valid')"
 
 clean:
 	rm -f tmp/*.html tmp/*.png tmp/*.pdf

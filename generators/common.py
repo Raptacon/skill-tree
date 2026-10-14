@@ -1,12 +1,14 @@
-"""Shared loading helpers for the generators - keeps data/*.yml as the one
-source of truth without each script re-deriving the same lookups."""
+"""Shared loading helpers for the generators - keeps content/<team>/*.yml as the
+one source of truth without each script re-deriving the same lookups."""
 
 import os
 
 import yaml
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DATA = os.path.join(ROOT, "data")
+# Team content lives apart from the engine so another team can point CONTENT at
+# their own directory without touching generator code.
+DATA = os.environ.get("CONTENT", os.path.join(ROOT, "content", "raptacon"))
 TMP = os.path.join(ROOT, "tmp")
 TEMPLATES = os.path.join(ROOT, "generators", "templates")
 

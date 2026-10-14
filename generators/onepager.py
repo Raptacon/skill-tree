@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """Render a single student's progress report: current rank per tree and a
-concrete, motivating path to the next one. Driven entirely by data/*.yml."""
+concrete, motivating path to the next one. Driven entirely by content/<team>/*.yml."""
 
 import os
 import sys
@@ -114,6 +114,7 @@ def build_context(student_id):
 
     return {
         "name": student["name"],
+        "student_id": student.get("student_id"),
         "grad_year": student.get("grad_year"),
         "tree_rows": tree_rows,
         "hybrid_badges": hybrid_badges,

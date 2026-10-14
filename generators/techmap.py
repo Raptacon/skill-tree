@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """Render the whole-program tech-tree map: every tree as a lane, tiers as
-columns, hybrid nodes called out separately. Driven entirely by data/*.yml."""
+columns, hybrid nodes called out separately. Driven entirely by content/<team>/*.yml."""
 
 from jinja2 import Environment, FileSystemLoader
 

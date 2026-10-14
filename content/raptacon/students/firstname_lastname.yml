@@ -1,6 +1,7 @@
 # Hand-written example: brand-new intake student who already came in with some
 # tool/electronics exposure (not formally tier-verified yet, just picked up).
 name: First LastName
+student_id: "87654321"   # 8-digit id from the roster system - the join key across systems
 grad_year: 2029
 progress:
   baseline:
