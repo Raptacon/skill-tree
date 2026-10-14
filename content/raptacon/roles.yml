@@ -45,7 +45,7 @@ member_roles:
       Member of the team's board. Not necessarily a parent. Onboarding is similar to
       a parent's, plus board-specific training.
     person_key: email
-    source: TODO   # no board tab/column in the roster yet
+    source: TODO   # no board form; adults sign up via parent or mentor/volunteer form and mark board interest
 
 conditions:
   - id: chaperone

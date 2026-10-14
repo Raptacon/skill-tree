@@ -22,7 +22,8 @@
 #   requires    [item-id, {hours: N}, ...]
 #   required    default true; false = recommended, not blocking
 #   status      active (default) | draft = not live, shown greyed for review
-#   resources   [{type: doc|video|form|link, label, url?}]
+#   resources   [{type: doc|video|form|link, label, url?, roles?}] - roles limits
+#               which checklists show it
 #
 # Authorship (tree-level defaults; any item may override with its own values)
 #   authored_by [{name, github}]  first + last name and GitHub username - credit
@@ -58,7 +59,7 @@ sections:
   - {id: connected, name: Get Connected}
   - {id: started, name: Get Started}
   - {id: help, name: Help the Team}
-  - {id: travel, name: Travel}
+  - {id: travel, name: Field Trips}
 
 items:
   # ---------------------------------------------------------------- join
@@ -72,15 +73,18 @@ items:
     renews: season
     visibility: team
     resources:
-      - {type: form, label: Student sign-up form}
-      - {type: form, label: Parent sign-up form}
-      - {type: form, label: Mentor / Volunteer sign-up form}
+      - {type: form, label: Student sign-up form, roles: [student]}
+      - {type: form, label: Parent sign-up form, roles: [parent]}
+      - {type: form, label: Mentor / Volunteer sign-up form, roles: [mentor, volunteer, board]}
+    notes: No separate board form - board members use the parent or mentor/volunteer form and mark board interest.
 
   - id: onb-dues
     name: Team dues
     description: >-
-      Dues paid in full, OR a payment plan or waiver arranged with the treasurer -
-      either counts as done. Nobody but you, your parents and the treasurer sees this.
+      $250/year if paid in full in the 1st quarter, or $270 over time - 3 payments
+      of $90, due in October, December and March. Scholarships are available; ask the treasurer. Paid in
+      full, on the payment plan, or on a scholarship all count as done. Nobody but
+      you, your parents and the treasurer sees this.
     section: join
     roles: [student]
     actor: parent
@@ -88,9 +92,11 @@ items:
     verify:
       method: auto
       source: {tab: Balances, where: "Category = Dues and Balance Due <= 0"}
-      by: {role: treasurer}    # treasurer records plans/waivers
+      by: {role: treasurer}    # treasurer records plans/scholarships
     renews: season
     visibility: self
+    resources:
+      - {type: link, label: Pay dues, url: "https://pay.raptacon.org"}
 
   # ---------------------------------------------------------------- paperwork
   - id: onb-handbook
@@ -141,7 +147,7 @@ items:
     renews: season
     visibility: team
     resources:
-      - {type: link, label: FIRST Dashboard, url: "https://my.firstinspires.org/Dashboard/"}
+      - {type: link, label: FIRST Dashboard, url: "https://my.firstinspires.org/"}
 
   - id: onb-first-consent
     name: FIRST Consent & Release form signed
@@ -219,13 +225,17 @@ items:
       - {role: volunteer, when: chaperone}
     kind: check
     verify: {method: auto, source: {tab: MentorsVolunteers_Active, where: "Background Check Status = Completed"}}
+    notes: >-
+      TODO parents/volunteers who chaperone - background check status belongs in the
+      roster but isn't designed yet (Parents_Active has no such column). Needs a
+      raptacon-onboarding-system change.
     renews: season          # TODO confirm policy; may be the same thing as CCSD forms
     visibility: mentors
 
   # ---------------------------------------------------------------- safety
   - id: onb-safety-test
     name: Safety test passed
-    description: Mentors take the same test as students.
+    description: Students and mentors take the same test.
     section: safety
     roles: [student, mentor]
     kind: score
@@ -243,7 +253,7 @@ items:
     name: Shop safety orientation
     description: >-
       Walkthrough with a mentor: PPE, e-stops, fire extinguisher, first aid, hair and
-      loose clothing, shop rules. Bring your own safety glasses.
+      loose clothing, shop rules.
     section: safety
     roles: [student, mentor]
     kind: check
@@ -251,6 +261,19 @@ items:
     verify: {method: signoff, by: {any_of: [{role: safety-officer}, {role: lead-mentor}]}}
     renews: season
     visibility: public
+
+  - id: onb-safety-glasses
+    name: Your safety glasses
+    description: >-
+      The team gives you one pair of safety glasses. Label them clearly with your
+      name and keep them in the safety glasses pocket. Grab them from the pocket at
+      the start of every meeting and put them back when you leave.
+    section: safety
+    roles: [student]
+    kind: check
+    verify: {method: signoff, by: {role: mentor}}   # any mentor can check the label
+    renews: season
+    visibility: team
 
   # ---------------------------------------------------------------- connected
   - id: onb-discord
@@ -271,9 +294,24 @@ items:
     renews: permanent
     visibility: team
 
+  - id: onb-remind
+    name: Join Remind for team texts
+    description: "Text @3200rapta to 81010."
+    section: connected
+    roles: [student, parent, mentor, volunteer, board]
+    kind: check
+    verify: {method: self}
+    renews: season          # Remind classes are usually set up per school year
+    visibility: team
+
   - id: onb-github
     name: GitHub account linked
-    description: Create a GitHub account and add your username to your sign-up form.
+    description: >-
+      Create a GitHub account with your first and last name as the username -
+      firstnamelastname, e.g. janedoe (add a number if it's taken). It's easy for
+      the team to find and looks good on a resume later. Then add it to your sign-up
+      form (returning members: use the "Updated GitHub username" question). This
+      is also the first step of the Kanban tree.
     section: connected
     roles: [student, mentor]
     kind: check
@@ -349,16 +387,15 @@ items:
     notes: TODO define with the board. Candidates - bylaws review, conflict-of-interest disclosure, financial controls.
 
   # ---------------------------------------------------------------- travel
-  - id: onb-trip-paperwork
-    name: Trip paperwork approved
-    description: Per trip - permission, medical and travel forms for that event.
+  - id: onb-field-trip-form
+    name: Annual field trip form
+    description: >-
+      One field trip form covers the whole season. Individual trips may still
+      have their own forms and info - those are handled separately per trip.
     section: travel
-    roles:
-      - {role: student, when: travels}
-      - {role: parent, when: chaperone}
-      - {role: mentor, when: travels}
-      - {role: volunteer, when: travels}
+    roles: [student]
+    actor: parent
     kind: check
-    verify: {method: auto, source: {tab: Travel_Paperwork, where: "Status = Approved"}}
-    renews: event
+    verify: {method: signoff, claim: true, by: {role: lead-mentor}}   # TODO auto-derive once tracked in the roster
+    renews: season
     visibility: mentors
