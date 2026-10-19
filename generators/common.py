@@ -11,6 +11,8 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # their own directory without touching generator code.
 DATA = os.environ.get("CONTENT", os.path.join(ROOT, "content", "raptacon"))
 TMP = os.path.join(ROOT, "tmp")
+# Where generated HTML goes. `make site` points this at site/ for publishing.
+OUT = os.environ.get("OUT", TMP)
 TEMPLATES = os.path.join(ROOT, "generators", "templates")
 
 
@@ -70,7 +72,7 @@ def own_items(trees):
 
 def resolve_items(tree_doc, items_by_id):
     """A tree's items with `{ref: id, section?}` entries replaced by the referenced
-    item (section overridable), so shared items are defined once (tmp/adr/0003)."""
+    item (section overridable), so shared items are defined once (docs/adr/0003)."""
     resolved = []
     for item in tree_doc["items"]:
         if "ref" in item:
@@ -114,10 +116,10 @@ def item_roles(item):
 
 
 def write_html(env, template_name, out_name, **context):
-    os.makedirs(TMP, exist_ok=True)
+    os.makedirs(OUT, exist_ok=True)
     template = env.get_template(template_name)
     html = template.render(**context)
-    out_path = os.path.join(TMP, out_name)
+    out_path = os.path.join(OUT, out_name)
     with open(out_path, "w") as f:
         f.write(html)
     print(f"Wrote {out_path}")

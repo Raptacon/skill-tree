@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ team.name }} {{ team.number }} Skill Trees</title>
+<style>
+  body { font-family: -apple-system, "Helvetica Neue", Arial, sans-serif; margin: 0 auto; padding: 28px 16px; color: #1a1a1a; max-width: 900px; }
+  h1 { font-size: 30px; margin: 0; }
+  .meta { color: #666; font-size: 13px; margin-bottom: 18px; }
+  h2 { font-size: 15px; text-transform: uppercase; letter-spacing: 0.04em; color: #1a6fb0; border-bottom: 2px solid #1a6fb0; padding-bottom: 3px; margin-top: 26px; }
+  .cards { display: flex; flex-wrap: wrap; gap: 12px; }
+  a.card { display: block; border: 2px solid #1a6fb0; border-radius: 8px; padding: 12px 16px; text-decoration: none; color: #1a1a1a; flex: 1 1 240px; }
+  a.card .name { font-weight: 700; font-size: 16px; color: #1a6fb0; }
+  a.card .desc { font-size: 12px; color: #555; margin-top: 4px; }
+  a.card.draft { border-style: dashed; border-color: #999; }
+  a.card.draft .name { color: #666; }
+  footer { margin-top: 30px; font-size: 11px; color: #999; }
+</style>
+</head>
+<body>
+  <h1>{{ team.name }} {{ team.number }} Skill Trees</h1>
+  <div class="meta">{{ season }} season</div>
+
+  <h2>Start here</h2>
+  <div class="cards">
+    {% for t in trees %}
+    <a class="card" href="{{ t.id }}.html"><div class="name">{{ t.name }}</div>{% if t.description %}<div class="desc">{{ t.description }}</div>{% endif %}</a>
+    {% endfor %}
+  </div>
+
+  <h2>Subteam trees (first drafts - being moved to the new format)</h2>
+  <div class="cards">
+    <a class="card draft" href="techmap.html"><div class="name">Tech map</div><div class="desc">Every tree on one page.</div></a>
+    {% for p in posters %}
+    <a class="card draft" href="{{ p.file }}"><div class="name">{{ p.name }}</div></a>
+    {% endfor %}
+  </div>
+
+  <footer>Built from github.com/Raptacon/skill-tree. Want to add or fix a skill? Open a pull request.</footer>
+</body>
+</html>

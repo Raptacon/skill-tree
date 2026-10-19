@@ -4,7 +4,7 @@ PYTHON := pipenv run python
 TREE ?= manufacturing
 STUDENT ?= example
 
-.PHONY: poster onepager techmap checklist validate clean
+.PHONY: poster onepager techmap checklist validate lint site ci clean
 
 poster:
 	$(PYTHON) generators/poster.py $(TREE)
@@ -22,6 +22,17 @@ checklist:
 
 validate:
 	$(PYTHON) -c "import yaml, glob; [yaml.safe_load(open(f)) for f in glob.glob('content/**/*.yml', recursive=True)]; print('all yaml valid')"
+
+lint:
+	$(PYTHON) generators/lint.py
+
+# Everything the published site needs, into site/
+site:
+	rm -rf site
+	$(PYTHON) generators/site.py
+
+# What CI runs on every PR
+ci: validate lint site
 
 clean:
 	rm -f tmp/*.html tmp/*.png tmp/*.pdf
