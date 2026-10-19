@@ -1,14 +1,13 @@
 # Tool Certifications - one card per shop tool (or tool family). A student must
 # hold a tool's certification before using it, so these are the hard safety
-# gates the technical trees build on (tmp/requirements.md R4; Phase 2 spec
-# "tool access is a hard safety gate, no override").
+# gates the technical trees build on. Handbook rule: "Do not use a machine or
+# tool unless you have been trained and signed off to use that equipment."
 #
 # A `certification` tree: no tier ladder, each item stands alone and is
 # reachable from one or more parent trees. Schema/fields as in onboarding.yml.
 #
-# First item doubles as the first end-to-end test of a technical item: it
-# depends on onboarding items across trees (onb-safety-test,
-# onb-shop-orientation), and is signed off by a scoped role.
+# Each item requires the onboarding safety items (onb-safety-test,
+# onb-shop-orientation) and is signed off by a tree-scoped role.
 
 tree:
   id: tools

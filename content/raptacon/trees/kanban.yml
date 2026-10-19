@@ -1,9 +1,8 @@
 # Kanban - how the team tracks work. Everyone who works on the robot or the
 # team's projects goes through this, regardless of subteam.
 #
-# First tree to reuse another tree's item: `{ref: onb-github}` pulls the
-# onboarding item in as-is (same id, so completing it once counts in both
-# trees - tmp/adr/0003). A ref may override `section` only.
+# `{ref: onb-github}` pulls the onboarding item in as-is (same id, so completing
+# it once counts in both trees - docs/adr/0003). A ref may override `section` only.
 
 tree:
   id: kanban

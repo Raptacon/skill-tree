@@ -1,4 +1,4 @@
-# Roles, conditions and sign-off roles. See tmp/adr/0001 and 0004.
+# Roles, conditions and sign-off roles. See docs/adr/0001 and 0004.
 #
 # member_roles - what kind of team member someone is. A person can hold several
 #   (parent + mentor + board is common); their onboarding is the union of every

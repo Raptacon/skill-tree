@@ -1,8 +1,8 @@
 # Onboarding - the first tree every team member works through, every season.
 #
-# DRAFT v2 schema (tmp/adr/0001, 0004). One file, items inline, each tagged with
-# the roles it applies to; renderers produce one checklist per role, and a person
-# with several roles sees the union.
+# One file, items inline, each tagged with the roles it applies to; renderers
+# produce one checklist per role, and a person with several roles sees the union
+# (docs/adr/0001, 0004).
 #
 # Item fields
 #   id          global, stable, never reused (progress is recorded against it)
@@ -102,17 +102,24 @@ items:
   - id: onb-handbook
     name: Read and sign the team handbook
     description: >-
-      Read this season's Raptacon handbook and sign the acknowledgment. Students
-      and their parent/guardian each sign.
+      Read this season's Raptacon handbook and submit the acknowledgment form (no
+      Google account needed). Students and their parent/guardian each submit one;
+      a parent with two students submits once per student. Can't do it online?
+      Sign the paper page and hand it to a mentor.
     section: paperwork
     roles: [student, parent, mentor, volunteer, board]
     kind: signature
-    verify: {method: signature, source: {form: handbook-acknowledgment}}
+    verify:
+      method: signature
+      # Version is "<season> (rev YYYY-MM)"; any revision of this season counts.
+      # Students: own ack + a parent ack with matching "Your student's School ID".
+      # Parents: an ack for each of their students. Rows flagged Possible Duplicate are skipped.
+      source: {tabs: [Handbook_Acks, Handbook_Acks_Paper], version_prefix: season}
     renews: season
     visibility: team
     resources:
-      - {type: doc, label: "Raptacon Handbook (this season)"}     # TODO gdoc link
-      - {type: form, label: Handbook acknowledgment form}         # TODO build (plan Phase 1)
+      - {type: doc, label: "Raptacon Handbook 2026-27", url: "https://docs.google.com/document/d/19xdyY0cUXU5lqMMsEIhkcs5NqTy1XQ93uskZNUNlgAY/view"}
+      - {type: form, label: Handbook acknowledgment form, url: "https://docs.google.com/forms/d/e/1FAIpQLScWCkReToQ0QJ1SzqZzZwIr7HtPNzqyHdEWpxzEHoWSDCSWuA/viewform"}
 
   - id: onb-emergency-info
     name: Emergency contact and medical info on file
