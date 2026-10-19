@@ -1,112 +1,80 @@
-# Raptacon Skill Tree
+# Raptacon 3200 Skill Trees
 
-Raptacon 3200's gamified skill-tree progression system. This repo is **Phase 1**: a schema-driven set of generators that turn plain YAML into a printable tree poster and a per-student progress one-pager.
+Raptacon 3200's skill trees: what every team member needs to do and learn, from onboarding to subteam mastery. Trees are written in YAML, checked by CI on every pull request, and published as a website and printable checklists.
 
-Phase 2 (a real system of record — check-ins, verifications, a live app) is documented at the bottom of this README but not built yet. This repo's YAML files are designed so that migration is a straight import, not a rewrite.
+**Site: https://skills.raptacon.com**
+
+| Tree | For | What it covers |
+|---|---|---|
+| Onboarding | Students, parents, mentors, volunteers, board | Sign-up, handbook, dues, FIRST registration, safety, getting connected. Renews every season. |
+| Kanban | Students, mentors | GitHub account, how kanban works, using the team board |
+| Tool Certifications | Students, mentors | Hands-on sign-off for each shop tool before using it alone |
+| Subteam trees | Students | Manufacturing, Design, Electronics, Programming, Business/Media, LEDs - first drafts in the older format, being moved over |
+
+People's progress is **not** in this repo. It lives in the team roster (Google Sheets), run by [raptacon-onboarding-system](https://github.com/Raptacon/raptacon-onboarding-system). This repo only defines the trees.
+
+## Contributing a skill
+
+Mentors and students are encouraged to add and improve skills.
+
+1. Edit or add a tree under `content/raptacon/trees/`. [`onboarding.yml`](content/raptacon/trees/onboarding.yml) documents every field in its header; [`tools.yml`](content/raptacon/trees/tools.yml) is a short example of a hands-on skill.
+2. Run `make ci` locally (see Setup) to check it and build the site into `site/`.
+3. Open a pull request. CI must pass and a maintainer approves before it merges to `main`; the site updates automatically.
+
+### Item fields
+
+```yaml
+- id: tool-drill-driver            # unique across all trees, never changes once in use
+  name: Drills & Drivers
+  description: What it is and what "done" looks like.
+  section: hand-power              # one of the tree's `sections`
+  roles: [student, mentor]         # who it applies to; {role: parent, when: chaperone} for conditional
+  kind: check                      # check | count | hours | score | signature | external
+  requires: [onb-safety-test]      # items (any tree) or {hours: N} that must come first
+  verify:
+    method: signoff                # auto | self | signoff | signature | score
+    by: {role: subteam-lead, tree: manufacturing}   # roles from roles.yml
+  practical:                       # optional: the exact hands-on test, in order
+    summary: Done in front of a co-lead.
+    steps: [Get the drill from its spot., ...]
+  renews: season                   # season | permanent | event
+  visibility: public               # public | team | mentors | self
+  resources:
+    - {type: link, label: Video, url: "https://..."}
+```
+
+- A tree can reuse another tree's item with `{ref: <item-id>}`; completing it once counts in both.
+- Trees and items carry `authored_by: [{name, github}]`, `created_at` and `updated_at`.
+- **No personal data in this repo.** People appear only as `{name, github}`. CI fails on emails, phone numbers and 8-digit IDs.
+
+### Other content files
+
+| File | Holds |
+|---|---|
+| `content/raptacon/roles.yml` | Member roles (student, parent, mentor, volunteer, board), conditions (chaperone, CCSD volunteer, ...), sign-off roles |
+| `content/raptacon/assignments.yml` | Who holds each sign-off role this season, so checklists say who to ask |
+| `content/raptacon/team.yml` | Team name/number and when the season rolls over |
+| `content/raptacon/trees.yml`, `tiers.yml`, `hybrids.yml`, `skills/` | Older-format subteam trees (tier 0-4 ladders), still rendered as posters |
 
 ## Setup
 
 ```bash
 pipenv install
+make ci                                   # validate YAML, lint for personal data, build site/
+make checklist TREE=onboarding            # per-role checklists + index into tmp/
+make checklist TREE=onboarding ROLES=parent,mentor   # one page for someone with both roles
+make poster TREE=manufacturing            # older-format tree poster
+make techmap                              # every older-format tree on one page
 ```
 
-## Usage
+Open the generated HTML in a browser to view or print it.
 
-```bash
-make poster TREE=manufacturing     # writes tmp/manufacturing_poster.html
-make onepager STUDENT=example      # writes tmp/example_onepager.html
-make techmap                       # writes tmp/techmap.html - the whole program in one picture
-make validate                      # checks all content/**/*.yml parses
-```
+Another team can point the generators at its own content with `CONTENT=/path/to/content make ci`.
 
-Trees available for `TREE=`: `manufacturing`, `design`, `electronics`, `programming`, `business`, `leds` (`baseline` isn't tiered, so it doesn't have its own poster — it shows up as the banner strip at the top of `techmap`). Students available for `STUDENT=`: `example`, `firstname_lastname`.
+## Design
 
-Open the generated HTML in Chrome (or any modern browser) to view or print it. Headless-render a PNG for a quick look without opening a window:
+Decisions and their reasons are in [`docs/adr/`](docs/adr/README.md): one onboarding file with role-tagged items, Google Sheets as the progress store, a shared item library with trees as views, per-item verification/renewal/visibility, and a public repo with no personal data.
 
-```bash
-/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome \
-  --headless=new --disable-gpu --window-size=850,1400 \
-  --screenshot=tmp/manufacturing_poster.png \
-  "file://$PWD/tmp/manufacturing_poster.html"
-```
+## License
 
-## Schema
-
-Everything lives under `content/raptacon/` as YAML — this is the single source of truth for both generators (and, later, for seeding Phase 2's database).
-
-- **`content/raptacon/trees.yml`** — registry of skill trees: `{id, name, tiered, kind, parent_trees?}`. `tiered: false` (currently just `baseline`) means a flat pass/fail checklist with no tier ladder. `kind: subteam` trees are the primary tracks offered in baseline's "decide your track" step; `kind: specialization` trees (currently just `leds`) are reached through one or more `parent_trees` instead of picked directly, but still get their own full ladder and poster.
-- **`content/raptacon/tiers.yml`** — the shared 0-4 tier ladder (Baseline/Novice/Journeyman/Expert/Master), used by every tiered tree: `{id, name, verification, supervision?, min_hours_default, requires_taught_tier?}`.
-  - `verification` is one of `mentor_signoff` (tiers 0-1), `practical_test` (tier 2), `portfolio_review` (tiers 3-4).
-  - `requires_taught_tier` on tiers 3/4 encodes the "senior students must teach" rule: Expert requires having certified someone at Novice, Master requires having certified someone at Journeyman.
-- **`content/raptacon/skills/<tree>.yml`** — one file per tree: `{tree, tier_hours_override?, skills: [{id, tier, name, description?, supervision?, part_of_hybrid?, resources}]}`.
-  - `tier_hours_override` lets a tree's actual hour targets differ from `tiers.yml`'s generic defaults (Manufacturing's Novice is 7 hrs, not the generic 25).
-  - `resources` is a list of `{type: video|repo|doc, url, path?, label}` — pointers to the actual training material (YouTube videos, the [Skills-Challenges](https://github.com/Raptacon/Skills-Challenges) repo's stepped coding challenges, docs, whatever). Empty `[]` is a valid placeholder until a mentor fills it in.
-  - `part_of_hybrid` links a skill to an entry in `hybrids.yml`.
-- **`content/raptacon/hybrids.yml`** — cross-tree hybrid nodes: `{id, name, requires: [{tree, tier}], hours?, skills: [skill_id]}`. A hybrid requires Journeyman (tier 2) in 2+ trees.
-- **`content/raptacon/students/<id>.yml`** — one file per student, stand-in for the future `students`/`verifications`/`checkins` tables: `{name, grad_year, progress: {<tree>: {hours, tier_verified?, skills_completed?, passed? (untiered trees)}}, interests?, hybrids_awarded, badges}`.
-  - `skills_completed` is separate from `tier_verified` on purpose: hours and informally-picked-up skills don't themselves grant a tier (see Phase 2's two-gates rule below) — a student can know several skills, or have logged a lot of hours, well before a mentor formally signs off the tier. The one-pager shows both.
-  - `interests` is a list of tree ids a student has flagged interest in but hasn't started logging progress against yet — shown as a note, not a gate.
-
-The **LEDs** tree (`content/raptacon/skills/leds.yml`) is a `kind: specialization` full 0-4 ladder of its own (basic circuits → addressable strips → dot-matrix mapping → an on-robot game with Xbox input) rather than a hybrid, even though it draws on both Electronics and Programming fundamentals — see the comment in `trees.yml` for why it isn't a hybrid, and the "Adding a tree" note below on subteam vs. specialization. Tiers 3-4 describe a learning path only; no dot-matrix hardware or game code exists on the team yet (deliberate scope call, not an oversight).
-
-`generators/common.py` holds the shared YAML-loading helpers (`load_trees`, `load_tiers`, `load_hybrids`, `load_skills`, `tier_hours`, `write_html`) that all three generators build on — add new lookups there rather than re-deriving them per script.
-
-### Adding a tree
-
-1. Add an entry to `content/raptacon/trees.yml` — `kind: subteam` if it's a primary track new students pick, `kind: specialization` + `parent_trees: [...]` if it's reached through other trees instead (like `leds`).
-2. Create `content/raptacon/skills/<tree>.yml` with at least one skill per tier you want to seed.
-3. `make validate`, then `make poster TREE=<tree>`.
-4. If it's `kind: subteam`, add it to `baseline-decide-track`'s description in `content/raptacon/skills/baseline.yml` so new students are actually offered it.
-
-### Adding a skill
-
-Add an entry under the right tree's `skills:` list with a unique `id` (convention: `<tree-prefix>-<short-name>`). `tier` is required; everything else is optional. If it's part of a hybrid, also add/update the matching entry in `hybrids.yml`.
-
-### Adding a hybrid
-
-Add an entry to `content/raptacon/hybrids.yml` with the two (or more) `{tree, tier}` requirements, then set `part_of_hybrid: <hybrid-id>` on the relevant skill(s) in each tree's skills file.
-
-## The one-pager (`make onepager STUDENT=...`)
-
-Deliberately not a flat report card — it's meant to read as "where you rank and how to level up." Per tiered tree: a rank ladder (Novice/Journeyman/Expert/Master, current rank highlighted), an "Already knows" line for informally-completed skills, and a "Next up" callout with an hours progress bar, the verification method that tier needs, and the specific remaining skills. A **Hybrid opportunities** section surfaces hybrids the student is partway into ("have Programming, still need Journeyman in Electronics") or fully eligible for but not yet awarded ("ready now, ask a mentor").
-
-## The tech-map (`make techmap`)
-
-A single landscape page showing every tree as a lane, tiers 1-4 as columns, the Baseline checklist as a banner strip at the top, and hybrid nodes called out below — meant to answer "how do I get from brand-new to [some goal]?" at a glance, game-tech-tree style. Current version labels each hybrid card with its two parent trees rather than drawing literal connector lines between lanes (lines that actually cross lanes correctly for a graph this connected — e.g. Manufacturing touches Electronics, Design, *and* Programming — need real graph layout, not just CSS grid row-spans). Worth a v2 if the labeled-card version proves too flat in practice.
-
-## Known open items
-
-- **Manufacturing tier overrides**: `mfg-cnc-intro` (tier 1) and `mfg-tool-path-cnc` (tier 3) are read from superscript markers on the mentor's original handwritten draft (`¹`/`³`) as "this skill actually certifies at a different tier than the section it's written under." Flagged with a comment in `content/raptacon/skills/manufacturing.yml` — confirm with the mentor who wrote the original draft.
-- **QR codes** on the poster point at placeholder URLs (`https://raptacon3200.example/skills/<tree>/tier/<n>`) — there's no real resources site yet. Swap `QR_BASE_URL` in `generators/poster.py` once one exists, or point `resources` entries directly at real links per skill.
-- **Business/Media tree** (`content/raptacon/skills/business.yml`) is a from-scratch design (social media, sponsor relations, pit displays, award-submission writing) — sanity-check it against what your business/media subteam actually does.
-- **Programming tree's `prog-pid-basics`** doesn't have a real linked resource yet — PID/closed-loop control isn't covered by any current Skills-Challenges step (`challenge_step_4`'s own docs explicitly defer it).
-- **LEDs tree tiers 3-4** (dot-matrix mapping, on-robot game) are a designed learning path with no existing hardware/code to link — by design, not an oversight (see the LEDs paragraph above).
-- **`elec-mentors-wiring`, `design-owns-cad-standards`** and similar Master-tier "trains others" skills are named explicitly per tree now, but the actual "must have certified someone at tier N" gate still only lives in `tiers.yml`'s `requires_taught_tier` — nothing enforces that the named skill and the gate stay in sync. Not a problem while everything's hand-authored YAML; would need a real check once Phase 2 exists.
-- **Hybrid `skills:` lists in `hybrids.yml`** must be kept in sync by hand when a skill's `part_of_hybrid` is added on either parent tree's side (see `dfm`'s list, which now has both a `mfg-*` and a `design-*` id) — easy to forget the other side when adding a new hybrid-tagged skill.
-
-## Phase 2 (not built yet): the full system of record
-
-Design spec for the full system of record:
-
-**Two independent gates per tier (both required):**
-1. Hours logged in that tree ≥ the tier's minimum (eligible to *attempt* verification, doesn't itself grant the tier).
-2. Verification passed, per `tiers.yml`'s `verification` method for that tier.
-
-**Hours are two kinds:** general presence hours (any check-in, gate Baseline only) vs. in-tree hours (tagged to a specific tree, gate that tree's tiers).
-
-**Privilege gating:** tool access is a hard safety gate on Tier 1-2 in the relevant tree, no override. Subteam lead / board eligibility needs Tier 3 in some tree *plus* a human approval flag — surface "eligible" vs. "approved" separately, never auto-grant leadership.
-
-**Board/Leadership track:** separate competencies (meeting facilitation, budget literacy, sponsor relations, scheduling, conflict resolution, onboarding) tracked as status per competency, not a tier number.
-
-**Commitment badges:** non-gating recognition track, milestones at 25/50/100/250/500 total hours regardless of tree.
-
-**Suggested data model** (Postgres): `students`, `skills(tree, tier, name, description, min_hours, prereq_skill_ids[])`, `verifications(student_id, skill_id, verifier_id, method, date, evidence_url, taught_student_id nullable)`, `hybrid_nodes(name, required_skill_ids[])`, `hybrid_awards`, `checkins(student_id, time_in, time_out, tree_tag nullable, method)`, `board_track`, `badges`. This repo's `content/**/*.yml` maps directly onto `skills`/`hybrid_nodes`; `content/raptacon/students/*.yml` maps onto `students`/`verifications`/`checkins` combined.
-
-**Existing infra to integrate with, not replace:**
-- QR check-in system already in use — extend it with a check-out step to compute session duration for hours logging.
-- RFID / e-paper name tag work in progress separately — future integration point (live tier badges + hour totals on the tag; a tool-station RFID tap logging a "used under supervision" event).
-- Shadow spreadsheet (Student, Skill, Tier, Verifier, Date, Hours, Evidence note) is the Phase 1 ledger — a CSV import path is needed so that data isn't lost at go-live.
-
-**Suggested stack:** Go backend + Postgres + REST API; server-rendered templates or htmx over a full JS SPA for the frontend, given the small user base (~20-30 students + mentors).
-
-**Suggested milestone order:** confirm stack → schema/migrations → seed data (import this repo's YAML) → minimal API (record verification, record check-in/out, compute current tier per tree) → read-only team board view (name, tier dots per tree, hybrid stars, hours — the multi-student sibling of this repo's one-pager) → mentor-facing verification forms.
+[MIT](LICENSE)
