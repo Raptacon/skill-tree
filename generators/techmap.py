@@ -50,7 +50,8 @@ def build_context():
 
     hybrid_cards = []
     for h in hybrids.values():
-        parent_names = [trees[r["tree"]]["name"] for r in h["requires"]]
+        parent_names = [trees[r["tree"]]["name"] if r["tree"] in trees else v2[r["tree"]]["tree"]["name"]
+                        for r in h["requires"]]
         hybrid_cards.append(
             {
                 "name": h["name"],

@@ -11,8 +11,9 @@
 #   roles       list of role ids, or {role, when: <condition>} for conditional
 #   actor       role that actually does it, when different from who it's for
 #               (a parent signs the FIRST consent *for* their student)
-#   kind        check | count | hours | score | signature | external
-#   target      for count/hours; pass_score for score
+#   kind        check | count | hours | score | signature | external | timed
+#   target      for count/hours; pass_score for score; runs for timed (best time recorded)
+#   track       optional label for a path within a tree (e.g. Strategy, Scouting, Drive)
 #   verify      method: auto | self | signoff | signature | score
 #               by:     {role: x} | {person: "@github"} | {any_of: [...]}
 #               source: where `auto` reads from (Master Roster tab/column)
