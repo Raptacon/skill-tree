@@ -35,7 +35,7 @@ hybrids:
       - mfg-update-measurements
       - mfg-3d-slicing
       - mfg-tool-path-cnc
-      - design-tolerancing-fits
+      - des-gdt-dfm
 
   - id: mechatronics
     name: Mechatronics
