@@ -2,6 +2,7 @@
 one source of truth without each script re-deriving the same lookups."""
 
 import os
+import shutil
 from datetime import date
 
 import yaml
@@ -113,6 +114,20 @@ def role_holders(season):
 def item_roles(item):
     """[(role_id, condition_id or None)] - normalizes `roles:` entries."""
     return [(r, None) if isinstance(r, str) else (r["role"], r.get("when")) for r in item.get("roles", [])]
+
+
+BRAND_ASSETS = ["logo/lockup-horizontal.svg", "logo/raptor-mark.svg"]
+
+
+def copy_brand_assets():
+    """Copy logos from the brand-kit submodule into OUT/assets/."""
+    dest = os.path.join(OUT, "assets")
+    os.makedirs(dest, exist_ok=True)
+    for rel in BRAND_ASSETS:
+        src = os.path.join(ROOT, "brand-kit", rel)
+        if not os.path.exists(src):
+            raise SystemExit(f"Missing {src} - run: git submodule update --init")
+        shutil.copy(src, dest)
 
 
 def write_html(env, template_name, out_name, **context):

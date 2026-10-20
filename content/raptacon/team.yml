@@ -3,6 +3,9 @@ team:
   number: 3200
   name: Raptacon
 
+# Published site; QR codes on printed overviews point back here.
+site_url: https://skills.raptacon.com
+
 # When annual (`renews: season`) items reset. Provisional: start of the CCSD
 # school year. Kept here, in one place, so it can change without touching any tree.
 season:

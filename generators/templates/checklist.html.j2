@@ -97,7 +97,7 @@
 </style>
 </head>
 <body>
-  <div class="back"><a href="index.html">&larr; All skill trees</a></div>
+  <div class="back"><a href="{{ tree.id }}.html">&larr; {{ tree.name }} overview</a> &middot; <a href="index.html">All skill trees</a></div>
   <h1>{{ tree.name }}: {{ role_names | join(" + ") }}</h1>
   <div class="meta">{{ team.name }} {{ team.number }} &middot; {{ season }} season &middot; {{ count }} item{{ 's' if count != 1 }}</div>
   {% if tree.description %}<div class="intro">{{ tree.description }}</div>{% endif %}
@@ -107,7 +107,7 @@
   {% for section in sections %}
   <h2>{{ section.name }}</h2>
   {% for item in section.entries %}
-  <div class="item{% if item.draft %} draft{% endif %}">
+  <div class="item{% if item.draft %} draft{% endif %}" id="{{ item.id }}">
     <div class="box"></div>
     <div class="body">
       <div class="title">{{ item.name }}</div>

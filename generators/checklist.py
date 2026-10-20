@@ -3,7 +3,7 @@
 what to do, how it gets checked off and who to ask. Driven by
 content/<team>/trees/<tree>.yml + roles.yml + assignments.yml + team.yml.
 
-    checklist.py onboarding                 # one page per role + an index page
+    checklist.py onboarding                 # one page per role (overview.py writes the tree page)
     checklist.py onboarding parent,mentor   # one page for someone holding both roles
 """
 
@@ -102,6 +102,7 @@ def build_item(item, roles, conditions, ctx):
     elif actor and actor in roles and not (tagged & set(roles) - {actor}) and tagged - {actor}:
         actor_note = "You do this one for your student"
     return {
+        "id": item["id"],
         "name": item["name"],
         "description": item.get("description"),
         "conditions": [ctx["conditions"].get(c, {"name": c})["name"] for c in conditions],
@@ -196,15 +197,10 @@ def main():
                           **build_context(tree_doc, roles, ctx))
         return
 
-    pages = []
     for role in ctx["member_roles"]:
         page = build_context(tree_doc, [role], ctx)
         if page["count"]:
-            out = f"{tree_id}_{role}.html"
-            common.write_html(env, "checklist.html.j2", out, **page)
-            pages.append({"role": page["role_names"][0], "file": out, "count": page["count"]})
-    common.write_html(env, "checklist_index.html.j2", f"{tree_id}.html",
-                      tree=tree_doc["tree"], pages=pages, season=ctx["season"], team=ctx["team"])
+            common.write_html(env, "checklist.html.j2", f"{tree_id}_{role}.html", **page)
 
 
 if __name__ == "__main__":
