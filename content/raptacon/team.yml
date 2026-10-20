@@ -9,6 +9,17 @@ season:
   starts: {month: 8, day: 1}     # TODO confirm - align with onboarding-system Rollover.gs
   label: "{start_year}-{end_year_short}"   # e.g. 2026-27
 
+# The six primary subteams (handbook section 3). `tree` is the tree id each one
+# trains in; Strategy and Marketing trees don't exist yet but their leads can
+# already sign off (e.g. Baseline shadowing).
+subteams:
+  - {id: strategy, name: Strategy/Scouting/Drive}
+  - {id: design, name: CAD/Design}
+  - {id: manufacturing, name: Fabrication/Manufacturing}
+  - {id: electronics, name: Electronics}
+  - {id: programming, name: Programming}
+  - {id: marketing, name: Marketing}
+
 # Named events for `renews: event` items (e.g. trip paperwork). Mirrors TRIPS in
 # raptacon-onboarding-system's Config.gs - keep in sync until one reads the other.
 events:

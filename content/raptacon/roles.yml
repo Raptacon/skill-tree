@@ -81,6 +81,9 @@ signoff_roles:
     description: >-
       Student or mentor (co-)lead for a subteam/tree. Usually two co-leads per tree;
       either one can sign off. Who holds it this season is in assignments.yml.
+  - id: captain
+    name: Team Captain
+    description: Student team captain.
   - id: food-coordinator
     name: Food Coordinator
     description: Tracks Saturday food sign-ups.

@@ -39,7 +39,7 @@ items:
     verify: {method: self}
     renews: permanent
     visibility: team
-    resources: []             # TODO short video or one-page intro
+    training: []             # TODO short video or one-page intro
 
   - id: kanban-our-board
     name: Using the Raptacon board
@@ -62,5 +62,5 @@ items:
         - Move it to Done - or back to To Do with a note if you're stuck.
     renews: permanent
     visibility: public
-    resources:
+    training:
       - {type: link, label: Raptacon board (GitHub Projects), url: "https://github.com/orgs/Raptacon/projects/7"}

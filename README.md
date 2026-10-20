@@ -6,7 +6,8 @@ Raptacon 3200's skill trees: what every team member needs to do and learn, from 
 
 | Tree | For | What it covers |
 |---|---|---|
-| Onboarding | Students, parents, mentors, volunteers, board | Sign-up, handbook, dues, FIRST registration, safety, getting connected. Renews every season. |
+| Onboarding | Students, parents, mentors, volunteers, board | Sign-up, handbook, dues, FIRST registration, safety, getting connected. Renews every season. Finish it: **Rookie**. |
+| Baseline | Students, mentors | Hand tools, drills & drivers, git, the team board, how the team works, the robot and game, shadow every subteam, choose a track. Finish it: **Raptor**. |
 | Kanban | Students, mentors | GitHub account, how kanban works, using the team board |
 | Tool Certifications | Students, mentors | Hands-on sign-off for each shop tool before using it alone |
 | Subteam trees | Students | Manufacturing, Design, Electronics, Programming, Business/Media, LEDs - first drafts in the older format, being moved over |
@@ -34,14 +35,18 @@ Mentors and students are encouraged to add and improve skills.
   verify:
     method: signoff                # auto | self | signoff | signature | score
     by: {role: subteam-lead, tree: manufacturing}   # roles from roles.yml
-  practical:                       # optional: the exact hands-on test, in order
+  training:                        # how to learn it
+    - {type: session, label: Walkthrough with a co-lead}
+    - {type: video, label: Drill basics, url: "https://..."}
+  practical:                       # the test: the exact hands-on task, in order
     summary: Done in front of a co-lead.
     steps: [Get the drill from its spot., ...]
   renews: season                   # season | permanent | event
   visibility: public               # public | team | mentors | self
-  resources:
-    - {type: link, label: Video, url: "https://..."}
 ```
+
+- `parts: [{id, name, by}]` splits an item into named sign-offs (Baseline's "Shadow every subteam" has one per subteam).
+- A tree can set `badge: {name, description}` (the rank for finishing it) and `next: {tree, text}` (where to go after).
 
 - A tree can reuse another tree's item with `{ref: <item-id>}`; completing it once counts in both.
 - Trees and items carry `authored_by: [{name, github}]`, `created_at` and `updated_at`.

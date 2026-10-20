@@ -22,8 +22,13 @@
 #   requires    [item-id, {hours: N}, ...]
 #   required    default true; false = recommended, not blocking
 #   status      active (default) | draft = not live, shown greyed for review
-#   resources   [{type: doc|video|form|link, label, url?, roles?}] - roles limits
+#   training    [{type: video|doc|form|link|session|repo, label, url?, roles?}] -
+#               how to learn it (`session` = hands-on with a mentor); roles limits
 #               which checklists show it
+#   practical   {summary, steps: [...]} - the test: the exact hands-on task a
+#               verifier has the person perform, in order
+#   parts       [{id, name, by}] - named sub-sign-offs that together complete the
+#               item (e.g. one per subteam shadowed)
 #
 # Authorship (tree-level defaults; any item may override with its own values)
 #   authored_by [{name, github}]  first + last name and GitHub username - credit
@@ -33,9 +38,9 @@
 #   updated_at  YYYY-MM-DD, bump on any change (CI will check a PR that edits an
 #               item also bumps this, and warn when it's old enough to be stale)
 #
-# Assessment (optional; see trees/tools.yml)
-#   practical   {summary, steps: [...]} - the exact hands-on task a verifier has
-#               the person perform, in order
+# Tree-level (optional)
+#   badge       {name, description} - rank earned by finishing every required item
+#   next        {tree, text} - where to go after this tree
 
 tree:
   id: onboarding
@@ -44,7 +49,15 @@ tree:
   authored_by:
     - {name: Chris Hirsch, github: ChrisHirsch}
   created_at: 2026-10-13
-  updated_at: 2026-10-13
+  updated_at: 2026-10-20
+  badge:
+    name: Rookie
+    description: Signed up, paid, handbook signed, safety done - you're on the team.
+  next:
+    tree: baseline
+    text: >-
+      Next up: Baseline. Learn the shop tools, git and the team board, shadow
+      every subteam, then choose your track.
   description: >-
     Everything you need to be a fully on-boarded member of Raptacon 3200 this
     season - what you need depends on your role. Most items check themselves off
@@ -72,7 +85,7 @@ items:
     verify: {method: auto, source: {tab: "<role roster tab>", where: "Status = Active"}}
     renews: season
     visibility: team
-    resources:
+    training:
       - {type: form, label: Student sign-up form, roles: [student]}
       - {type: form, label: Parent sign-up form, roles: [parent]}
       - {type: form, label: Mentor / Volunteer sign-up form, roles: [mentor, volunteer, board]}
@@ -95,7 +108,7 @@ items:
       by: {role: treasurer}    # treasurer records plans/scholarships
     renews: season
     visibility: self
-    resources:
+    training:
       - {type: link, label: Pay dues, url: "https://pay.raptacon.org"}
 
   # ---------------------------------------------------------------- paperwork
@@ -117,7 +130,7 @@ items:
       source: {tabs: [Handbook_Acks, Handbook_Acks_Paper], version_prefix: season}
     renews: season
     visibility: team
-    resources:
+    training:
       - {type: doc, label: "Raptacon Handbook 2026-27", url: "https://docs.google.com/document/d/19xdyY0cUXU5lqMMsEIhkcs5NqTy1XQ93uskZNUNlgAY/view"}
       - {type: form, label: Handbook acknowledgment form, url: "https://docs.google.com/forms/d/e/1FAIpQLScWCkReToQ0QJ1SzqZzZwIr7HtPNzqyHdEWpxzEHoWSDCSWuA/viewform"}
 
@@ -153,7 +166,7 @@ items:
     verify: {method: signoff, claim: true, by: {role: lead-mentor}}
     renews: season
     visibility: team
-    resources:
+    training:
       - {type: link, label: FIRST Dashboard, url: "https://my.firstinspires.org/"}
 
   - id: onb-first-consent
@@ -253,7 +266,7 @@ items:
       by: {any_of: [{role: safety-officer}, {role: lead-mentor}]}
     renews: season
     visibility: team
-    resources:
+    training:
       - {type: link, label: Safety test (Schoology)}   # TODO link
 
   - id: onb-shop-orientation
@@ -335,21 +348,6 @@ items:
     kind: hours
     target: 10
     verify: {method: auto, source: {tab: CheckIns, sum: "Duration (min)"}}
-    renews: season
-    visibility: public
-
-  - id: onb-choose-track
-    name: Choose your track
-    description: >-
-      Shadow each subteam, then pick a primary tree and meet its lead. You can
-      switch or add more later. This unlocks the Baseline tree.
-    section: started
-    roles: [student]
-    kind: check
-    requires: [onb-shop-orientation]
-    verify:
-      method: signoff
-      by: {any_of: [{role: subteam-lead}, {role: lead-mentor}]}
     renews: season
     visibility: public
 
