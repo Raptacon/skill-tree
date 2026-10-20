@@ -30,7 +30,7 @@ Mentors and students are encouraged to add and improve skills.
   description: What it is and what "done" looks like.
   section: hand-power              # one of the tree's `sections`
   roles: [student, mentor]         # who it applies to; {role: parent, when: chaperone} for conditional
-  kind: check                      # check | count | hours | score | signature | external
+  kind: check                      # check | count | hours | score | signature | external | timed
   requires: [onb-safety-test]      # items (any tree) or {hours: N} that must come first
   verify:
     method: signoff                # auto | self | signoff | signature | score

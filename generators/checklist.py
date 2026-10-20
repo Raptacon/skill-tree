@@ -65,6 +65,8 @@ def describe_target(item):
         return f"{item['target']} hours"
     if kind == "score" and item.get("pass_score") is not None:
         return f"pass score {item['pass_score']}"
+    if kind == "timed":
+        return f"best of {item.get('runs', 1)} runs - time recorded"
     return None
 
 
@@ -103,6 +105,7 @@ def build_item(item, roles, conditions, ctx):
         actor_note = "You do this one for your student"
     return {
         "id": item["id"],
+        "track": item.get("track"),
         "name": item["name"],
         "description": item.get("description"),
         "conditions": [ctx["conditions"].get(c, {"name": c})["name"] for c in conditions],

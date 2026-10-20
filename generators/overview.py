@@ -48,11 +48,21 @@ def v2_card(item, tree_id, home, ctx):
         "name": item["name"],
         "description": item.get("description"),
         "test": bool(item.get("practical")),
+        "timed": item.get("runs", 1) if item.get("kind") == "timed" else None,
+        "track": item.get("track"),
         "renews": item.get("renews") == "season",
         "shared": ctx["tree_names"].get(origin) if origin and origin != tree_id else None,
         "draft": item.get("status") == "draft",
         "detail": detail,
     }
+
+
+def tree_hybrids(tree_id, ctx):
+    return [
+        {"name": h["name"], "with": [ctx["tree_names"].get(r["tree"], r["tree"]) for r in h["requires"] if r["tree"] != tree_id]}
+        for h in common.load_hybrids().values()
+        if any(r["tree"] == tree_id for r in h["requires"])
+    ]
 
 
 def build_v2(tree_id, ctx):
@@ -86,6 +96,7 @@ def build_v2(tree_id, ctx):
         "next": tree.get("next"),
         "checklists": [{"role": ctx["member_roles"][r]["name"], "file": f"{tree_id}_{r}.html"} for r in roles],
         "rows": rows,
+        "hybrids": tree_hybrids(tree_id, ctx),
         "draft": False,
     }
 
@@ -102,11 +113,7 @@ def build_legacy(tree_id, ctx):
             cards = [{"name": s["name"], "description": s.get("description")} for s in skills]
             meta = tier_meta(tier, common.tier_hours(skills_doc, tiers, tier_id))
             rows.append(row(tier["name"].lower(), tier["name"], tree_id, ctx, cards, meta))
-    hybrids = [
-        {"name": h["name"], "with": [ctx["tree_names"].get(r["tree"], r["tree"]) for r in h["requires"] if r["tree"] != tree_id]}
-        for h in common.load_hybrids().values()
-        if any(r["tree"] == tree_id for r in h["requires"])
-    ]
+    hybrids = tree_hybrids(tree_id, ctx)
     return {
         "name": tree["name"],
         "description": None,

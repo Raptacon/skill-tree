@@ -57,6 +57,7 @@
   .mark { display: inline-block; font-size: 11px; font-weight: 700; padding: 1px 7px; border-radius: 999px; background: #f0f0f0; color: #555; margin-right: 4px; }
   .mark.test { background: var(--ink); color: var(--green); }
   .mark.shared { background: #e6f0fa; color: #1a6fb0; }
+  .mark.track { background: var(--green); color: var(--ink); }
   details.card .body { padding: 0 12px 12px; font-size: 15px; line-height: 1.45; color: #333; }
   details.card .body a { color: #1a6fb0; font-weight: 700; text-decoration: none; }
 
@@ -114,8 +115,10 @@
       {% for c in r.cards %}
       <details class="card{% if c.draft %} draft{% endif %}">
         <summary>{{ c.name }}
-          {% if c.test or c.renews or c.shared %}<span class="marks">
+          {% if c.test or c.timed or c.renews or c.shared or c.track %}<span class="marks">
+            {% if c.track %}<span class="mark track">{{ c.track }}</span>{% endif %}
             {% if c.test %}<span class="mark test">&#9873; hands-on test</span>{% endif %}
+            {% if c.timed %}<span class="mark test">&#9201; timed - best of {{ c.timed }}</span>{% endif %}
             {% if c.renews %}<span class="mark">&#8635; every season</span>{% endif %}
             {% if c.shared %}<span class="mark shared">also in {{ c.shared }}</span>{% endif %}
           </span>{% endif %}
