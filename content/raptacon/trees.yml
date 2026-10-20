@@ -20,10 +20,6 @@ trees:
     name: Programming
     tiered: true
     kind: subteam
-  - id: business
-    name: Business / Media
-    tiered: true
-    kind: subteam
   - id: leds
     name: LEDs
     tiered: true

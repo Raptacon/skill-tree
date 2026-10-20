@@ -1,0 +1,78 @@
+# Outreach - how Raptacon shows up in the community: telling our story,
+# sponsors, award submissions and outreach programs (handbook 3.4g). Fields as
+# documented in onboarding.yml; items use `tier` instead of `section`.
+
+tree:
+  id: outreach
+  name: Outreach
+  kind: subteam
+  requires: [base-choose-track]
+  authored_by:
+    - {name: Chris Hirsch, github: ChrisHirsch}
+  created_at: 2026-10-20
+  updated_at: 2026-10-20
+  description: >-
+    How Raptacon shows up in the community: telling our story, thanking and
+    growing our sponsors, writing award submissions and running outreach programs.
+
+items:
+  # ---------------------------------------------------------------- Novice
+  - id: out-team-pitch
+    tier: 1
+    name: Team pitch
+    description: Explain the team's history, mission and sponsors to a stranger in under a minute.
+    roles: [student]
+    kind: check
+    verify: {method: signoff, by: {role: subteam-lead, tree: outreach}}
+    practical:
+      summary: Give the pitch to an Outreach lead (or a visitor at an event).
+      steps:
+        - Who we are - FRC Team 3200, our school, how long we've competed.
+        - What we do - build a robot each season, plus outreach in the community.
+        - Who makes it possible - name at least two sponsors.
+        - Finish with how to get involved or support the team.
+    renews: permanent
+    visibility: public
+
+  # ---------------------------------------------------------------- Journeyman
+  - id: out-sponsor-recognition
+    tier: 2
+    name: Sponsor recognition
+    description: Write sponsor thank-you notes and recognition posts, and keep sponsor logos current on team materials.
+    roles: [student]
+    kind: check
+    verify: {method: signoff, by: {role: subteam-lead, tree: outreach}}
+    renews: permanent
+    visibility: public
+
+  # ---------------------------------------------------------------- Expert
+  - id: out-sponsor-communications
+    tier: 3
+    name: Sponsor communications
+    description: Lead sponsor outreach - asks, season updates and renewal thank-yous.
+    roles: [student]
+    kind: check
+    verify: {method: signoff, by: {role: lead-mentor}}
+    renews: permanent
+    visibility: public
+
+  - id: out-award-writing
+    tier: 3
+    name: Award submission writing
+    description: Co-write an award submission - the Impact Award essay or a Woodie Flowers nomination.
+    roles: [student]
+    kind: check
+    verify: {method: signoff, by: {role: lead-mentor}}
+    renews: permanent
+    visibility: public
+
+  # ---------------------------------------------------------------- Master
+  - id: out-outreach-program
+    tier: 4
+    name: Community outreach program
+    description: Design and lead a community outreach or STEM demo program.
+    roles: [student]
+    kind: check
+    verify: {method: signoff, by: {role: lead-mentor}}
+    renews: permanent
+    visibility: public

@@ -76,8 +76,11 @@ def build_v2(tree_id, ctx):
                 rows.append(row(section["id"], section["name"], tree_id, ctx, cards))
     roles = sorted({r for i in items for r, _ in common.item_roles(i)}, key=ROLE_ORDER.index)
     tree = doc["tree"]
+    starts = [f"{ctx['all_items'][r]['name']} ({ctx['tree_names'].get(home.get(r), home.get(r))})"
+              for r in tree.get("requires", []) if r in ctx["all_items"]]
     return {
         "name": tree["name"],
+        "starts_after": starts,
         "description": tree.get("description"),
         "badge": tree.get("badge"),
         "next": tree.get("next"),

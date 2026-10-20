@@ -87,6 +87,7 @@
   <div class="meta">{{ season }} season</div>
   {% if page.draft %}<div class="draft-note">First draft - being moved to the new format. Tap a skill to see what it covers.</div>{% endif %}
   {% if page.description %}<div class="intro">{{ page.description }}</div>{% endif %}
+  {% if page.starts_after %}<div class="meta">Starts after: <b>{{ page.starts_after | join(", ") }}</b></div>{% endif %}
 
   <div class="actions">
     {% if page.badge %}<span class="badge">&#9733; Finish it: {{ page.badge.name }}</span>{% endif %}

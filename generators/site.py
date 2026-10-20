@@ -39,8 +39,12 @@ def main():
         env, "site_index.html.j2", "index.html",
         team=team["team"],
         season=common.current_season(team),
-        trees=sorted((d["tree"] for d in v2.values()), key=lambda t: KIND_ORDER.get(t.get("kind"), 99)),
-        legacy=legacy,
+        trees=sorted((d["tree"] for d in v2.values() if d["tree"].get("kind") in KIND_ORDER),
+                     key=lambda t: KIND_ORDER[t["kind"]]),
+        subteams=sorted([{"id": d["tree"]["id"], "name": d["tree"]["name"], "draft": False}
+                         for d in v2.values() if d["tree"].get("kind") not in KIND_ORDER]
+                        + [{"id": t["id"], "name": t["name"], "draft": True} for t in legacy],
+                        key=lambda t: t["name"]),
     )
 
 
