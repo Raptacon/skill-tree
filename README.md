@@ -64,8 +64,10 @@ Mentors and students are encouraged to add and improve skills.
 ## Setup
 
 ```bash
+git submodule update --init               # brand-kit (logo); or clone with --recurse-submodules
 pipenv install
 make ci                                   # validate YAML, lint for personal data, build site/
+make overview TREE=programming            # a tree's main page: tiers as rows, skills as cards
 make checklist TREE=onboarding            # per-role checklists + index into tmp/
 make checklist TREE=onboarding ROLES=parent,mentor   # one page for someone with both roles
 make poster TREE=manufacturing            # older-format tree poster

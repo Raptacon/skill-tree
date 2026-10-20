@@ -1,0 +1,143 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ page.name }} - {{ team.name }} {{ team.number }} Skill Tree</title>
+<style>
+  :root { --green: #84EC5C; --ink: #111; --red: #c0392b; }
+  @page { size: letter portrait; margin: 0.4in; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+    margin: 0 auto;
+    padding: 20px 16px 32px;
+    color: var(--ink);
+    max-width: 70rem;
+  }
+  .topbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .topbar img { height: 34px; }
+  .topbar a { color: #1a6fb0; font-size: 14px; text-decoration: none; }
+  h1 {
+    font-size: clamp(30px, 5vw, 48px);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin: 14px 0 2px;
+    border-bottom: 6px solid var(--green);
+    display: inline-block;
+    padding-bottom: 2px;
+  }
+  .meta { color: #666; font-size: 14px; margin: 6px 0 10px; }
+  .intro { font-size: 17px; line-height: 1.45; max-width: 52rem; margin-bottom: 14px; }
+  .draft-note { font-size: 14px; color: #8a6d00; background: #fff8e1; border-radius: 6px; padding: 6px 10px; display: inline-block; margin-bottom: 12px; }
+  .actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 18px; }
+  .actions .label { font-size: 13px; font-weight: 700; text-transform: uppercase; color: #555; }
+  .actions a.btn {
+    background: var(--ink); color: var(--green); font-weight: 700; text-decoration: none;
+    padding: 8px 14px; border-radius: 999px; font-size: 15px;
+  }
+  .badge { font-size: 15px; background: var(--green); color: var(--ink); font-weight: 700; padding: 6px 12px; border-radius: 6px; }
+
+  .row { border: 3px solid var(--ink); border-radius: 12px; margin-bottom: 18px; overflow: hidden; break-inside: avoid; scroll-margin-top: 12px; }
+  .row-head { display: flex; align-items: center; gap: 16px; background: var(--ink); color: #fff; padding: 12px 16px; }
+  .row-name { font-size: clamp(20px, 3vw, 28px); font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: var(--green); min-width: 9rem; }
+  .row-meta { flex: 1; font-size: 15px; line-height: 1.6; color: #ddd; }
+  .row-meta b { color: #fff; }
+  .sup { display: inline-block; background: var(--red); color: #fff; font-size: 13px; font-weight: 800; text-transform: uppercase; padding: 3px 9px; border-radius: 4px; margin-right: 8px; letter-spacing: 0.04em; }
+  .row-head img.qr { width: 64px; height: 64px; background: #fff; border-radius: 4px; padding: 2px; flex: none; }
+  .row-head a.qr-link { flex: none; line-height: 0; }
+
+  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); gap: 10px; padding: 14px; align-items: start; }
+  details.card { border: 2px solid #ccc; border-left: 6px solid var(--green); border-radius: 8px; background: #fff; }
+  details.card[open] { border-color: var(--ink); border-left-color: var(--green); }
+  details.card.draft { opacity: 0.5; }
+  details.card summary { cursor: pointer; list-style: none; padding: 10px 12px; font-size: 17px; font-weight: 700; }
+  details.card summary::-webkit-details-marker { display: none; }
+  .marks { display: block; margin-top: 4px; }
+  .mark { display: inline-block; font-size: 11px; font-weight: 700; padding: 1px 7px; border-radius: 999px; background: #f0f0f0; color: #555; margin-right: 4px; }
+  .mark.test { background: var(--ink); color: var(--green); }
+  .mark.shared { background: #e6f0fa; color: #1a6fb0; }
+  details.card .body { padding: 0 12px 12px; font-size: 15px; line-height: 1.45; color: #333; }
+  details.card .body a { color: #1a6fb0; font-weight: 700; text-decoration: none; }
+
+  .hybrids { padding: 0 14px 14px; font-size: 15px; }
+  .next { margin-top: 8px; background: var(--ink); color: #fff; border-radius: 12px; padding: 14px 18px; font-size: 17px; }
+  .next a { color: var(--green); font-weight: 800; }
+  footer { margin-top: 22px; font-size: 12px; color: #999; }
+
+  @media (max-width: 40rem) {
+    .row-head { flex-wrap: wrap; }
+    .row-head img.qr { width: 48px; height: 48px; }
+  }
+  @media print {
+    body { max-width: none; padding: 0; }
+    .topbar a, .actions a.btn { display: none; }
+    details.card summary { font-size: 13px; padding: 6px 8px; }
+    .cards { padding: 8px; gap: 6px; }
+  }
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <a href="index.html"><img src="assets/lockup-horizontal.svg" alt="Raptacon 3200"></a>
+    <a href="index.html">&larr; All skill trees</a>
+  </div>
+
+  <h1>{{ page.name }}</h1>
+  <div class="meta">{{ season }} season</div>
+  {% if page.draft %}<div class="draft-note">First draft - being moved to the new format. Tap a skill to see what it covers.</div>{% endif %}
+  {% if page.description %}<div class="intro">{{ page.description }}</div>{% endif %}
+
+  <div class="actions">
+    {% if page.badge %}<span class="badge">&#9733; Finish it: {{ page.badge.name }}</span>{% endif %}
+    {% if page.checklists %}
+    <span class="label">Your checklist:</span>
+    {% for c in page.checklists %}<a class="btn" href="{{ c.file }}">{{ c.role }}</a>{% endfor %}
+    {% endif %}
+  </div>
+
+  {% for r in page.rows %}
+  <section class="row" id="{{ r.id }}">
+    <div class="row-head">
+      <div class="row-name">{{ r.name }}</div>
+      <div class="row-meta">
+        {% if r.meta %}
+        {% if r.meta.supervision %}<span class="sup">{{ r.meta.supervision }} supervision</span>{% endif %}
+        {% if r.meta.hours %}<b>~{{ r.meta.hours }} hrs</b> &middot; {% endif %}verified by <b>{{ r.meta.verification }}</b>
+        {% if r.meta.taught %}<br>must have taught someone to {{ ["", "Novice", "Journeyman", "Expert"][r.meta.taught] }}{% endif %}
+        {% else %}{{ r.cards | length }} skill{{ 's' if r.cards | length != 1 }}{% endif %}
+      </div>
+      <a class="qr-link" href="{{ r.qr_url }}"><img class="qr" src="{{ r.qr }}" alt="QR code to this row"></a>
+    </div>
+    <div class="cards">
+      {% for c in r.cards %}
+      <details class="card{% if c.draft %} draft{% endif %}">
+        <summary>{{ c.name }}
+          {% if c.test or c.renews or c.shared %}<span class="marks">
+            {% if c.test %}<span class="mark test">&#9873; hands-on test</span>{% endif %}
+            {% if c.renews %}<span class="mark">&#8635; every season</span>{% endif %}
+            {% if c.shared %}<span class="mark shared">also in {{ c.shared }}</span>{% endif %}
+          </span>{% endif %}
+        </summary>
+        <div class="body">
+          {% if c.description %}{{ c.description }}{% endif %}
+          {% if c.detail %}<p><a href="{{ c.detail }}">Full details, training and test &rarr;</a></p>{% endif %}
+        </div>
+      </details>
+      {% endfor %}
+    </div>
+  </section>
+  {% endfor %}
+
+  {% if page.hybrids %}
+  <section class="row" id="hybrids">
+    <div class="row-head"><div class="row-name">Hybrids</div><div class="row-meta">Journeyman here plus Journeyman in another tree</div></div>
+    <div class="hybrids">{% for h in page.hybrids %}<p><b>{{ h.name }}</b> - with {{ h.with | join(", ") }}</p>{% endfor %}</div>
+  </section>
+  {% endif %}
+
+  {% if page.next %}<div class="next">{{ page.next.text }}{% if page.next.link %} <a href="{{ page.next.link }}">{{ page.next.label }} &rarr;</a>{% endif %}</div>{% endif %}
+
+  <footer>Generated from github.com/Raptacon/skill-tree. Want to add or improve a skill? Open a pull request.</footer>
+</body>
+</html>

@@ -4,7 +4,7 @@ PYTHON := pipenv run python
 TREE ?= manufacturing
 STUDENT ?= example
 
-.PHONY: poster onepager techmap checklist validate lint site ci clean
+.PHONY: poster onepager techmap checklist overview validate lint site ci clean
 
 poster:
 	$(PYTHON) generators/poster.py $(TREE)
@@ -19,6 +19,10 @@ techmap:
 # ROLES=parent,mentor renders a single combined page for someone holding several roles.
 checklist:
 	$(PYTHON) generators/checklist.py $(TREE) $(ROLES)
+
+# A tree's main page: tiers/sections as rows, skills as expandable cards, QR per row
+overview:
+	$(PYTHON) generators/overview.py $(TREE)
 
 validate:
 	$(PYTHON) -c "import yaml, glob; [yaml.safe_load(open(f)) for f in glob.glob('content/**/*.yml', recursive=True)]; print('all yaml valid')"
