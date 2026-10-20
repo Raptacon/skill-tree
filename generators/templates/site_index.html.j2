@@ -31,10 +31,10 @@
     {% endfor %}
   </div>
 
-  <h2>Subteam trees (first drafts - being moved to the new format)</h2>
+  <h2>Subteam trees</h2>
   <div class="cards">
-    {% for t in legacy %}
-    <a class="card draft" href="{{ t.id }}.html"><div class="name">{{ t.name }}</div></a>
+    {% for t in subteams %}
+    <a class="card{% if t.draft %} draft{% endif %}" href="{{ t.id }}.html"><div class="name">{{ t.name }}</div>{% if t.draft %}<div class="desc">First draft</div>{% endif %}</a>
     {% endfor %}
     <a class="card draft" href="techmap.html"><div class="name">Tech map</div><div class="desc">Every tree on one page.</div></a>
   </div>

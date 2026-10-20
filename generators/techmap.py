@@ -36,6 +36,18 @@ def build_context():
             }
         )
 
+    items = common.own_items(v2)
+    for doc in v2.values():
+        tree_items = common.resolve_items(doc, items)
+        if not any("tier" in i for i in tree_items):
+            continue
+        columns = [
+            {"tier_name": tiers[t]["name"], "skills": [i["name"] for i in tree_items if i.get("tier") == t]}
+            for t in tier_ids
+        ]
+        lanes.append({"name": doc["tree"]["name"], "kind": doc["tree"].get("kind", "subteam"),
+                      "parent_trees": [], "columns": columns})
+
     hybrid_cards = []
     for h in hybrids.values():
         parent_names = [trees[r["tree"]]["name"] for r in h["requires"]]

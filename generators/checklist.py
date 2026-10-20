@@ -132,19 +132,28 @@ def build_next(tree, ctx):
     }
 
 
+def groups(tree_doc, items):
+    """[(name, key, value)]: the tree's sections, or its tiers for tiered trees."""
+    if any("tier" in i for i in items):
+        tiers = common.load_tiers()
+        return [(tiers[t]["name"], "tier", t) for t in sorted(tiers) if t > 0]
+    return [(s["name"], "section", s["id"]) for s in tree_doc.get("sections", [])]
+
+
 def build_context(tree_doc, roles, ctx):
     sections = []
     count = 0
-    for section in tree_doc.get("sections", []):
+    resolved = common.resolve_items(tree_doc, ctx["all_items"])
+    for name, key, value in groups(tree_doc, resolved):
         items = []
-        for item in common.resolve_items(tree_doc, ctx["all_items"]):
-            if item.get("section") != section["id"]:
+        for item in resolved:
+            if item.get(key) != value:
                 continue
             ok, conditions = applies(item, roles)
             if ok:
                 items.append(build_item(item, roles, conditions, ctx))
         if items:
-            sections.append({"name": section["name"], "entries": items})
+            sections.append({"name": name, "entries": items})
             count += len(items)
     return {
         "tree": tree_doc["tree"],
