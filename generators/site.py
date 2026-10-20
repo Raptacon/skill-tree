@@ -14,7 +14,7 @@ import common
 SITE = os.path.join(common.ROOT, "site")
 HERE = os.path.dirname(os.path.abspath(__file__))
 # Index order: what everyone needs first.
-KIND_ORDER = {"onboarding": 0, "core": 1, "certification": 2}
+KIND_ORDER = {"onboarding": 0, "baseline": 1, "core": 2, "certification": 3}
 
 
 def run(script, *args):

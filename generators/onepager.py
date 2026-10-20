@@ -96,7 +96,8 @@ def build_context(student_id):
 
     tree_rows = []
     for tree_id, progress in student.get("progress", {}).items():
-        tree = trees.get(tree_id, {"name": tree_id, "tiered": True})
+        # Trees outside trees.yml (e.g. baseline, now a v2 tree) show as pass/fail.
+        tree = trees.get(tree_id, {"name": tree_id.title(), "tiered": False})
         if not tree.get("tiered", True):
             tree_rows.append(
                 {

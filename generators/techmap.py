@@ -12,8 +12,8 @@ def build_context():
     tiers = common.load_tiers()
     hybrids = common.load_hybrids()
 
-    baseline_doc = common.load_skills("baseline")
-    baseline_skills = [s["name"] for s in baseline_doc.get("skills", [])]
+    v2 = common.load_v2_trees()
+    baseline_skills = [i["name"] for i in common.resolve_items(v2["baseline"], common.own_items(v2))]
 
     tier_ids = sorted(t for t in tiers if t > 0)
 

@@ -50,6 +50,8 @@ def describe_how(item, ctx):
         return "Check it off yourself"
     if method == "signature":
         return "Sign the form - checks itself off"
+    if item.get("parts") and not who:
+        return "Each part is signed off separately - see below"
     if verify.get("claim"):
         return f"Do it, then tell {who} - they confirm it"
     return f"Signed off by {who}"
@@ -112,7 +114,20 @@ def build_item(item, roles, conditions, ctx):
         "optional": item.get("required") is False,
         "draft": item.get("status") == "draft",
         "practical": item.get("practical"),
-        "resources": [r for r in item.get("resources", []) if not r.get("roles") or set(r["roles"]) & set(roles)],
+        "training": [r for r in item.get("training", []) if not r.get("roles") or set(r["roles"]) & set(roles)],
+        "parts": [{"name": p["name"], "who": " or ".join(describe_by(p.get("by"), ctx))} for p in item.get("parts", [])],
+    }
+
+
+def build_next(tree, ctx):
+    nxt = tree.get("next")
+    if not nxt:
+        return None
+    target = nxt.get("tree")
+    return {
+        "text": nxt.get("text"),
+        "link": f"{target}.html" if target in ctx["trees"] else "index.html",
+        "label": ctx["tree_names"].get(target, "All skill trees"),
     }
 
 
@@ -132,6 +147,8 @@ def build_context(tree_doc, roles, ctx):
             count += len(items)
     return {
         "tree": tree_doc["tree"],
+        "badge": tree_doc["tree"].get("badge"),
+        "next": build_next(tree_doc["tree"], ctx),
         "role_names": [ctx["member_roles"][r]["name"] for r in roles],
         "sections": sections,
         "count": count,
@@ -147,9 +164,9 @@ def load_ctx():
     season = common.current_season(team)
     return {
         "trees": trees,
-        "tree_names": {t: d["tree"]["name"] for t, d in trees.items()} | {
-            t["id"]: t["name"] for t in common.load_yaml("trees.yml")["trees"]
-        },
+        "tree_names": {s["id"]: s["name"] for s in team.get("subteams", [])}
+        | {t["id"]: t["name"] for t in common.load_yaml("trees.yml")["trees"]}
+        | {t: d["tree"]["name"] for t, d in trees.items()},
         "all_items": common.own_items(trees),
         "member_roles": {r["id"]: r for r in roles_doc["member_roles"]},
         "signoff_roles": {r["id"]: r for r in roles_doc["signoff_roles"]},

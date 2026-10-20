@@ -21,12 +21,46 @@ tree:
   authored_by:
     - {name: Chris Hirsch, github: ChrisHirsch}
   created_at: 2026-10-13
-  updated_at: 2026-10-13
+  updated_at: 2026-10-20
 
 sections:
+  - {id: hand, name: Hand Tools}
   - {id: hand-power, name: Hand Power Tools}
 
 items:
+  - id: tool-hand-tools
+    name: Hand Tools
+    description: >-
+      The everyday shop hand tools - what each is for, using it safely, and
+      putting it back: tape measure and steel rule, combination square, digital
+      calipers, screwdrivers (Phillips, flat, Torx), hex keys (imperial and
+      metric, ball-end), wrenches and sockets, pliers and flush cutters, files and
+      deburring tool, hacksaw, mallet, clamps, center punch.
+    section: hand
+    roles: [student, mentor]
+    kind: check
+    requires: [onb-safety-test, onb-shop-orientation]
+    verify:
+      method: signoff
+      by: {role: subteam-lead, tree: manufacturing}
+    training:
+      - {type: session, label: Hand tools walkthrough with a Manufacturing co-lead}
+      - {type: video, label: Hand tools intro}          # TODO pick a video
+    practical:
+      summary: >-
+        Done in front of a manufacturing co-lead with no help - putting every tool
+        back is part of the test.
+      steps:
+        - Measure and mark a part from a drawing, using calipers and a square.
+        - Center-punch the hole locations.
+        - Clamp the stock and cut it to length with a hacksaw.
+        - File and deburr the cut edges.
+        - Fasten two parts with the right screwdriver, hex key and wrench - snug, not stripped.
+        - Put every tool back where it lives.
+    renews: season
+    visibility: public
+    related: [mfg-handtools-1, mfg-handtools-2]   # v1 Manufacturing tier-1 skills this replaces
+
   - id: tool-drill-driver
     name: Drills & Drivers
     description: >-
@@ -56,4 +90,4 @@ items:
     renews: season            # annual refresher
     visibility: public        # sticker-board worthy
     related: [mfg-power-tool-basics]   # v1 Manufacturing tier-1 skill this splits out of
-    resources: []             # TODO short video + photo of where each item lives
+    training: []             # TODO short video + photo of where each item lives
