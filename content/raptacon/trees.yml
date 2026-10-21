@@ -4,10 +4,6 @@
 # (see `parent_trees`) rather than picked as a primary track, but still get their
 # own full ladder + poster page.
 trees:
-  - id: electronics
-    name: Electronics
-    tiered: true
-    kind: subteam
   - id: leds
     name: LEDs
     tiered: true

@@ -61,7 +61,8 @@ def v2_card(item, tree_id, home, ctx):
 
 def tree_hybrids(tree_id, ctx):
     return [
-        {"name": h["name"], "with": [ctx["tree_names"].get(r["tree"], r["tree"]) for r in h["requires"] if r["tree"] != tree_id]}
+        {"name": h["name"], "with": [ctx["tree_names"].get(r["tree"], r["tree"]) for r in h["requires"] if r["tree"] != tree_id],
+         "projects": h.get("projects", [])}
         for h in common.load_hybrids().values()
         if any(r["tree"] == tree_id for r in h["requires"])
     ]
