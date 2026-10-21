@@ -14,7 +14,7 @@ tree:
     - {name: TODO, github: TODO}          # Programming whiteboard session author(s)
     - {name: Chris Hirsch, github: ChrisHirsch}
   created_at: 2026-10-20
-  updated_at: 2026-10-20
+  updated_at: 2026-10-21
   description: >-
     Write the Python that runs the robot: Python first, then sensors, motors,
     subsystems and commands, then the real competition code and the team's
@@ -30,7 +30,7 @@ items:
       and tuples, operators, pass, and Python syntax. Comment your code!
     roles: [student]
     kind: check
-    verify: {method: signoff, by: {role: subteam-lead, tree: programming}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: programming}, {role: subteam-mentor, tree: programming}]}}
     training:
       - {type: repo, label: "Intro to Python homework 1: variables and types", url: "https://github.com/Raptacon/Skills-Challenges/blob/main/cone_drill_west_coast/homework/intro_to_py_new_programmer/01_variables_and_types.py"}
       - {type: repo, label: "Homework 2: if/else", url: "https://github.com/Raptacon/Skills-Challenges/blob/main/cone_drill_west_coast/homework/intro_to_py_new_programmer/02_if_else.py"}
@@ -46,7 +46,7 @@ items:
     roles: [student]
     kind: check
     requires: [prog-python-basics]
-    verify: {method: signoff, by: {role: subteam-lead, tree: programming}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: programming}, {role: subteam-mentor, tree: programming}]}}
     training:
       - {type: repo, label: "Homework 5: classes", url: "https://github.com/Raptacon/Skills-Challenges/blob/main/cone_drill_west_coast/homework/intro_to_py_new_programmer/05_classes.py"}
     renews: permanent
@@ -59,7 +59,7 @@ items:
     roles: [student]
     kind: check
     requires: [prog-python-basics]
-    verify: {method: signoff, by: {role: subteam-lead, tree: programming}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: programming}, {role: subteam-mentor, tree: programming}]}}
     renews: permanent
     visibility: public
 
@@ -72,7 +72,7 @@ items:
     roles: [student]
     kind: check
     requires: [prog-python-basics]
-    verify: {method: signoff, by: {role: subteam-lead, tree: programming}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: programming}, {role: subteam-mentor, tree: programming}]}}
     training:
       - {type: doc, label: RobotPy documentation, url: "https://robotpy.readthedocs.io/en/stable/index.html"}
     renews: permanent
@@ -87,7 +87,7 @@ items:
     roles: [student]
     kind: check
     requires: [base-git]
-    verify: {method: signoff, by: {role: subteam-lead, tree: programming}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: programming}, {role: subteam-mentor, tree: programming}]}}
     renews: permanent
     visibility: public
 
@@ -101,7 +101,7 @@ items:
     roles: [student]
     kind: check
     requires: [prog-python-objects]
-    verify: {method: signoff, by: {role: subteam-lead, tree: programming}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: programming}, {role: subteam-mentor, tree: programming}]}}
     training:
       - {type: doc, label: RobotPy documentation, url: "https://robotpy.readthedocs.io/en/stable/index.html"}
     renews: permanent
@@ -117,8 +117,8 @@ items:
     kind: check
     requires: [prog-libraries-docs]
     parts:
-      - {id: step1, name: "Step 1: drive one side of a robot", by: {role: subteam-lead, tree: programming}}
-      - {id: step2, name: "Step 2: drivetrain subsystem", by: {role: subteam-lead, tree: programming}}
+      - {id: step1, name: "Step 1: drive one side of a robot", by: {any_of: [{role: subteam-lead, tree: programming}, {role: subteam-mentor, tree: programming}]}}
+      - {id: step2, name: "Step 2: drivetrain subsystem", by: {any_of: [{role: subteam-lead, tree: programming}, {role: subteam-mentor, tree: programming}]}}
     verify: {method: signoff}
     training:
       - {type: repo, label: "Cone drill step 1", url: "https://github.com/Raptacon/Skills-Challenges/tree/main/cone_drill_west_coast/challenge_step_1"}
@@ -134,7 +134,7 @@ items:
     roles: [student]
     kind: check
     requires: [prog-cone-drill-1-2]
-    verify: {method: signoff, by: {role: subteam-lead, tree: programming}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: programming}, {role: subteam-mentor, tree: programming}]}}
     renews: permanent
     visibility: public
 
@@ -145,7 +145,7 @@ items:
     roles: [student]
     kind: check
     requires: [prog-cone-drill-1-2]
-    verify: {method: signoff, by: {role: subteam-lead, tree: programming}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: programming}, {role: subteam-mentor, tree: programming}]}}
     renews: permanent
     visibility: public
 
@@ -156,7 +156,7 @@ items:
     roles: [student]
     kind: check
     requires: [prog-cone-drill-1-2]
-    verify: {method: signoff, by: {role: subteam-lead, tree: programming}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: programming}, {role: subteam-mentor, tree: programming}]}}
     renews: permanent
     visibility: public
 
@@ -169,7 +169,7 @@ items:
     roles: [student]
     kind: check
     requires: [prog-commands-v2]
-    verify: {method: signoff, by: {role: subteam-lead, tree: programming}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: programming}, {role: subteam-mentor, tree: programming}]}}
     training:
       - {type: repo, label: "Cone drill step 3", url: "https://github.com/Raptacon/Skills-Challenges/tree/main/cone_drill_west_coast/challenge_step_3"}
     renews: permanent
@@ -182,7 +182,7 @@ items:
     roles: [student]
     kind: check
     requires: [prog-commands-v2]
-    verify: {method: signoff, by: {role: subteam-lead, tree: programming}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: programming}, {role: subteam-mentor, tree: programming}]}}
     training:
       - {type: repo, label: "Cone drill step 4", url: "https://github.com/Raptacon/Skills-Challenges/tree/main/cone_drill_west_coast/challenge_step_4"}
     renews: permanent
@@ -195,7 +195,7 @@ items:
     roles: [student]
     kind: check
     requires: [prog-sensors]
-    verify: {method: signoff, by: {role: subteam-lead, tree: programming}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: programming}, {role: subteam-mentor, tree: programming}]}}
     training:
       - {type: repo, label: "State machines step 1: breakbeam and addressable LEDs", url: "https://github.com/Raptacon/Skills-Challenges/tree/main/state_machines/challenge_step_1"}
       - {type: repo, label: "State machines step 2: StatefulAutonomous", url: "https://github.com/Raptacon/Skills-Challenges/tree/main/state_machines/challenge_step_2"}
@@ -209,7 +209,7 @@ items:
     roles: [student]
     kind: check
     requires: [prog-debugging]
-    verify: {method: signoff, by: {role: subteam-lead, tree: programming}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: programming}, {role: subteam-mentor, tree: programming}]}}
     renews: permanent
     visibility: public
 
@@ -220,7 +220,7 @@ items:
     roles: [student]
     kind: check
     requires: [prog-cone-drill-1-2]
-    verify: {method: signoff, by: {role: subteam-lead, tree: programming}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: programming}, {role: subteam-mentor, tree: programming}]}}
     renews: season
     visibility: public
 

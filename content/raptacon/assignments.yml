@@ -23,6 +23,11 @@ seasons:
       tree: programming
       holders:
         - {name: Emma Garrett, github: DanteSGarrett}
+    - role: subteam-mentor
+      tree: programming
+      holders:
+        - {name: Nathan Beasley, github: tuffinmuffin}
+        - {name: Cat Kessler, github: manicmou}
     - role: lead-mentor
       holders:
         - {name: Chris Hirsch, github: ChrisHirsch}

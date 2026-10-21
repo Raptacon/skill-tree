@@ -10,7 +10,7 @@ tree:
   authored_by:
     - {name: Chris Hirsch, github: ChrisHirsch}
   created_at: 2026-10-20
-  updated_at: 2026-10-20
+  updated_at: 2026-10-21
   description: >-
     How Raptacon shows up in the community: telling our story, thanking and
     growing our sponsors, writing award submissions and running outreach programs.
@@ -23,7 +23,7 @@ items:
     description: Explain the team's history, mission and sponsors to a stranger in under a minute.
     roles: [student]
     kind: check
-    verify: {method: signoff, by: {role: subteam-lead, tree: outreach}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: outreach}, {role: subteam-mentor, tree: outreach}]}}
     practical:
       summary: Give the pitch to an Outreach lead (or a visitor at an event).
       steps:
@@ -41,7 +41,7 @@ items:
     description: Write sponsor thank-you notes and recognition posts, and keep sponsor logos current on team materials.
     roles: [student]
     kind: check
-    verify: {method: signoff, by: {role: subteam-lead, tree: outreach}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: outreach}, {role: subteam-mentor, tree: outreach}]}}
     renews: permanent
     visibility: public
 
