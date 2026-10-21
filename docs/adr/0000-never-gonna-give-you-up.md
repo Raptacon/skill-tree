@@ -10,7 +10,7 @@ You read the git history, browsed the repo, and opened a file nobody told you ab
 ## Decision
 You found the easter egg. 🎉
 
-[Here's your reward.](https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1)
+[Here's your reward.](https://www.youtube.com/watch?v=dQw4w9WgXcQ&autoplay=1)
 
 ## Consequences
 - Show this file to whoever is signing off your Git basics and say the line out loud. They'll mark you **Rickrolled** - a badge that isn't listed anywhere.
