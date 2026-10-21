@@ -58,6 +58,7 @@
   .mark.test { background: var(--ink); color: var(--green); }
   .mark.shared { background: #e6f0fa; color: #1a6fb0; }
   .mark.track { background: var(--green); color: var(--ink); }
+  .mark.sup-mark { background: var(--red); color: #fff; text-transform: uppercase; }
   details.card .body { padding: 0 12px 12px; font-size: 15px; line-height: 1.45; color: #333; }
   details.card .body a { color: #1a6fb0; font-weight: 700; text-decoration: none; }
 
@@ -115,7 +116,8 @@
       {% for c in r.cards %}
       <details class="card{% if c.draft %} draft{% endif %}">
         <summary>{{ c.name }}
-          {% if c.test or c.timed or c.parts or c.renews or c.shared or c.track %}<span class="marks">
+          {% if c.test or c.timed or c.parts or c.renews or c.shared or c.track or c.mentor_only %}<span class="marks">
+            {% if c.mentor_only %}<span class="mark sup-mark">mentor supervision</span>{% endif %}
             {% if c.track %}<span class="mark track">{{ c.track }}</span>{% endif %}
             {% if c.test %}<span class="mark test">&#9873; hands-on test</span>{% endif %}
             {% if c.parts %}<span class="mark test">&#9873; {{ c.parts }} parts</span>{% endif %}
