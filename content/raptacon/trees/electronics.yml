@@ -1,7 +1,6 @@
 # Electronics - wiring the robot and its pneumatics so the mechanisms can be
 # controlled; the other half of the competition pit crew (handbook 3.4d).
-# Built from the first draft plus CAN, pneumatics control and pit work. Fields
-# as documented in onboarding.yml; items use `tier` instead of `section`.
+# Fields as documented in onboarding.yml; items use `tier` instead of `section`.
 
 tree:
   id: electronics

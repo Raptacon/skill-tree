@@ -2,20 +2,13 @@ SHELL := /bin/bash
 PYTHON := pipenv run python
 
 TREE ?= manufacturing
-STUDENT ?= example
 
-.PHONY: poster onepager techmap checklist overview validate lint site ci clean
-
-poster:
-	$(PYTHON) generators/poster.py $(TREE)
-
-onepager:
-	$(PYTHON) generators/onepager.py $(STUDENT)
+.PHONY: techmap checklist overview validate lint site ci clean
 
 techmap:
 	$(PYTHON) generators/techmap.py
 
-# One printable checklist per role + an index page, e.g. make checklist TREE=onboarding
+# One printable checklist per role, e.g. make checklist TREE=onboarding
 # ROLES=parent,mentor renders a single combined page for someone holding several roles.
 checklist:
 	$(PYTHON) generators/checklist.py $(TREE) $(ROLES)

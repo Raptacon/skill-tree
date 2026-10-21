@@ -1,6 +1,6 @@
 # Shared 0-4 tier ladder, reused by every tiered tree.
-# min_hours are illustrative defaults - mentors calibrate per skill/tier,
-# individual skills.yml entries may override via their own min_hours field.
+# min_hours are illustrative defaults - mentors calibrate per tree; a tree can
+# override them with `tier_hours: {1: 25, ...}` in its tree header.
 tiers:
   - id: 0
     name: Baseline

@@ -1,5 +1,6 @@
 # Cross-tree hybrid nodes: require partial (Journeyman, tier 2) progress in 2+ trees.
-# `skills` lists which skill ids (from data/skills/<tree>.yml) this hybrid actually certifies.
+# `skills` lists item ids (from trees/*.yml) this hybrid certifies; `projects` are
+# suggested things to build with it.
 hybrids:
   - id: controls
     name: Controls

@@ -1,11 +1,10 @@
 # Fabrication/Manufacturing - making every part of the robot in our shop and
-# assembling it; half of the competition pit crew (handbook 3.4c). Built from
-# the mentor's handwritten first draft (scan, 2026-08) plus power transmission
-# and pit work. Shop machines are separate Tool Certifications (tools.yml) that
-# this tree reuses. Ids used by hybrids (mfg-cnc-intro, mfg-component-mounting,
+# assembling it; half of the competition pit crew (handbook 3.4c). Shop
+# machines are separate Tool Certifications (tools.yml) that this tree reuses.
+# Item ids referenced by hybrids (mfg-cnc-intro, mfg-component-mounting,
 # mfg-model-clearances, mfg-update-measurements, mfg-3d-slicing,
-# mfg-tool-path-cnc, mfg-sensor-mounting) are kept from the first draft.
-# Fields as documented in onboarding.yml; items use `tier` instead of `section`.
+# mfg-tool-path-cnc, mfg-sensor-mounting) must not change. Fields as documented
+# in onboarding.yml; items use `tier` instead of `section`.
 
 tree:
   id: manufacturing
