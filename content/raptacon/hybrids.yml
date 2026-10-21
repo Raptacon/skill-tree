@@ -53,3 +53,19 @@ hybrids:
       - {tree: programming, tier: 2}
       - {tree: strategy, tier: 2}
     skills: []
+
+  - id: embedded-systems
+    name: Embedded Systems
+    # Microcontrollers and custom hardware the robot and team use.
+    requires:
+      - {tree: electronics, tier: 2}
+      - {tree: programming, tier: 2}
+    skills: [elec-microcontrollers]
+    projects:
+      - Cone course timing gates - beam breaks that time and log the RC and robot cone courses
+      - Battery tracker - NFC tags on batteries and a reader on the charging cart that logs cycles and test results
+      - Shop check-in tap - an NFC/RFID reader that posts to the team check-in system
+      - E-paper name tags showing tier dots and badges
+      - Custom LED controller - a microcontroller driving the robot's addressable LEDs with status from the roboRIO
+      - Custom I2C sensor (time-of-flight, color) reported to the roboRIO
+      - Reverse engineer an undocumented device's protocol with a logic analyzer and AI help, then write a driver for it

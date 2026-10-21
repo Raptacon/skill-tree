@@ -32,6 +32,14 @@ seasons:
       holders:
         - {name: Nathan Beasley, github: tuffinmuffin}
         - {name: Cat Kessler, github: manicmou}
+    - role: subteam-lead
+      tree: electronics
+      holders:
+        - {name: Genevieve Kiehl, github: TODO}
+    - role: subteam-mentor
+      tree: electronics
+      holders:
+        - {name: Stefan Sell, github: TODO}
     - role: lead-mentor
       holders:
         - {name: Chris Hirsch, github: ChrisHirsch}
