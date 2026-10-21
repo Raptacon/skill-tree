@@ -106,6 +106,7 @@ def build_item(item, roles, conditions, ctx):
     return {
         "id": item["id"],
         "track": item.get("track"),
+        "mentor_only": item.get("supervision") == "mentor",
         "name": item["name"],
         "description": item.get("description"),
         "conditions": [ctx["conditions"].get(c, {"name": c})["name"] for c in conditions],

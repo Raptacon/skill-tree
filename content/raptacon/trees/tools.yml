@@ -7,7 +7,9 @@
 # reachable from one or more parent trees. Schema/fields as in onboarding.yml.
 #
 # Each item requires the onboarding safety items (onb-safety-test,
-# onb-shop-orientation) and is signed off by a tree-scoped role.
+# onb-shop-orientation) and is signed off by a tree-scoped role. The large
+# machines (`supervision: mentor`) are signed off by a Manufacturing mentor and
+# are only ever run with a mentor present.
 
 tree:
   id: tools
@@ -21,11 +23,13 @@ tree:
   authored_by:
     - {name: Chris Hirsch, github: ChrisHirsch}
   created_at: 2026-10-13
-  updated_at: 2026-10-20
+  updated_at: 2026-10-21
 
 sections:
   - {id: hand, name: Hand Tools}
   - {id: hand-power, name: Hand Power Tools}
+  - {id: power, name: Power Tools}
+  - {id: machines, name: Shop Machines - mentor supervised}
 
 items:
   - id: tool-hand-tools
@@ -91,3 +95,261 @@ items:
     visibility: public        # sticker-board worthy
     related: [mfg-power-tool-basics]   # v1 Manufacturing tier-1 skill this splits out of
     training: []             # TODO short video + photo of where each item lives
+
+  - id: tool-sander
+    name: Belt and disc sander
+    description: >-
+      Shaping and deburring on the belt/disc sander. Keep aluminum and wood sanding separate and empty the dust collector.
+    section: power
+    roles: [student, mentor]
+    kind: check
+    requires: [onb-safety-test, onb-shop-orientation]
+    verify:
+      method: signoff
+      by: {any_of: [{role: subteam-lead, tree: manufacturing}, {role: subteam-mentor, tree: manufacturing}]}
+    training:
+      - {type: session, label: Belt and disc sander walkthrough with a Manufacturing co-lead}
+    practical:
+      summary: >-
+        Done in front of the person signing you off - PPE on (safety glasses,
+        hair tied back, no loose sleeves, gloves or jewelry near moving parts)
+        and cleanup included.
+      steps:
+        - Check the gap between the table and the belt or disc is tiny (no more than 1/16 in).
+        - Turn on dust collection and find the power switch.
+        - Sand on the downward-moving side of the disc only.
+        - Light pressure, keep the part moving; hold small parts with a clamp or holder, not fingers.
+        - Sand a part to a marked line and deburr its edges.
+        - Switch off, wait for it to stop, and brush (not hand) the dust away.
+    renews: season
+    visibility: public
+
+  - id: tool-jigsaw
+    name: Jigsaw
+    description: >-
+      Curved and straight cuts in sheet material with a jigsaw.
+    section: power
+    roles: [student, mentor]
+    kind: check
+    requires: [onb-safety-test, onb-shop-orientation]
+    verify:
+      method: signoff
+      by: {any_of: [{role: subteam-lead, tree: manufacturing}, {role: subteam-mentor, tree: manufacturing}]}
+    training:
+      - {type: session, label: Jigsaw walkthrough with a Manufacturing co-lead}
+    practical:
+      summary: >-
+        Done in front of the person signing you off - PPE on (safety glasses,
+        hair tied back, no loose sleeves, gloves or jewelry near moving parts)
+        and cleanup included.
+      steps:
+        - Pick the right blade for the material and lock it in with the saw unplugged.
+        - Clamp the work with the cut line hanging past the bench edge, clear underneath.
+        - Keep the cord out of the cut path.
+        - Start the blade before it touches the work; keep the shoe flat on the material.
+        - Cut a marked curve, then wait for the blade to stop before lifting it out.
+        - Unplug before changing blades; clean up.
+    renews: season
+    visibility: public
+
+  - id: tool-dremel
+    name: Rotary tool (Dremel)
+    description: >-
+      Grinding, cutting and cleanup with a rotary tool. Cut-off wheels can shatter - glasses always, and stand out of line with the wheel.
+    section: power
+    roles: [student, mentor]
+    kind: check
+    requires: [onb-safety-test, onb-shop-orientation]
+    verify:
+      method: signoff
+      by: {any_of: [{role: subteam-lead, tree: manufacturing}, {role: subteam-mentor, tree: manufacturing}]}
+    training:
+      - {type: session, label: Rotary tool (Dremel) walkthrough with a Manufacturing co-lead}
+    practical:
+      summary: >-
+        Done in front of the person signing you off - PPE on (safety glasses,
+        hair tied back, no loose sleeves, gloves or jewelry near moving parts)
+        and cleanup included.
+      steps:
+        - Pick the right bit or wheel and check its rated speed against the tool's speed.
+        - Fit it with the tool unplugged; tighten the collet.
+        - Clamp the work - never hold a small part in your hand while cutting.
+        - Make a cut-off and a deburr, keeping the wheel's line of fire away from you and others.
+        - Switch off, let it stop, unplug, and put the bits away.
+    renews: season
+    visibility: public
+
+  - id: tool-band-saw
+    name: Band saw
+    description: >-
+      Straight and curved cuts on the vertical band saw.
+    section: machines
+    roles: [student, mentor]
+    kind: check
+    requires: [onb-safety-test, onb-shop-orientation]
+    supervision: mentor
+    verify:
+      method: signoff
+      by: {role: subteam-mentor, tree: manufacturing}
+    training:
+      - {type: session, label: Band saw walkthrough with a Manufacturing mentor}
+    practical:
+      summary: >-
+        Done in front of the person signing you off - PPE on (safety glasses,
+        hair tied back, no loose sleeves, gloves or jewelry near moving parts)
+        and cleanup included.
+      steps:
+        - Check the blade suits the material and is tensioned and tracking.
+        - Set the upper blade guard just above the work (about 1/4 in).
+        - Point out the power switch and e-stop.
+        - Keep the work flat on the table; use a push stick near the blade; hands never in line with the blade.
+        - Make a straight cut and a curved cut to a marked line, without forcing the feed.
+        - Don't back out of a cut with the blade running - stop the saw first.
+        - Switch off, wait for the blade to stop, lower the guard and brush the table clean.
+    renews: season
+    visibility: public
+
+  - id: tool-drill-press
+    name: Drill press
+    description: >-
+      Accurate holes on the drill press.
+    section: machines
+    roles: [student, mentor]
+    kind: check
+    requires: [onb-safety-test, onb-shop-orientation, tool-drill-driver]
+    supervision: mentor
+    verify:
+      method: signoff
+      by: {role: subteam-mentor, tree: manufacturing}
+    training:
+      - {type: session, label: Drill press walkthrough with a Manufacturing mentor}
+    practical:
+      summary: >-
+        Done in front of the person signing you off - PPE on (safety glasses,
+        hair tied back, no loose sleeves, gloves or jewelry near moving parts)
+        and cleanup included.
+      steps:
+        - Take the chuck key out the moment the bit is tight - never leave it in the chuck.
+        - Pick the bit and set the speed for the material and bit size (bigger bit or metal = slower).
+        - Clamp the work in the vise or to the table - never hand-held.
+        - Center-punch, drill a pilot hole, then the final hole to depth with the depth stop.
+        - Clear chips with a brush with the spindle stopped.
+        - Switch off, remove the bit, clean the table.
+    renews: season
+    visibility: public
+
+  - id: tool-chop-saw
+    name: Chop / miter saw
+    description: >-
+      Cutting tube and bar stock to length on the chop or miter saw. Hearing protection on.
+    section: machines
+    roles: [student, mentor]
+    kind: check
+    requires: [onb-safety-test, onb-shop-orientation]
+    supervision: mentor
+    verify:
+      method: signoff
+      by: {role: subteam-mentor, tree: manufacturing}
+    training:
+      - {type: session, label: Chop / miter saw walkthrough with a Manufacturing mentor}
+    practical:
+      summary: >-
+        Done in front of the person signing you off - PPE on (safety glasses,
+        hair tied back, no loose sleeves, gloves or jewelry near moving parts)
+        and cleanup included.
+      steps:
+        - Check the blade is right for the material (a non-ferrous blade for aluminum) and the guard moves freely.
+        - Clamp the stock against the fence; hands stay outside the no-hands zone.
+        - Let the blade reach full speed before cutting.
+        - Cut a piece to a marked length within tolerance.
+        - Let the blade stop before raising it; never reach under a spinning blade.
+        - Switch off and clean up chips.
+    renews: season
+    visibility: public
+
+  - id: tool-lathe
+    name: Lathe
+    description: >-
+      Turning round parts - spacers, shafts, bushings - on the lathe.
+    section: machines
+    roles: [student, mentor]
+    kind: check
+    requires: [onb-safety-test, onb-shop-orientation]
+    supervision: mentor
+    verify:
+      method: signoff
+      by: {role: subteam-mentor, tree: manufacturing}
+    training:
+      - {type: session, label: Lathe walkthrough with a Manufacturing mentor}
+    practical:
+      summary: >-
+        Done in front of the person signing you off - PPE on (safety glasses,
+        hair tied back, no loose sleeves, gloves or jewelry near moving parts)
+        and cleanup included.
+      steps:
+        - Take the chuck key out the moment the work is tight - never leave it in the chuck.
+        - Turn the chuck by hand to check the work and tool clear everything.
+        - Set the speed for the material and diameter.
+        - Face the end and turn the part to a diameter, checking with calipers.
+        - Stop the machine before measuring or touching the work.
+        - Clear chips with a brush or hook - never hands; clean the ways and put tooling back.
+    renews: season
+    visibility: public
+
+  - id: tool-mill
+    name: Milling machine
+    description: >-
+      Pockets, slots and precise holes on the milling machine.
+    section: machines
+    roles: [student, mentor]
+    kind: check
+    requires: [onb-safety-test, onb-shop-orientation]
+    supervision: mentor
+    verify:
+      method: signoff
+      by: {role: subteam-mentor, tree: manufacturing}
+    training:
+      - {type: session, label: Milling machine walkthrough with a Manufacturing mentor}
+    practical:
+      summary: >-
+        Done in front of the person signing you off - PPE on (safety glasses,
+        hair tied back, no loose sleeves, gloves or jewelry near moving parts)
+        and cleanup included.
+      steps:
+        - Clamp the work securely in the vise, on parallels.
+        - Install the cutter and tighten the collet with the spindle locked off.
+        - Find the edges and set zero.
+        - Set speed and feed for the cutter and material.
+        - Cut a slot or pocket to a dimension and check it.
+        - Stop the spindle before measuring or clearing chips; clean the table and put tooling back.
+    renews: season
+    visibility: public
+
+  - id: tool-cnc-router
+    name: CNC router
+    description: >-
+      Running a job on the team's CNC router. Hearing protection on, dust collection running, and you stay with the machine for the whole job.
+    section: machines
+    roles: [student, mentor]
+    kind: check
+    requires: [onb-safety-test, onb-shop-orientation, mfg-cnc-intro]
+    supervision: mentor
+    verify:
+      method: signoff
+      by: {role: subteam-mentor, tree: manufacturing}
+    training:
+      - {type: session, label: CNC router walkthrough with a Manufacturing mentor}
+    practical:
+      summary: >-
+        Done in front of the person signing you off - PPE on (safety glasses,
+        hair tied back, no loose sleeves, gloves or jewelry near moving parts)
+        and cleanup included.
+      steps:
+        - Secure the stock so screws or clamps are clear of the tool path.
+        - Check the bit is right for the job and tight in the collet.
+        - Load the job and check the tool path preview.
+        - Set X, Y and Z zero.
+        - Point out the e-stop, start the job and stay at the machine the whole run.
+        - Inspect the parts, then vacuum the bed and put tooling away.
+    renews: season
+    visibility: public

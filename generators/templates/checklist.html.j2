@@ -129,6 +129,7 @@
       {% endif %}
       <div class="how">&#10148; {{ item.how }}</div>
       <div class="tags">
+        {% if item.mentor_only %}<span class="tag private">Mentor supervision - always</span>{% endif %}
         {% if item.track %}<span class="tag">{{ item.track }}</span>{% endif %}
         {% for c in item.conditions %}<span class="tag cond">Only if: {{ c }}</span>{% endfor %}
         {% if item.target %}<span class="tag">{{ item.target }}</span>{% endif %}

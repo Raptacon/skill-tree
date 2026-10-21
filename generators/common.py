@@ -72,15 +72,16 @@ def own_items(trees):
 
 
 def resolve_items(tree_doc, items_by_id):
-    """A tree's items with `{ref: id, section?}` entries replaced by the referenced
-    item (section overridable), so shared items are defined once (docs/adr/0003)."""
+    """A tree's items with `{ref: id, section?, tier?}` entries replaced by the
+    referenced item (placement overridable), so shared items are defined once
+    (docs/adr/0003)."""
     resolved = []
     for item in tree_doc["items"]:
         if "ref" in item:
             target = items_by_id.get(item["ref"])
             if target is None:
                 raise SystemExit(f"{tree_doc['tree']['id']}: ref to unknown item '{item['ref']}'")
-            item = {**target, **{k: v for k, v in item.items() if k == "section"}}
+            item = {**target, **{k: v for k, v in item.items() if k in ("section", "tier")}}
         resolved.append(item)
     return resolved
 
