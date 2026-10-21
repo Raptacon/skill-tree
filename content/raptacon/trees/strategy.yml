@@ -159,6 +159,8 @@ items:
     kind: check
     requires: [strat-subjective-scouting]
     verify: {method: signoff, by: {role: lead-mentor}}
+    bonus:
+      - {label: "What does the giraffe have? - every event has an outlier", url: "https://www.youtube.com/shorts/l6zOaeBuhPA"}
     renews: season
     visibility: public
 

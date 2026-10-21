@@ -26,6 +26,7 @@
 #   training    [{type: video|doc|form|link|session|repo, label, url?, roles?}] -
 #               how to learn it (`session` = hands-on with a mentor); roles limits
 #               which checklists show it
+#   bonus       [{label, url}] - optional fun or interesting extra; never required
 #   practical   {summary, steps: [...]} - the test: the exact hands-on task a
 #               verifier has the person perform, in order
 #   parts       [{id, name, by}] - named sub-sign-offs that together complete the

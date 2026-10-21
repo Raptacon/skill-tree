@@ -264,6 +264,9 @@ items:
     roles: [student]
     kind: check
     verify: {method: signoff, by: {role: lead-mentor}}
+    bonus:
+      - {label: "Tacoma Narrows Bridge collapse, 1940 (British Pathé) - why designs get reviewed", url: "https://www.youtube.com/watch?v=XggxeuFDaDU"}
+      - {label: "Feynman's O-ring ice water demonstration - the Challenger hearing", url: "https://www.youtube.com/watch?v=6TInWPDJhjU"}
     renews: permanent
     visibility: public
 

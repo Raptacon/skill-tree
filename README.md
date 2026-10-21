@@ -45,6 +45,7 @@ Mentors and students are encouraged to add and improve skills.
   visibility: public               # public | team | mentors | self
 ```
 
+- `bonus: [{label, url}]` adds an optional fun or interesting link - never part of the test.
 - `parts: [{id, name, by}]` splits an item into named sign-offs (Baseline's "Shadow every subteam" has one per subteam).
 - A tree can set `badge: {name, description}` (the rank for finishing it) and `next: {tree, text}` (where to go after).
 
