@@ -15,7 +15,7 @@ tree:
   authored_by:
     - {name: Chris Hirsch, github: ChrisHirsch}
   created_at: 2026-10-13
-  updated_at: 2026-10-13
+  updated_at: 2026-10-21
 
 sections:
   - {id: setup, name: Get Set Up}
@@ -39,7 +39,9 @@ items:
     verify: {method: self}
     renews: permanent
     visibility: team
-    training: []             # TODO short video or one-page intro
+    training:
+      - {type: video, label: "What is Kanban? (Atlassian Agile Coach)", url: "https://www.youtube.com/watch?v=iVaFVa7HYj4"}
+      - {type: doc, label: "Kanban guide (Atlassian)", url: "https://www.atlassian.com/agile/kanban"}
 
   - id: kanban-our-board
     name: Using the Raptacon board
@@ -64,3 +66,5 @@ items:
     visibility: public
     training:
       - {type: link, label: Raptacon board (GitHub Projects), url: "https://github.com/orgs/Raptacon/projects/7"}
+      - {type: video, label: "How to use GitHub issues and projects (GitHub for Beginners)", url: "https://www.youtube.com/watch?v=c67GaAkf1BE"}
+      - {type: doc, label: "Quickstart for GitHub Projects", url: "https://docs.github.com/en/issues/planning-and-tracking-with-projects/learning-about-projects/quickstart-for-projects"}

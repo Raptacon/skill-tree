@@ -122,6 +122,7 @@
         {% for r in links %}{% if r.url %}<a href="{{ r.url }}">{{ r.label }}</a>{% else %}{{ r.label }}{% endif %}{% if not loop.last %} &middot; {% endif %}{% endfor %}
       </div>
       {% endif %}
+      {% for b in item.bonus %}<div class="training"><span class="label">Bonus:</span> <a href="{{ b.url }}">{{ b.label }}</a></div>{% endfor %}
       {% if item.practical %}
       <div class="practical"><span class="label">Test:</span> {{ item.practical.summary }}
         <ol>{% for step in item.practical.steps %}<li>{{ step }}</li>{% endfor %}</ol>

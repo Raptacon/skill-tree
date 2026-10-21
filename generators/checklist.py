@@ -119,6 +119,7 @@ def build_item(item, roles, conditions, ctx):
         "optional": item.get("required") is False,
         "draft": item.get("status") == "draft",
         "practical": item.get("practical"),
+        "bonus": item.get("bonus", []),
         "training": [r for r in item.get("training", []) if not r.get("roles") or set(r["roles"]) & set(roles)],
         "parts": [{"name": p["name"], "who": " or ".join(describe_by(p.get("by"), ctx))} for p in item.get("parts", [])],
     }

@@ -266,6 +266,8 @@ items:
     roles: [student]
     kind: check
     verify: {method: signoff, by: {role: lead-mentor}}
+    bonus:
+      - {label: "Feynman's O-ring demonstration - when a material fails in the cold", url: "https://www.youtube.com/watch?v=6TInWPDJhjU"}
     renews: permanent
     visibility: public
 

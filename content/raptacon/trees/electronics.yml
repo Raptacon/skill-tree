@@ -160,6 +160,8 @@ items:
     kind: check
     requires: [elec-soldering, elec-multimeter]
     verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: electronics}, {role: subteam-mentor, tree: electronics}]}}
+    bonus:
+      - {label: "Ben Eater: build an 8-bit computer on breadboards", url: "https://eater.net/8bit"}
     renews: permanent
     visibility: public
 
@@ -393,6 +395,8 @@ items:
         - Decode real messages and explain what they mean.
         - Write a small driver or tool that talks to the device.
         - Document it - what you found, how, and which AI suggestions turned out wrong.
+    bonus:
+      - {label: "Cliff Stoll: Stalking the Wily Hacker, 40 years later (DEF CON 34)", url: "https://www.youtube.com/watch?v=656058JxTM0"}
     renews: permanent
     visibility: public
 

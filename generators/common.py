@@ -71,7 +71,7 @@ def own_items(trees):
     return {i["id"]: i for d in trees.values() for i in d["items"] if "ref" not in i}
 
 
-def resolve_items(tree_doc, items_by_id):
+def resolve_items(tree_doc, items_by_id, include_hidden=False):
     """A tree's items with `{ref: id, section?, tier?}` entries replaced by the
     referenced item (placement overridable), so shared items are defined once
     (docs/adr/0003)."""
@@ -82,7 +82,8 @@ def resolve_items(tree_doc, items_by_id):
             if target is None:
                 raise SystemExit(f"{tree_doc['tree']['id']}: ref to unknown item '{item['ref']}'")
             item = {**target, **{k: v for k, v in item.items() if k in ("section", "tier")}}
-        resolved.append(item)
+        if include_hidden or item.get("status") != "hidden":
+            resolved.append(item)
     return resolved
 
 

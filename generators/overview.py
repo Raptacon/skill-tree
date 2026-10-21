@@ -56,6 +56,7 @@ def v2_card(item, tree_id, home, ctx):
         "shared": ctx["tree_names"].get(origin) if origin and origin != tree_id else None,
         "draft": item.get("status") == "draft",
         "detail": detail,
+        "bonus": item.get("bonus", []),
     }
 
 
