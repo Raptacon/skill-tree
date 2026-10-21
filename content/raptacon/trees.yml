@@ -12,10 +12,6 @@ trees:
     name: Electronics
     tiered: true
     kind: subteam
-  - id: programming
-    name: Programming
-    tiered: true
-    kind: subteam
   - id: leds
     name: LEDs
     tiered: true

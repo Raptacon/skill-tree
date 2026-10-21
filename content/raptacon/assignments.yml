@@ -19,6 +19,10 @@ seasons:
       holders:
         - {name: Sasha Graves, github: TODO}
         - {name: Snort Hirsch, github: TODO}
+    - role: subteam-lead
+      tree: programming
+      holders:
+        - {name: Emma Garrett, github: DanteSGarrett}
     - role: lead-mentor
       holders:
         - {name: Chris Hirsch, github: ChrisHirsch}
