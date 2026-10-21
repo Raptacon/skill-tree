@@ -26,6 +26,8 @@ items:
     roles: [student]
     kind: check
     verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: electronics}, {role: subteam-mentor, tree: electronics}]}}
+    training:
+      - {type: doc, label: "WPILib: Wiring best practices", url: "https://docs.wpilib.org/en/stable/docs/hardware/hardware-basics/wiring-best-practices.html"}
     practical:
       summary: Show a lead or mentor, with the robot powered off.
       steps:
@@ -43,6 +45,8 @@ items:
     roles: [student]
     kind: check
     verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: electronics}, {role: subteam-mentor, tree: electronics}]}}
+    training:
+      - {type: doc, label: "WPILib: Robot battery basics", url: "https://docs.wpilib.org/en/stable/docs/hardware/hardware-basics/robot-battery.html"}
     renews: season
     visibility: public
 
@@ -66,6 +70,8 @@ items:
     kind: check
     requires: [elec-safe-wiring]
     verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: electronics}, {role: subteam-mentor, tree: electronics}]}}
+    training:
+      - {type: doc, label: "WPILib: Wiring best practices", url: "https://docs.wpilib.org/en/stable/docs/hardware/hardware-basics/wiring-best-practices.html"}
     practical:
       summary: Make each termination with a lead or mentor watching.
       steps:
@@ -86,6 +92,8 @@ items:
     kind: check
     requires: [elec-esd-bench]
     verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: electronics}, {role: subteam-mentor, tree: electronics}]}}
+    training:
+      - {type: doc, label: "SparkFun: How to use a multimeter", url: "https://learn.sparkfun.com/tutorials/how-to-use-a-multimeter"}
     practical:
       summary: Use the multimeter on real robot parts with a lead or mentor.
       steps:
@@ -105,6 +113,8 @@ items:
     kind: check
     requires: [elec-esd-bench]
     verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: electronics}, {role: subteam-mentor, tree: electronics}]}}
+    training:
+      - {type: doc, label: "Adafruit Guide to Excellent Soldering", url: "https://learn.adafruit.com/adafruit-guide-excellent-soldering"}
     practical:
       summary: Solder in front of a lead or mentor.
       steps:
@@ -135,6 +145,8 @@ items:
     roles: [student]
     kind: check
     verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: electronics}, {role: subteam-mentor, tree: electronics}]}}
+    training:
+      - {type: doc, label: "WPILib: Wiring the FRC control system", url: "https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-1/how-to-wire-a-robot.html"}
     renews: season
     visibility: public
 
@@ -148,6 +160,8 @@ items:
     kind: check
     requires: [elec-soldering]
     verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: electronics}, {role: subteam-mentor, tree: electronics}]}}
+    training:
+      - {type: doc, label: "Adafruit Guide to Excellent Soldering (incl. desoldering)", url: "https://learn.adafruit.com/adafruit-guide-excellent-soldering"}
     renews: permanent
     visibility: public
 
@@ -174,6 +188,8 @@ items:
     kind: check
     requires: [elec-multimeter]
     verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: electronics}, {role: subteam-mentor, tree: electronics}]}}
+    training:
+      - {type: doc, label: "SparkFun: How to use an oscilloscope", url: "https://learn.sparkfun.com/tutorials/how-to-use-an-oscilloscope"}
     renews: permanent
     visibility: public
 
@@ -186,6 +202,10 @@ items:
     kind: check
     requires: [elec-can-bus]
     verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: electronics}, {role: subteam-mentor, tree: electronics}]}}
+    training:
+      - {type: doc, label: "WPILib: Imaging your roboRIO", url: "https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-3/imaging-your-roborio.html"}
+      - {type: doc, label: "REV Hardware Client", url: "https://docs.revrobotics.com/rev-hardware-client"}
+      - {type: doc, label: "CTRE Phoenix Tuner X", url: "https://v6.docs.ctr-electronics.com/en/stable/docs/tuner/index.html"}
     renews: season
     visibility: public
 
@@ -200,6 +220,8 @@ items:
     kind: check
     requires: [elec-crimping, elec-robot-tour]
     verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: electronics}, {role: subteam-mentor, tree: electronics}]}}
+    training:
+      - {type: doc, label: "WPILib: Status light quick reference", url: "https://docs.wpilib.org/en/stable/docs/hardware/hardware-basics/status-lights-ref.html"}
     renews: permanent
     visibility: public
 
@@ -215,6 +237,8 @@ items:
     requires: [elec-battery-safety, elec-multimeter]
     verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: electronics}, {role: subteam-mentor, tree: electronics}]}}
     notes: Nathan Beasley had an idea for NFC tags on batteries to log them automatically - fold it in when it exists.
+    training:
+      - {type: doc, label: "WPILib: Robot battery basics", url: "https://docs.wpilib.org/en/stable/docs/hardware/hardware-basics/robot-battery.html"}
     renews: season
     visibility: public
 
@@ -226,6 +250,8 @@ items:
     kind: check
     requires: [elec-crimping, elec-wiring-diagrams]
     verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: electronics}, {role: subteam-mentor, tree: electronics}]}}
+    training:
+      - {type: doc, label: "WPILib: Wiring best practices", url: "https://docs.wpilib.org/en/stable/docs/hardware/hardware-basics/wiring-best-practices.html"}
     renews: permanent
     visibility: public
 
@@ -237,6 +263,8 @@ items:
     kind: check
     requires: [elec-robot-tour]
     verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: electronics}, {role: subteam-mentor, tree: electronics}]}}
+    training:
+      - {type: doc, label: "WPILib: Wiring the FRC control system", url: "https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-1/how-to-wire-a-robot.html"}
     renews: permanent
     visibility: public
 
@@ -248,6 +276,8 @@ items:
     kind: check
     requires: [elec-robot-tour]
     verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: electronics}, {role: subteam-mentor, tree: electronics}]}}
+    training:
+      - {type: doc, label: "WPILib: CAN wiring basics", url: "https://docs.wpilib.org/en/stable/docs/hardware/hardware-basics/can-wiring-basics.html"}
     renews: permanent
     visibility: public
 
@@ -275,6 +305,8 @@ items:
     kind: check
     requires: [elec-can-bus]
     verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: electronics}, {role: subteam-mentor, tree: electronics}]}}
+    training:
+      - {type: doc, label: "WPILib: Pneumatics", url: "https://docs.wpilib.org/en/stable/docs/software/hardware-apis/pneumatics/index.html"}
     renews: permanent
     visibility: public
 
@@ -286,6 +318,8 @@ items:
     roles: [student]
     kind: check
     verify: {method: signoff, by: {role: lead-mentor}}
+    training:
+      - {type: doc, label: "KiCad documentation", url: "https://docs.kicad.org/"}
     renews: permanent
     visibility: public
 
@@ -310,6 +344,8 @@ items:
     kind: check
     requires: [elec-health-monitoring]
     verify: {method: signoff, by: {role: lead-mentor}}
+    training:
+      - {type: doc, label: "WPILib: roboRIO brownouts", url: "https://docs.wpilib.org/en/stable/docs/software/roborio-info/roborio-brownouts.html"}
     renews: permanent
     visibility: public
 
@@ -323,6 +359,8 @@ items:
     kind: check
     requires: [elec-wiring-harness, elec-can-bus]
     verify: {method: signoff, by: {role: lead-mentor}}
+    training:
+      - {type: doc, label: "WPILib: Preemptive troubleshooting", url: "https://docs.wpilib.org/en/stable/docs/hardware/hardware-basics/preemptive-troubleshooting.html"}
     renews: season
     visibility: public
 
@@ -358,6 +396,8 @@ items:
     kind: check
     requires: [elec-power-distribution]
     verify: {method: signoff, by: {role: lead-mentor}}
+    training:
+      - {type: doc, label: "WPILib: Preemptive troubleshooting", url: "https://docs.wpilib.org/en/stable/docs/hardware/hardware-basics/preemptive-troubleshooting.html"}
     renews: season
     visibility: public
 
@@ -371,6 +411,8 @@ items:
     kind: check
     requires: [elec-soldering, elec-multimeter, elec-sensor-wiring]
     verify: {method: signoff, by: {role: lead-mentor}}
+    training:
+      - {type: doc, label: "Arduino: Getting started", url: "https://docs.arduino.cc/learn/starting-guide/getting-started-arduino/"}
     renews: permanent
     visibility: public
 
@@ -387,6 +429,8 @@ items:
     kind: check
     requires: [elec-oscilloscope, elec-microcontrollers]
     verify: {method: signoff, by: {role: lead-mentor}}
+    training:
+      - {type: doc, label: "PulseView (sigrok) logic analyzer software", url: "https://sigrok.org/wiki/PulseView"}
     practical:
       summary: Present the finished work to the lead mentor.
       steps:
