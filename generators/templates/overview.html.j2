@@ -90,6 +90,7 @@
   <div class="meta">{{ season }} season</div>
   {% if page.draft %}<div class="draft-note">First draft - being moved to the new format. Tap a skill to see what it covers.</div>{% endif %}
   {% if page.description %}<div class="intro">{{ page.description }}</div>{% endif %}
+  {% if page.reached_from %}<div class="meta">Specialization - reached from <b>{{ page.reached_from | join(" and ") }}</b></div>{% endif %}
   {% if page.starts_after %}<div class="meta">Starts after: <b>{{ page.starts_after | join(", ") }}</b></div>{% endif %}
 
   <div class="actions">
@@ -141,6 +142,13 @@
   <section class="row" id="hybrids">
     <div class="row-head"><div class="row-name">Hybrids</div><div class="row-meta">Journeyman here plus Journeyman in another tree</div></div>
     <div class="hybrids">{% for h in page.hybrids %}<p><b>{{ h.name }}</b> - with {{ h.with | join(", ") }}</p>{% if h.projects %}<ul class="projects">{% for p in h.projects %}<li>{{ p }}</li>{% endfor %}</ul>{% endif %}{% endfor %}</div>
+  </section>
+  {% endif %}
+
+  {% if page.specializations %}
+  <section class="row" id="specializations">
+    <div class="row-head"><div class="row-name">Specializations</div><div class="row-meta">Elective paths that start from this tree</div></div>
+    <div class="hybrids">{% for sp in page.specializations %}<p><a href="{{ sp.id }}.html"><b>{{ sp.name }}</b></a>{% if sp.with %} - with {{ sp.with | join(", ") }}{% endif %}</p>{% endfor %}</div>
   </section>
   {% endif %}
 

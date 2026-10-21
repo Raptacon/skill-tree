@@ -100,6 +100,13 @@ def build_v2(tree_id, ctx):
         "checklists": [{"role": ctx["member_roles"][r]["name"], "file": f"{tree_id}_{r}.html"} for r in roles],
         "rows": rows,
         "hybrids": tree_hybrids(tree_id, ctx),
+        "specializations": [
+            {"id": t, "name": d["tree"]["name"],
+             "with": [ctx["tree_names"].get(p, p) for p in d["tree"].get("parent_trees", []) if p != tree_id]}
+            for t, d in ctx["trees"].items()
+            if d["tree"].get("kind") == "specialization" and tree_id in d["tree"].get("parent_trees", [])
+        ],
+        "reached_from": [ctx["tree_names"].get(p, p) for p in tree.get("parent_trees", [])],
         "draft": False,
     }
 
