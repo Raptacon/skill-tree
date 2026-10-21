@@ -8,10 +8,6 @@ trees:
     name: Manufacturing
     tiered: true
     kind: subteam
-  - id: design
-    name: Design
-    tiered: true
-    kind: subteam
   - id: electronics
     name: Electronics
     tiered: true

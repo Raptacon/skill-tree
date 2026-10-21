@@ -50,6 +50,7 @@ def v2_card(item, tree_id, home, ctx):
         "test": bool(item.get("practical")),
         "timed": item.get("runs", 1) if item.get("kind") == "timed" else None,
         "track": item.get("track"),
+        "parts": len(item.get("parts", [])),
         "renews": item.get("renews") == "season",
         "shared": ctx["tree_names"].get(origin) if origin and origin != tree_id else None,
         "draft": item.get("status") == "draft",
