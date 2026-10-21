@@ -31,7 +31,8 @@ def build_context():
             {
                 "name": tree["name"],
                 "kind": tree.get("kind", "subteam"),
-                "parent_trees": [trees[t]["name"] for t in tree.get("parent_trees", []) if t in trees],
+                "parent_trees": [trees[t]["name"] if t in trees else v2[t]["tree"]["name"]
+                                 for t in tree.get("parent_trees", []) if t in trees or t in v2],
                 "columns": columns,
             }
         )
