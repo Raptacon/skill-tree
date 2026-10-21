@@ -139,6 +139,8 @@ items:
     kind: check
     requires: [mfg-shafts-bearings]
     verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: manufacturing}, {role: subteam-mentor, tree: manufacturing}]}}
+    training:
+      - {type: doc, label: "frcdesign.org: Power transmissions", url: "https://frcdesign.org/learning-course/stage1/1b/introduction/"}
     practical:
       summary: Build a chain run with a co-lead or mentor watching.
       steps:
@@ -159,6 +161,8 @@ items:
     kind: check
     requires: [mfg-shafts-bearings]
     verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: manufacturing}, {role: subteam-mentor, tree: manufacturing}]}}
+    training:
+      - {type: doc, label: "frcdesign.org: Power transmissions", url: "https://frcdesign.org/learning-course/stage1/1b/introduction/"}
     renews: permanent
     visibility: public
 

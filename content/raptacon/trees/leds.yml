@@ -37,6 +37,8 @@ items:
     roles: [student]
     kind: check
     verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: electronics}, {role: subteam-mentor, tree: electronics}]}}
+    training:
+      - {type: doc, label: "Adafruit NeoPixel Uberguide", url: "https://learn.adafruit.com/adafruit-neopixel-uberguide"}
     renews: permanent
     visibility: public
 
@@ -51,6 +53,8 @@ items:
     kind: check
     requires: [leds-circuit-basics]
     verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: electronics}, {role: subteam-mentor, tree: electronics}]}}
+    training:
+      - {type: doc, label: "Adafruit NeoPixel Uberguide: powering strips", url: "https://learn.adafruit.com/adafruit-neopixel-uberguide"}
     renews: permanent
     visibility: public
 
@@ -67,6 +71,7 @@ items:
     training:
       - {type: repo, label: "State machines step 1: addressable LEDs", url: "https://github.com/Raptacon/Skills-Challenges/tree/main/state_machines/challenge_step_1"}
       - {type: repo, label: "raptacon3200 LED strip helper", url: "https://github.com/Raptacon/raptacon3200/blob/main/raptacon3200/utils/leds.py"}
+      - {type: doc, label: "WPILib: Addressable LEDs", url: "https://docs.wpilib.org/en/stable/docs/software/hardware-apis/misc/addressable-leds.html"}
     practical:
       summary: Show it on a real strip.
       steps:
@@ -89,6 +94,7 @@ items:
     verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: programming}, {role: subteam-mentor, tree: programming}]}}
     training:
       - {type: repo, label: "raptacon3200 LED strip helper (modes)", url: "https://github.com/Raptacon/raptacon3200/blob/main/raptacon3200/utils/leds.py"}
+      - {type: doc, label: "WPILib: Addressable LEDs (patterns)", url: "https://docs.wpilib.org/en/stable/docs/software/hardware-apis/misc/addressable-leds.html"}
     renews: permanent
     visibility: public
 
