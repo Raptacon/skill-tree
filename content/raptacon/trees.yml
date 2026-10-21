@@ -3,14 +3,4 @@
 # track" step. `kind: specialization` trees are reachable via one or more subteams
 # (see `parent_trees`) rather than picked as a primary track, but still get their
 # own full ladder + poster page.
-trees:
-  - id: leds
-    name: LEDs
-    tiered: true
-    kind: specialization
-    parent_trees: [electronics, programming]
-    # Not a subteam a new student picks in "decide your track" - reached by
-    # progressing in Electronics and/or Programming first. Runs its own full
-    # 0-4 ladder rather than a hybrid node because it doesn't strictly need
-    # Journeyman in both parents to start (Novice LED circuit basics is
-    # reachable from either side early on).
+trees: []

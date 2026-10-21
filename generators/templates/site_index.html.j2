@@ -39,6 +39,15 @@
     <a class="card draft" href="techmap.html"><div class="name">Tech map</div><div class="desc">Every tree on one page.</div></a>
   </div>
 
+  {% if specializations %}
+  <h2>Specializations</h2>
+  <div class="cards">
+    {% for t in specializations %}
+    <a class="card" href="{{ t.id }}.html"><div class="name">{{ t.name }}</div>{% if t.description %}<div class="desc">{{ t.description }}</div>{% endif %}</a>
+    {% endfor %}
+  </div>
+  {% endif %}
+
   <footer>Built from github.com/Raptacon/skill-tree. Want to add or fix a skill? Open a pull request.</footer>
 </body>
 </html>

@@ -41,8 +41,11 @@ def main():
         season=common.current_season(team),
         trees=sorted((d["tree"] for d in v2.values() if d["tree"].get("kind") in KIND_ORDER),
                      key=lambda t: KIND_ORDER[t["kind"]]),
+        specializations=sorted([d["tree"] for d in v2.values() if d["tree"].get("kind") == "specialization"],
+                               key=lambda t: t["name"]),
         subteams=sorted([{"id": d["tree"]["id"], "name": d["tree"]["name"], "draft": False}
-                         for d in v2.values() if d["tree"].get("kind") not in KIND_ORDER]
+                         for d in v2.values() if d["tree"].get("kind") not in KIND_ORDER
+                         and d["tree"].get("kind") != "specialization"]
                         + [{"id": t["id"], "name": t["name"], "draft": True} for t in legacy],
                         key=lambda t: t["name"]),
     )

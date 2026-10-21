@@ -1,0 +1,275 @@
+# LEDs & the Raptacon Arcade - a specialization reached from Electronics and
+# Programming. Starts with one LED strip (hard until it isn't), turns the strip
+# into a matrix, then into a games console: patterns, text, pictures, Pong,
+# Snake, Breakout - played with robot code, Xbox controllers as input and the
+# matrix as the screen, on a cart in the queue and against other teams.
+# Based on Nazeer Zeerak's LED strip-to-matrix project. Fields as documented in
+# onboarding.yml; items use `tier` instead of `section`.
+
+tree:
+  id: leds
+  name: LEDs & the Raptacon Arcade
+  kind: specialization
+  parent_trees: [electronics, programming]
+  requires: [elec-rsl-status-lights, prog-state-machines]
+  authored_by:
+    - {name: Nazeer Zeerak, github: nazeermazeer}
+    - {name: Chris Hirsch, github: ChrisHirsch}
+  created_at: 2026-10-21
+  updated_at: 2026-10-21
+  badge:
+    name: Arcade Master
+    description: From one LED strip to a game you can challenge another team at.
+  description: >-
+    Start with one strip of LEDs, tape it into a matrix, and turn the matrix into
+    a games console - patterns, text, pictures, then Pong, Snake and Breakout,
+    played with Xbox controllers in robot code. Ends with the Raptacon Arcade:
+    games on our cart in the queue, and 1v1 challenges against other teams.
+
+items:
+  # ---------------------------------------------------------------- Novice: the strip
+  - id: leds-circuit-basics
+    tier: 1
+    name: LED circuit basics
+    description: >-
+      Voltage, current and resistance; why a plain LED needs a current-limiting
+      resistor; polarity; and reading an LED or strip datasheet.
+    roles: [student]
+    kind: check
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: electronics}, {role: subteam-mentor, tree: electronics}]}}
+    renews: permanent
+    visibility: public
+
+  - id: leds-strip-power
+    tier: 1
+    name: Strip wiring and power
+    description: >-
+      Wire an addressable strip - 5V supply, fuse, data line and ground - and work
+      out the current budget. A full-white 16x16 matrix can draw about 15 A, so
+      plan power injection and cap brightness.
+    roles: [student]
+    kind: check
+    requires: [leds-circuit-basics]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: electronics}, {role: subteam-mentor, tree: electronics}]}}
+    renews: permanent
+    visibility: public
+
+  - id: leds-strip-control
+    tier: 1
+    name: Strip control
+    description: >-
+      Control the whole strip from robot code - on, off, any color, brightness -
+      then single LEDs by index.
+    roles: [student]
+    kind: check
+    requires: [leds-strip-power]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: programming}, {role: subteam-mentor, tree: programming}]}}
+    training:
+      - {type: repo, label: "State machines step 1: addressable LEDs", url: "https://github.com/Raptacon/Skills-Challenges/tree/main/state_machines/challenge_step_1"}
+      - {type: repo, label: "raptacon3200 LED strip helper", url: "https://github.com/Raptacon/raptacon3200/blob/main/raptacon3200/utils/leds.py"}
+    practical:
+      summary: Show it on a real strip.
+      steps:
+        - Turn the whole strip on and off.
+        - Set it to three different colors, then dim it.
+        - Light one chosen LED by its index.
+        - Light every other LED.
+    renews: permanent
+    visibility: public
+    authored_by:
+      - {name: Nazeer Zeerak, github: nazeermazeer}
+
+  - id: leds-strip-effects
+    tier: 1
+    name: Strip effects
+    description: Blink, chase, fade and rainbow effects, timed from the robot's periodic loop.
+    roles: [student]
+    kind: check
+    requires: [leds-strip-control]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: programming}, {role: subteam-mentor, tree: programming}]}}
+    training:
+      - {type: repo, label: "raptacon3200 LED strip helper (modes)", url: "https://github.com/Raptacon/raptacon3200/blob/main/raptacon3200/utils/leds.py"}
+    renews: permanent
+    visibility: public
+
+  # ---------------------------------------------------------------- Journeyman: the matrix
+  - id: leds-build-matrix
+    tier: 2
+    name: Build the matrix
+    description: >-
+      Tape the strip back and forth across a board so it becomes a matrix, then
+      map (x, y) to the strip's LED number - every other row runs backwards - and
+      skip the LEDs that loop off the board edge.
+    roles: [student]
+    kind: check
+    requires: [leds-strip-effects]
+    parts:
+      - {id: square, name: "A 16x16 matrix", by: {any_of: [{role: subteam-lead, tree: programming}, {role: subteam-mentor, tree: programming}]}}
+      - {id: rectangle, name: "A non-square matrix (e.g. 8x16) - the math has to work for any size", by: {any_of: [{role: subteam-lead, tree: programming}, {role: subteam-mentor, tree: programming}]}}
+    verify: {method: signoff}
+    practical:
+      summary: Prove the mapping on real hardware.
+      steps:
+        - Light the four corners - they must be the real corners.
+        - Draw a diagonal line from (0, 0) to the far corner.
+        - Fill one row, then one column, with nothing lit off the board.
+        - Do it again on a matrix with a different width and height.
+    renews: permanent
+    visibility: public
+    authored_by:
+      - {name: Nazeer Zeerak, github: nazeermazeer}
+
+  - id: leds-matrix-drawing
+    tier: 2
+    name: Matrix drawing
+    description: Pixels, lines, rectangles, filled shapes and blinking on the mapped matrix.
+    roles: [student]
+    kind: check
+    requires: [leds-build-matrix]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: programming}, {role: subteam-mentor, tree: programming}]}}
+    renews: permanent
+    visibility: public
+
+  - id: leds-patterns-animation
+    tier: 2
+    name: Patterns and animation
+    description: >-
+      Animated patterns with steady frame timing, and keeping the whole matrix
+      updating within the robot's periodic loop.
+    roles: [student]
+    kind: check
+    requires: [leds-matrix-drawing]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: programming}, {role: subteam-mentor, tree: programming}]}}
+    renews: permanent
+    visibility: public
+
+  - id: leds-text
+    tier: 2
+    name: Letters and scrolling text
+    description: Draw letters from a small bitmap font, then scroll a message across the matrix.
+    roles: [student]
+    kind: check
+    requires: [leds-matrix-drawing]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: programming}, {role: subteam-mentor, tree: programming}]}}
+    practical:
+      summary: Scroll "RAPTACON 3200" across the matrix.
+      steps:
+        - Draw each letter from a bitmap font.
+        - Scroll the message smoothly, wrapping when it reaches the end.
+    renews: permanent
+    visibility: public
+
+  - id: leds-pictures
+    tier: 2
+    name: Pictures
+    description: Turn an image into pixels and show it on the matrix - the raptor logo is a good first one.
+    roles: [student]
+    kind: check
+    requires: [leds-matrix-drawing]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: programming}, {role: subteam-mentor, tree: programming}]}}
+    renews: permanent
+    visibility: public
+
+  # ---------------------------------------------------------------- Expert: games
+  - id: leds-pong
+    tier: 3
+    name: Pong
+    description: >-
+      Pong in robot code: Xbox controllers in, the matrix as the screen, a game
+      loop with a ball, two paddles and a score. Build it in the WPILib simulator
+      first, then on the real matrix.
+    roles: [student]
+    kind: check
+    requires: [leds-patterns-animation, leds-text]
+    verify: {method: signoff, by: {role: lead-mentor}}
+    training:
+      - {type: repo, label: "robot-2027 Xbox controller mapping", url: "https://github.com/Raptacon/robot-2027/blob/main/utils/input/xbox_map.py"}
+    practical:
+      summary: Two people play a full game on the real matrix.
+      steps:
+        - Each paddle is driven by its own Xbox controller.
+        - The ball bounces off paddles and walls.
+        - Points are scored and the score is shown.
+        - The game ends at a set score and shows the winner.
+    renews: permanent
+    visibility: public
+    authored_by:
+      - {name: Nazeer Zeerak, github: nazeermazeer}
+
+  - id: leds-more-games
+    tier: 3
+    name: More games
+    description: Build at least one more game - Snake, Breakout, Tetris or your own idea.
+    roles: [student]
+    kind: check
+    requires: [leds-pong]
+    verify: {method: signoff, by: {role: lead-mentor}}
+    renews: permanent
+    visibility: public
+
+  - id: leds-matrix-library
+    tier: 3
+    name: Matrix library
+    description: >-
+      Get the matrix mapping, drawing, text and game-loop code merged into the
+      raptacon3200 shared library so any team can use it.
+    roles: [student]
+    kind: check
+    requires: [leds-pong, prog-shared-library]
+    verify: {method: signoff, by: {role: lead-mentor}}
+    training:
+      - {type: repo, label: raptacon3200 shared library, url: "https://github.com/Raptacon/raptacon3200"}
+    renews: permanent
+    visibility: public
+
+  # ---------------------------------------------------------------- Master: the Arcade
+  - id: leds-1v1-challenge
+    tier: 4
+    name: 1v1 against another team
+    description: >-
+      Challenge another team to one of our games - in the queue or at an event -
+      and help them try building their own matrix.
+    roles: [student]
+    kind: check
+    requires: [leds-more-games]
+    verify: {method: signoff, by: {role: lead-mentor}}
+    renews: permanent
+    visibility: public
+
+  - id: leds-arcade-cart
+    tier: 4
+    name: The Arcade cart
+    description: >-
+      Build a permanent matrix and controller station onto the team cart, with
+      Design, Manufacturing and Electronics - power, mounting and a case that
+      survives travel.
+    roles: [student]
+    kind: check
+    requires: [leds-more-games]
+    verify: {method: signoff, by: {role: lead-mentor}}
+    renews: permanent
+    visibility: public
+
+  - id: leds-on-robot
+    tier: 4
+    name: A matrix on the robot
+    description: >-
+      Put a matrix on the competition robot - only within this season's game
+      manual (robot lights must not look like field lighting or distract other
+      teams) and only with the drive team's agreement.
+    roles: [student]
+    kind: check
+    requires: [leds-patterns-animation, strat-game-rules-test]
+    verify: {method: signoff, by: {role: lead-mentor}}
+    renews: season
+    visibility: public
+
+  - id: leds-teach
+    tier: 4
+    name: Teach
+    description: Take a Novice from their first strip to a working matrix.
+    roles: [student]
+    kind: check
+    verify: {method: signoff, by: {role: lead-mentor}}
+    renews: permanent
+    visibility: public
