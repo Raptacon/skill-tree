@@ -25,7 +25,7 @@ overview:
 	$(PYTHON) generators/overview.py $(TREE)
 
 validate:
-	$(PYTHON) -c "import yaml, glob; [yaml.safe_load(open(f)) for f in glob.glob('content/**/*.yml', recursive=True)]; print('all yaml valid')"
+	$(PYTHON) generators/validator.py
 
 lint:
 	$(PYTHON) generators/lint.py
