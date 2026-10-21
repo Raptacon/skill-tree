@@ -1,7 +1,6 @@
 # CAD/Design - designing the robot in Onshape before it's fabricated: parts,
 # assemblies and the drawings Manufacturing builds from (handbook 3.4b).
-# Structure from the Design subteam's whiteboard session (2026-10); first-draft
-# skills kept and folded in. Advanced sketch, body and assembly tools are listed
+# Structure from the Design subteam's whiteboard session (2026-10). Advanced sketch, body and assembly tools are listed
 # in the order to teach them. Fields as documented in onboarding.yml; items use
 # `tier` instead of `section`.
 
@@ -165,7 +164,6 @@ items:
       - {type: video, label: "Tube Converter (Julia's FeatureScripts)", url: "https://www.youtube.com/watch?v=b5D4UI2Q_xQ"}
     renews: permanent
     visibility: public
-    # Includes the first-draft "Tolerancing and fits" skill.
 
   - id: des-drawings-bom
     tier: 2
@@ -179,7 +177,6 @@ items:
     verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: design}, {role: subteam-mentor, tree: design}]}}
     renews: permanent
     visibility: public
-    # Includes the first-draft "Drawing conventions" and "BOM and fab-ready drawings" skills.
 
   - id: des-complex-parts
     tier: 2

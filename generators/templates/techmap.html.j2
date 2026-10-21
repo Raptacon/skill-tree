@@ -2,6 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Raptacon 3200 - Skill Tree Map</title>
 <style>
   @page { size: letter landscape; margin: 0.4in; }
@@ -113,22 +114,33 @@
   }
   .hybrid-card .name { font-weight: 700; color: #1a6fb0; }
   footer { margin-top: 14px; font-size: 9px; color: #999; }
+  .topbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
+  .topbar img { height: 30px; }
+  .topbar a { color: #1a6fb0; font-size: 13px; text-decoration: none; }
+  .grid-wrap { overflow-x: auto; }
+  table.grid td.lane-label a { color: inherit; text-decoration: none; }
+  @media print { .topbar a.back { display: none; } }
 </style>
 </head>
 <body>
+  <div class="topbar">
+    <a href="index.html"><img src="assets/lockup-horizontal.svg" alt="Raptacon 3200"></a>
+    <a class="back" href="index.html">&larr; All skill trees</a>
+  </div>
   <h1>Raptacon 3200 - Skill Tree Map</h1>
   <div class="subtitle">Every tree, every tier, in one picture. Read left to right: Baseline first, then increasing tier per tree; hybrid nodes bridge two trees at Journeyman.</div>
 
   <div class="baseline-banner">
-    <span class="label">BASELINE (everyone starts here):</span>
+    <span class="label">ONBOARDING &rarr; BASELINE (everyone starts here):</span>
     {% for s in baseline_skills %}<span class="chip">{{ s }}</span>{% endfor %}
   </div>
 
   <div class="example-path">
-    Example: a brand-new student finishes <b>Baseline</b>, picks Electronics and Programming, reaches
+    Example: a brand-new student finishes <b>Onboarding</b> (Rookie) and <b>Baseline</b> (Raptor), picks Electronics and Programming, reaches
     <b>Journeyman</b> in both, and is then eligible for the <b>Controls</b> hybrid node (see below) on the way to Expert.
   </div>
 
+  <div class="grid-wrap">
   <table class="grid">
     <tr>
       <th style="background:#fff;"></th>
@@ -137,7 +149,7 @@
     {% for lane in lanes %}
     <tr>
       <td class="lane-label {{ 'specialization' if lane.kind == 'specialization' }}">
-        {{ lane.name }}
+        <a href="{{ lane.id }}.html">{{ lane.name }}</a>
         {% if lane.kind == "specialization" %}<span class="spec-note">via {{ lane.parent_trees | join(" / ") }}</span>{% endif %}
       </td>
       {% for col in lane.columns %}
@@ -148,6 +160,7 @@
     </tr>
     {% endfor %}
   </table>
+  </div>
 
   <div class="hybrids-section">
     <h2>Hybrid nodes (require Journeyman in each parent tree)</h2>

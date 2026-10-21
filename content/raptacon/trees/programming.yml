@@ -1,7 +1,6 @@
 # Programming - Python and RobotPy: the code that runs the robot, the tools
 # around it, and the team's shared library (handbook 3.4e). Structure from the
-# Programming subteam's whiteboard session (2026-10); first-draft skills and
-# their Skills-Challenges links kept. Git basics (kanban, push/pull, merging)
+# Programming subteam's whiteboard session (2026-10). Git basics (kanban, push/pull, merging)
 # live in Baseline; pull requests and .gitignore start here. Fields as
 # documented in onboarding.yml; items use `tier` instead of `section`.
 

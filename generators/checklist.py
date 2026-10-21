@@ -180,7 +180,6 @@ def load_ctx():
     return {
         "trees": trees,
         "tree_names": {s["id"]: s["name"] for s in team.get("subteams", [])}
-        | {t["id"]: t["name"] for t in common.load_yaml("trees.yml")["trees"]}
         | {t: d["tree"]["name"] for t, d in trees.items()},
         "all_items": common.own_items(trees),
         "member_roles": {r["id"]: r for r in roles_doc["member_roles"]},

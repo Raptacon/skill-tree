@@ -1,6 +1,0 @@
-# Registry of skill trees. `tiered: false` means single pass/fail, no tier ladder.
-# `kind: subteam` trees are the primary tracks offered in Baseline's "Choose your
-# track" step. `kind: specialization` trees are reachable via one or more subteams
-# (see `parent_trees`) rather than picked as a primary track, but still get their
-# own full ladder + poster page.
-trees: []
