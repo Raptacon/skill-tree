@@ -14,7 +14,7 @@ tree:
     - {name: TODO, github: TODO}          # Design whiteboard session author(s)
     - {name: Chris Hirsch, github: ChrisHirsch}
   created_at: 2026-10-20
-  updated_at: 2026-10-20
+  updated_at: 2026-10-21
   description: >-
     Design the robot in Onshape: sketches, parts, assemblies and the drawings
     Manufacturing builds from. Expect about four years from your first sketch to
@@ -28,7 +28,7 @@ items:
     description: Onshape navigation and controls, planes, units and measurements, and the core definitions (sketch, part, feature, assembly).
     roles: [student]
     kind: check
-    verify: {method: signoff, by: {role: subteam-lead, tree: design}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: design}, {role: subteam-mentor, tree: design}]}}
     training:
       - {type: doc, label: "frcdesign.org course setup: new to CAD", url: "https://frcdesign.org/learning-course/course-setup/new-to-cad/"}
       - {type: doc, label: Onshape Learning Center, url: "https://learn.onshape.com/"}
@@ -45,7 +45,7 @@ items:
     roles: [student]
     kind: check
     requires: [des-cad-intro]
-    verify: {method: signoff, by: {role: subteam-lead, tree: design}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: design}, {role: subteam-mentor, tree: design}]}}
     training:
       - {type: doc, label: "frcdesign.org 1A: Part Studio fundamentals", url: "https://frcdesign.org/learning-course/stage1/1a/section1-exercise3/"}
     renews: permanent
@@ -60,7 +60,7 @@ items:
     roles: [student]
     kind: check
     requires: [des-sketching]
-    verify: {method: signoff, by: {role: subteam-lead, tree: design}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: design}, {role: subteam-mentor, tree: design}]}}
     training:
       - {type: doc, label: "frcdesign.org 1A: Plates", url: "https://frcdesign.org/learning-course/stage1/1a/section2-exercise1/"}
     renews: permanent
@@ -75,7 +75,7 @@ items:
     roles: [student]
     kind: check
     requires: [des-basic-body-tools]
-    verify: {method: signoff, by: {role: subteam-lead, tree: design}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: design}, {role: subteam-mentor, tree: design}]}}
     training:
       - {type: doc, label: "frcdesign.org 1A: Assemblies", url: "https://frcdesign.org/learning-course/stage1/1a/section3-exercise1/"}
       - {type: session, label: Lego assembly practice}
@@ -89,7 +89,7 @@ items:
     roles: [student]
     kind: check
     requires: [des-basic-body-tools, tool-hand-tools]
-    verify: {method: signoff, by: {role: subteam-lead, tree: design}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: design}, {role: subteam-mentor, tree: design}]}}
     renews: permanent
     visibility: public
 
@@ -100,7 +100,7 @@ items:
     roles: [student]
     kind: check
     requires: [des-basic-body-tools]
-    verify: {method: signoff, by: {role: subteam-lead, tree: design}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: design}, {role: subteam-mentor, tree: design}]}}
     renews: permanent
     visibility: public
     authored_by:
@@ -115,7 +115,7 @@ items:
     roles: [student]
     kind: check
     requires: [des-sketching, des-basic-body-tools, des-basic-assembly]
-    verify: {method: signoff, by: {role: subteam-lead, tree: design}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: design}, {role: subteam-mentor, tree: design}]}}
     practical:
       summary: Done on your own, then reviewed with a Design lead.   # TODO the gusset spec / drawing
       steps:
@@ -135,7 +135,7 @@ items:
     roles: [student]
     kind: check
     requires: [des-gusset-assessment]
-    verify: {method: signoff, by: {role: subteam-lead, tree: design}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: design}, {role: subteam-mentor, tree: design}]}}
     renews: permanent
     visibility: public
 
@@ -146,7 +146,7 @@ items:
     roles: [student]
     kind: check
     requires: [des-gusset-assessment]
-    verify: {method: signoff, by: {role: subteam-lead, tree: design}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: design}, {role: subteam-mentor, tree: design}]}}
     renews: permanent
     visibility: public
 
@@ -159,7 +159,7 @@ items:
     roles: [student]
     kind: check
     requires: [des-gusset-assessment]
-    verify: {method: signoff, by: {role: subteam-lead, tree: design}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: design}, {role: subteam-mentor, tree: design}]}}
     training:
       - {type: doc, label: "FRC FeatureScripts list (incl. Julia's FeatureScripts)", url: "https://frcdesign.org/resources/featurescripts/"}
       - {type: video, label: "Tube Converter (Julia's FeatureScripts)", url: "https://www.youtube.com/watch?v=b5D4UI2Q_xQ"}
@@ -176,7 +176,7 @@ items:
     roles: [student]
     kind: check
     requires: [des-gusset-assessment]
-    verify: {method: signoff, by: {role: subteam-lead, tree: design}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: design}, {role: subteam-mentor, tree: design}]}}
     renews: permanent
     visibility: public
     # Includes the first-draft "Drawing conventions" and "BOM and fab-ready drawings" skills.
@@ -191,9 +191,9 @@ items:
     kind: check
     requires: [des-adv-sketch-tools, des-adv-body-tools]
     parts:
-      - {id: basic, name: "Basic part: sketch, extrude, cut, modify key dimensions", by: {role: subteam-lead, tree: design}}
-      - {id: intermediate, name: "Intermediate part: revolve, cut, circular pattern, holes, fillets", by: {role: subteam-lead, tree: design}}
-      - {id: advanced, name: "Advanced part: offsets, harder geometry, mass after changes", by: {role: subteam-lead, tree: design}}
+      - {id: basic, name: "Basic part: sketch, extrude, cut, modify key dimensions", by: {any_of: [{role: subteam-lead, tree: design}, {role: subteam-mentor, tree: design}]}}
+      - {id: intermediate, name: "Intermediate part: revolve, cut, circular pattern, holes, fillets", by: {any_of: [{role: subteam-lead, tree: design}, {role: subteam-mentor, tree: design}]}}
+      - {id: advanced, name: "Advanced part: offsets, harder geometry, mass after changes", by: {any_of: [{role: subteam-lead, tree: design}, {role: subteam-mentor, tree: design}]}}
     verify: {method: signoff}
     training:
       - {type: doc, label: CSWA sample exam (practice parts)}   # TODO pick the practice parts we use

@@ -12,7 +12,7 @@ tree:
   authored_by:
     - {name: Chris Hirsch, github: ChrisHirsch}
   created_at: 2026-10-20
-  updated_at: 2026-10-20
+  updated_at: 2026-10-21
   description: >-
     Know the game better than anyone, scout every team at an event, and drive
     our robot. Three tracks - Strategy, Scouting and Drive. Drive Team seats
@@ -32,7 +32,7 @@ items:
     roles: [student]
     kind: score
     pass_score: null          # TODO the team's rules test and its pass mark
-    verify: {method: signoff, claim: true, by: {role: subteam-lead, tree: strategy}}
+    verify: {method: signoff, claim: true, by: {any_of: [{role: subteam-lead, tree: strategy}, {role: subteam-mentor, tree: strategy}]}}
     training:
       - {type: doc, label: This season's game manual}   # TODO link after kickoff
     renews: season
@@ -47,7 +47,7 @@ items:
       for every match you're assigned.
     roles: [student]
     kind: check
-    verify: {method: signoff, by: {role: subteam-lead, tree: strategy}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: strategy}, {role: subteam-mentor, tree: strategy}]}}
     training:
       - {type: session, label: Scout training}
       - {type: link, label: Scouting software}         # TBD - the system the team uses
@@ -69,7 +69,7 @@ items:
       answers, and hand out our team and scouting sheets.
     roles: [student]
     kind: check
-    verify: {method: signoff, by: {role: subteam-lead, tree: strategy}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: strategy}, {role: subteam-mentor, tree: strategy}]}}
     renews: season
     visibility: public
 
@@ -81,7 +81,7 @@ items:
     roles: [student]
     kind: timed
     runs: 3
-    verify: {method: signoff, by: {role: subteam-lead, tree: strategy}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: strategy}, {role: subteam-mentor, tree: strategy}]}}
     training:
       - {type: session, label: Cone course setup and a practice lap}
     renews: season
@@ -98,7 +98,7 @@ items:
     roles: [student]
     kind: check
     requires: [base-robot-game]
-    verify: {method: signoff, by: {role: subteam-lead, tree: strategy}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: strategy}, {role: subteam-mentor, tree: strategy}]}}
     renews: season
     visibility: public
 
@@ -111,7 +111,7 @@ items:
     roles: [student]
     kind: check
     requires: [strat-objective-scouting]
-    verify: {method: signoff, by: {role: subteam-lead, tree: strategy}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: strategy}, {role: subteam-mentor, tree: strategy}]}}
     renews: season
     visibility: public
 
@@ -125,7 +125,7 @@ items:
     roles: [student]
     kind: check
     requires: [strat-game-rules-test]
-    verify: {method: signoff, by: {role: subteam-lead, tree: strategy}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: strategy}, {role: subteam-mentor, tree: strategy}]}}
     renews: season
     visibility: public
 
@@ -143,7 +143,7 @@ items:
     requires: [strat-rc-cone-course, strat-robot-knowledge, strat-game-rules-test]
     verify:
       method: signoff
-      by: {any_of: [{role: subteam-lead, tree: strategy}, {role: lead-mentor}]}
+      by: {any_of: [{role: subteam-lead, tree: strategy}, {role: subteam-mentor, tree: strategy}, {role: lead-mentor}]}
     training:
       - {type: repo, label: "The code that drives it: Skills-Challenges cone drill", url: "https://github.com/Raptacon/Skills-Challenges/tree/main/cone_drill_west_coast"}
     renews: season

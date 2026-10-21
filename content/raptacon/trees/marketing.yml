@@ -11,7 +11,7 @@ tree:
   authored_by:
     - {name: Chris Hirsch, github: ChrisHirsch}
   created_at: 2026-10-20
-  updated_at: 2026-10-20
+  updated_at: 2026-10-21
   description: >-
     Raptacon's image: our theme, T-shirts, pit, posters, photos and video of
     every event, the website and our socials. Pictures and video we share only
@@ -27,7 +27,7 @@ items:
       tag sponsors, credit people, and never post anyone without a media release.
     roles: [student]
     kind: check
-    verify: {method: signoff, by: {role: subteam-lead, tree: marketing}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: marketing}, {role: subteam-mentor, tree: marketing}]}}
     renews: permanent
     visibility: public
     training:
@@ -39,7 +39,7 @@ items:
     description: Take usable photos at meetings, events, the pit and matches with a phone or camera.
     roles: [student]
     kind: check
-    verify: {method: signoff, by: {role: subteam-lead, tree: marketing}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: marketing}, {role: subteam-mentor, tree: marketing}]}}
     renews: permanent
     visibility: public
     training:
@@ -56,7 +56,7 @@ items:
     roles: [student]
     kind: check
     requires: [mkt-event-photography]
-    verify: {method: signoff, by: {role: subteam-lead, tree: marketing}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: marketing}, {role: subteam-mentor, tree: marketing}]}}
     training:
       - {type: session, label: Headshot setup with a Marketing lead}
       - {type: video, label: Portrait lighting and framing}   # TODO pick a video
@@ -79,7 +79,7 @@ items:
     description: Plan and run the social content calendar across a build season or a competition weekend.
     roles: [student]
     kind: check
-    verify: {method: signoff, by: {role: subteam-lead, tree: marketing}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: marketing}, {role: subteam-mentor, tree: marketing}]}}
     renews: permanent
     visibility: public
 
@@ -90,7 +90,7 @@ items:
     roles: [student]
     kind: check
     requires: [mkt-event-photography]
-    verify: {method: signoff, by: {role: subteam-lead, tree: marketing}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: marketing}, {role: subteam-mentor, tree: marketing}]}}
     renews: permanent
     visibility: public
 
@@ -100,7 +100,7 @@ items:
     description: Design, build and maintain the competition pit display.
     roles: [student]
     kind: check
-    verify: {method: signoff, by: {role: subteam-lead, tree: marketing}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: marketing}, {role: subteam-mentor, tree: marketing}]}}
     renews: permanent
     visibility: public
 
@@ -113,7 +113,7 @@ items:
       design is due two weeks before Thanksgiving.
     roles: [student]
     kind: check
-    verify: {method: signoff, by: {role: subteam-lead, tree: marketing}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: marketing}, {role: subteam-mentor, tree: marketing}]}}
     training:
       - {type: repo, label: Raptacon brand kit, url: "https://github.com/Raptacon/brand-kit"}
     renews: permanent

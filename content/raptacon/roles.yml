@@ -84,6 +84,10 @@ signoff_roles:
   - id: captain
     name: Team Captain
     description: Student team captain.
+  - id: subteam-mentor
+    name: Subteam Mentor
+    scoped: tree    # assigned per tree, e.g. {role: subteam-mentor, tree: programming}
+    description: Adult mentor for a subteam/tree; can sign off alongside its leads.
   - id: food-coordinator
     name: Food Coordinator
     description: Tracks Saturday food sign-ups.
