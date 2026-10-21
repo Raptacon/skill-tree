@@ -1,0 +1,134 @@
+# Baseline - what every Rookie (student or mentor) finishes before joining a
+# subteam: the shop tools, git and the team board, how the team works, the robot
+# and the game, then shadowing every subteam and choosing a track. Finished
+# alongside mock build season. Fields as documented in onboarding.yml.
+
+tree:
+  id: baseline
+  name: Baseline
+  kind: baseline
+  authored_by:
+    - {name: Chris Hirsch, github: ChrisHirsch}
+  created_at: 2026-10-20
+  updated_at: 2026-10-20
+  badge:
+    name: Raptor
+    description: Tools, git, the team and every subteam - you're ready for a subteam tree.
+  next:
+    text: >-
+      Next up: your subteam's tree - start at its Novice tier. You can add a second
+      subteam, or a specialization like LEDs, later.
+  description: >-
+    Your first real skills: the shop tools, git and our board, how the team works,
+    the robot and the game - then shadow every subteam and choose your track.
+    Mentors do it too, so you know exactly what students go through.
+
+sections:
+  - {id: shop, name: In the Shop}
+  - {id: collaborate, name: Working Together}
+  - {id: team, name: The Team and the Game}
+  - {id: track, name: Find Your Track}
+
+items:
+  - {ref: onb-shop-orientation, section: shop}
+  - {ref: tool-hand-tools, section: shop}
+  - {ref: tool-drill-driver, section: shop}
+
+  - id: base-git
+    name: Git basics
+    description: >-
+      Clone a repo, make a branch, commit, push, open a pull request and respond
+      to a review. Every subteam uses git - code, CAD exports, the website, and
+      these skill trees.
+    section: collaborate
+    roles: [student, mentor]
+    kind: check
+    requires: [onb-github]
+    verify:
+      method: signoff
+      by: {any_of: [{role: subteam-lead}, {role: lead-mentor}]}
+    training:
+      - {type: doc, label: "GitHub Docs: Hello World", url: "https://docs.github.com/en/get-started/start-your-journey/hello-world"}
+      - {type: repo, label: "GitHub Skills: Introduction to GitHub", url: "https://github.com/skills/introduction-to-github"}
+    practical:
+      summary: Improve this skill tree with a real pull request that gets merged.
+      steps:
+        - Pick a skill on skills.raptacon.com that's missing a training video or has a confusing description.
+        - Find a good video (or write a clearer description) for it.
+        - Make a branch in github.com/Raptacon/skill-tree and edit that skill's YAML file.
+        - Commit with a short, clear message and push your branch.
+        - Open a pull request explaining what you changed and why.
+        - Respond to the review comments until it's approved and merged.
+    renews: permanent
+    visibility: public
+
+  - {ref: kanban-our-board, section: collaborate}
+
+  - id: base-culture
+    name: How Raptacon works
+    description: >-
+      Gracious Professionalism and the Golden Rule; no bullying or harassment;
+      phones only for team work during meetings; ask for something to do if you
+      run out (or work on your skill tree); tell a mentor or lead before you
+      leave; return tools to their places; Clean 15 at the end of every meeting;
+      no knives or multitools. Talk it through with a mentor.
+    section: team
+    roles: [student, mentor]
+    kind: check
+    verify: {method: signoff, by: {role: mentor}}
+    training:
+      - {type: doc, label: "Raptacon Handbook - Expectations and Workspace Rules", url: "https://docs.google.com/document/d/19xdyY0cUXU5lqMMsEIhkcs5NqTy1XQ93uskZNUNlgAY/view"}
+    renews: permanent
+    visibility: public
+
+  - id: base-robot-game
+    name: The robot and the game
+    description: >-
+      Walk through a Raptacon robot with a captain or mentor - drivetrain, the
+      mechanisms, electronics, the code that drives it - and learn this season's
+      game: how a match works, how points are scored, and the big rules.
+    section: team
+    roles: [student, mentor]
+    kind: check
+    verify:
+      method: signoff
+      by: {any_of: [{role: captain}, {role: lead-mentor}]}
+    training:
+      - {type: session, label: Robot walkthrough with a captain or mentor}
+      - {type: doc, label: This season's game manual}   # TODO link after kickoff; last season's until then
+    renews: season
+    visibility: public
+
+  - id: base-shadow-subteams
+    name: Shadow every subteam
+    description: >-
+      Spend a meeting with each of the six subteams and do real work with them.
+      That subteam's lead marks you off.
+    section: track
+    roles: [student, mentor]
+    kind: check
+    parts:
+      - {id: strategy, name: Strategy/Scouting/Drive, by: {role: subteam-lead, tree: strategy}}
+      - {id: design, name: CAD/Design, by: {role: subteam-lead, tree: design}}
+      - {id: manufacturing, name: Fabrication/Manufacturing, by: {role: subteam-lead, tree: manufacturing}}
+      - {id: electronics, name: Electronics, by: {role: subteam-lead, tree: electronics}}
+      - {id: programming, name: Programming, by: {role: subteam-lead, tree: programming}}
+      - {id: marketing, name: Marketing, by: {role: subteam-lead, tree: marketing}}
+    verify: {method: signoff}
+    renews: season
+    visibility: public
+
+  - id: base-choose-track
+    name: Choose your track
+    description: >-
+      Pick a primary subteam and meet its lead - that's where your skill tree
+      goes next. Not permanent: you can switch, or add a second subteam later.
+    section: track
+    roles: [student]
+    kind: check
+    requires: [base-shadow-subteams]
+    verify:
+      method: signoff
+      by: {any_of: [{role: subteam-lead}, {role: lead-mentor}]}
+    renews: season
+    visibility: public

@@ -1,0 +1,142 @@
+# Marketing & Media - the team's image: annual theme, T-shirts, pit design,
+# promotional material, photos and video of every event, website and socials
+# (handbook 3.4). Fields as documented in onboarding.yml; items use `tier`
+# (tiers.yml: Novice 1 .. Master 4) instead of `section`.
+
+tree:
+  id: marketing
+  name: Marketing & Media
+  kind: subteam
+  requires: [base-choose-track]
+  authored_by:
+    - {name: Chris Hirsch, github: ChrisHirsch}
+  created_at: 2026-10-20
+  updated_at: 2026-10-21
+  description: >-
+    Raptacon's image: our theme, T-shirts, pit, posters, photos and video of
+    every event, the website and our socials. Pictures and video we share only
+    include people who've signed a media release.
+
+items:
+  # ---------------------------------------------------------------- Novice
+  - id: mkt-social-basics
+    tier: 1
+    name: Social media basics
+    description: >-
+      Post on the team's accounts following our brand and voice guidelines -
+      tag sponsors, credit people, and never post anyone without a media release.
+    roles: [student]
+    kind: check
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: marketing}, {role: subteam-mentor, tree: marketing}]}}
+    renews: permanent
+    visibility: public
+    training:
+      - {type: session, label: Walkthrough of our accounts with a Marketing lead}
+
+  - id: mkt-event-photography
+    tier: 1
+    name: Event photography
+    description: Take usable photos at meetings, events, the pit and matches with a phone or camera.
+    roles: [student]
+    kind: check
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: marketing}, {role: subteam-mentor, tree: marketing}]}}
+    renews: permanent
+    visibility: public
+    training:
+      - {type: video, label: Event photography basics}   # TODO pick a video
+
+  - id: mkt-headshots
+    tier: 1
+    name: Team headshots
+    description: >-
+      Take professional-style headshots of teammates for the team roster:
+      consistent framing and background, good light. Only photograph people
+      whose media release is "yes". Name each file by the person's name - the
+      upload tool matches names to the roster, so you never handle School IDs.
+    roles: [student]
+    kind: check
+    requires: [mkt-event-photography]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: marketing}, {role: subteam-mentor, tree: marketing}]}}
+    training:
+      - {type: session, label: Headshot setup with a Marketing lead}
+      - {type: video, label: Portrait lighting and framing}   # TODO pick a video
+    practical:
+      summary: Shoot five teammates with a Marketing lead watching.
+      steps:
+        - Set up the backdrop and light in the usual spot.
+        - Check the media release list - only photograph people marked "yes".
+        - Frame every shot the same way (head and shoulders, same height and distance).
+        - Take a few shots each and pick the best.
+        - Export and name each file by the person's name (e.g. jane-doe.jpg).
+        - Upload them with the team's headshot upload tool.
+    renews: permanent
+    visibility: public
+
+  # ---------------------------------------------------------------- Journeyman
+  - id: mkt-content-calendar
+    tier: 2
+    name: Content calendar
+    description: Plan and run the social content calendar across a build season or a competition weekend.
+    roles: [student]
+    kind: check
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: marketing}, {role: subteam-mentor, tree: marketing}]}}
+    renews: permanent
+    visibility: public
+
+  - id: mkt-photo-video-shoot
+    tier: 2
+    name: Running a photo/video shoot
+    description: Plan and run a shoot at a competition or event - pit, matches, robot reveal.
+    roles: [student]
+    kind: check
+    requires: [mkt-event-photography]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: marketing}, {role: subteam-mentor, tree: marketing}]}}
+    renews: permanent
+    visibility: public
+
+  - id: mkt-pit-display
+    tier: 2
+    name: Pit display
+    description: Design, build and maintain the competition pit display.
+    roles: [student]
+    kind: check
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: marketing}, {role: subteam-mentor, tree: marketing}]}}
+    renews: permanent
+    visibility: public
+
+  - id: mkt-shirt-brand-design
+    tier: 2
+    name: T-shirt and brand design
+    description: >-
+      Design the season's T-shirt (or another team graphic) using the brand kit -
+      logo, Raptacon Green, fonts - and get it to the printer on time: the shirt
+      design is due two weeks before Thanksgiving.
+    roles: [student]
+    kind: check
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: marketing}, {role: subteam-mentor, tree: marketing}]}}
+    training:
+      - {type: repo, label: Raptacon brand kit, url: "https://github.com/Raptacon/brand-kit"}
+    renews: permanent
+    visibility: public
+
+  # ---------------------------------------------------------------- Expert
+  - id: mkt-media-analytics
+    tier: 3
+    name: Media strategy and analytics
+    description: Set the team's social strategy and use engagement analytics to adjust it.
+    roles: [student]
+    kind: check
+    verify: {method: signoff, by: {role: lead-mentor}}
+    renews: permanent
+    visibility: public
+
+  # ---------------------------------------------------------------- Master
+  - id: mkt-owns-brand
+    tier: 4
+    name: Owns brand and media strategy
+    description: Own the team's brand and media strategy season to season, and train new members in it.
+    roles: [student]
+    kind: check
+    verify: {method: signoff, by: {role: lead-mentor}}
+    renews: permanent
+    visibility: public

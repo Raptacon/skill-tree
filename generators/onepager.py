@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """Render a single student's progress report: current rank per tree and a
-concrete, motivating path to the next one. Driven entirely by data/*.yml."""
+concrete, motivating path to the next one. Driven entirely by content/<team>/*.yml."""
 
 import os
 import sys
@@ -97,7 +97,8 @@ def build_context(student_id):
 
     tree_rows = []
     for tree_id, progress in student.get("progress", {}).items():
-        tree = trees.get(tree_id, {"name": tree_id, "tiered": True})
+        # Trees outside trees.yml (e.g. baseline, now a v2 tree) show as pass/fail.
+        tree = trees.get(tree_id, {"name": tree_id.title(), "tiered": False})
         if not tree.get("tiered", True):
             tree_rows.append(
                 {
@@ -115,6 +116,7 @@ def build_context(student_id):
 
     return {
         "name": student["name"],
+        "student_id": student.get("student_id"),
         "grad_year": student.get("grad_year"),
         "tree_rows": tree_rows,
         "hybrid_badges": hybrid_badges,

@@ -1,31 +1,15 @@
 # Registry of skill trees. `tiered: false` means single pass/fail, no tier ladder.
-# `kind: subteam` trees are the primary tracks offered in baseline's "decide your
+# `kind: subteam` trees are the primary tracks offered in Baseline's "Choose your
 # track" step. `kind: specialization` trees are reachable via one or more subteams
 # (see `parent_trees`) rather than picked as a primary track, but still get their
 # own full ladder + poster page.
 trees:
-  - id: baseline
-    name: Baseline
-    tiered: false
-    kind: subteam
   - id: manufacturing
     name: Manufacturing
     tiered: true
     kind: subteam
-  - id: design
-    name: Design
-    tiered: true
-    kind: subteam
   - id: electronics
     name: Electronics
-    tiered: true
-    kind: subteam
-  - id: programming
-    name: Programming
-    tiered: true
-    kind: subteam
-  - id: business
-    name: Business / Media
     tiered: true
     kind: subteam
   - id: leds

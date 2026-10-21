@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Render a tree's skill poster as HTML, driven entirely by data/*.yml."""
+"""Render a tree's skill poster as HTML, driven entirely by content/<team>/*.yml."""
 
 import base64
 import io
@@ -29,7 +29,7 @@ def build_context(tree_id):
     skills_doc = common.load_skills(tree_id)
 
     if tree_id not in trees:
-        raise SystemExit(f"Unknown tree '{tree_id}' - not in data/trees.yml")
+        raise SystemExit(f"Unknown tree '{tree_id}' - not in trees.yml")
 
     tree = trees[tree_id]
     skills = skills_doc.get("skills", [])

@@ -1,0 +1,339 @@
+# Programming - Python and RobotPy: the code that runs the robot, the tools
+# around it, and the team's shared library (handbook 3.4e). Structure from the
+# Programming subteam's whiteboard session (2026-10); first-draft skills and
+# their Skills-Challenges links kept. Git basics (kanban, push/pull, merging)
+# live in Baseline; pull requests and .gitignore start here. Fields as
+# documented in onboarding.yml; items use `tier` instead of `section`.
+
+tree:
+  id: programming
+  name: Programming
+  kind: subteam
+  requires: [base-choose-track]
+  authored_by:
+    - {name: TODO, github: TODO}          # Programming whiteboard session author(s)
+    - {name: Chris Hirsch, github: ChrisHirsch}
+  created_at: 2026-10-20
+  updated_at: 2026-10-21
+  description: >-
+    Write the Python that runs the robot: Python first, then sensors, motors,
+    subsystems and commands, then the real competition code and the team's
+    shared library. Comment your code - please!
+
+items:
+  # ---------------------------------------------------------------- Novice
+  - id: prog-python-basics
+    tier: 1
+    name: Python basics
+    description: >-
+      print() and Hello World, variables, functions, if/elif/else, lists, dicts
+      and tuples, operators, pass, and Python syntax. Comment your code!
+    roles: [student]
+    kind: check
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: programming}, {role: subteam-mentor, tree: programming}]}}
+    training:
+      - {type: repo, label: "Intro to Python homework 1: variables and types", url: "https://github.com/Raptacon/Skills-Challenges/blob/main/cone_drill_west_coast/homework/intro_to_py_new_programmer/01_variables_and_types.py"}
+      - {type: repo, label: "Homework 2: if/else", url: "https://github.com/Raptacon/Skills-Challenges/blob/main/cone_drill_west_coast/homework/intro_to_py_new_programmer/02_if_else.py"}
+      - {type: repo, label: "Homework 3: loops", url: "https://github.com/Raptacon/Skills-Challenges/blob/main/cone_drill_west_coast/homework/intro_to_py_new_programmer/03_loops.py"}
+      - {type: repo, label: "Homework 4: functions", url: "https://github.com/Raptacon/Skills-Challenges/blob/main/cone_drill_west_coast/homework/intro_to_py_new_programmer/04_functions.py"}
+    renews: permanent
+    visibility: public
+
+  - id: prog-python-objects
+    tier: 1
+    name: Python objects and imports
+    description: Classes and objects, imports (import / from ... import), and lambdas.
+    roles: [student]
+    kind: check
+    requires: [prog-python-basics]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: programming}, {role: subteam-mentor, tree: programming}]}}
+    training:
+      - {type: repo, label: "Homework 5: classes", url: "https://github.com/Raptacon/Skills-Challenges/blob/main/cone_drill_west_coast/homework/intro_to_py_new_programmer/05_classes.py"}
+    renews: permanent
+    visibility: public
+
+  - id: prog-python-beyond
+    tier: 1
+    name: Python beyond robotics
+    description: try/except error handling and working with strings.
+    roles: [student]
+    kind: check
+    requires: [prog-python-basics]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: programming}, {role: subteam-mentor, tree: programming}]}}
+    renews: permanent
+    visibility: public
+
+  - id: prog-debugging
+    tier: 1
+    name: Debugging and the robot sim
+    description: >-
+      Read an error message and find the bug, set up a Python virtual
+      environment, and run robot code in the simulator.
+    roles: [student]
+    kind: check
+    requires: [prog-python-basics]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: programming}, {role: subteam-mentor, tree: programming}]}}
+    training:
+      - {type: doc, label: RobotPy documentation, url: "https://robotpy.readthedocs.io/en/stable/index.html"}
+    renews: permanent
+    visibility: public
+
+  - id: prog-pull-requests
+    tier: 1
+    name: Pull requests and .gitignore
+    description: >-
+      Open a pull request on a team code repo, respond to review, and keep junk
+      out of the repo with .gitignore.
+    roles: [student]
+    kind: check
+    requires: [base-git]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: programming}, {role: subteam-mentor, tree: programming}]}}
+    renews: permanent
+    visibility: public
+
+  - id: prog-libraries-docs
+    tier: 1
+    name: Libraries and reading docs
+    description: >-
+      What FRC, WPILib and RobotPy are and how robot.py is structured; get
+      familiar with WPILib, WPIMath and REV's libraries, and learn to find
+      answers in the docs.
+    roles: [student]
+    kind: check
+    requires: [prog-python-objects]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: programming}, {role: subteam-mentor, tree: programming}]}}
+    training:
+      - {type: doc, label: RobotPy documentation, url: "https://robotpy.readthedocs.io/en/stable/index.html"}
+    renews: permanent
+    visibility: public
+
+  - id: prog-cone-drill-1-2
+    tier: 1
+    name: Cone drill 1-2
+    description: >-
+      Drive one side of a robot (motor groups, an Xbox controller, reading a
+      joystick axis), then organize it into a drivetrain subsystem with tank drive.
+    roles: [student]
+    kind: check
+    requires: [prog-libraries-docs]
+    parts:
+      - {id: step1, name: "Step 1: drive one side of a robot", by: {any_of: [{role: subteam-lead, tree: programming}, {role: subteam-mentor, tree: programming}]}}
+      - {id: step2, name: "Step 2: drivetrain subsystem", by: {any_of: [{role: subteam-lead, tree: programming}, {role: subteam-mentor, tree: programming}]}}
+    verify: {method: signoff}
+    training:
+      - {type: repo, label: "Cone drill step 1", url: "https://github.com/Raptacon/Skills-Challenges/tree/main/cone_drill_west_coast/challenge_step_1"}
+      - {type: repo, label: "Cone drill step 2", url: "https://github.com/Raptacon/Skills-Challenges/tree/main/cone_drill_west_coast/challenge_step_2"}
+    renews: permanent
+    visibility: public
+
+  # ---------------------------------------------------------------- Journeyman
+  - id: prog-sensors
+    tier: 2
+    name: Sensor programming
+    description: Read sensors (encoders, limit switches, breakbeams, gyros) and use them in code.
+    roles: [student]
+    kind: check
+    requires: [prog-cone-drill-1-2]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: programming}, {role: subteam-mentor, tree: programming}]}}
+    renews: permanent
+    visibility: public
+
+  - id: prog-motors
+    tier: 2
+    name: Motor programming
+    description: Configure and control motor controllers - direction, current limits, brake/coast, followers.
+    roles: [student]
+    kind: check
+    requires: [prog-cone-drill-1-2]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: programming}, {role: subteam-mentor, tree: programming}]}}
+    renews: permanent
+    visibility: public
+
+  - id: prog-commands-v2
+    tier: 2
+    name: Commands v2
+    description: Structure robot behavior with command-based programming - subsystems, commands and triggers.
+    roles: [student]
+    kind: check
+    requires: [prog-cone-drill-1-2]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: programming}, {role: subteam-mentor, tree: programming}]}}
+    renews: permanent
+    visibility: public
+
+  - id: prog-controls-mapping
+    tier: 2
+    name: Controls mapping
+    description: >-
+      Map driver and operator controls - arcade drive, and switching drive modes
+      or triggering actions on button presses.
+    roles: [student]
+    kind: check
+    requires: [prog-commands-v2]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: programming}, {role: subteam-mentor, tree: programming}]}}
+    training:
+      - {type: repo, label: "Cone drill step 3", url: "https://github.com/Raptacon/Skills-Challenges/tree/main/cone_drill_west_coast/challenge_step_3"}
+    renews: permanent
+    visibility: public
+
+  - id: prog-autonomous
+    tier: 2
+    name: Autonomous routines
+    description: Time-based (open-loop) autonomous actions.
+    roles: [student]
+    kind: check
+    requires: [prog-commands-v2]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: programming}, {role: subteam-mentor, tree: programming}]}}
+    training:
+      - {type: repo, label: "Cone drill step 4", url: "https://github.com/Raptacon/Skills-Challenges/tree/main/cone_drill_west_coast/challenge_step_4"}
+    renews: permanent
+    visibility: public
+
+  - id: prog-state-machines
+    tier: 2
+    name: State machines
+    description: React to a sensor (breakbeam) with robot and LED state transitions.
+    roles: [student]
+    kind: check
+    requires: [prog-sensors]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: programming}, {role: subteam-mentor, tree: programming}]}}
+    training:
+      - {type: repo, label: "State machines step 1: breakbeam and addressable LEDs", url: "https://github.com/Raptacon/Skills-Challenges/tree/main/state_machines/challenge_step_1"}
+      - {type: repo, label: "State machines step 2: StatefulAutonomous", url: "https://github.com/Raptacon/Skills-Challenges/tree/main/state_machines/challenge_step_2"}
+    renews: permanent
+    visibility: public
+
+  - id: prog-testing
+    tier: 2
+    name: Testing
+    description: Run the test suite before you push, read a failing test, and contribute new tests.
+    roles: [student]
+    kind: check
+    requires: [prog-debugging]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: programming}, {role: subteam-mentor, tree: programming}]}}
+    renews: permanent
+    visibility: public
+
+  - id: prog-driver-station
+    tier: 2
+    name: Driver Station and dashboard
+    description: Run the robot from the Driver Station app and use the dashboard to watch and tune it.
+    roles: [student]
+    kind: check
+    requires: [prog-cone-drill-1-2]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: programming}, {role: subteam-mentor, tree: programming}]}}
+    renews: season
+    visibility: public
+
+  # ---------------------------------------------------------------- Expert
+  - id: prog-subsystems
+    tier: 3
+    name: Mechanism subsystems
+    description: >-
+      Program the robot's mechanisms - intake, arms and shooters - including
+      variable position and velocity control, and structure them cleanly.
+    roles: [student]
+    kind: check
+    requires: [prog-commands-v2, prog-motors, prog-sensors]
+    verify: {method: signoff, by: {role: lead-mentor}}
+    renews: permanent
+    visibility: public
+
+  - id: prog-pid
+    tier: 3
+    name: PID and closed-loop control
+    description: Tune closed-loop position and velocity control.
+    roles: [student]
+    kind: check
+    requires: [prog-motors, prog-sensors]
+    verify: {method: signoff, by: {role: lead-mentor}}
+    renews: permanent
+    visibility: public
+
+  - id: prog-swerve
+    tier: 3
+    name: Swerve drive
+    description: Understand and work on the swerve drivetrain - module control, kinematics and field-relative driving.
+    roles: [student]
+    kind: check
+    requires: [prog-pid]
+    verify: {method: signoff, by: {role: lead-mentor}}
+    renews: permanent
+    visibility: public
+
+  - id: prog-vision
+    tier: 3
+    name: Vision
+    description: Use the robot's cameras and vision pipeline to find targets and estimate position.
+    roles: [student]
+    kind: check
+    verify: {method: signoff, by: {role: lead-mentor}}
+    training:
+      - {type: repo, label: "Robot-2026 PhotonVision helper (reference)", url: "https://github.com/Raptacon/Robot-2026/blob/main/photonUtils.py"}
+    renews: permanent
+    visibility: public
+
+  - id: prog-robot-codebase
+    tier: 3
+    name: Contribute to the robot code
+    description: >-
+      Set up the real dev environment, then read and extend a real subsystem and
+      add a command that uses it - merged into the season's robot repo.
+    roles: [student]
+    kind: check
+    requires: [prog-commands-v2, prog-testing, prog-pull-requests]
+    verify: {method: signoff, by: {role: lead-mentor}}
+    training:
+      - {type: repo, label: robot-2027 (setup in the README), url: "https://github.com/Raptacon/robot-2027"}
+      - {type: repo, label: robot-2027 commands, url: "https://github.com/Raptacon/robot-2027/tree/main/commands"}
+    renews: permanent
+    visibility: public
+
+  - id: prog-shared-library
+    tier: 3
+    name: Contribute to the shared library
+    description: >-
+      Get a change merged into raptacon3200, the team's shared Python library -
+      branch as feature/* or fix/* (which publishes a test version), add tests,
+      and open a PR for the stable release.
+    roles: [student]
+    kind: check
+    requires: [prog-testing, prog-pull-requests]
+    verify: {method: signoff, by: {role: lead-mentor}}
+    training:
+      - {type: repo, label: raptacon3200 shared library, url: "https://github.com/Raptacon/raptacon3200"}
+    renews: permanent
+    visibility: public
+
+  - id: prog-custom-mechanism
+    tier: 3
+    name: Custom code for a new mechanism
+    description: Write the code for a brand-new mechanism from scratch, start to finish.
+    roles: [student]
+    kind: check
+    requires: [prog-subsystems]
+    verify: {method: signoff, by: {role: lead-mentor}}
+    renews: permanent
+    visibility: public
+
+  # ---------------------------------------------------------------- Master
+  - id: prog-architecture
+    tier: 4
+    name: Software architecture
+    description: Design a reusable abstraction, not just a single feature.
+    roles: [student]
+    kind: check
+    verify: {method: signoff, by: {role: lead-mentor}}
+    training:
+      - {type: repo, label: "robot-2027 InputFactory - an architecture-level abstraction", url: "https://github.com/Raptacon/robot-2027/blob/main/utils/input/factory.py"}
+    renews: permanent
+    visibility: public
+
+  - id: prog-teach
+    tier: 4
+    name: Teach
+    description: Take a Novice from Hello World through the cone drill.
+    roles: [student]
+    kind: check
+    verify: {method: signoff, by: {role: lead-mentor}}
+    renews: permanent
+    visibility: public

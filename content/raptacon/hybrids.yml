@@ -35,7 +35,7 @@ hybrids:
       - mfg-update-measurements
       - mfg-3d-slicing
       - mfg-tool-path-cnc
-      - design-tolerancing-fits
+      - des-gdt-dfm
 
   - id: mechatronics
     name: Mechatronics
@@ -45,3 +45,11 @@ hybrids:
     hours: 1
     skills:
       - mfg-sensor-mounting
+
+  - id: scouting-software
+    name: Scouting Software
+    # Building and running the team's scouting system (handbook 7.2g).
+    requires:
+      - {tree: programming, tier: 2}
+      - {tree: strategy, tier: 2}
+    skills: []

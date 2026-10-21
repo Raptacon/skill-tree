@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """Render the whole-program tech-tree map: every tree as a lane, tiers as
-columns, hybrid nodes called out separately. Driven entirely by data/*.yml."""
+columns, hybrid nodes called out separately. Driven entirely by content/<team>/*.yml."""
 
 from jinja2 import Environment, FileSystemLoader
 
@@ -12,8 +12,8 @@ def build_context():
     tiers = common.load_tiers()
     hybrids = common.load_hybrids()
 
-    baseline_doc = common.load_skills("baseline")
-    baseline_skills = [s["name"] for s in baseline_doc.get("skills", [])]
+    v2 = common.load_v2_trees()
+    baseline_skills = [i["name"] for i in common.resolve_items(v2["baseline"], common.own_items(v2))]
 
     tier_ids = sorted(t for t in tiers if t > 0)
 
@@ -31,14 +31,28 @@ def build_context():
             {
                 "name": tree["name"],
                 "kind": tree.get("kind", "subteam"),
-                "parent_trees": [trees[t]["name"] for t in tree.get("parent_trees", []) if t in trees],
+                "parent_trees": [trees[t]["name"] if t in trees else v2[t]["tree"]["name"]
+                                 for t in tree.get("parent_trees", []) if t in trees or t in v2],
                 "columns": columns,
             }
         )
 
+    items = common.own_items(v2)
+    for doc in v2.values():
+        tree_items = common.resolve_items(doc, items)
+        if not any("tier" in i for i in tree_items):
+            continue
+        columns = [
+            {"tier_name": tiers[t]["name"], "skills": [i["name"] for i in tree_items if i.get("tier") == t]}
+            for t in tier_ids
+        ]
+        lanes.append({"name": doc["tree"]["name"], "kind": doc["tree"].get("kind", "subteam"),
+                      "parent_trees": [], "columns": columns})
+
     hybrid_cards = []
     for h in hybrids.values():
-        parent_names = [trees[r["tree"]]["name"] for r in h["requires"]]
+        parent_names = [trees[r["tree"]]["name"] if r["tree"] in trees else v2[r["tree"]]["tree"]["name"]
+                        for r in h["requires"]]
         hybrid_cards.append(
             {
                 "name": h["name"],

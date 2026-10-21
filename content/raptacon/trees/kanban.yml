@@ -1,0 +1,66 @@
+# Kanban - how the team tracks work. Everyone who works on the robot or the
+# team's projects goes through this, regardless of subteam.
+#
+# `{ref: onb-github}` pulls the onboarding item in as-is (same id, so completing
+# it once counts in both trees - docs/adr/0003). A ref may override `section` only.
+
+tree:
+  id: kanban
+  name: Kanban
+  kind: core
+  description: >-
+    How Raptacon tracks work: get on GitHub, learn how kanban works, then learn
+    our board - so you can always find something to work on and everyone can
+    see what's happening.
+  authored_by:
+    - {name: Chris Hirsch, github: ChrisHirsch}
+  created_at: 2026-10-13
+  updated_at: 2026-10-13
+
+sections:
+  - {id: setup, name: Get Set Up}
+  - {id: learn, name: Learn Kanban}
+  - {id: board, name: Use Our Board}
+
+items:
+  - {ref: onb-github, section: setup}
+
+  - id: kanban-intro
+    name: Intro to kanban
+    description: >-
+      What a kanban board is and why we use one: cards are small pieces of work,
+      columns show where each one is (To Do -> In Progress -> Done), you pull the
+      next card when you're free instead of waiting to be assigned, and you limit
+      how much is in progress at once so things actually finish.
+    section: learn
+    roles: [student, mentor]
+    kind: check
+    requires: [onb-github]
+    verify: {method: self}
+    renews: permanent
+    visibility: team
+    training: []             # TODO short video or one-page intro
+
+  - id: kanban-our-board
+    name: Using the Raptacon board
+    description: >-
+      Show a lead you can work our board end to end.
+    section: board
+    roles: [student, mentor]
+    kind: check
+    requires: [kanban-intro]
+    verify:
+      method: signoff
+      by: {any_of: [{role: subteam-lead}, {role: lead-mentor}]}
+    practical:
+      summary: Walk through a real card with a subteam lead watching.
+      steps:
+        - Find the team board and filter it to your subteam.
+        - Pick a card from To Do and assign it to yourself.
+        - Move it to In Progress and add a comment with what you're doing.
+        - Link your work (a PR, a photo, a doc) to the card.
+        - Move it to Done - or back to To Do with a note if you're stuck.
+    renews: permanent
+    visibility: public
+    training:
+      - {type: link, label: Raptacon board (GitHub Projects), url: "https://github.com/orgs/Raptacon/projects/7"}

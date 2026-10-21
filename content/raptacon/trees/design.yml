@@ -1,0 +1,300 @@
+# CAD/Design - designing the robot in Onshape before it's fabricated: parts,
+# assemblies and the drawings Manufacturing builds from (handbook 3.4b).
+# Structure from the Design subteam's whiteboard session (2026-10); first-draft
+# skills kept and folded in. Advanced sketch, body and assembly tools are listed
+# in the order to teach them. Fields as documented in onboarding.yml; items use
+# `tier` instead of `section`.
+
+tree:
+  id: design
+  name: CAD/Design
+  kind: subteam
+  requires: [base-choose-track]
+  authored_by:
+    - {name: TODO, github: TODO}          # Design whiteboard session author(s)
+    - {name: Chris Hirsch, github: ChrisHirsch}
+  created_at: 2026-10-20
+  updated_at: 2026-10-21
+  description: >-
+    Design the robot in Onshape: sketches, parts, assemblies and the drawings
+    Manufacturing builds from. Expect about four years from your first sketch to
+    designing full robot mechanisms and teaching the next designers.
+
+items:
+  # ---------------------------------------------------------------- Novice
+  - id: des-cad-intro
+    tier: 1
+    name: Intro to CAD
+    description: Onshape navigation and controls, planes, units and measurements, and the core definitions (sketch, part, feature, assembly).
+    roles: [student]
+    kind: check
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: design}, {role: subteam-mentor, tree: design}]}}
+    training:
+      - {type: doc, label: "frcdesign.org course setup: new to CAD", url: "https://frcdesign.org/learning-course/course-setup/new-to-cad/"}
+      - {type: doc, label: Onshape Learning Center, url: "https://learn.onshape.com/"}
+    renews: permanent
+    visibility: public
+
+  - id: des-sketching
+    tier: 1
+    name: Sketching
+    description: >-
+      Make shapes several different ways, use relationships (constraints) and
+      dimensions to fully define a sketch, use the sketch tools, and build clean
+      profiles for features.
+    roles: [student]
+    kind: check
+    requires: [des-cad-intro]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: design}, {role: subteam-mentor, tree: design}]}}
+    training:
+      - {type: doc, label: "frcdesign.org 1A: Part Studio fundamentals", url: "https://frcdesign.org/learning-course/stage1/1a/section1-exercise3/"}
+    renews: permanent
+    visibility: public
+
+  - id: des-basic-body-tools
+    tier: 1
+    name: Basic body tools
+    description: >-
+      Extrude (and its different types), cut, revolve, linear and circular
+      patterns, offset, fillet and chamfer, and mirror.
+    roles: [student]
+    kind: check
+    requires: [des-sketching]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: design}, {role: subteam-mentor, tree: design}]}}
+    training:
+      - {type: doc, label: "frcdesign.org 1A: Plates", url: "https://frcdesign.org/learning-course/stage1/1a/section2-exercise1/"}
+    renews: permanent
+    visibility: public
+
+  - id: des-basic-assembly
+    tier: 1
+    name: Basic assembly
+    description: >-
+      Put parts together with simple mates. Practice by assembling a Lego model,
+      then pull standard FRC parts from MKCad into an assembly.
+    roles: [student]
+    kind: check
+    requires: [des-basic-body-tools]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: design}, {role: subteam-mentor, tree: design}]}}
+    training:
+      - {type: doc, label: "frcdesign.org 1A: Assemblies", url: "https://frcdesign.org/learning-course/stage1/1a/section3-exercise1/"}
+      - {type: session, label: Lego assembly practice}
+    renews: permanent
+    visibility: public
+
+  - id: des-measure-real-part
+    tier: 1
+    name: Measuring a real part
+    description: Measure an existing part with calipers and reproduce it accurately in CAD.
+    roles: [student]
+    kind: check
+    requires: [des-basic-body-tools, tool-hand-tools]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: design}, {role: subteam-mentor, tree: design}]}}
+    renews: permanent
+    visibility: public
+
+  - id: des-model-from-drawing
+    tier: 1
+    name: Modeling a drawing
+    description: Model a 3D part accurately from a 2D drawing.
+    roles: [student]
+    kind: check
+    requires: [des-basic-body-tools]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: design}, {role: subteam-mentor, tree: design}]}}
+    renews: permanent
+    visibility: public
+    authored_by:
+      - {name: Rayl Morris, github: raylmorris}
+
+  - id: des-gusset-assessment
+    tier: 1
+    name: Gusset assessment
+    description: >-
+      The Novice gate: design a gusset to spec on your own - sketching, body
+      tools and an assembly that uses it.
+    roles: [student]
+    kind: check
+    requires: [des-sketching, des-basic-body-tools, des-basic-assembly]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: design}, {role: subteam-mentor, tree: design}]}}
+    practical:
+      summary: Done on your own, then reviewed with a Design lead.   # TODO the gusset spec / drawing
+      steps:
+        - Get the gusset spec from a Design lead.
+        - Sketch it fully defined - every line constrained or dimensioned.
+        - Build the part with the right body tools (extrude, holes, fillets).
+        - Mate it into a small assembly with the tubes it joins.
+        - Walk the lead through your feature tree.
+    renews: permanent
+    visibility: public
+
+  # ---------------------------------------------------------------- Journeyman
+  - id: des-adv-sketch-tools
+    tier: 2
+    name: Advanced sketch tools
+    description: Variables, convert (use) existing geometry, offset, and fix.
+    roles: [student]
+    kind: check
+    requires: [des-gusset-assessment]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: design}, {role: subteam-mentor, tree: design}]}}
+    renews: permanent
+    visibility: public
+
+  - id: des-adv-body-tools
+    tier: 2
+    name: Advanced body tools
+    description: Sweeps, drafts, Booleans and ribs.
+    roles: [student]
+    kind: check
+    requires: [des-gusset-assessment]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: design}, {role: subteam-mentor, tree: design}]}}
+    renews: permanent
+    visibility: public
+
+  - id: des-adv-assemblies
+    tier: 2
+    name: Advanced assemblies
+    description: >-
+      MKCad parts, Julia's FeatureScripts, advanced mates and moving mates, and
+      tolerances - clearance vs. press fits and stack-up basics.
+    roles: [student]
+    kind: check
+    requires: [des-gusset-assessment]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: design}, {role: subteam-mentor, tree: design}]}}
+    training:
+      - {type: doc, label: "FRC FeatureScripts list (incl. Julia's FeatureScripts)", url: "https://frcdesign.org/resources/featurescripts/"}
+      - {type: video, label: "Tube Converter (Julia's FeatureScripts)", url: "https://www.youtube.com/watch?v=b5D4UI2Q_xQ"}
+    renews: permanent
+    visibility: public
+    # Includes the first-draft "Tolerancing and fits" skill.
+
+  - id: des-drawings-bom
+    tier: 2
+    name: Drawings and BOM
+    description: >-
+      Fab-ready drawings Manufacturing can build from - views, dimensions, a title
+      block - and a bill of materials generated from the model.
+    roles: [student]
+    kind: check
+    requires: [des-gusset-assessment]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: design}, {role: subteam-mentor, tree: design}]}}
+    renews: permanent
+    visibility: public
+    # Includes the first-draft "Drawing conventions" and "BOM and fab-ready drawings" skills.
+
+  - id: des-complex-parts
+    tier: 2
+    name: Complex parts assessment
+    description: >-
+      CSWA-style part challenges, done in Onshape: model the part, change the
+      given dimensions, and report the mass - the mass proves the model is right.
+    roles: [student]
+    kind: check
+    requires: [des-adv-sketch-tools, des-adv-body-tools]
+    parts:
+      - {id: basic, name: "Basic part: sketch, extrude, cut, modify key dimensions", by: {any_of: [{role: subteam-lead, tree: design}, {role: subteam-mentor, tree: design}]}}
+      - {id: intermediate, name: "Intermediate part: revolve, cut, circular pattern, holes, fillets", by: {any_of: [{role: subteam-lead, tree: design}, {role: subteam-mentor, tree: design}]}}
+      - {id: advanced, name: "Advanced part: offsets, harder geometry, mass after changes", by: {any_of: [{role: subteam-lead, tree: design}, {role: subteam-mentor, tree: design}]}}
+    verify: {method: signoff}
+    training:
+      - {type: doc, label: CSWA sample exam (practice parts)}   # TODO pick the practice parts we use
+    renews: permanent
+    visibility: public
+
+  # ---------------------------------------------------------------- Expert
+  - id: des-complex-assembly
+    tier: 3
+    name: Complex assembly assessment - full robot
+    description: Assemble a full robot (or a full past robot) with correct mates and motion, organized so others can work in it.
+    roles: [student]
+    kind: check
+    requires: [des-adv-assemblies, des-complex-parts]
+    verify: {method: signoff, by: {role: lead-mentor}}
+    renews: permanent
+    visibility: public
+
+  - id: des-frc-design
+    tier: 3
+    name: FRC mechanism design
+    description: >-
+      Design real FRC mechanisms: motors and gearing, axles and bearings, and
+      tube structure with Julia's FeatureScripts (Tube Converter).
+    roles: [student]
+    kind: check
+    requires: [des-adv-assemblies]
+    verify: {method: signoff, by: {role: lead-mentor}}
+    training:
+      - {type: doc, label: "frcdesign.org 1B: Power transmissions", url: "https://frcdesign.org/learning-course/stage1/1b/introduction/"}
+      - {type: doc, label: "frcdesign.org Stage 2: shooter, pivot, intake, elevator", url: "https://frcdesign.org/learning-course/stage2/2a/introduction/"}
+    renews: permanent
+    visibility: public
+
+  - id: des-gdt-dfm
+    tier: 3
+    name: GD&T and DFM basics
+    description: Geometric dimensioning and tolerancing basics, and designing parts that are easy for our shop to make.
+    roles: [student]
+    kind: check
+    requires: [des-drawings-bom]
+    verify: {method: signoff, by: {role: lead-mentor}}
+    renews: permanent
+    visibility: public
+    part_of_hybrid: dfm
+
+  - id: des-game-rules
+    tier: 3
+    name: Designing to the game rules
+    description: >-
+      Build this season's game rules into the models and drawings - robot size,
+      weight and extension limits, game piece and field geometry - and check the
+      model against them before release.
+    roles: [student]
+    kind: check
+    requires: [strat-game-rules-test]
+    verify: {method: signoff, by: {role: lead-mentor}}
+    training:
+      - {type: repo, label: "Robot-2026 frame and module dimensions", url: "https://github.com/Raptacon/Robot-2026/blob/main/constants/robot_geometry.py"}
+      - {type: repo, label: "Robot-2026 field element coordinates", url: "https://github.com/Raptacon/Robot-2026/blob/main/constants/field_target_constants_2026.py"}
+    renews: season
+    visibility: public
+
+  - id: des-design-review
+    tier: 3
+    name: Running a design review
+    description: Present a design for review, take the feedback, and follow up on every item.
+    roles: [student]
+    kind: check
+    verify: {method: signoff, by: {role: lead-mentor}}
+    renews: permanent
+    visibility: public
+
+  # ---------------------------------------------------------------- Master
+  - id: des-teach
+    tier: 4
+    name: Teach
+    description: Take a Novice from Intro to CAD through the Gusset assessment.
+    roles: [student]
+    kind: check
+    verify: {method: signoff, by: {role: lead-mentor}}
+    renews: permanent
+    visibility: public
+
+  - id: des-lead-design-reviews
+    tier: 4
+    name: Leads design reviews
+    description: Run the team's design reviews across subsystems.
+    roles: [student]
+    kind: check
+    requires: [des-design-review]
+    verify: {method: signoff, by: {role: lead-mentor}}
+    renews: permanent
+    visibility: public
+
+  - id: des-owns-cad-standards
+    tier: 4
+    name: Owns CAD standards
+    description: Own the team's CAD and drawing conventions, and train others in them.
+    roles: [student]
+    kind: check
+    verify: {method: signoff, by: {role: lead-mentor}}
+    renews: permanent
+    visibility: public

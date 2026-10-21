@@ -1,0 +1,202 @@
+# Strategy/Scouting/Drive - game strategy, scouting other teams, and driving
+# the robot (handbook 3.4a, 7.2). Three tracks in one subteam; each item's
+# `track` says which. Drive Team seats are picked by tryout, so this tree builds
+# readiness to try out - who holds a seat goes in assignments.yml, not here.
+# Fields as documented in onboarding.yml; items use `tier` instead of `section`.
+
+tree:
+  id: strategy
+  name: Strategy/Scouting/Drive
+  kind: subteam
+  requires: [base-choose-track]
+  authored_by:
+    - {name: Chris Hirsch, github: ChrisHirsch}
+  created_at: 2026-10-20
+  updated_at: 2026-10-21
+  description: >-
+    Know the game better than anyone, scout every team at an event, and drive
+    our robot. Three tracks - Strategy, Scouting and Drive. Drive Team seats
+    (driver, operator, drive coach, human player, technician) are picked by
+    tryout before build season; this tree gets you ready to try out.
+
+items:
+  # ---------------------------------------------------------------- Novice
+  - id: strat-game-rules-test
+    tier: 1
+    track: Strategy
+    name: Game rules test
+    description: >-
+      Pass the team's rules test for this season's game - how a match runs, how
+      points are scored, fouls and the rules that matter most to us. Before
+      kickoff it covers last season's game.
+    roles: [student]
+    kind: score
+    pass_score: null          # TODO the team's rules test and its pass mark
+    verify: {method: signoff, claim: true, by: {any_of: [{role: subteam-lead, tree: strategy}, {role: subteam-mentor, tree: strategy}]}}
+    training:
+      - {type: doc, label: This season's game manual}   # TODO link after kickoff
+    renews: season
+    visibility: public
+
+  - id: strat-objective-scouting
+    tier: 1
+    track: Scouting
+    name: Objective scouting
+    description: >-
+      Scout matches in the team's scouting system - accurate, consistent data
+      for every match you're assigned.
+    roles: [student]
+    kind: check
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: strategy}, {role: subteam-mentor, tree: strategy}]}}
+    training:
+      - {type: session, label: Scout training}
+      - {type: link, label: Scouting software}         # TBD - the system the team uses
+    practical:
+      summary: Scout real or recorded matches alongside a lead.
+      steps:
+        - Scout three matches in the scouting system.
+        - Compare your data with the lead's for the same robots.
+        - Your data matches closely enough that the lead would use it.
+    renews: season
+    visibility: public
+
+  - id: strat-pit-scouting
+    tier: 1
+    track: Scouting
+    name: Pit scouting and handouts
+    description: >-
+      Visit other teams in the pits with the team's question list, record their
+      answers, and hand out our team and scouting sheets.
+    roles: [student]
+    kind: check
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: strategy}, {role: subteam-mentor, tree: strategy}]}}
+    renews: season
+    visibility: public
+
+  - id: strat-rc-cone-course
+    tier: 1
+    track: Drive
+    name: RC cone course
+    description: Drive an RC car through the cone course three times. Your best time is recorded.
+    roles: [student]
+    kind: timed
+    runs: 3
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: strategy}, {role: subteam-mentor, tree: strategy}]}}
+    training:
+      - {type: session, label: Cone course setup and a practice lap}
+    renews: season
+    visibility: public
+
+  - id: strat-robot-knowledge
+    tier: 1
+    track: Drive
+    name: Robot knowledge
+    description: >-
+      Explain every mechanism on the robot from the bottom up, what each control
+      does, and how to recover from the common failures (brownout, lost
+      connection, a jammed mechanism).
+    roles: [student]
+    kind: check
+    requires: [base-robot-game]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: strategy}, {role: subteam-mentor, tree: strategy}]}}
+    renews: season
+    visibility: public
+
+  # ---------------------------------------------------------------- Journeyman
+  - id: strat-subjective-scouting
+    tier: 2
+    track: Scouting
+    name: Subjective scouting
+    description: Rate driver skill, defense and reliability during qualification matches, with useful notes.
+    roles: [student]
+    kind: check
+    requires: [strat-objective-scouting]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: strategy}, {role: subteam-mentor, tree: strategy}]}}
+    renews: season
+    visibility: public
+
+  - id: strat-strategy-meetings
+    tier: 2
+    track: Strategy
+    name: Strategy meetings
+    description: >-
+      Analyze another team's strategy (from match video or the forums) and
+      present it at a strategy meeting.
+    roles: [student]
+    kind: check
+    requires: [strat-game-rules-test]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: strategy}, {role: subteam-mentor, tree: strategy}]}}
+    renews: season
+    visibility: public
+
+  - id: strat-robot-cone-course
+    tier: 2
+    track: Drive
+    name: Robot cone course
+    description: >-
+      Drive the robot through the cone course three times with a drive coach or
+      mentor watching. Your best time is recorded - this makes you eligible to
+      try out for the Drive Team.
+    roles: [student]
+    kind: timed
+    runs: 3
+    requires: [strat-rc-cone-course, strat-robot-knowledge, strat-game-rules-test]
+    verify:
+      method: signoff
+      by: {any_of: [{role: subteam-lead, tree: strategy}, {role: subteam-mentor, tree: strategy}, {role: lead-mentor}]}
+    training:
+      - {type: repo, label: "The code that drives it: Skills-Challenges cone drill", url: "https://github.com/Raptacon/Skills-Challenges/tree/main/cone_drill_west_coast"}
+    renews: season
+    visibility: public
+
+  # ---------------------------------------------------------------- Expert
+  - id: strat-pick-list
+    tier: 3
+    track: Strategy
+    name: Pick list
+    description: Build an alliance-selection pick list from scouting data and defend it to the team.
+    roles: [student]
+    kind: check
+    requires: [strat-subjective-scouting]
+    verify: {method: signoff, by: {role: lead-mentor}}
+    renews: season
+    visibility: public
+
+  - id: strat-match-strategist
+    tier: 3
+    track: Strategy
+    name: Match strategist
+    description: >-
+      At an event, plan each match with the drive coach: talk to alliance
+      partners about their robots, agree a plan, and relay it to the drive team.
+    roles: [student]
+    kind: check
+    requires: [strat-strategy-meetings]
+    verify: {method: signoff, by: {role: lead-mentor}}
+    renews: season
+    visibility: public
+
+  - id: strat-lead-scout
+    tier: 3
+    track: Scouting
+    name: Lead scout
+    description: Run scouting at an event - training, the schedule, logistics and the scouts' well-being.
+    roles: [student]
+    kind: check
+    requires: [strat-subjective-scouting]
+    verify: {method: signoff, by: {role: lead-mentor}}
+    renews: season
+    visibility: public
+
+  # ---------------------------------------------------------------- Master
+  - id: strat-owns-strategy
+    tier: 4
+    track: Strategy
+    name: Owns season strategy
+    description: Lead the kickoff strategy session, own the season's game strategy, and train the next strategists.
+    roles: [student]
+    kind: check
+    requires: [strat-pick-list, strat-match-strategist]
+    verify: {method: signoff, by: {role: lead-mentor}}
+    renews: permanent
+    visibility: public
