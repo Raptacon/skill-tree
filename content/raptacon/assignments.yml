@@ -17,8 +17,8 @@ seasons:
     - role: subteam-lead
       tree: manufacturing
       holders:
-        - {name: Sasha Graves, github: TODO}
-        - {name: Snort Hirsch, github: TODO}
+        - {name: Sasha Graves, github: sashgravess}
+        - {name: Snort Hirsch, github: Snort-Hirsch}
     - role: subteam-mentor
       tree: manufacturing
       holders:
