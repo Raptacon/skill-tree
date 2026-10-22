@@ -1,9 +1,23 @@
+from pydantic import BaseModel, Field, NonNegativeInt
 import yaml
 import glob
 import common
 
+class SkillTree(BaseModel):
+    tree: str
+    skills: list[Skills]
+    
+class Skills(BaseModel):
+    id: str
+    tier: NonNegativeInt = Field(le=4)
+    name: str
+    description: str
+
 def validate_yaml():
-    [yaml.safe_load(open(f)) for f in glob.glob('content/**/*.yml', recursive=True)]
+    for file in glob.glob('content/**/*.yml', recursive=True):
+        entries = yaml.safe_load(open(file))
+        Skills(**entries)
+        
     print('all yaml valid')
 
 def is_skill_valid(tree_name, skill):
