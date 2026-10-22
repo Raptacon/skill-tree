@@ -17,6 +17,27 @@ The [Tech Map](https://skills.raptacon.com/techmap.html) shows every tree and ti
 
 People's progress is **not** in this repo. It lives in the team roster (Google Sheets), run by [raptacon-onboarding-system](https://github.com/Raptacon/raptacon-onboarding-system). This repo only defines the trees.
 
+## How progress works
+
+Progress is tracked digitally in the team roster (Google Sheets), not on paper. Every completion is an event in an append-only log; nothing is ever erased (docs/adr/0002).
+
+**Students**
+1. Find the skill on the site - the [Tech Map](https://skills.raptacon.com/techmap.html), a tree's page, or a QR code in the shop. Each skill says how to learn it (**Learn**), the hands-on test (**Test**) and who signs it off.
+2. Learn and practice. Shop hours count automatically when you check in and out.
+3. When you're ready, do the test in front of someone who can sign it off and ask them to record it.
+4. Your progress, earned ranks and badges show up for you online and are announced on Discord.
+
+**Leads and mentors**
+1. Watch the student do the test.
+2. Record it with the sign-off form on your phone (signed in, so the system knows who signed). Choose the student, the skill, and *passed* or *not yet*; add a note or photo link if useful.
+3. The system checks you're allowed to sign that skill (the roster's Roles tab and the skill's `verify` rule). If you're not, it's flagged for a mentor instead of recorded.
+- Mentor-supervised machines can only be signed off by a mentor. Expert and Master skills are signed off by the lead mentor after a portfolio review.
+- Mentors can revoke a sign-off (for example for safety); that's a new event, not an edit.
+
+**Automatic** - onboarding items the roster already knows about (handbook acknowledgment, sign-up, dues, background check, check-in hours) are checked off without anyone signing.
+
+The site publishes [`catalog.json`](https://skills.raptacon.com/catalog.json) - every skill, its sign-off rule and this season's sign-off roles - for the progress system to read. The progress system lives in [raptacon-onboarding-system](https://github.com/Raptacon/raptacon-onboarding-system).
+
 ## Contributing a skill
 
 Mentors and students are encouraged to add and improve skills.
@@ -73,7 +94,7 @@ Mentors and students are encouraged to add and improve skills.
 ```bash
 git submodule update --init               # brand-kit (logo); or clone with --recurse-submodules
 pipenv install
-make ci                                   # validate YAML, lint for personal data, build site/
+make ci                                   # validate YAML, lint for personal data, build site/ (incl. catalog.json)
 make overview TREE=programming            # a tree's main page: tiers as rows, skills as cards
 make checklist TREE=onboarding            # per-role checklists + index into tmp/
 make checklist TREE=onboarding ROLES=parent,mentor   # one page for someone with both roles
