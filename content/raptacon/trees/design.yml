@@ -3,6 +3,8 @@
 # Structure from the Design subteam's whiteboard session (2026-10). Advanced sketch, body and assembly tools are listed
 # in the order to teach them. Fields as documented in onboarding.yml; items use
 # `tier` instead of `section`.
+# TODO: work through frcdesign.org (learning course and design handbook) and
+# link more of it from these skills.
 
 tree:
   id: design
@@ -13,7 +15,7 @@ tree:
     - {name: TODO, github: TODO}          # Design whiteboard session author(s)
     - {name: Chris Hirsch, github: ChrisHirsch}
   created_at: 2026-10-20
-  updated_at: 2026-10-21
+  updated_at: 2026-10-22
   description: >-
     Design the robot in Onshape: sketches, parts, assemblies and the drawings
     Manufacturing builds from. Expect about four years from your first sketch to
@@ -70,7 +72,8 @@ items:
     name: Basic assembly
     description: >-
       Put parts together with simple mates. Practice by assembling a Lego model,
-      then pull standard FRC parts from MKCad into an assembly.
+      then build with FRC parts: pull standard parts from MKCad and make FRC
+      tubing with Julia's FeatureScripts (Tube Converter).
     roles: [student]
     kind: check
     requires: [des-basic-body-tools]
@@ -78,6 +81,8 @@ items:
     training:
       - {type: doc, label: "frcdesign.org 1A: Assemblies", url: "https://frcdesign.org/learning-course/stage1/1a/section3-exercise1/"}
       - {type: session, label: Lego assembly practice}
+      - {type: doc, label: "FRC FeatureScripts list (incl. Julia's FeatureScripts)", url: "https://frcdesign.org/resources/featurescripts/"}
+      - {type: video, label: "Tube Converter (Julia's FeatureScripts)", url: "https://www.youtube.com/watch?v=b5D4UI2Q_xQ"}
     renews: permanent
     visibility: public
 
@@ -94,16 +99,28 @@ items:
 
   - id: des-model-from-drawing
     tier: 1
-    name: Modeling a drawing
-    description: Model a 3D part accurately from a 2D drawing.
+    name: Drawing interpretation
+    description: >-
+      Read a 2D drawing and model the part from it: different views, depth
+      lines, positioning features, fillets and chamfers - and problem-solving
+      when the drawing doesn't tell you everything.
     roles: [student]
     kind: check
     requires: [des-basic-body-tools]
     verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: design}, {role: subteam-mentor, tree: design}]}}
+    practical:
+      summary: Model practice parts from drawings with a Design lead or mentor checking.
+      steps:
+        - Model a practice part from its drawing, using every view.
+        - Use the depth lines to get hole and pocket depths right.
+        - Position features from the drawing's dimensions, not by eye.
+        - Add the fillets and chamfers the drawing calls for.
+        - Explain how you resolved anything the drawing left unclear.
     renews: permanent
     visibility: public
     authored_by:
       - {name: Rayl Morris, github: raylmorris}
+      - {name: Jamie, github: TODO}
 
   - id: des-gusset-assessment
     tier: 1
@@ -153,15 +170,40 @@ items:
     tier: 2
     name: Advanced assemblies
     description: >-
-      MKCad parts, Julia's FeatureScripts, advanced mates and moving mates, and
-      tolerances - clearance vs. press fits and stack-up basics.
+      Advanced and moving mates, larger MKCad assemblies, and tolerances -
+      clearance vs. press fits and stack-up basics.
     roles: [student]
     kind: check
     requires: [des-gusset-assessment]
     verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: design}, {role: subteam-mentor, tree: design}]}}
+    renews: permanent
+    visibility: public
+
+  - id: des-master-sketch
+    tier: 2
+    name: Master sketch (top-down) design
+    description: >-
+      Put every important dimension - motor positions, roller locations, belt
+      lengths, plate thicknesses, electronics placement - in one master sketch
+      document, and derive it into each subsystem's document. A change in the
+      master sketch flows to every subsystem, so parts from different
+      subsystems still line up, and packaging problems show up in the sketch
+      phase instead of after the CAD is built.
+    roles: [student]
+    kind: check
+    requires: [des-adv-sketch-tools, des-adv-assemblies]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: design}, {role: subteam-mentor, tree: design}]}}
     training:
-      - {type: doc, label: "FRC FeatureScripts list (incl. Julia's FeatureScripts)", url: "https://frcdesign.org/resources/featurescripts/"}
-      - {type: video, label: "Tube Converter (Julia's FeatureScripts)", url: "https://www.youtube.com/watch?v=b5D4UI2Q_xQ"}
+      - {type: doc, label: "frcdesign.org 1D: Top-down design", url: "https://frcdesign.org/learning-course/stage1/1d/top-down-design/"}
+      - {type: doc, label: "frcdesign.org 1D: Layout sketch", url: "https://frcdesign.org/learning-course/stage1/1d/layout-sketch/"}
+      - {type: doc, label: "frcdesign.org 1E: Subsystem workflow", url: "https://frcdesign.org/learning-course/stage1/1e/introduction/"}
+    practical:
+      summary: Build a small mechanism top-down and show a change propagating.
+      steps:
+        - Lay out the mechanism's key positions and dimensions in a master sketch.
+        - Derive the master sketch into two subsystem documents and build parts from it.
+        - Change one dimension in the master sketch and push it.
+        - Show both subsystems update and still line up.
     renews: permanent
     visibility: public
 
@@ -204,7 +246,7 @@ items:
     description: Assemble a full robot (or a full past robot) with correct mates and motion, organized so others can work in it.
     roles: [student]
     kind: check
-    requires: [des-adv-assemblies, des-complex-parts]
+    requires: [des-master-sketch, des-complex-parts]
     verify: {method: signoff, by: {role: lead-mentor}}
     renews: permanent
     visibility: public
