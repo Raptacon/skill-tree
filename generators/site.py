@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Build the whole published site into site/: an overview page and per-role
-checklists for every tree, the techmap and an index.
+checklists for every tree, the techmap, catalog.json and an index.
 No people data - personal progress comes from the roster, not this site."""
 
 import os
@@ -30,6 +30,7 @@ def main():
     for tree_id in v2:
         run("overview.py", tree_id)
     run("techmap.py")
+    run("catalog.py")
 
     team = common.load_team()
     common.OUT = SITE
