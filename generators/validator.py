@@ -14,9 +14,9 @@ class Skills(BaseModel):
     description: str
 
 def validate_yaml():
-    for file in glob.glob('content/**/*.yml', recursive=True):
+    for file in glob.glob('content/raptacon/skills/*.yml', recursive=True):
         entries = yaml.safe_load(open(file))
-        Skills(**entries)
+        SkillTree(**entries)
         
     print('all yaml valid')
 
