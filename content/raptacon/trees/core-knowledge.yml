@@ -1,0 +1,49 @@
+# Core Knowledge - the same introduction to every subteam, for every student,
+# after Baseline and before specializing. Every item is a reference to a skill
+# in its subteam's tree (docs/adr/0003, 0007), so it counts in both places.
+# Finishing it is required before Journeyman in any tree (tiers.yml, tier 2).
+# Subteam leads own their row - change the selection with a PR.
+
+tree:
+  id: core-knowledge
+  name: Core Knowledge
+  kind: core-knowledge
+  requires: [base-choose-track]
+  authored_by:
+    - {name: Chris Hirsch, github: ChrisHirsch}
+  created_at: 2026-10-23
+  updated_at: 2026-10-23
+  badge:
+    name: Core
+    description: You've learned what every subteam actually does - now specialize.
+  next:
+    text: >-
+      Next: specialize. Keep going in your chosen subteam's tree - Core Knowledge
+      unlocks Journeyman in every tree.
+  description: >-
+    The same introduction to every subteam, for everyone: one or two real
+    skills from each, signed off by that subteam's leads and mentors. This is
+    where cross-training happens - you'll know what every part of the team does
+    and how it fits together before you specialize.
+
+sections:
+  - {id: programming, name: Programming}
+  - {id: design, name: CAD/Design}
+  - {id: manufacturing, name: Fabrication/Manufacturing}
+  - {id: electronics, name: Electronics}
+  - {id: strategy, name: Strategy/Scouting/Drive}
+  - {id: marketing, name: Marketing & Media}
+  - {id: outreach, name: Outreach}
+
+items:
+  - {ref: prog-python-basics, section: programming}
+  - {ref: des-cad-intro, section: design}
+  - {ref: des-sketching, section: design}
+  - {ref: mfg-measure-layout, section: manufacturing}
+  - {ref: mfg-fasteners-rivets, section: manufacturing}
+  - {ref: elec-safe-wiring, section: electronics}
+  - {ref: elec-robot-tour, section: electronics}
+  - {ref: strat-game-rules-test, section: strategy}
+  - {ref: strat-robot-knowledge, section: strategy}
+  - {ref: mkt-social-basics, section: marketing}
+  - {ref: out-team-pitch, section: outreach}

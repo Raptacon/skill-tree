@@ -31,12 +31,22 @@ def tier_meta(tier, hours):
         "hours": hours,
         "verification": tier["verification"].replace("_", " "),
         "taught": tier.get("requires_taught_tier"),
+        "after_trees": [r["tree"] for r in tier.get("requires", []) if isinstance(r, dict) and "tree" in r],
     }
 
 
 def row(row_id, name, tree_id, ctx, cards, meta=None):
     url = f"{ctx['site_url']}/{tree_id}.html#{row_id}"
     return {"id": row_id, "name": name, "cards": cards, "meta": meta, "qr": qr_data_uri(url), "qr_url": url}
+
+
+def renew_label(renews):
+    if renews == "season":
+        return "every season"
+    if isinstance(renews, dict) and "months" in renews:
+        m = renews["months"]
+        return f"every {m // 12} years" if m % 12 == 0 and m > 12 else f"every {m} months"
+    return None
 
 
 def v2_card(item, tree_id, home, ctx):
@@ -51,7 +61,8 @@ def v2_card(item, tree_id, home, ctx):
         "track": item.get("track"),
         "parts": len(item.get("parts", [])),
         "mentor_only": item.get("supervision") == "mentor",
-        "renews": item.get("renews") == "season",
+        "core": item["id"] in ctx["core_ids"] and tree_id != "core-knowledge",
+        "renews": renew_label(item.get("renews")),
         "shared": ctx["tree_names"].get(origin) if origin and origin != tree_id else None,
         "draft": item.get("status") == "draft",
         "detail": detail,
@@ -81,7 +92,9 @@ def build_v2(tree_id, ctx):
             if cards:
                 tier = tiers[tier_id]
                 hours = overrides.get(tier_id, tier.get("min_hours_default"))
-                rows.append(row(tier["name"].lower(), tier["name"], tree_id, ctx, cards, tier_meta(tier, hours)))
+                meta = tier_meta(tier, hours)
+                meta["after_trees"] = [ctx["tree_names"].get(t, t) for t in meta["after_trees"]]
+                rows.append(row(tier["name"].lower(), tier["name"], tree_id, ctx, cards, meta))
     else:
         for section in doc.get("sections", []):
             cards = [v2_card(i, tree_id, home, ctx) for i in items if i.get("section") == section["id"]]
@@ -123,6 +136,7 @@ def load_ctx():
         "tree_names": {s["id"]: s["name"] for s in team.get("subteams", [])}
         | {t: d["tree"]["name"] for t, d in trees.items()},
         "site_url": team["site_url"].rstrip("/"),
+        "core_ids": {i.get("ref") for i in trees.get("core-knowledge", {}).get("items", [])},
         "team": team["team"],
         "season": common.current_season(team),
     }

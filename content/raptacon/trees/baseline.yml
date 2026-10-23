@@ -10,16 +10,17 @@ tree:
   authored_by:
     - {name: Chris Hirsch, github: ChrisHirsch}
   created_at: 2026-10-20
-  updated_at: 2026-10-21
+  updated_at: 2026-10-23
   badge:
     name: Raptor
     description: Tools, git, the team and every subteam - you're ready for a subteam tree.
   next:
+    tree: core-knowledge
     text: >-
-      Next up: your subteam's tree - start at its Novice tier. You can add a second
-      subteam, or a specialization like LEDs, later.
+      Next up: Core Knowledge - the same introduction to every subteam, for
+      everyone, before you specialize.
   description: >-
-    Your first real skills: the shop tools, git and our board, how the team works,
+    Your first real skills: shop safety and first aid, the shop tools, git and our board, how the team works,
     the robot and the game - then shadow every subteam and choose your track.
     Mentors do it too, so you know exactly what students go through.
 
@@ -31,6 +32,33 @@ sections:
 
 items:
   - {ref: onb-shop-orientation, section: shop}
+  - id: base-first-aid
+    name: First aid basics
+    description: >-
+      Know what to do when someone gets hurt in the shop: where the first aid
+      kit, eyewash station, AED and fire extinguisher are; how to handle a
+      minor cut and a burn (soldering irons, hot glue, hot motors); when to get
+      an adult or call 911 and what address to give; and that every injury gets
+      reported to a mentor, even small ones.
+    section: shop
+    roles: [student, mentor]
+    kind: check
+    requires: [onb-shop-orientation]
+    verify: {method: signoff, by: {any_of: [{role: safety-captain}, {role: safety-officer}, {role: lead-mentor}]}}
+    training:
+      - {type: session, label: First aid walkthrough with a safety mentor}
+      - {type: doc, label: "American Red Cross: first aid steps", url: "https://www.redcross.org/take-a-class/first-aid/performing-first-aid/first-aid-steps"}
+      - {type: link, label: "American Red Cross First Aid app", url: "https://www.redcross.org/get-help/how-to-prepare-for-emergencies/mobile-apps.html"}
+    practical:
+      summary: Walk a safety mentor through it in the shop.
+      steps:
+        - Go to the first aid kit, the eyewash station, the AED and the fire extinguisher.
+        - Explain how you'd treat a small cut and a minor burn.
+        - Say when you'd get an adult and when you'd call 911 - and give the shop's address.
+        - Explain how an injury gets reported, and to whom.
+    renews: season
+    visibility: team
+
   - {ref: tool-hand-tools, section: shop}
   - {ref: tool-drill-driver, section: shop}
 

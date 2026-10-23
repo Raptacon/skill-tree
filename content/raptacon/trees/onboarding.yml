@@ -18,7 +18,7 @@
 #               by:     {role: x} | {person: "@github"} | {any_of: [...]}
 #               source: where `auto` reads from (Master Roster tab/column)
 #               claim:  true = person self-reports, a verifier confirms
-#   renews      season | permanent | event
+#   renews      season | permanent | event | {months: N}
 #   visibility  public | team | mentors | self
 #   requires    [item-id, {hours: N}, ...]
 #   required    default true; false = recommended, not blocking
@@ -296,6 +296,23 @@ items:
     verify: {method: signoff, by: {role: mentor}}   # any mentor can check the label
     renews: season
     visibility: team
+
+  - id: onb-cpr-certified
+    name: CPR / First Aid / AED certified
+    description: >-
+      A current CPR, First Aid and AED certification from a recognized course
+      (American Red Cross, American Heart Association or similar). Recommended
+      for mentors and anyone chaperoning a trip; students are welcome to get it too.
+    section: safety
+    roles: [mentor, {role: parent, when: chaperone}, {role: volunteer, when: chaperone}]
+    kind: external
+    required: false
+    verify: {method: signoff, claim: true, by: {role: lead-mentor}}
+    training:
+      - {type: link, label: "American Red Cross: first aid classes", url: "https://www.redcross.org/take-a-class/first-aid"}
+      - {type: link, label: "American Red Cross: CPR classes", url: "https://www.redcross.org/take-a-class/cpr"}
+    renews: {months: 24}
+    visibility: mentors
 
   # ---------------------------------------------------------------- connected
   - id: onb-discord
