@@ -13,6 +13,7 @@ tiers:
     min_hours_default: 25
   - id: 2
     name: Journeyman
+    requires: [{tree: core-knowledge}]   # everyone cross-trains before specializing
     verification: practical_test
     supervision: direct
     min_hours_default: 60

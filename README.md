@@ -8,6 +8,7 @@ Raptacon 3200's skill trees: what every team member needs to do and learn, from 
 |---|---|---|
 | Onboarding | Students, parents, mentors, volunteers, board | Sign-up, handbook, dues, FIRST registration, safety, getting connected. Renews every season. Finish it: **Rookie**. |
 | Baseline | Students, mentors | Hand tools, drills & drivers, git, the team board, how the team works, the robot and game, shadow every subteam, choose a track. Finish it: **Raptor**. |
+| Core Knowledge | Students | The same intro to every subteam, for everyone - one or two real skills from each. Required before Journeyman in any tree. Finish it: **Core**. |
 | Kanban | Students, mentors | GitHub account, how kanban works, using the team board |
 | Tool Certifications | Students, mentors | Hands-on sign-off for each shop tool before using it alone |
 | Subteam trees | Students | CAD/Design, Electronics, Fabrication/Manufacturing, Marketing & Media, Outreach, Programming, Strategy/Scouting/Drive - Novice to Master |
