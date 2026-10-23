@@ -255,6 +255,21 @@ items:
     visibility: mentors
 
   # ---------------------------------------------------------------- safety
+  - id: onb-first-safety-manual
+    name: Read the FIRST Safety Manual
+    description: >-
+      Everyone on the team - students, parents, mentors, volunteers and board -
+      reads FIRST's Safety Manual each season: how FIRST expects teams to work
+      safely in the shop, at events and when traveling.
+    section: safety
+    roles: [student, parent, mentor, volunteer, board]
+    kind: check
+    verify: {method: self}
+    training:
+      - {type: doc, label: "FIRST Safety Manual", url: "https://www.firstinspires.org/hubfs/web/program/all/safety-manual.pdf?hsLang=en"}
+    renews: season
+    visibility: team
+
   - id: onb-safety-test
     name: Safety test passed
     description: Students and mentors take the same test.
@@ -269,6 +284,7 @@ items:
     renews: season
     visibility: team
     training:
+      - {type: doc, label: "FIRST Safety Manual", url: "https://www.firstinspires.org/hubfs/web/program/all/safety-manual.pdf?hsLang=en"}
       - {type: link, label: Safety test (Schoology)}   # TODO link
 
   - id: onb-shop-orientation
@@ -280,6 +296,8 @@ items:
     roles: [student, mentor]
     kind: check
     requires: [onb-safety-test]
+    training:
+      - {type: doc, label: "FIRST Safety Manual", url: "https://www.firstinspires.org/hubfs/web/program/all/safety-manual.pdf?hsLang=en"}
     verify: {method: signoff, by: {any_of: [{role: safety-officer}, {role: lead-mentor}]}}
     renews: season
     visibility: public
