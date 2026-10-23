@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 """Render a tree's overview page: one row per tier (or per section, for trees
 without tiers), each skill a card that expands in place, a QR code per row back
-to the site. Works for v2 trees (trees/*.yml) and older-format trees
-(trees.yml + skills/*.yml). Written as <tree>.html - each tree's main page.
+to the site. Written as <tree>.html - each tree's main page.
 
     overview.py <tree_id>
 """
@@ -51,16 +50,19 @@ def v2_card(item, tree_id, home, ctx):
         "timed": item.get("runs", 1) if item.get("kind") == "timed" else None,
         "track": item.get("track"),
         "parts": len(item.get("parts", [])),
+        "mentor_only": item.get("supervision") == "mentor",
         "renews": item.get("renews") == "season",
         "shared": ctx["tree_names"].get(origin) if origin and origin != tree_id else None,
         "draft": item.get("status") == "draft",
         "detail": detail,
+        "bonus": item.get("bonus", []),
     }
 
 
 def tree_hybrids(tree_id, ctx):
     return [
-        {"name": h["name"], "with": [ctx["tree_names"].get(r["tree"], r["tree"]) for r in h["requires"] if r["tree"] != tree_id]}
+        {"name": h["name"], "with": [ctx["tree_names"].get(r["tree"], r["tree"]) for r in h["requires"] if r["tree"] != tree_id],
+         "projects": h.get("projects", [])}
         for h in common.load_hybrids().values()
         if any(r["tree"] == tree_id for r in h["requires"])
     ]
@@ -98,48 +100,27 @@ def build_v2(tree_id, ctx):
         "checklists": [{"role": ctx["member_roles"][r]["name"], "file": f"{tree_id}_{r}.html"} for r in roles],
         "rows": rows,
         "hybrids": tree_hybrids(tree_id, ctx),
+        "specializations": [
+            {"id": t, "name": d["tree"]["name"],
+             "with": [ctx["tree_names"].get(p, p) for p in d["tree"].get("parent_trees", []) if p != tree_id]}
+            for t, d in ctx["trees"].items()
+            if d["tree"].get("kind") == "specialization" and tree_id in d["tree"].get("parent_trees", [])
+        ],
+        "reached_from": [ctx["tree_names"].get(p, p) for p in tree.get("parent_trees", [])],
         "draft": False,
-    }
-
-
-def build_legacy(tree_id, ctx):
-    tree = ctx["legacy"][tree_id]
-    skills_doc = common.load_skills(tree_id)
-    tiers = common.load_tiers()
-    rows = []
-    for tier_id in sorted(t for t in tiers if t > 0):
-        skills = [s for s in skills_doc.get("skills", []) if s["tier"] == tier_id]
-        if skills:
-            tier = tiers[tier_id]
-            cards = [{"name": s["name"], "description": s.get("description")} for s in skills]
-            meta = tier_meta(tier, common.tier_hours(skills_doc, tiers, tier_id))
-            rows.append(row(tier["name"].lower(), tier["name"], tree_id, ctx, cards, meta))
-    hybrids = tree_hybrids(tree_id, ctx)
-    return {
-        "name": tree["name"],
-        "description": None,
-        "badge": None,
-        "next": None,
-        "checklists": [],
-        "rows": rows,
-        "hybrids": hybrids,
-        "draft": True,
     }
 
 
 def load_ctx():
     trees = common.load_v2_trees()
-    legacy = {t["id"]: t for t in common.load_yaml("trees.yml")["trees"]}
     team = common.load_team()
     home = {i["id"]: tid for tid, d in trees.items() for i in d["items"] if "ref" not in i}
     return {
         "trees": trees,
-        "legacy": legacy,
         "home": home,
         "all_items": common.own_items(trees),
         "member_roles": {r["id"]: r for r in common.load_roles()["member_roles"]},
         "tree_names": {s["id"]: s["name"] for s in team.get("subteams", [])}
-        | {t: d["name"] for t, d in legacy.items()}
         | {t: d["tree"]["name"] for t, d in trees.items()},
         "site_url": team["site_url"].rstrip("/"),
         "team": team["team"],
@@ -148,12 +129,9 @@ def load_ctx():
 
 
 def render(tree_id, ctx, env):
-    if tree_id in ctx["trees"]:
-        page = build_v2(tree_id, ctx)
-    elif tree_id in ctx["legacy"]:
-        page = build_legacy(tree_id, ctx)
-    else:
+    if tree_id not in ctx["trees"]:
         raise SystemExit(f"Unknown tree '{tree_id}'")
+    page = build_v2(tree_id, ctx)
     if page.get("next") and page["next"].get("tree"):
         page["next"]["link"] = f"{page['next']['tree']}.html"
         page["next"]["label"] = ctx["tree_names"].get(page["next"]["tree"], page["next"]["tree"])

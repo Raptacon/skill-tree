@@ -18,8 +18,7 @@ CHECKS = [
     ("8-digit ID", re.compile(r"(?<![\d.])\d{8}(?![\d.])")),
 ]
 
-# Obvious placeholders used by the example student fixtures.
-ALLOWED = {"12345678", "87654321"}
+ALLOWED = set()
 
 
 def lint_file(path):

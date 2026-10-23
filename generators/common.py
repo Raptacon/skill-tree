@@ -22,11 +22,6 @@ def load_yaml(name):
         return yaml.safe_load(f)
 
 
-def load_trees():
-    """{tree_id: tree dict}"""
-    return {t["id"]: t for t in load_yaml("trees.yml")["trees"]}
-
-
 def load_tiers():
     """{tier_id (int): tier dict}"""
     return {t["id"]: t for t in load_yaml("tiers.yml")["tiers"]}
@@ -37,22 +32,7 @@ def load_hybrids():
     return {h["id"]: h for h in load_yaml("hybrids.yml")["hybrids"]}
 
 
-def load_skills(tree_id):
-    """Full skills doc for one tree: {tree, tier_hours_override?, skills: [...]}"""
-    return load_yaml(os.path.join("skills", f"{tree_id}.yml"))
-
-
-def max_tier(tiers):
-    return max(t for t in tiers if t > 0)
-
-
-def tier_hours(skills_doc, tiers, tier_id):
-    """A tree's actual hour target for a tier, honoring tier_hours_override."""
-    override = skills_doc.get("tier_hours_override", {})
-    return override.get(tier_id, tiers[tier_id].get("min_hours_default"))
-
-
-# --- v2 schema (trees/*.yml with role-tagged items; see trees/onboarding.yml) ---
+# --- Trees (trees/*.yml; fields documented in trees/onboarding.yml) ---
 
 
 def load_v2_trees():
@@ -71,17 +51,19 @@ def own_items(trees):
     return {i["id"]: i for d in trees.values() for i in d["items"] if "ref" not in i}
 
 
-def resolve_items(tree_doc, items_by_id):
-    """A tree's items with `{ref: id, section?}` entries replaced by the referenced
-    item (section overridable), so shared items are defined once (docs/adr/0003)."""
+def resolve_items(tree_doc, items_by_id, include_hidden=False):
+    """A tree's items with `{ref: id, section?, tier?}` entries replaced by the
+    referenced item (placement overridable), so shared items are defined once
+    (docs/adr/0003)."""
     resolved = []
     for item in tree_doc["items"]:
         if "ref" in item:
             target = items_by_id.get(item["ref"])
             if target is None:
                 raise SystemExit(f"{tree_doc['tree']['id']}: ref to unknown item '{item['ref']}'")
-            item = {**target, **{k: v for k, v in item.items() if k == "section"}}
-        resolved.append(item)
+            item = {**target, **{k: v for k, v in item.items() if k in ("section", "tier")}}
+        if include_hidden or item.get("status") != "hidden":
+            resolved.append(item)
     return resolved
 
 

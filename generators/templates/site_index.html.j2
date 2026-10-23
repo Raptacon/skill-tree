@@ -14,6 +14,9 @@
   a.card { display: block; border: 3px solid #111; border-left: 8px solid #84EC5C; border-radius: 8px; padding: 12px 16px; text-decoration: none; color: #1a1a1a; flex: 1 1 240px; }
   a.card .name { font-weight: 800; font-size: 18px; color: #111; text-transform: uppercase; letter-spacing: 0.04em; }
   a.card .desc { font-size: 12px; color: #555; margin-top: 4px; }
+  a.hero { display: block; margin: 18px 0 6px; padding: 18px 20px; border-radius: 12px; background: #111; color: #fff; text-decoration: none; }
+  a.hero .name { font-size: 24px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: #84EC5C; }
+  a.hero .desc { font-size: 15px; color: #ddd; margin-top: 4px; }
   a.card.draft { border-style: dashed; border-color: #999; border-left: 8px solid #ccc; }
   a.card.draft .name { color: #666; }
   footer { margin-top: 30px; font-size: 11px; color: #999; }
@@ -23,6 +26,11 @@
   <img class="logo" src="assets/lockup-horizontal.svg" alt="Raptacon 3200"><br>
   <h1>{{ team.name }} {{ team.number }} Skill Trees</h1>
   <div class="meta">{{ season }} season</div>
+
+  <a class="hero" href="techmap.html">
+    <div class="name">The Tech Map</div>
+    <div class="desc">Every tree and every tier on one page - from your first day to Master, and the hybrids in between.</div>
+  </a>
 
   <h2>Start here</h2>
   <div class="cards">
@@ -34,10 +42,18 @@
   <h2>Subteam trees</h2>
   <div class="cards">
     {% for t in subteams %}
-    <a class="card{% if t.draft %} draft{% endif %}" href="{{ t.id }}.html"><div class="name">{{ t.name }}</div>{% if t.draft %}<div class="desc">First draft</div>{% endif %}</a>
+    <a class="card" href="{{ t.id }}.html"><div class="name">{{ t.name }}</div></a>
     {% endfor %}
-    <a class="card draft" href="techmap.html"><div class="name">Tech map</div><div class="desc">Every tree on one page.</div></a>
   </div>
+
+  {% if specializations %}
+  <h2>Specializations</h2>
+  <div class="cards">
+    {% for t in specializations %}
+    <a class="card" href="{{ t.id }}.html"><div class="name">{{ t.name }}</div>{% if t.description %}<div class="desc">{{ t.description }}</div>{% endif %}</a>
+    {% endfor %}
+  </div>
+  {% endif %}
 
   <footer>Built from github.com/Raptacon/skill-tree. Want to add or fix a skill? Open a pull request.</footer>
 </body>

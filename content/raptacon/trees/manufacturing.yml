@@ -1,0 +1,309 @@
+# Fabrication/Manufacturing - making every part of the robot in our shop and
+# assembling it; half of the competition pit crew (handbook 3.4c). Shop
+# machines are separate Tool Certifications (tools.yml) that this tree reuses.
+# Item ids referenced by hybrids (mfg-cnc-intro, mfg-component-mounting,
+# mfg-model-clearances, mfg-update-measurements, mfg-3d-slicing,
+# mfg-tool-path-cnc, mfg-sensor-mounting) must not change. Fields as documented
+# in onboarding.yml; items use `tier` instead of `section`.
+
+tree:
+  id: manufacturing
+  name: Fabrication/Manufacturing
+  kind: subteam
+  requires: [base-choose-track]
+  authored_by:
+    - {name: Chris Hirsch, github: ChrisHirsch}
+  created_at: 2026-10-21
+  updated_at: 2026-10-21
+  description: >-
+    Make every part of the robot in our shop and put it together: hand tools
+    and machines, fasteners, power transmission, 3D printing and CNC - then keep
+    the robot running in the pit at competition.
+
+items:
+  # ---------------------------------------------------------------- Novice
+  - {ref: tool-hand-tools, tier: 1}
+  - {ref: tool-drill-driver, tier: 1}
+
+  - id: mfg-fasteners-rivets
+    tier: 1
+    name: Fasteners and riveting
+    description: >-
+      The fasteners on our robot - bolt sizes (#10-32, 1/4-20 and metric), nuts
+      and nylocks, washers, and pop rivets - which to use where, and setting a
+      rivet with the rivet tool.
+    roles: [student]
+    kind: check
+    requires: [tool-hand-tools]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: manufacturing}, {role: subteam-mentor, tree: manufacturing}]}}
+    renews: permanent
+    visibility: public
+
+  - id: mfg-measure-layout
+    tier: 1
+    name: Measuring and layout
+    description: Tape, rule, calipers, squares, levels and a T-square - measure accurately and lay out a part from a drawing.
+    roles: [student]
+    kind: check
+    requires: [tool-hand-tools]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: manufacturing}, {role: subteam-mentor, tree: manufacturing}]}}
+    renews: permanent
+    visibility: public
+
+  - id: mfg-materials
+    tier: 1
+    name: Materials
+    description: Wood, polycarbonate, acrylic and aluminum - what each is for, and how to cut, drill and finish it.
+    roles: [student]
+    kind: check
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: manufacturing}, {role: subteam-mentor, tree: manufacturing}]}}
+    renews: permanent
+    visibility: public
+
+  - id: mfg-read-drawings
+    tier: 1
+    name: Reading technical drawings
+    description: Read Design's drawings - views, dimensions, tolerances and the title block - well enough to make the part.
+    roles: [student]
+    kind: check
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: manufacturing}, {role: subteam-mentor, tree: manufacturing}]}}
+    renews: permanent
+    visibility: public
+
+  - id: mfg-shafts-bearings
+    tier: 1
+    name: Shafts, bearings and spacers
+    description: >-
+      Hex shaft, bearings, shaft collars, spacers and retaining clips - and
+      stacking them on a shaft in the right order so it spins freely.
+    roles: [student]
+    kind: check
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: manufacturing}, {role: subteam-mentor, tree: manufacturing}]}}
+    renews: permanent
+    visibility: public
+
+  - id: mfg-cnc-intro
+    tier: 1
+    name: Intro to CNC tables
+    description: What the CNC router does, how a job goes from Design's model to cut parts, and the CNC safety rules.
+    roles: [student]
+    kind: check
+    verify: {method: signoff, by: {role: subteam-mentor, tree: manufacturing}}
+    renews: permanent
+    visibility: public
+
+  # ---------------------------------------------------------------- Journeyman
+  - {ref: tool-sander, tier: 2}
+  - {ref: tool-jigsaw, tier: 2}
+  - {ref: tool-dremel, tier: 2}
+  - {ref: tool-band-saw, tier: 2}
+  - {ref: tool-drill-press, tier: 2}
+  - {ref: tool-chop-saw, tier: 2}
+  - {ref: tool-lathe, tier: 2}
+  - {ref: tool-mill, tier: 2}
+
+  - id: mfg-tapping
+    tier: 2
+    name: Tapping
+    description: Drill and tap threaded holes - the right drill size for the tap, cutting fluid, and backing out to break chips.
+    roles: [student]
+    kind: check
+    requires: [mfg-fasteners-rivets]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: manufacturing}, {role: subteam-mentor, tree: manufacturing}]}}
+    renews: permanent
+    visibility: public
+
+  - id: mfg-gears-gearboxes
+    tier: 2
+    name: Gears and gearboxes
+    description: >-
+      Gear ratios, and assembling, greasing and checking a planetary gearbox
+      (e.g. MAXPlanetary or VersaPlanetary) so it runs without binding.
+    roles: [student]
+    kind: check
+    requires: [mfg-shafts-bearings]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: manufacturing}, {role: subteam-mentor, tree: manufacturing}]}}
+    training:
+      - {type: doc, label: "frcdesign.org: Power transmissions", url: "https://frcdesign.org/learning-course/stage1/1b/introduction/"}
+    renews: permanent
+    visibility: public
+
+  - id: mfg-chain-sprockets
+    tier: 2
+    name: Chain and sprockets
+    description: >-
+      Chain sizes (#25, #35), breaking chain and adding a master link, lining up
+      sprockets, and tensioning a chain run.
+    roles: [student]
+    kind: check
+    requires: [mfg-shafts-bearings]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: manufacturing}, {role: subteam-mentor, tree: manufacturing}]}}
+    training:
+      - {type: doc, label: "frcdesign.org: Power transmissions", url: "https://frcdesign.org/learning-course/stage1/1b/introduction/"}
+    practical:
+      summary: Build a chain run with a co-lead or mentor watching.
+      steps:
+        - Measure and break a chain to length with the chain tool.
+        - Fit a master link the right way round.
+        - Line the sprockets up on their shafts.
+        - Tension the run - snug, not tight - and spin it by hand to check it.
+    renews: permanent
+    visibility: public
+
+  - id: mfg-belts-pulleys
+    tier: 2
+    name: Belts and timing pulleys
+    description: >-
+      Toothed (timing) belts and pulleys - HTD and GT2 - center-to-center
+      distance, lining up the pulleys, and tensioning the belt.
+    roles: [student]
+    kind: check
+    requires: [mfg-shafts-bearings]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: manufacturing}, {role: subteam-mentor, tree: manufacturing}]}}
+    training:
+      - {type: doc, label: "frcdesign.org: Power transmissions", url: "https://frcdesign.org/learning-course/stage1/1b/introduction/"}
+    renews: permanent
+    visibility: public
+
+  - id: mfg-pneumatics-plumbing
+    tier: 2
+    name: Pneumatics plumbing and mounting
+    description: >-
+      Mount cylinders, tanks and the regulator, run tubing with push-to-connect
+      fittings, and leak-check the system. Pairs with Electronics' "Pneumatics
+      control" (compressor, hub, solenoids).
+    roles: [student]
+    kind: check
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: manufacturing}, {role: subteam-mentor, tree: manufacturing}]}}
+    renews: permanent
+    visibility: public
+
+  - id: mfg-3d-slicing
+    tier: 2
+    name: 3D printing and slicing
+    description: Slice a part for our 3D printers - orientation, supports, infill and material - and run the print.
+    roles: [student]
+    kind: check
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: manufacturing}, {role: subteam-mentor, tree: manufacturing}]}}
+    renews: permanent
+    visibility: public
+    part_of_hybrid: dfm
+
+  - id: mfg-model-clearances
+    tier: 2
+    name: Checking a model for clearances
+    description: Check Design's model for clearances and fits before parts get made.
+    roles: [student]
+    kind: check
+    requires: [mfg-read-drawings]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: manufacturing}, {role: subteam-mentor, tree: manufacturing}]}}
+    renews: permanent
+    visibility: public
+    part_of_hybrid: dfm
+
+  - id: mfg-update-measurements
+    tier: 2
+    name: Feeding measurements back to Design
+    description: Measure the real, built part and get the differences back into Design's model.
+    roles: [student]
+    kind: check
+    requires: [mfg-measure-layout]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: manufacturing}, {role: subteam-mentor, tree: manufacturing}]}}
+    renews: permanent
+    visibility: public
+    part_of_hybrid: dfm
+
+  - id: mfg-component-mounting
+    tier: 2
+    name: Mounting electronic components
+    description: Mount motors, the power distribution hub and other electronics securely and where Electronics can wire them.
+    roles: [student]
+    kind: check
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: manufacturing}, {role: subteam-mentor, tree: manufacturing}]}}
+    renews: permanent
+    visibility: public
+    part_of_hybrid: fab-assembly
+
+  - id: mfg-sensor-mounting
+    tier: 2
+    name: Sensor placement and mounting
+    description: Place and mount sensors (encoders, limit switches, breakbeams) where they'll read reliably and survive a match.
+    roles: [student]
+    kind: check
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: manufacturing}, {role: subteam-mentor, tree: manufacturing}]}}
+    renews: permanent
+    visibility: public
+    part_of_hybrid: mechatronics
+
+  # ---------------------------------------------------------------- Expert
+  - {ref: tool-cnc-router, tier: 3}
+
+  - id: mfg-tool-path-cnc
+    tier: 3
+    name: CNC tool paths
+    description: Create the tool path for a part from Design's model and run it on the CNC router.
+    roles: [student]
+    kind: check
+    requires: [tool-cnc-router]
+    verify: {method: signoff, by: {role: subteam-mentor, tree: manufacturing}}
+    renews: permanent
+    visibility: public
+    part_of_hybrid: dfm
+
+  - id: mfg-unsupervised
+    tier: 3
+    name: Working unsupervised
+    description: >-
+      Carry out your certified skills without direct supervision (mentor-supervised
+      machines still need a mentor present).
+    roles: [student]
+    kind: check
+    verify: {method: signoff, by: {role: lead-mentor}}
+    renews: season
+    visibility: public
+
+  - id: mfg-report-defects
+    tier: 3
+    name: Recognizing material defects
+    description: Spot and report defects in stock and finished parts - cracks, warping, bad cuts or holes - before they go on the robot.
+    roles: [student]
+    kind: check
+    verify: {method: signoff, by: {role: lead-mentor}}
+    bonus:
+      - {label: "Feynman's O-ring demonstration - when a material fails in the cold", url: "https://www.youtube.com/watch?v=6TInWPDJhjU"}
+    renews: permanent
+    visibility: public
+
+  - id: mfg-pit-repairs
+    tier: 3
+    name: Pit repairs and drivetrain maintenance
+    description: >-
+      At competition, inspect, diagnose and fix the robot between matches -
+      including chains, belts, gearboxes and bent or broken parts - fast and safely.
+    roles: [student]
+    kind: check
+    requires: [mfg-gears-gearboxes, mfg-chain-sprockets, mfg-belts-pulleys]
+    verify: {method: signoff, by: {role: lead-mentor}}
+    renews: season
+    visibility: public
+
+  # ---------------------------------------------------------------- Master
+  - id: mfg-runs-shop
+    tier: 4
+    name: Runs the shop
+    description: Plan the build schedule, keep shop standards and safety, and keep stock and tools ready.
+    roles: [student]
+    kind: check
+    verify: {method: signoff, by: {role: lead-mentor}}
+    renews: permanent
+    visibility: public
+
+  - id: mfg-teach
+    tier: 4
+    name: Teach
+    description: Take a Novice through Hand Tools and Drills & Drivers to their first machine certification.
+    roles: [student]
+    kind: check
+    verify: {method: signoff, by: {role: lead-mentor}}
+    renews: permanent
+    visibility: public

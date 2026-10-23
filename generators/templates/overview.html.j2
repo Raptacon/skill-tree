@@ -58,10 +58,14 @@
   .mark.test { background: var(--ink); color: var(--green); }
   .mark.shared { background: #e6f0fa; color: #1a6fb0; }
   .mark.track { background: var(--green); color: var(--ink); }
+  .mark.sup-mark { background: var(--red); color: #fff; text-transform: uppercase; }
   details.card .body { padding: 0 12px 12px; font-size: 15px; line-height: 1.45; color: #333; }
   details.card .body a { color: #1a6fb0; font-weight: 700; text-decoration: none; }
 
   .hybrids { padding: 0 14px 14px; font-size: 15px; }
+  details.card .body p.bonus { font-size: 14px; color: #555; }
+  details.card .body p.bonus a { font-weight: 600; }
+  .hybrids ul.projects { margin: -6px 0 10px 18px; padding: 0; color: #444; font-size: 14px; }
   .next { margin-top: 8px; background: var(--ink); color: #fff; border-radius: 12px; padding: 14px 18px; font-size: 17px; }
   .next a { color: var(--green); font-weight: 800; }
   footer { margin-top: 22px; font-size: 12px; color: #999; }
@@ -88,6 +92,7 @@
   <div class="meta">{{ season }} season</div>
   {% if page.draft %}<div class="draft-note">First draft - being moved to the new format. Tap a skill to see what it covers.</div>{% endif %}
   {% if page.description %}<div class="intro">{{ page.description }}</div>{% endif %}
+  {% if page.reached_from %}<div class="meta">Specialization - reached from <b>{{ page.reached_from | join(" and ") }}</b></div>{% endif %}
   {% if page.starts_after %}<div class="meta">Starts after: <b>{{ page.starts_after | join(", ") }}</b></div>{% endif %}
 
   <div class="actions">
@@ -115,7 +120,8 @@
       {% for c in r.cards %}
       <details class="card{% if c.draft %} draft{% endif %}">
         <summary>{{ c.name }}
-          {% if c.test or c.timed or c.parts or c.renews or c.shared or c.track %}<span class="marks">
+          {% if c.test or c.timed or c.parts or c.renews or c.shared or c.track or c.mentor_only %}<span class="marks">
+            {% if c.mentor_only %}<span class="mark sup-mark">mentor supervision</span>{% endif %}
             {% if c.track %}<span class="mark track">{{ c.track }}</span>{% endif %}
             {% if c.test %}<span class="mark test">&#9873; hands-on test</span>{% endif %}
             {% if c.parts %}<span class="mark test">&#9873; {{ c.parts }} parts</span>{% endif %}
@@ -126,6 +132,7 @@
         </summary>
         <div class="body">
           {% if c.description %}{{ c.description }}{% endif %}
+          {% for b in c.bonus %}<p class="bonus">&#127871; Bonus: <a href="{{ b.url }}">{{ b.label }}</a></p>{% endfor %}
           {% if c.detail %}<p><a href="{{ c.detail }}">Full details, training and test &rarr;</a></p>{% endif %}
         </div>
       </details>
@@ -137,7 +144,14 @@
   {% if page.hybrids %}
   <section class="row" id="hybrids">
     <div class="row-head"><div class="row-name">Hybrids</div><div class="row-meta">Journeyman here plus Journeyman in another tree</div></div>
-    <div class="hybrids">{% for h in page.hybrids %}<p><b>{{ h.name }}</b> - with {{ h.with | join(", ") }}</p>{% endfor %}</div>
+    <div class="hybrids">{% for h in page.hybrids %}<p><b>{{ h.name }}</b> - with {{ h.with | join(", ") }}</p>{% if h.projects %}<ul class="projects">{% for p in h.projects %}<li>{{ p }}</li>{% endfor %}</ul>{% endif %}{% endfor %}</div>
+  </section>
+  {% endif %}
+
+  {% if page.specializations %}
+  <section class="row" id="specializations">
+    <div class="row-head"><div class="row-name">Specializations</div><div class="row-meta">Elective paths that start from this tree</div></div>
+    <div class="hybrids">{% for sp in page.specializations %}<p><a href="{{ sp.id }}.html"><b>{{ sp.name }}</b></a>{% if sp.with %} - with {{ sp.with | join(", ") }}{% endif %}</p>{% endfor %}</div>
   </section>
   {% endif %}
 

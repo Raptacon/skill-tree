@@ -10,7 +10,7 @@ tree:
   authored_by:
     - {name: Chris Hirsch, github: ChrisHirsch}
   created_at: 2026-10-20
-  updated_at: 2026-10-20
+  updated_at: 2026-10-21
   badge:
     name: Raptor
     description: Tools, git, the team and every subteam - you're ready for a subteam tree.
@@ -59,6 +59,7 @@ items:
         - Commit with a short, clear message and push your branch.
         - Open a pull request explaining what you changed and why.
         - Respond to the review comments until it's approved and merged.
+        - "Bonus: there's an easter egg hidden somewhere in this repo. Find it."
     renews: permanent
     visibility: public
 
@@ -78,6 +79,7 @@ items:
     verify: {method: signoff, by: {role: mentor}}
     training:
       - {type: doc, label: "Raptacon Handbook - Expectations and Workspace Rules", url: "https://docs.google.com/document/d/19xdyY0cUXU5lqMMsEIhkcs5NqTy1XQ93uskZNUNlgAY/view"}
+      - {type: video, label: "Gracious Professionalism with Woodie Flowers (Official FIRST)", url: "https://www.youtube.com/watch?v=R0jEa8Bz-tY"}
     renews: permanent
     visibility: public
 
@@ -96,6 +98,8 @@ items:
     training:
       - {type: session, label: Robot walkthrough with a captain or mentor}
       - {type: doc, label: This season's game manual}   # TODO link after kickoff; last season's until then
+    bonus:
+      - {label: "Grace Hopper explains the nanosecond - how far a signal goes in a billionth of a second", url: "https://www.youtube.com/watch?v=9eyFDBPk4Yw"}
     renews: season
     visibility: public
 
@@ -131,4 +135,15 @@ items:
       method: signoff
       by: {any_of: [{role: subteam-lead}, {role: lead-mentor}]}
     renews: season
+    visibility: public
+
+  - id: base-rickrolled
+    name: Rickrolled
+    description: Found the easter egg hidden in the skill-tree repo.
+    section: collaborate
+    roles: [student, mentor]
+    kind: check
+    status: hidden
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead}, {role: lead-mentor}]}}
+    renews: permanent
     visibility: public

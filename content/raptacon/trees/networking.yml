@@ -1,0 +1,196 @@
+# Networking - a specialization reached from Electronics and Programming: how
+# the robot, driver station, field and our own team systems talk to each other,
+# how to keep them working at an event, and how to keep them safe. Fields as
+# documented in onboarding.yml; items use `tier` instead of `section`.
+
+tree:
+  id: networking
+  name: Networking
+  kind: specialization
+  parent_trees: [electronics, programming]
+  requires: [elec-robot-tour, prog-libraries-docs]
+  authored_by:
+    - {name: Chris Hirsch, github: ChrisHirsch}
+  created_at: 2026-10-21
+  updated_at: 2026-10-21
+  badge:
+    name: Network Wrangler
+    description: You can get any robot talking to any driver station - and keep it that way at an event.
+  description: >-
+    How the robot, the driver station, the field and our own team systems talk
+    to each other - IP addresses, the robot radio, the field network and its
+    rules - how to troubleshoot it when a match is minutes away, and how to keep
+    it secure.
+
+items:
+  # ---------------------------------------------------------------- Novice
+  - id: net-basics
+    tier: 1
+    name: Networking basics
+    description: >-
+      IP addresses, subnets and gateways, DHCP vs. static addresses, DNS - what
+      actually happens when a device joins a network.
+    roles: [student]
+    kind: check
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: electronics}, {role: subteam-mentor, tree: electronics}, {role: subteam-lead, tree: programming}, {role: subteam-mentor, tree: programming}]}}
+    training:
+      - {type: doc, label: "WPILib: Networking basics", url: "https://docs.wpilib.org/en/stable/docs/networking/networking-introduction/networking-basics.html"}
+    bonus:
+      - {label: "Warriors of the Net (Ericsson, 1999) - the classic animation of a packet's trip", url: "https://archive.org/details/warriors_of_net"}
+    renews: permanent
+    visibility: public
+
+  - id: net-frc-addressing
+    tier: 1
+    name: Our robot's addresses
+    description: >-
+      The FRC 10.TE.AM.x scheme - for team 3200 that's 10.32.0.x: the radio, the
+      roboRIO, the driver station - plus mDNS names like roboRIO-3200-FRC.local.
+    roles: [student]
+    kind: check
+    requires: [net-basics]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: electronics}, {role: subteam-mentor, tree: electronics}, {role: subteam-lead, tree: programming}, {role: subteam-mentor, tree: programming}]}}
+    training:
+      - {type: doc, label: "WPILib: IP configurations", url: "https://docs.wpilib.org/en/stable/docs/networking/networking-introduction/ip-configurations.html"}
+    renews: permanent
+    visibility: public
+
+  - id: net-tools
+    tier: 1
+    name: Network tools
+    description: >-
+      ping, ipconfig/ifconfig, traceroute and link lights - check whether two
+      devices can reach each other and find where it breaks.
+    roles: [student]
+    kind: check
+    requires: [net-basics]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: electronics}, {role: subteam-mentor, tree: electronics}, {role: subteam-lead, tree: programming}, {role: subteam-mentor, tree: programming}]}}
+    training:
+      - {type: doc, label: "WPILib: Networking utilities", url: "https://docs.wpilib.org/en/stable/docs/networking/networking-utilities/index.html"}
+    renews: permanent
+    visibility: public
+
+  # ---------------------------------------------------------------- Journeyman
+  - id: net-radio
+    tier: 2
+    name: Robot radio
+    description: Program and configure the robot radio for our team, and know its status lights.
+    roles: [student]
+    kind: check
+    requires: [net-frc-addressing]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: electronics}, {role: subteam-mentor, tree: electronics}]}}
+    training:
+      - {type: doc, label: "WPILib: Programming your radio", url: "https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-3/radio-programming.html"}
+    renews: season
+    visibility: public
+
+  - id: net-driver-station-comms
+    tier: 2
+    name: Driver station communications
+    description: >-
+      Connect the driver station to the robot by USB, Ethernet and radio; fix
+      "no robot communication"; and set up the laptop's firewall so it doesn't
+      block the robot.
+    roles: [student]
+    kind: check
+    requires: [net-tools, net-frc-addressing]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: programming}, {role: subteam-mentor, tree: programming}, {role: subteam-lead, tree: electronics}, {role: subteam-mentor, tree: electronics}]}}
+    training:
+      - {type: doc, label: "WPILib: roboRIO network troubleshooting", url: "https://docs.wpilib.org/en/stable/docs/networking/networking-introduction/roborio-network-troubleshooting.html"}
+      - {type: doc, label: "WPILib: Windows firewall configuration", url: "https://docs.wpilib.org/en/stable/docs/networking/networking-introduction/windows-firewall-configuration.html"}
+    renews: season
+    visibility: public
+
+  - id: net-field-network
+    tier: 2
+    name: The field network and its rules
+    description: >-
+      How the field network works: the allowed ports and the per-team bandwidth
+      limit (check this season's manual), and the event rule that teams may not
+      run their own Wi-Fi - a phone hotspot counts.
+    roles: [student]
+    kind: check
+    requires: [net-frc-addressing]
+    verify: {method: signoff, by: {role: lead-mentor}}
+    training:
+      - {type: doc, label: "FMS whitepaper - how the field network works", url: "https://fms-manual.readthedocs.io/en/latest/fms-whitepaper/fms-whitepaper.html"}
+      - {type: doc, label: "WPILib: Measuring bandwidth usage", url: "https://docs.wpilib.org/en/stable/docs/networking/networking-introduction/measuring-bandwidth-usage.html"}
+      - {type: doc, label: This season's game manual - robot and event rules}   # TODO link after kickoff
+    renews: season
+    visibility: public
+
+  - id: net-packet-capture
+    tier: 2
+    name: Packet capture
+    description: Capture traffic with Wireshark, filter it, and explain what a few packets are doing.
+    roles: [student]
+    kind: check
+    requires: [net-tools]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: programming}, {role: subteam-mentor, tree: programming}]}}
+    training:
+      - {type: doc, label: "Wireshark user's guide", url: "https://www.wireshark.org/docs/wsug_html_chunked/"}
+    renews: permanent
+    visibility: public
+
+  # ---------------------------------------------------------------- Expert
+  - id: net-event-troubleshooting
+    tier: 3
+    name: Troubleshooting comms at an event
+    description: >-
+      Diagnose robot communication problems at competition - on the practice
+      field and with the field technical staff - calmly and fast.
+    roles: [student]
+    kind: check
+    requires: [net-driver-station-comms, net-field-network]
+    verify: {method: signoff, by: {role: lead-mentor}}
+    renews: season
+    visibility: public
+
+  - id: net-scouting-network
+    tier: 3
+    name: Event-legal scouting data
+    description: >-
+      Move scouting data at an event without breaking the no-Wi-Fi rule - wired,
+      QR codes, USB or cellular to a server - and keep it working all day.
+    roles: [student]
+    kind: check
+    requires: [net-field-network, strat-objective-scouting]
+    verify: {method: signoff, by: {role: lead-mentor}}
+    renews: season
+    visibility: public
+
+  - id: net-security
+    tier: 3
+    name: Network security
+    description: >-
+      Firewalls, strong passwords and account safety, keeping team laptops and
+      the robot patched, and spotting suspicious activity.
+    roles: [student]
+    kind: check
+    requires: [net-packet-capture]
+    verify: {method: signoff, by: {role: lead-mentor}}
+    bonus:
+      - {label: "Cliff Stoll: Stalking the Wily Hacker, 40 years later (DEF CON 34)", url: "https://www.youtube.com/watch?v=656058JxTM0"}
+    renews: permanent
+    visibility: public
+
+  # ---------------------------------------------------------------- Master
+  - id: net-owns-team-network
+    tier: 4
+    name: Owns the team network
+    description: Design and document the team's networks - shop, robot, driver stations and scouting - and keep them running.
+    roles: [student]
+    kind: check
+    verify: {method: signoff, by: {role: lead-mentor}}
+    renews: permanent
+    visibility: public
+
+  - id: net-teach
+    tier: 4
+    name: Teach
+    description: Take a Novice from networking basics to getting a driver station talking to the robot.
+    roles: [student]
+    kind: check
+    verify: {method: signoff, by: {role: lead-mentor}}
+    renews: permanent
+    visibility: public

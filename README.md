@@ -10,9 +10,33 @@ Raptacon 3200's skill trees: what every team member needs to do and learn, from 
 | Baseline | Students, mentors | Hand tools, drills & drivers, git, the team board, how the team works, the robot and game, shadow every subteam, choose a track. Finish it: **Raptor**. |
 | Kanban | Students, mentors | GitHub account, how kanban works, using the team board |
 | Tool Certifications | Students, mentors | Hands-on sign-off for each shop tool before using it alone |
-| Subteam trees | Students | Manufacturing, Design, Electronics, Programming, Business/Media, LEDs - first drafts in the older format, being moved over |
+| Subteam trees | Students | CAD/Design, Electronics, Fabrication/Manufacturing, Marketing & Media, Outreach, Programming, Strategy/Scouting/Drive - Novice to Master |
+| Specializations | Students | Elective paths from a parent tree: LEDs & the Raptacon Arcade, Networking |
+
+The [Tech Map](https://skills.raptacon.com/techmap.html) shows every tree and tier on one page.
 
 People's progress is **not** in this repo. It lives in the team roster (Google Sheets), run by [raptacon-onboarding-system](https://github.com/Raptacon/raptacon-onboarding-system). This repo only defines the trees.
+
+## How progress works
+
+Progress is tracked digitally in the team roster (Google Sheets), not on paper. Every completion is an event in an append-only log; nothing is ever erased (docs/adr/0002).
+
+**Students**
+1. Find the skill on the site - the [Tech Map](https://skills.raptacon.com/techmap.html), a tree's page, or a QR code in the shop. Each skill says how to learn it (**Learn**), the hands-on test (**Test**) and who signs it off.
+2. Learn and practice. Shop hours count automatically when you check in and out.
+3. When you're ready, do the test in front of someone who can sign it off and ask them to record it.
+4. Your progress, earned ranks and badges show up for you online and are announced on Discord.
+
+**Leads and mentors**
+1. Watch the student do the test.
+2. Record it with the sign-off form on your phone (signed in, so the system knows who signed). Choose the student, the skill, and *passed* or *not yet*; add a note or photo link if useful.
+3. The system checks you're allowed to sign that skill (the roster's Roles tab and the skill's `verify` rule). If you're not, it's flagged for a mentor instead of recorded.
+- Mentor-supervised machines can only be signed off by a mentor. Expert and Master skills are signed off by the lead mentor after a portfolio review.
+- Mentors can revoke a sign-off (for example for safety); that's a new event, not an edit.
+
+**Automatic** - onboarding items the roster already knows about (handbook acknowledgment, sign-up, dues, background check, check-in hours) are checked off without anyone signing.
+
+The site publishes [`catalog.json`](https://skills.raptacon.com/catalog.json) - every skill, its sign-off rule and this season's sign-off roles - for the progress system to read. The progress system lives in [raptacon-onboarding-system](https://github.com/Raptacon/raptacon-onboarding-system).
 
 ## Contributing a skill
 
@@ -20,7 +44,7 @@ Mentors and students are encouraged to add and improve skills.
 
 1. Edit or add a tree under `content/raptacon/trees/`. [`onboarding.yml`](content/raptacon/trees/onboarding.yml) documents every field in its header; [`tools.yml`](content/raptacon/trees/tools.yml) is a short example of a hands-on skill.
 2. Run `make ci` locally (see Setup) to check it and build the site into `site/`.
-3. Open a pull request. CI must pass and a maintainer approves before it merges to `main`; the site updates automatically.
+3. Open a pull request. CI must pass and a maintainer approves before it's squash-merged to `main`; the site updates automatically.
 
 ### Item fields
 
@@ -28,7 +52,8 @@ Mentors and students are encouraged to add and improve skills.
 - id: tool-drill-driver            # unique across all trees, never changes once in use
   name: Drills & Drivers
   description: What it is and what "done" looks like.
-  section: hand-power              # one of the tree's `sections`
+  section: hand-power              # one of the tree's `sections` - or `tier: 1..4` in tiered trees
+  supervision: mentor              # optional: a mentor must always be present (big machines)
   roles: [student, mentor]         # who it applies to; {role: parent, when: chaperone} for conditional
   kind: check                      # check | count | hours | score | signature | external | timed
   requires: [onb-safety-test]      # items (any tree) or {hours: N} that must come first
@@ -45,8 +70,10 @@ Mentors and students are encouraged to add and improve skills.
   visibility: public               # public | team | mentors | self
 ```
 
+- `kind: timed` with `runs: 3` records a best time; `track` labels a path inside a tree (e.g. Drive).
+- `bonus: [{label, url}]` adds an optional fun or interesting link - never part of the test.
 - `parts: [{id, name, by}]` splits an item into named sign-offs (Baseline's "Shadow every subteam" has one per subteam).
-- A tree can set `badge: {name, description}` (the rank for finishing it) and `next: {tree, text}` (where to go after).
+- A tree can set `badge: {name, description}` (the rank for finishing it), `next: {tree, text}` (where to go after), `requires` (items that must come first) and, for specializations, `parent_trees`.
 
 - A tree can reuse another tree's item with `{ref: <item-id>}`; completing it once counts in both.
 - Trees and items carry `authored_by: [{name, github}]`, `created_at` and `updated_at`.
@@ -59,19 +86,19 @@ Mentors and students are encouraged to add and improve skills.
 | `content/raptacon/roles.yml` | Member roles (student, parent, mentor, volunteer, board), conditions (chaperone, CCSD volunteer, ...), sign-off roles |
 | `content/raptacon/assignments.yml` | Who holds each sign-off role this season, so checklists say who to ask |
 | `content/raptacon/team.yml` | Team name/number and when the season rolls over |
-| `content/raptacon/trees.yml`, `tiers.yml`, `hybrids.yml`, `skills/` | Older-format subteam trees (tier 0-4 ladders), still rendered as posters |
+| `content/raptacon/tiers.yml` | The Novice-Master ladder: hours, supervision and verification per tier |
+| `content/raptacon/hybrids.yml` | Hybrids: Journeyman in two trees, with suggested projects |
 
 ## Setup
 
 ```bash
 git submodule update --init               # brand-kit (logo); or clone with --recurse-submodules
 pipenv install
-make ci                                   # validate YAML, lint for personal data, build site/
+make ci                                   # validate YAML, lint for personal data, build site/ (incl. catalog.json)
 make overview TREE=programming            # a tree's main page: tiers as rows, skills as cards
 make checklist TREE=onboarding            # per-role checklists + index into tmp/
 make checklist TREE=onboarding ROLES=parent,mentor   # one page for someone with both roles
-make poster TREE=manufacturing            # older-format tree poster
-make techmap                              # every older-format tree on one page
+make techmap                              # every tree and tier on one page
 ```
 
 Open the generated HTML in a browser to view or print it.

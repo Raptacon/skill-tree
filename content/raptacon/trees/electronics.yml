@@ -1,0 +1,465 @@
+# Electronics - wiring the robot and its pneumatics so the mechanisms can be
+# controlled; the other half of the competition pit crew (handbook 3.4d).
+# Fields as documented in onboarding.yml; items use `tier` instead of `section`.
+
+tree:
+  id: electronics
+  name: Electronics
+  kind: subteam
+  requires: [base-choose-track]
+  authored_by:
+    - {name: Chris Hirsch, github: ChrisHirsch}
+  created_at: 2026-10-21
+  updated_at: 2026-10-21
+  description: >-
+    Wire the robot so Programming can control every mechanism: power, CAN,
+    sensors and pneumatics - built safely, neatly and to survive a match - then
+    keep it running in the pit.
+
+items:
+  # ---------------------------------------------------------------- Novice
+  - id: elec-safe-wiring
+    tier: 1
+    name: Safe wiring basics
+    description: Wire gauge and color, stripping, and basic electrical safety around the robot and its battery.
+    roles: [student]
+    kind: check
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: electronics}, {role: subteam-mentor, tree: electronics}]}}
+    training:
+      - {type: doc, label: "WPILib: Wiring best practices", url: "https://docs.wpilib.org/en/stable/docs/hardware/hardware-basics/wiring-best-practices.html"}
+    practical:
+      summary: Show a lead or mentor, with the robot powered off.
+      steps:
+        - Pick the right wire gauge and color for a given circuit.
+        - Explain what never to do with a powered robot or a loose battery lead.
+    renews: permanent
+    visibility: public
+
+  - id: elec-battery-safety
+    tier: 1
+    name: Battery handling and charging
+    description: >-
+      Carry, connect, charge and store robot batteries safely; spot a damaged
+      battery; and track charge so the robot never runs on a weak one.
+    roles: [student]
+    kind: check
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: electronics}, {role: subteam-mentor, tree: electronics}]}}
+    training:
+      - {type: doc, label: "WPILib: Robot battery basics", url: "https://docs.wpilib.org/en/stable/docs/hardware/hardware-basics/robot-battery.html"}
+    renews: season
+    visibility: public
+
+  - id: elec-esd-bench
+    tier: 1
+    name: ESD and bench safety
+    description: >-
+      Ground yourself before touching boards (strap or mat), use a bench power supply safely, and never plug or unplug things on a powered robot.
+    roles: [student]
+    kind: check
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: electronics}, {role: subteam-mentor, tree: electronics}]}}
+    renews: permanent
+    visibility: public
+
+  - id: elec-crimping
+    tier: 1
+    name: Crimping and terminating
+    description: >-
+      The terminations on our robot - Anderson Powerpole, ferrules for the power hub, JST and Dupont connectors, ring terminals - and heat shrink.
+    roles: [student]
+    kind: check
+    requires: [elec-safe-wiring]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: electronics}, {role: subteam-mentor, tree: electronics}]}}
+    training:
+      - {type: doc, label: "WPILib: Wiring best practices", url: "https://docs.wpilib.org/en/stable/docs/hardware/hardware-basics/wiring-best-practices.html"}
+    practical:
+      summary: Make each termination with a lead or mentor watching.
+      steps:
+        - Strip to the right length without nicking strands.
+        - Crimp an Anderson Powerpole and seat it in its housing.
+        - Crimp a ferrule and land it in the power hub.
+        - Crimp a small signal connector (JST or Dupont).
+        - Heat-shrink a joint, then pull-test every termination.
+    renews: permanent
+    visibility: public
+
+  - id: elec-multimeter
+    tier: 1
+    name: Using a multimeter
+    description: >-
+      Measure voltage (battery and rails), continuity to find a broken wire, resistance, diode test - and current only with the right jack and range.
+    roles: [student]
+    kind: check
+    requires: [elec-esd-bench]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: electronics}, {role: subteam-mentor, tree: electronics}]}}
+    training:
+      - {type: doc, label: "SparkFun: How to use a multimeter", url: "https://learn.sparkfun.com/tutorials/how-to-use-a-multimeter"}
+    practical:
+      summary: Use the multimeter on real robot parts with a lead or mentor.
+      steps:
+        - Check a robot battery's voltage.
+        - Find a broken wire with the continuity test.
+        - Measure a resistor and test a diode or LED.
+        - Explain why you don't measure current across a battery.
+    renews: permanent
+    visibility: public
+
+  - id: elec-soldering
+    tier: 1
+    name: Soldering
+    description: >-
+      Tin wires, splice wires with heat shrink, and solder through-hole joints - with iron and fume safety.
+    roles: [student]
+    kind: check
+    requires: [elec-esd-bench]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: electronics}, {role: subteam-mentor, tree: electronics}]}}
+    training:
+      - {type: doc, label: "Adafruit Guide to Excellent Soldering", url: "https://learn.adafruit.com/adafruit-guide-excellent-soldering"}
+    practical:
+      summary: Solder in front of a lead or mentor.
+      steps:
+        - Tin the iron and two wires.
+        - Splice the wires and cover the joint with heat shrink.
+        - Solder three through-hole joints that are shiny and cone-shaped.
+        - Set the iron back in its stand and turn it off.
+    renews: permanent
+    visibility: public
+
+  - id: elec-wiring-diagrams
+    tier: 1
+    name: Reading a wiring diagram
+    description: Read the robot's wiring diagram and trace a circuit from the battery to a motor or sensor.
+    roles: [student]
+    kind: check
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: electronics}, {role: subteam-mentor, tree: electronics}]}}
+    renews: permanent
+    visibility: public
+
+  - id: elec-robot-tour
+    tier: 1
+    name: Robot electrical tour
+    description: >-
+      Name and explain the main parts - battery, main breaker, power
+      distribution hub, roboRIO, radio, motor controllers - and where power and
+      CAN run between them.
+    roles: [student]
+    kind: check
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: electronics}, {role: subteam-mentor, tree: electronics}]}}
+    training:
+      - {type: doc, label: "WPILib: Wiring the FRC control system", url: "https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-1/how-to-wire-a-robot.html"}
+    renews: season
+    visibility: public
+
+  # ---------------------------------------------------------------- Journeyman
+  - id: elec-desoldering
+    tier: 2
+    name: Desoldering
+    description: >-
+      Remove parts and fix bad joints with solder wick and a solder sucker without lifting pads.
+    roles: [student]
+    kind: check
+    requires: [elec-soldering]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: electronics}, {role: subteam-mentor, tree: electronics}]}}
+    training:
+      - {type: doc, label: "Adafruit Guide to Excellent Soldering (incl. desoldering)", url: "https://learn.adafruit.com/adafruit-guide-excellent-soldering"}
+    renews: permanent
+    visibility: public
+
+  - id: elec-build-kit
+    tier: 2
+    name: Building a kit
+    description: >-
+      Build an electronics kit from its instructions - parts identification, orientation, soldering - and get it working.
+    roles: [student]
+    kind: check
+    requires: [elec-soldering, elec-multimeter]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: electronics}, {role: subteam-mentor, tree: electronics}]}}
+    bonus:
+      - {label: "Ben Eater: build an 8-bit computer on breadboards", url: "https://eater.net/8bit"}
+    renews: permanent
+    visibility: public
+
+  - id: elec-oscilloscope
+    tier: 2
+    name: Using an oscilloscope
+    description: >-
+      Set up probes and the ground clip, timebase and trigger, and look at real signals - PWM, CAN and power noise.
+    roles: [student]
+    kind: check
+    requires: [elec-multimeter]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: electronics}, {role: subteam-mentor, tree: electronics}]}}
+    training:
+      - {type: doc, label: "SparkFun: How to use an oscilloscope", url: "https://learn.sparkfun.com/tutorials/how-to-use-an-oscilloscope"}
+    renews: permanent
+    visibility: public
+
+  - id: elec-firmware-config
+    tier: 2
+    name: Device firmware and configuration
+    description: >-
+      Image the roboRIO, configure the radio, and update and configure motor controllers (REV Hardware Client, Phoenix Tuner).
+    roles: [student]
+    kind: check
+    requires: [elec-can-bus]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: electronics}, {role: subteam-mentor, tree: electronics}]}}
+    training:
+      - {type: doc, label: "WPILib: Imaging your roboRIO", url: "https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-3/imaging-your-roborio.html"}
+      - {type: doc, label: "REV Hardware Client", url: "https://docs.revrobotics.com/rev-hardware-client"}
+      - {type: doc, label: "CTRE Phoenix Tuner X", url: "https://v6.docs.ctr-electronics.com/en/stable/docs/tuner/index.html"}
+    renews: season
+    visibility: public
+
+  - id: elec-rsl-status-lights
+    tier: 2
+    name: Robot signal light and status lights
+    description: >-
+      Wire and mount the robot signal light (required by FRC) and any status
+      LEDs so the drive team and field staff can read the robot's state. Leads
+      into the LEDs specialization.
+    roles: [student]
+    kind: check
+    requires: [elec-crimping, elec-robot-tour]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: electronics}, {role: subteam-mentor, tree: electronics}]}}
+    training:
+      - {type: doc, label: "WPILib: Status light quick reference", url: "https://docs.wpilib.org/en/stable/docs/hardware/hardware-basics/status-lights-ref.html"}
+    renews: permanent
+    visibility: public
+
+  - id: elec-battery-testing
+    tier: 2
+    name: Battery testing and logging
+    description: >-
+      Number and label every battery, test capacity and internal resistance with
+      the battery analyzer, log each battery's results and age, and retire weak
+      ones before they cost a match.
+    roles: [student]
+    kind: check
+    requires: [elec-battery-safety, elec-multimeter]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: electronics}, {role: subteam-mentor, tree: electronics}]}}
+    notes: Nathan Beasley had an idea for NFC tags on batteries to log them automatically - fold it in when it exists.
+    training:
+      - {type: doc, label: "WPILib: Robot battery basics", url: "https://docs.wpilib.org/en/stable/docs/hardware/hardware-basics/robot-battery.html"}
+    renews: season
+    visibility: public
+
+  - id: elec-wiring-harness
+    tier: 2
+    name: Building a wiring harness
+    description: Build a neat, labeled, strain-relieved harness that survives a match and is easy to fix.
+    roles: [student]
+    kind: check
+    requires: [elec-crimping, elec-wiring-diagrams]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: electronics}, {role: subteam-mentor, tree: electronics}]}}
+    training:
+      - {type: doc, label: "WPILib: Wiring best practices", url: "https://docs.wpilib.org/en/stable/docs/hardware/hardware-basics/wiring-best-practices.html"}
+    renews: permanent
+    visibility: public
+
+  - id: elec-power-distribution
+    tier: 2
+    name: Power distribution
+    description: The power distribution hub, breakers and fuses, and sizing wire for the expected current draw.
+    roles: [student]
+    kind: check
+    requires: [elec-robot-tour]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: electronics}, {role: subteam-mentor, tree: electronics}]}}
+    training:
+      - {type: doc, label: "WPILib: Wiring the FRC control system", url: "https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-1/how-to-wire-a-robot.html"}
+    renews: permanent
+    visibility: public
+
+  - id: elec-can-bus
+    tier: 2
+    name: CAN bus
+    description: Wire the CAN chain, terminate it, set device IDs, and find a broken link.
+    roles: [student]
+    kind: check
+    requires: [elec-robot-tour]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: electronics}, {role: subteam-mentor, tree: electronics}]}}
+    training:
+      - {type: doc, label: "WPILib: CAN wiring basics", url: "https://docs.wpilib.org/en/stable/docs/hardware/hardware-basics/can-wiring-basics.html"}
+    renews: permanent
+    visibility: public
+
+  - id: elec-sensor-wiring
+    tier: 2
+    name: Sensor wiring
+    description: Wire sensors (limit switches, encoders, breakbeams) to the roboRIO and check they read correctly.
+    roles: [student]
+    kind: check
+    requires: [elec-safe-wiring]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: electronics}, {role: subteam-mentor, tree: electronics}]}}
+    training:
+      - {type: repo, label: "State machines step 1: a real breakbeam wiring/reading example", url: "https://github.com/Raptacon/Skills-Challenges/tree/main/state_machines/challenge_step_1"}
+    renews: permanent
+    visibility: public
+
+  - id: elec-pneumatics-control
+    tier: 2
+    name: Pneumatics control
+    description: >-
+      Wire the compressor, Pneumatic Hub, solenoid valves and pressure
+      switch/sensor. Pairs with Manufacturing's "Pneumatics plumbing and
+      mounting" (cylinders, tubing, fittings).
+    roles: [student]
+    kind: check
+    requires: [elec-can-bus]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: electronics}, {role: subteam-mentor, tree: electronics}]}}
+    training:
+      - {type: doc, label: "WPILib: Pneumatics", url: "https://docs.wpilib.org/en/stable/docs/software/hardware-apis/pneumatics/index.html"}
+    renews: permanent
+    visibility: public
+
+  # ---------------------------------------------------------------- Expert
+  - id: elec-pcb-design-debug
+    tier: 3
+    name: PCB design and debug
+    description: Design a small custom circuit board and debug one that isn't working.
+    roles: [student]
+    kind: check
+    verify: {method: signoff, by: {role: lead-mentor}}
+    training:
+      - {type: doc, label: "KiCad documentation", url: "https://docs.kicad.org/"}
+    renews: permanent
+    visibility: public
+
+  - id: elec-health-monitoring
+    tier: 3
+    name: Power and battery health monitoring
+    description: Publish and read power hub and roboRIO voltage, current and brownout data.
+    roles: [student]
+    kind: check
+    requires: [elec-power-distribution]
+    verify: {method: signoff, by: {role: lead-mentor}}
+    training:
+      - {type: repo, label: "robot-2027 HealthAndStatus subsystem", url: "https://github.com/Raptacon/robot-2027/blob/main/subsystem/health_and_status.py"}
+    renews: permanent
+    visibility: public
+
+  - id: elec-brownouts
+    tier: 3
+    name: Brownout diagnosis and prevention
+    description: Trace current-draw and voltage-sag symptoms back to a wiring, breaker or battery cause, and fix it.
+    roles: [student]
+    kind: check
+    requires: [elec-health-monitoring]
+    verify: {method: signoff, by: {role: lead-mentor}}
+    training:
+      - {type: doc, label: "WPILib: roboRIO brownouts", url: "https://docs.wpilib.org/en/stable/docs/software/roborio-info/roborio-brownouts.html"}
+    renews: permanent
+    visibility: public
+
+  - id: elec-pit-troubleshooting
+    tier: 3
+    name: Pit electrical troubleshooting
+    description: >-
+      At competition, find and fix electrical problems between matches - loose
+      connectors, CAN faults, a dead radio, a bad battery - fast and safely.
+    roles: [student]
+    kind: check
+    requires: [elec-wiring-harness, elec-can-bus]
+    verify: {method: signoff, by: {role: lead-mentor}}
+    training:
+      - {type: doc, label: "WPILib: Preemptive troubleshooting", url: "https://docs.wpilib.org/en/stable/docs/hardware/hardware-basics/preemptive-troubleshooting.html"}
+    renews: season
+    visibility: public
+
+  - id: elec-repair-electronics
+    tier: 3
+    name: Repairing electronics
+    description: >-
+      Diagnose a broken device, cable or board and repair it - find the fault with a multimeter or scope, then fix it.
+    roles: [student]
+    kind: check
+    requires: [elec-desoldering, elec-oscilloscope]
+    verify: {method: signoff, by: {role: lead-mentor}}
+    renews: permanent
+    visibility: public
+
+  - id: elec-repair-computer
+    tier: 3
+    name: Repairing a computer
+    description: >-
+      Keep the driver station laptops and team PCs running - diagnose hardware, swap RAM or storage, reinstall the OS.
+    roles: [student]
+    kind: check
+    verify: {method: signoff, by: {role: lead-mentor}}
+    renews: permanent
+    visibility: public
+
+  - id: elec-inspection
+    tier: 3
+    name: Electrical robot inspection
+    description: >-
+      Get the robot through FRC inspection on the electrical rules - breakers, wire gauge and colors, an accessible main breaker, the robot signal light.
+    roles: [student]
+    kind: check
+    requires: [elec-power-distribution]
+    verify: {method: signoff, by: {role: lead-mentor}}
+    training:
+      - {type: doc, label: "WPILib: Preemptive troubleshooting", url: "https://docs.wpilib.org/en/stable/docs/hardware/hardware-basics/preemptive-troubleshooting.html"}
+    renews: season
+    visibility: public
+
+  - id: elec-microcontrollers
+    tier: 3
+    name: Microcontrollers
+    description: >-
+      Use a microcontroller (Arduino, Raspberry Pi Pico or similar) for custom
+      sensors or LED drivers - wiring, power, and talking to the roboRIO.
+    roles: [student]
+    kind: check
+    requires: [elec-soldering, elec-multimeter, elec-sensor-wiring]
+    verify: {method: signoff, by: {role: lead-mentor}}
+    training:
+      - {type: doc, label: "Arduino: Getting started", url: "https://docs.arduino.cc/learn/starting-guide/getting-started-arduino/"}
+    renews: permanent
+    visibility: public
+
+  - id: elec-reverse-engineering
+    tier: 3
+    name: Reverse engineering a hardware protocol
+    description: >-
+      Figure out how an undocumented device talks - capture its signals with a
+      logic analyzer or scope, identify the protocol (UART, I2C, SPI, CAN or
+      something custom), decode it, and write a working driver. Use AI tools to
+      form and check hypotheses, but verify every claim against the captured
+      signals. Only on hardware the team owns.
+    roles: [student]
+    kind: check
+    requires: [elec-oscilloscope, elec-microcontrollers]
+    verify: {method: signoff, by: {role: lead-mentor}}
+    training:
+      - {type: doc, label: "PulseView (sigrok) logic analyzer software", url: "https://sigrok.org/wiki/PulseView"}
+    practical:
+      summary: Present the finished work to the lead mentor.
+      steps:
+        - Capture the device's traffic with a logic analyzer or scope.
+        - Identify the physical layer and protocol, and show the evidence.
+        - Decode real messages and explain what they mean.
+        - Write a small driver or tool that talks to the device.
+        - Document it - what you found, how, and which AI suggestions turned out wrong.
+    bonus:
+      - {label: "Cliff Stoll: Stalking the Wily Hacker, 40 years later (DEF CON 34)", url: "https://www.youtube.com/watch?v=656058JxTM0"}
+    renews: permanent
+    visibility: public
+
+  # ---------------------------------------------------------------- Master
+  - id: elec-owns-system
+    tier: 4
+    name: Owns the electrical system
+    description: Own the robot's electrical design and layout for the season, from first wiring plan to competition.
+    roles: [student]
+    kind: check
+    verify: {method: signoff, by: {role: lead-mentor}}
+    renews: permanent
+    visibility: public
+
+  - id: elec-teach
+    tier: 4
+    name: Teach
+    description: Train others on safe wiring - take a Novice through Safe wiring basics and the robot electrical tour.
+    roles: [student]
+    kind: check
+    verify: {method: signoff, by: {role: lead-mentor}}
+    renews: permanent
+    visibility: public

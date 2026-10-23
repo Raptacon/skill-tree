@@ -106,6 +106,7 @@ def build_item(item, roles, conditions, ctx):
     return {
         "id": item["id"],
         "track": item.get("track"),
+        "mentor_only": item.get("supervision") == "mentor",
         "name": item["name"],
         "description": item.get("description"),
         "conditions": [ctx["conditions"].get(c, {"name": c})["name"] for c in conditions],
@@ -118,6 +119,7 @@ def build_item(item, roles, conditions, ctx):
         "optional": item.get("required") is False,
         "draft": item.get("status") == "draft",
         "practical": item.get("practical"),
+        "bonus": item.get("bonus", []),
         "training": [r for r in item.get("training", []) if not r.get("roles") or set(r["roles"]) & set(roles)],
         "parts": [{"name": p["name"], "who": " or ".join(describe_by(p.get("by"), ctx))} for p in item.get("parts", [])],
     }
@@ -178,7 +180,6 @@ def load_ctx():
     return {
         "trees": trees,
         "tree_names": {s["id"]: s["name"] for s in team.get("subteams", [])}
-        | {t["id"]: t["name"] for t in common.load_yaml("trees.yml")["trees"]}
         | {t: d["tree"]["name"] for t, d in trees.items()},
         "all_items": common.own_items(trees),
         "member_roles": {r["id"]: r for r in roles_doc["member_roles"]},
