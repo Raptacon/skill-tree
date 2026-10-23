@@ -22,7 +22,7 @@ seasons:
     - role: subteam-mentor
       tree: manufacturing
       holders:
-        - {name: Tyler Hirsch, github: TODO}
+        - {name: Tyler Hirsch, github: Mineops99}
     - role: subteam-lead
       tree: programming
       holders:
