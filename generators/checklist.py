@@ -57,6 +57,13 @@ def describe_how(item, ctx):
     return f"Signed off by {who}"
 
 
+def describe_renews(renews):
+    if isinstance(renews, dict) and "months" in renews:
+        months = renews["months"]
+        return f"Every {months // 12} years" if months % 12 == 0 and months > 12 else f"Every {months} months"
+    return RENEWS.get(renews, renews)
+
+
 def describe_target(item):
     kind = item.get("kind")
     if kind == "count":
@@ -112,7 +119,7 @@ def build_item(item, roles, conditions, ctx):
         "conditions": [ctx["conditions"].get(c, {"name": c})["name"] for c in conditions],
         "how": describe_how(item, ctx),
         "target": describe_target(item),
-        "renews": RENEWS.get(item.get("renews"), item.get("renews")),
+        "renews": describe_renews(item.get("renews")),
         "private": PRIVATE.get(item.get("visibility")),
         "after": describe_requires(item, ctx),
         "actor_note": actor_note,

@@ -41,6 +41,7 @@
   .row { border: 3px solid var(--ink); border-radius: 12px; margin-bottom: 18px; overflow: hidden; break-inside: avoid; scroll-margin-top: 12px; }
   .row-head { display: flex; align-items: center; gap: 16px; background: var(--ink); color: #fff; padding: 12px 16px; }
   .row-name { font-size: clamp(20px, 3vw, 28px); font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: var(--green); min-width: 9rem; }
+  .row-name .layer { font-size: 13px; color: #fff; letter-spacing: 0.04em; margin-top: 2px; }
   .row-meta { flex: 1; font-size: 15px; line-height: 1.6; color: #ddd; }
   .row-meta b { color: #fff; }
   .sup { display: inline-block; background: var(--red); color: #fff; font-size: 13px; font-weight: 800; text-transform: uppercase; padding: 3px 9px; border-radius: 4px; margin-right: 8px; letter-spacing: 0.04em; }
@@ -58,6 +59,7 @@
   .mark.test { background: var(--ink); color: var(--green); }
   .mark.shared { background: #e6f0fa; color: #1a6fb0; }
   .mark.track { background: var(--green); color: var(--ink); }
+  .mark.core { background: var(--ink); color: #fff; }
   .mark.sup-mark { background: var(--red); color: #fff; text-transform: uppercase; }
   details.card .body { padding: 0 12px 12px; font-size: 15px; line-height: 1.45; color: #333; }
   details.card .body a { color: #1a6fb0; font-weight: 700; text-decoration: none; }
@@ -111,6 +113,7 @@
         {% if r.meta %}
         {% if r.meta.supervision %}<span class="sup">{{ r.meta.supervision }} supervision</span>{% endif %}
         {% if r.meta.hours %}<b>~{{ r.meta.hours }} hrs</b> &middot; {% endif %}verified by <b>{{ r.meta.verification }}</b>
+        {% if r.meta.after_trees %}<br>after finishing <b>{{ r.meta.after_trees | join(", ") }}</b>{% endif %}
         {% if r.meta.taught %}<br>must have taught someone to {{ ["", "Novice", "Journeyman", "Expert"][r.meta.taught] }}{% endif %}
         {% else %}{{ r.cards | length }} skill{{ 's' if r.cards | length != 1 }}{% endif %}
       </div>
@@ -120,13 +123,14 @@
       {% for c in r.cards %}
       <details class="card{% if c.draft %} draft{% endif %}">
         <summary>{{ c.name }}
-          {% if c.test or c.timed or c.parts or c.renews or c.shared or c.track or c.mentor_only %}<span class="marks">
+          {% if c.test or c.timed or c.parts or c.renews or c.shared or c.track or c.mentor_only or c.core %}<span class="marks">
+            {% if c.core %}<span class="mark core">core knowledge</span>{% endif %}
             {% if c.mentor_only %}<span class="mark sup-mark">mentor supervision</span>{% endif %}
             {% if c.track %}<span class="mark track">{{ c.track }}</span>{% endif %}
             {% if c.test %}<span class="mark test">&#9873; hands-on test</span>{% endif %}
             {% if c.parts %}<span class="mark test">&#9873; {{ c.parts }} parts</span>{% endif %}
             {% if c.timed %}<span class="mark test">&#9201; timed - best of {{ c.timed }}</span>{% endif %}
-            {% if c.renews %}<span class="mark">&#8635; every season</span>{% endif %}
+            {% if c.renews %}<span class="mark">&#8635; {{ c.renews }}</span>{% endif %}
             {% if c.shared %}<span class="mark shared">also in {{ c.shared }}</span>{% endif %}
           </span>{% endif %}
         </summary>

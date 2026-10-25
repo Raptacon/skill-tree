@@ -18,7 +18,7 @@
 #               by:     {role: x} | {person: "@github"} | {any_of: [...]}
 #               source: where `auto` reads from (Master Roster tab/column)
 #               claim:  true = person self-reports, a verifier confirms
-#   renews      season | permanent | event
+#   renews      season | permanent | event | {months: N}
 #   visibility  public | team | mentors | self
 #   requires    [item-id, {hours: N}, ...]
 #   required    default true; false = recommended, not blocking
@@ -255,6 +255,21 @@ items:
     visibility: mentors
 
   # ---------------------------------------------------------------- safety
+  - id: onb-first-safety-manual
+    name: Read the FIRST Safety Manual
+    description: >-
+      Everyone on the team - students, parents, mentors, volunteers and board -
+      reads FIRST's Safety Manual each season: how FIRST expects teams to work
+      safely in the shop, at events and when traveling.
+    section: safety
+    roles: [student, parent, mentor, volunteer, board]
+    kind: check
+    verify: {method: self}
+    training:
+      - {type: doc, label: "FIRST Safety Manual", url: "https://www.firstinspires.org/hubfs/web/program/all/safety-manual.pdf?hsLang=en"}
+    renews: season
+    visibility: team
+
   - id: onb-safety-test
     name: Safety test passed
     description: Students and mentors take the same test.
@@ -269,6 +284,7 @@ items:
     renews: season
     visibility: team
     training:
+      - {type: doc, label: "FIRST Safety Manual", url: "https://www.firstinspires.org/hubfs/web/program/all/safety-manual.pdf?hsLang=en"}
       - {type: link, label: Safety test (Schoology)}   # TODO link
 
   - id: onb-shop-orientation
@@ -280,6 +296,8 @@ items:
     roles: [student, mentor]
     kind: check
     requires: [onb-safety-test]
+    training:
+      - {type: doc, label: "FIRST Safety Manual", url: "https://www.firstinspires.org/hubfs/web/program/all/safety-manual.pdf?hsLang=en"}
     verify: {method: signoff, by: {any_of: [{role: safety-officer}, {role: lead-mentor}]}}
     renews: season
     visibility: public
@@ -296,6 +314,23 @@ items:
     verify: {method: signoff, by: {role: mentor}}   # any mentor can check the label
     renews: season
     visibility: team
+
+  - id: onb-cpr-certified
+    name: CPR / First Aid / AED certified
+    description: >-
+      A current CPR, First Aid and AED certification from a recognized course
+      (American Red Cross, American Heart Association or similar). Recommended
+      for mentors and anyone chaperoning a trip; students are welcome to get it too.
+    section: safety
+    roles: [mentor, {role: parent, when: chaperone}, {role: volunteer, when: chaperone}]
+    kind: external
+    required: false
+    verify: {method: signoff, claim: true, by: {role: lead-mentor}}
+    training:
+      - {type: link, label: "American Red Cross: first aid classes", url: "https://www.redcross.org/take-a-class/first-aid"}
+      - {type: link, label: "American Red Cross: CPR classes", url: "https://www.redcross.org/take-a-class/cpr"}
+    renews: {months: 24}
+    visibility: mentors
 
   # ---------------------------------------------------------------- connected
   - id: onb-discord

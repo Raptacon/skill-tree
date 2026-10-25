@@ -69,6 +69,9 @@ signoff_roles:
   - id: lead-mentor
     name: Lead Mentor
     description: Can sign off any onboarding item and authorize other verifiers.
+  - id: safety-captain
+    name: Safety Captain
+    description: Student safety captain - leads the team's safety culture and FIRST Safety Award effort, and signs off safety basics.
   - id: safety-officer
     name: Safety Mentor
     description: Signs off safety tests and shop orientation.
