@@ -12,6 +12,7 @@ class Tree(BaseModel):
     id: str
     name: str
     kind: str
+    authored_by: list[dict[str, str]]
     created_at: date
     updated_at: date
     description: str
