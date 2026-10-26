@@ -18,3 +18,4 @@ jobs:
           python-version: "3.14"
       - run: pip install pipenv && pipenv install --deploy
       - run: make ci
+      - run: make validate
