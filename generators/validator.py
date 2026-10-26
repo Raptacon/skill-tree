@@ -12,6 +12,8 @@ class Tree(BaseModel):
     id: str
     name: str
     kind: str
+    parent_trees: list[str] | None = None
+    requires: list[str] | None = None
     authored_by: list[dict[str, str]]
     created_at: date
     updated_at: date
