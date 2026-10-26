@@ -1,3 +1,5 @@
+from datetime import date
+
 from pydantic import BaseModel, Field, NonNegativeInt
 import yaml
 import glob
@@ -10,6 +12,8 @@ class Tree(BaseModel):
     id: str
     name: str
     kind: str
+    created_at: date
+    updated_at: date
     description: str
 
 def validate_yaml():
