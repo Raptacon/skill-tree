@@ -4,17 +4,16 @@ import glob
 import common
 
 class SkillTree(BaseModel):
-    tree: str
-    skills: list[Skills]
+    tree: Tree
     
-class Skills(BaseModel):
+class Tree(BaseModel):
     id: str
-    tier: NonNegativeInt = Field(le=4)
     name: str
+    kind: str
     description: str
 
 def validate_yaml():
-    for file in glob.glob('content/raptacon/skills/*.yml', recursive=True):
+    for file in glob.glob('content/raptacon/trees/*.yml', recursive=True):
         entries = yaml.safe_load(open(file))
         SkillTree(**entries)
         
