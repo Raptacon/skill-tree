@@ -6,6 +6,7 @@ import glob
 
 class SkillTree(BaseModel):
     tree: Tree
+    items: Item
     
 class Tree(BaseModel):
     id: str
@@ -17,6 +18,18 @@ class Tree(BaseModel):
     created_at: date
     updated_at: date
     description: str
+    
+class Item(BaseModel):
+    id: str
+    name: str
+    description: str
+    section: str
+    roles: str
+    kind: str
+    requires: list[str]
+    verify: dict[str, str]
+    renews: str
+    visibility: str
 
 def validate_yaml():
     for file in glob.glob('content/raptacon/trees/*.yml', recursive=True):
