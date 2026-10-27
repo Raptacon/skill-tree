@@ -1,12 +1,13 @@
 from datetime import date
+from typing import Any, Self
 
-from pydantic import BaseModel
+from pydantic import BaseModel, ModelWrapValidatorHandler, ValidationError, model_validator
 import yaml
 import glob
 
 class SkillTree(BaseModel):
     tree: Tree
-    items: Item
+    items: Item    
     
 class Tree(BaseModel):
     id: str
@@ -34,6 +35,7 @@ class Item(BaseModel):
 def validate_yaml():
     for file in glob.glob('content/raptacon/trees/*.yml', recursive=True):
         entries = yaml.safe_load(open(file))
+        print(f"validating '{file}'...")
         SkillTree(**entries)
         
     print('all yaml valid')
