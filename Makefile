@@ -3,7 +3,7 @@ PYTHON := pipenv run python
 
 TREE ?= manufacturing
 
-.PHONY: techmap checklist overview validate lint site ci clean
+.PHONY: techmap checklist overview slide validate lint site ci clean
 
 techmap:
 	$(PYTHON) generators/techmap.py
@@ -12,6 +12,10 @@ techmap:
 # ROLES=parent,mentor renders a single combined page for someone holding several roles.
 checklist:
 	$(PYTHON) generators/checklist.py $(TREE) $(ROLES)
+
+# A 16:9 slide for meetings, e.g. make slide TREE=core-knowledge
+slide:
+	$(PYTHON) generators/slide.py $(TREE)
 
 # A tree's main page: tiers/sections as rows, skills as expandable cards, QR per row
 overview:
