@@ -1,0 +1,25 @@
+# Raptacon's config for Bibbidi-Bobbidi-Bash (the bash-game submodule), copied
+# over the game's own config.yaml when the site is built. Published at
+# <site_url>/bash/. Set a module or mode to false to hide it.
+
+modules:
+  - terminal: true     # 🐚 bash
+  - pwsh: true         # 💠 PowerShell - the driver station laptops run Windows
+  - dotfiles: true     # ⚙️ Dotfiles & aliases
+  - macos: true        # 🍎 macOS
+  - vim: true          # ✍️ Vim
+  - tmux: false        # 🪟 tmux
+  - text: true         # 🔤 Text wrangling (awk, sed, jq)
+  - git: true          # 🌿 Git
+  - linux: true        # 🐧 Linux admin
+  - docker: true       # 🐳 Docker - students are asking about it
+  - k8s: false         # ☸️ Kubernetes
+  - aws: false         # ☁️ AWS CLI
+  - azure: false       # 🔷 Azure CLI
+  - terraform: false   # 🏗️ Terraform
+  - db: false          # 🗄️ Database (PostgreSQL / psql)
+
+modes:
+  hardcore: true       # 🔥 no sidebar, no hints, 1.5x pixie dust
+  impossible: true     # 🐉 opt-in Impossible tracks
+  unfair: true         # 😈 opt-in Unfair (Hades) tracks

@@ -120,6 +120,7 @@ def build_v2(tree_id, ctx):
             if d["tree"].get("kind") == "specialization" and tree_id in d["tree"].get("parent_trees", [])
         ],
         "reached_from": [ctx["tree_names"].get(p, p) for p in tree.get("parent_trees", [])],
+        "slide": f"{tree_id}_slide.html" if tree_id in ctx["slides"] else None,
         "draft": False,
     }
 
@@ -136,6 +137,7 @@ def load_ctx():
         "tree_names": {s["id"]: s["name"] for s in team.get("subteams", [])}
         | {t: d["tree"]["name"] for t, d in trees.items()},
         "site_url": team["site_url"].rstrip("/"),
+        "slides": team.get("slides", []),
         "core_ids": {i.get("ref") for i in trees.get("core-knowledge", {}).get("items", [])},
         "team": team["team"],
         "season": common.current_season(team),

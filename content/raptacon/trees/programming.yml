@@ -76,6 +76,7 @@ items:
     requires: [prog-python-basics]
     verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: programming}, {role: subteam-mentor, tree: programming}]}}
     training:
+      - {type: link, label: "Bibbidi-Bobbidi-Bash: the Terminal module", url: "https://skills.raptacon.com/bash/"}
       - {type: doc, label: RobotPy documentation, url: "https://robotpy.readthedocs.io/en/stable/index.html"}
       - {type: doc, label: "Python virtual environments (venv)", url: "https://docs.python.org/3/library/venv.html"}
       - {type: doc, label: "RobotPy: the robot simulator", url: "https://robotpy.readthedocs.io/en/stable/guide/simulator.html"}
@@ -95,6 +96,7 @@ items:
     requires: [base-git]
     verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: programming}, {role: subteam-mentor, tree: programming}]}}
     training:
+      - {type: link, label: "Bibbidi-Bobbidi-Bash: Git module, Intermediate track", url: "https://skills.raptacon.com/bash/"}
       - {type: doc, label: "GitHub Docs: About pull requests", url: "https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests"}
       - {type: doc, label: "GitHub Docs: Ignoring files (.gitignore)", url: "https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files"}
     renews: permanent

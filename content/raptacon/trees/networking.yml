@@ -66,6 +66,7 @@ items:
     requires: [net-basics]
     verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: electronics}, {role: subteam-mentor, tree: electronics}, {role: subteam-lead, tree: programming}, {role: subteam-mentor, tree: programming}]}}
     training:
+      - {type: link, label: "Bibbidi-Bobbidi-Bash: Terminal and Linux Admin modules", url: "https://skills.raptacon.com/bash/"}
       - {type: doc, label: "WPILib: Networking utilities", url: "https://docs.wpilib.org/en/stable/docs/networking/networking-utilities/index.html"}
     renews: permanent
     visibility: public

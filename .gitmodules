@@ -1,3 +1,6 @@
 [submodule "brand-kit"]
 	path = brand-kit
 	url = https://github.com/Raptacon/brand-kit.git
+[submodule "bash-game"]
+	path = bash-game
+	url = https://gitlab.com/klevermonicker/bash-game.git
