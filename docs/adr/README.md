@@ -8,3 +8,4 @@
 | [0004](0004-item-semantics-declared-in-yaml.md) | Verification, renewal, visibility and kind are declared per item |
 | [0005](0005-repo-public-engine-separate-from-content.md) | Public repo, no people data, engine separate from content |
 | [0006](0006-roster-is-source-of-truth-for-membership.md) | The roster is the source of truth for team membership and roles |
+| [0007](0007-skills-are-a-dag-skill-sets-are-views.md) | Skills are a DAG; skill-sets are views over it |
