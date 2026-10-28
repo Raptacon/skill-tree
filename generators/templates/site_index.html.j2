@@ -32,6 +32,11 @@
     <div class="desc">Every tree and every tier on one page - from your first day to Master, and the hybrids in between.</div>
   </a>
 
+  <div class="cards side">
+    <a class="card" href="bash/"><div class="name">&#128058; Command-line game</div><div class="desc">Bibbidi-Bobbidi-Bash: learn the terminal, Git, PowerShell and more by playing.</div></a>
+    {% for s in slides %}<a class="card" href="{{ s.id }}_slide.html"><div class="name">&#128250; {{ s.name }} slide</div><div class="desc">For meetings and join nights.</div></a>{% endfor %}
+  </div>
+
   <h2>Start here</h2>
   <div class="cards">
     {% for t in trees %}

@@ -14,8 +14,6 @@ import common
 SITE = os.path.join(common.ROOT, "site")
 HERE = os.path.dirname(os.path.abspath(__file__))
 # Index order: what everyone needs first.
-# Trees that get a 16:9 slide (<tree>_slide.html) for meetings and join nights.
-SLIDES = ["onboarding", "baseline", "core-knowledge"]
 KIND_ORDER = {"onboarding": 0, "baseline": 1, "core-knowledge": 2, "core": 3, "certification": 4}
 
 
@@ -32,9 +30,11 @@ def main():
     for tree_id in v2:
         run("overview.py", tree_id)
     run("techmap.py")
-    for tree_id in SLIDES:
+    slides = common.load_team().get("slides", [])
+    for tree_id in slides:
         run("slide.py", tree_id)
     run("catalog.py")
+    run("bashgame.py")
 
     team = common.load_team()
     common.OUT = SITE
@@ -47,6 +47,7 @@ def main():
                      key=lambda t: KIND_ORDER[t["kind"]]),
         specializations=sorted([d["tree"] for d in v2.values() if d["tree"].get("kind") == "specialization"],
                                key=lambda t: t["name"]),
+        slides=[{"id": t, "name": v2[t]["tree"]["name"]} for t in slides if t in v2],
         subteams=sorted([d["tree"] for d in v2.values() if d["tree"].get("kind") == "subteam"],
                         key=lambda t: t["name"]),
     )

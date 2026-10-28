@@ -6,6 +6,9 @@ team:
 # Published site; QR codes on printed overviews point back here.
 site_url: https://skills.raptacon.com
 
+# Trees that get a 16:9 slide (<tree>_slide.html) for meetings and join nights.
+slides: [onboarding, baseline, core-knowledge]
+
 # Sign-off form for leads and mentors; slides show a QR code to it when set.
 signoff_form_url:
 

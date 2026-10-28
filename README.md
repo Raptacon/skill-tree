@@ -16,6 +16,8 @@ Raptacon 3200's skill trees: what every team member needs to do and learn, from 
 
 The [Tech Map](https://skills.raptacon.com/techmap.html) shows every tree and tier on one page.
 
+Also on the site: [Bibbidi-Bobbidi-Bash](https://skills.raptacon.com/bash/), a command-line training game by Dan Babb (the `bash-game` submodule, with Raptacon's module choices in `content/raptacon/bash-game.yaml`), and 16:9 slides for meetings (`make slide TREE=core-knowledge`).
+
 People's progress is **not** in this repo. It lives in the team roster (Google Sheets), run by [raptacon-onboarding-system](https://github.com/Raptacon/raptacon-onboarding-system). This repo only defines the trees.
 
 ## How progress works
