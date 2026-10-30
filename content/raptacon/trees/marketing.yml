@@ -11,7 +11,7 @@ tree:
   authored_by:
     - {name: Chris Hirsch, github: ChrisHirsch}
   created_at: 2026-10-20
-  updated_at: 2026-10-21
+  updated_at: 2026-10-30
   description: >-
     Raptacon's image: our theme, T-shirts, pit, posters, photos and video of
     every event, the website and our socials. Pictures and video we share only
@@ -126,7 +126,7 @@ items:
     description: Set the team's social strategy and use engagement analytics to adjust it.
     roles: [student]
     kind: check
-    verify: {method: signoff, by: {role: lead-mentor}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-mentor, tree: marketing}, {role: lead-mentor}]}}
     renews: permanent
     visibility: public
 
@@ -137,6 +137,6 @@ items:
     description: Own the team's brand and media strategy season to season, and train new members in it.
     roles: [student]
     kind: check
-    verify: {method: signoff, by: {role: lead-mentor}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-mentor, tree: marketing}, {role: lead-mentor}]}}
     renews: permanent
     visibility: public

@@ -20,6 +20,8 @@ Tier-level defaults in `tiers.yml` remain as **defaults** that items inherit and
 
 **People in YAML** are only ever `{name, github}`. Items reference *roles*; `assignments.yml` maps roles to people per season. The site and checklists can then say "ask Jane D. or Sam K." while a lead change stays a one-line PR. Items may also carry `practical: {summary, steps}`, the exact hands-on task a verifier runs. Trees set defaults and items override. These are kept in YAML instead of being derived from `git blame` because blame loses track when items move between files (ADR-0003). CI keeps `updated_at` honest by failing a PR that edits an item without bumping it.
 
+**Earning a tree's badge** (added 2026-10-30): a person earns a tree's `badge` when every item in the tree that **applies to their roles** (and conditions) is complete, **excluding** items with `required: false`, `status: hidden` or `status: draft`. Items that renew must be current: this season for `renews: season`, within the window for `renews: {months: N}`. An item with `parts` counts once every part is signed off.
+
 Scoped sign-off roles use `{role: <id>, tree: <tree-id>}` (e.g. `{role: subteam-lead, tree: manufacturing}`).
 
 ## Consequences

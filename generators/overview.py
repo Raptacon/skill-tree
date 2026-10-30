@@ -67,6 +67,7 @@ def v2_card(item, tree_id, home, ctx):
         "draft": item.get("status") == "draft",
         "detail": detail,
         "bonus": item.get("bonus", []),
+        "signoff": common.signoff_link(item, ctx["trees"], ctx["team_doc"]),
     }
 
 
@@ -138,6 +139,9 @@ def load_ctx():
         | {t: d["tree"]["name"] for t, d in trees.items()},
         "site_url": team["site_url"].rstrip("/"),
         "slides": team.get("slides", []),
+        "signoff_url": team.get("signoff_form_url"),
+        "signoff_qr": qr_data_uri(team["signoff_form_url"]) if team.get("signoff_form_url") else None,
+        "team_doc": team,
         "core_ids": {i.get("ref") for i in trees.get("core-knowledge", {}).get("items", [])},
         "team": team["team"],
         "season": common.current_season(team),
@@ -152,7 +156,8 @@ def render(tree_id, ctx, env):
         page["next"]["link"] = f"{page['next']['tree']}.html"
         page["next"]["label"] = ctx["tree_names"].get(page["next"]["tree"], page["next"]["tree"])
     return common.write_html(env, "overview.html.j2", f"{tree_id}.html",
-                             page=page, team=ctx["team"], season=ctx["season"])
+                             page=page, team=ctx["team"], season=ctx["season"],
+                             signoff_url=ctx["signoff_url"], signoff_qr=ctx["signoff_qr"])
 
 
 def main():

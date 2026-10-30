@@ -13,7 +13,7 @@ tree:
     - {name: TODO, github: TODO}          # Programming whiteboard session author(s)
     - {name: Chris Hirsch, github: ChrisHirsch}
   created_at: 2026-10-20
-  updated_at: 2026-10-21
+  updated_at: 2026-10-30
   description: >-
     Write the Python that runs the robot: Python first, then sensors, motors,
     subsystems and commands, then the real competition code and the team's
@@ -263,7 +263,7 @@ items:
     roles: [student]
     kind: check
     requires: [prog-commands-v2, prog-motors, prog-sensors]
-    verify: {method: signoff, by: {role: lead-mentor}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-mentor, tree: programming}, {role: lead-mentor}]}}
     training:
       - {type: doc, label: "WPILib: Subsystems", url: "https://docs.wpilib.org/en/stable/docs/software/commandbased/subsystems.html"}
     renews: permanent
@@ -276,7 +276,7 @@ items:
     roles: [student]
     kind: check
     requires: [prog-motors, prog-sensors]
-    verify: {method: signoff, by: {role: lead-mentor}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-mentor, tree: programming}, {role: lead-mentor}]}}
     training:
       - {type: doc, label: "WPILib: Introduction to PID", url: "https://docs.wpilib.org/en/stable/docs/software/advanced-controls/introduction/introduction-to-pid.html"}
     renews: permanent
@@ -289,7 +289,7 @@ items:
     roles: [student]
     kind: check
     requires: [prog-pid]
-    verify: {method: signoff, by: {role: lead-mentor}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-mentor, tree: programming}, {role: lead-mentor}]}}
     training:
       - {type: doc, label: "WPILib: Swerve drive kinematics", url: "https://docs.wpilib.org/en/stable/docs/software/kinematics-and-odometry/swerve-drive-kinematics.html"}
     renews: permanent
@@ -301,7 +301,7 @@ items:
     description: Use the robot's cameras and vision pipeline to find targets and estimate position.
     roles: [student]
     kind: check
-    verify: {method: signoff, by: {role: lead-mentor}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-mentor, tree: programming}, {role: lead-mentor}]}}
     training:
       - {type: repo, label: "Robot-2026 PhotonVision helper (reference)", url: "https://github.com/Raptacon/Robot-2026/blob/main/photonUtils.py"}
       - {type: doc, label: "PhotonVision documentation", url: "https://docs.photonvision.org/en/latest/"}
@@ -317,7 +317,7 @@ items:
     roles: [student]
     kind: check
     requires: [prog-commands-v2, prog-testing, prog-pull-requests]
-    verify: {method: signoff, by: {role: lead-mentor}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-mentor, tree: programming}, {role: lead-mentor}]}}
     training:
       - {type: repo, label: robot-2027 (setup in the README), url: "https://github.com/Raptacon/robot-2027"}
       - {type: repo, label: robot-2027 commands, url: "https://github.com/Raptacon/robot-2027/tree/main/commands"}
@@ -334,7 +334,7 @@ items:
     roles: [student]
     kind: check
     requires: [prog-testing, prog-pull-requests]
-    verify: {method: signoff, by: {role: lead-mentor}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-mentor, tree: programming}, {role: lead-mentor}]}}
     training:
       - {type: repo, label: raptacon3200 shared library, url: "https://github.com/Raptacon/raptacon3200"}
     renews: permanent
@@ -347,7 +347,7 @@ items:
     roles: [student]
     kind: check
     requires: [prog-subsystems]
-    verify: {method: signoff, by: {role: lead-mentor}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-mentor, tree: programming}, {role: lead-mentor}]}}
     renews: permanent
     visibility: public
 
@@ -358,7 +358,7 @@ items:
     description: Design a reusable abstraction, not just a single feature.
     roles: [student]
     kind: check
-    verify: {method: signoff, by: {role: lead-mentor}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-mentor, tree: programming}, {role: lead-mentor}]}}
     training:
       - {type: repo, label: "robot-2027 InputFactory - an architecture-level abstraction", url: "https://github.com/Raptacon/robot-2027/blob/main/utils/input/factory.py"}
     bonus:
@@ -374,6 +374,6 @@ items:
     description: Take a Novice from Hello World through the cone drill.
     roles: [student]
     kind: check
-    verify: {method: signoff, by: {role: lead-mentor}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-mentor, tree: programming}, {role: lead-mentor}]}}
     renews: permanent
     visibility: public

@@ -16,7 +16,7 @@ tree:
     - {name: Nazeer Zeerak, github: nazeermazeer}
     - {name: Chris Hirsch, github: ChrisHirsch}
   created_at: 2026-10-21
-  updated_at: 2026-10-21
+  updated_at: 2026-10-30
   badge:
     name: Arcade Master
     description: From one LED strip to a game you can challenge another team at.
@@ -187,7 +187,7 @@ items:
     roles: [student]
     kind: check
     requires: [leds-patterns-animation, leds-text]
-    verify: {method: signoff, by: {role: lead-mentor}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-mentor, tree: electronics}, {role: subteam-mentor, tree: programming}, {role: lead-mentor}]}}
     training:
       - {type: repo, label: "robot-2027 Xbox controller mapping", url: "https://github.com/Raptacon/robot-2027/blob/main/utils/input/xbox_map.py"}
     practical:
@@ -209,7 +209,7 @@ items:
     roles: [student]
     kind: check
     requires: [leds-pong]
-    verify: {method: signoff, by: {role: lead-mentor}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-mentor, tree: electronics}, {role: subteam-mentor, tree: programming}, {role: lead-mentor}]}}
     renews: permanent
     visibility: public
 
@@ -222,7 +222,7 @@ items:
     roles: [student]
     kind: check
     requires: [leds-pong, prog-shared-library]
-    verify: {method: signoff, by: {role: lead-mentor}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-mentor, tree: electronics}, {role: subteam-mentor, tree: programming}, {role: lead-mentor}]}}
     training:
       - {type: repo, label: raptacon3200 shared library, url: "https://github.com/Raptacon/raptacon3200"}
     renews: permanent
@@ -238,7 +238,7 @@ items:
     roles: [student]
     kind: check
     requires: [leds-more-games]
-    verify: {method: signoff, by: {role: lead-mentor}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-mentor, tree: electronics}, {role: subteam-mentor, tree: programming}, {role: lead-mentor}]}}
     renews: permanent
     visibility: public
 
@@ -252,7 +252,7 @@ items:
     roles: [student]
     kind: check
     requires: [leds-more-games]
-    verify: {method: signoff, by: {role: lead-mentor}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-mentor, tree: electronics}, {role: subteam-mentor, tree: programming}, {role: lead-mentor}]}}
     renews: permanent
     visibility: public
 
@@ -266,7 +266,7 @@ items:
     roles: [student]
     kind: check
     requires: [leds-patterns-animation, strat-game-rules-test]
-    verify: {method: signoff, by: {role: lead-mentor}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-mentor, tree: electronics}, {role: subteam-mentor, tree: programming}, {role: lead-mentor}]}}
     renews: season
     visibility: public
 
@@ -276,6 +276,6 @@ items:
     description: Take a Novice from their first strip to a working matrix.
     roles: [student]
     kind: check
-    verify: {method: signoff, by: {role: lead-mentor}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-mentor, tree: electronics}, {role: subteam-mentor, tree: programming}, {role: lead-mentor}]}}
     renews: permanent
     visibility: public

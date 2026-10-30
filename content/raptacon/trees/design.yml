@@ -15,7 +15,7 @@ tree:
     - {name: TODO, github: TODO}          # Design whiteboard session author(s)
     - {name: Chris Hirsch, github: ChrisHirsch}
   created_at: 2026-10-20
-  updated_at: 2026-10-22
+  updated_at: 2026-10-30
   description: >-
     Design the robot in Onshape: sketches, parts, assemblies and the drawings
     Manufacturing builds from. Expect about four years from your first sketch to
@@ -247,7 +247,7 @@ items:
     roles: [student]
     kind: check
     requires: [des-master-sketch, des-complex-parts]
-    verify: {method: signoff, by: {role: lead-mentor}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-mentor, tree: design}, {role: lead-mentor}]}}
     renews: permanent
     visibility: public
 
@@ -260,7 +260,7 @@ items:
     roles: [student]
     kind: check
     requires: [des-adv-assemblies]
-    verify: {method: signoff, by: {role: lead-mentor}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-mentor, tree: design}, {role: lead-mentor}]}}
     training:
       - {type: doc, label: "frcdesign.org 1B: Power transmissions", url: "https://frcdesign.org/learning-course/stage1/1b/introduction/"}
       - {type: doc, label: "frcdesign.org Stage 2: shooter, pivot, intake, elevator", url: "https://frcdesign.org/learning-course/stage2/2a/introduction/"}
@@ -274,7 +274,7 @@ items:
     roles: [student]
     kind: check
     requires: [des-drawings-bom]
-    verify: {method: signoff, by: {role: lead-mentor}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-mentor, tree: design}, {role: lead-mentor}]}}
     renews: permanent
     visibility: public
     part_of_hybrid: dfm
@@ -289,7 +289,7 @@ items:
     roles: [student]
     kind: check
     requires: [strat-game-rules-test]
-    verify: {method: signoff, by: {role: lead-mentor}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-mentor, tree: design}, {role: lead-mentor}]}}
     training:
       - {type: repo, label: "Robot-2026 frame and module dimensions", url: "https://github.com/Raptacon/Robot-2026/blob/main/constants/robot_geometry.py"}
       - {type: repo, label: "Robot-2026 field element coordinates", url: "https://github.com/Raptacon/Robot-2026/blob/main/constants/field_target_constants_2026.py"}
@@ -302,7 +302,7 @@ items:
     description: Present a design for review, take the feedback, and follow up on every item.
     roles: [student]
     kind: check
-    verify: {method: signoff, by: {role: lead-mentor}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-mentor, tree: design}, {role: lead-mentor}]}}
     training:
       - {type: doc, label: "frcdesign.org 1D: Design methodology", url: "https://frcdesign.org/learning-course/stage1/1d/introduction/"}
     bonus:
@@ -318,7 +318,7 @@ items:
     description: Take a Novice from Intro to CAD through the Gusset assessment.
     roles: [student]
     kind: check
-    verify: {method: signoff, by: {role: lead-mentor}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-mentor, tree: design}, {role: lead-mentor}]}}
     renews: permanent
     visibility: public
 
@@ -329,7 +329,7 @@ items:
     roles: [student]
     kind: check
     requires: [des-design-review]
-    verify: {method: signoff, by: {role: lead-mentor}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-mentor, tree: design}, {role: lead-mentor}]}}
     renews: permanent
     visibility: public
 
@@ -339,6 +339,6 @@ items:
     description: Own the team's CAD and drawing conventions, and train others in them.
     roles: [student]
     kind: check
-    verify: {method: signoff, by: {role: lead-mentor}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-mentor, tree: design}, {role: lead-mentor}]}}
     renews: permanent
     visibility: public

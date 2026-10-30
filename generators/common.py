@@ -3,6 +3,7 @@ one source of truth without each script re-deriving the same lookups."""
 
 import os
 import shutil
+from urllib.parse import quote
 from datetime import date
 
 import yaml
@@ -65,6 +66,23 @@ def resolve_items(tree_doc, items_by_id, include_hidden=False):
         if include_hidden or item.get("status") != "hidden":
             resolved.append(item)
     return resolved
+
+
+def signoff_link(item, trees, team):
+    """Pre-filled sign-off form URL for an item recorded by a person, or None.
+    The form lists only `verify.method: signoff` items that aren't hidden or
+    draft, labelled "<home tree name>: <item name> (<item id>)"."""
+    url, field = team.get("signoff_form_url"), team.get("signoff_skill_field")
+    if not (url and field) or item.get("verify", {}).get("method") != "signoff":
+        return None
+    if item.get("status") in ("hidden", "draft"):
+        return None
+    home = next((d["tree"] for d in trees.values()
+                 if any(i.get("id") == item["id"] for i in d["items"] if "ref" not in i)), None)
+    if home is None:
+        return None
+    label = f"{home.get('short_name', home['name'])}: {item['name']} ({item['id']})"
+    return f"{url}?usp=pp_url&{field}={quote(label)}"
 
 
 def load_roles():

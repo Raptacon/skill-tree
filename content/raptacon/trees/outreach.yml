@@ -10,7 +10,7 @@ tree:
   authored_by:
     - {name: Chris Hirsch, github: ChrisHirsch}
   created_at: 2026-10-20
-  updated_at: 2026-10-21
+  updated_at: 2026-10-30
   description: >-
     How Raptacon shows up in the community: telling our story, thanking and
     growing our sponsors, writing award submissions and running outreach programs.
@@ -52,7 +52,7 @@ items:
     description: Lead sponsor outreach - asks, season updates and renewal thank-yous.
     roles: [student]
     kind: check
-    verify: {method: signoff, by: {role: lead-mentor}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-mentor, tree: outreach}, {role: lead-mentor}]}}
     renews: permanent
     visibility: public
 
@@ -62,7 +62,7 @@ items:
     description: Co-write an award submission - the Impact Award essay or a Woodie Flowers nomination.
     roles: [student]
     kind: check
-    verify: {method: signoff, by: {role: lead-mentor}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-mentor, tree: outreach}, {role: lead-mentor}]}}
     renews: permanent
     visibility: public
 
@@ -73,6 +73,6 @@ items:
     description: Design and lead a community outreach or STEM demo program.
     roles: [student]
     kind: check
-    verify: {method: signoff, by: {role: lead-mentor}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-mentor, tree: outreach}, {role: lead-mentor}]}}
     renews: permanent
     visibility: public
