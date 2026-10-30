@@ -10,11 +10,12 @@ import sys
 from jinja2 import Environment, FileSystemLoader
 
 import common
+import overview
 
 SITE = os.path.join(common.ROOT, "site")
 HERE = os.path.dirname(os.path.abspath(__file__))
 # Index order: what everyone needs first.
-KIND_ORDER = {"onboarding": 0, "baseline": 1, "core-knowledge": 2, "core": 3, "certification": 4}
+KIND_ORDER = {"onboarding": 0, "baseline": 1, "core-knowledge": 2, "core": 3, "certification": 4, "commitment": 5}
 
 
 def run(script, *args):
@@ -47,6 +48,8 @@ def main():
                      key=lambda t: KIND_ORDER[t["kind"]]),
         specializations=sorted([d["tree"] for d in v2.values() if d["tree"].get("kind") == "specialization"],
                                key=lambda t: t["name"]),
+        signoff_url=team.get("signoff_form_url"),
+        signoff_qr=overview.qr_data_uri(team["signoff_form_url"]) if team.get("signoff_form_url") else None,
         slides=[{"id": t, "name": v2[t]["tree"]["name"]} for t in slides if t in v2],
         subteams=sorted([d["tree"] for d in v2.values() if d["tree"].get("kind") == "subteam"],
                         key=lambda t: t["name"]),

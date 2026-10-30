@@ -10,7 +10,7 @@ tree:
   authored_by:
     - {name: Chris Hirsch, github: ChrisHirsch}
   created_at: 2026-10-20
-  updated_at: 2026-10-23
+  updated_at: 2026-10-30
   badge:
     name: Raptor
     description: Tools, git, the team and every subteam - you're ready for a subteam tree.
@@ -136,17 +136,17 @@ items:
     name: Shadow every subteam
     description: >-
       Spend a meeting with each of the six subteams and do real work with them.
-      That subteam's lead marks you off.
+      That subteam's lead or mentor marks you off.
     section: track
     roles: [student, mentor]
     kind: check
     parts:
-      - {id: strategy, name: Strategy/Scouting/Drive, by: {role: subteam-lead, tree: strategy}}
-      - {id: design, name: CAD/Design, by: {role: subteam-lead, tree: design}}
-      - {id: manufacturing, name: Fabrication/Manufacturing, by: {role: subteam-lead, tree: manufacturing}}
-      - {id: electronics, name: Electronics, by: {role: subteam-lead, tree: electronics}}
-      - {id: programming, name: Programming, by: {role: subteam-lead, tree: programming}}
-      - {id: marketing, name: Marketing, by: {role: subteam-lead, tree: marketing}}
+      - {id: strategy, name: Strategy/Scouting/Drive, by: {any_of: [{role: subteam-lead, tree: strategy}, {role: subteam-mentor, tree: strategy}, {role: lead-mentor}]}}
+      - {id: design, name: CAD/Design, by: {any_of: [{role: subteam-lead, tree: design}, {role: subteam-mentor, tree: design}, {role: lead-mentor}]}}
+      - {id: manufacturing, name: Fabrication/Manufacturing, by: {any_of: [{role: subteam-lead, tree: manufacturing}, {role: subteam-mentor, tree: manufacturing}, {role: lead-mentor}]}}
+      - {id: electronics, name: Electronics, by: {any_of: [{role: subteam-lead, tree: electronics}, {role: subteam-mentor, tree: electronics}, {role: lead-mentor}]}}
+      - {id: programming, name: Programming, by: {any_of: [{role: subteam-lead, tree: programming}, {role: subteam-mentor, tree: programming}, {role: lead-mentor}]}}
+      - {id: marketing, name: Marketing, by: {any_of: [{role: subteam-lead, tree: marketing}, {role: subteam-mentor, tree: marketing}, {role: lead-mentor}]}}
     verify: {method: signoff}
     renews: season
     visibility: public

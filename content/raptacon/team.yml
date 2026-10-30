@@ -9,8 +9,11 @@ site_url: https://skills.raptacon.com
 # Trees that get a 16:9 slide (<tree>_slide.html) for meetings and join nights.
 slides: [onboarding, baseline, core-knowledge]
 
-# Sign-off form for leads and mentors; slides show a QR code to it when set.
-signoff_form_url:
+# Sign-off form for leads and mentors (raptacon-onboarding-system). Slides show
+# a QR code to it; every signed-off skill links to it with the skill pre-filled.
+# The skill label the form expects: "<tree name>: <item name> (<item id>)".
+signoff_form_url: https://docs.google.com/forms/d/e/1FAIpQLSf5ospvdUOAtcpeWTBVrxYsOacsLkkMoWtRViqr0-n4oBAfjg/viewform
+signoff_skill_field: entry.1249674057
 
 # When annual (`renews: season`) items reset. Provisional: start of the CCSD
 # school year. Kept here, in one place, so it can change without touching any tree.
