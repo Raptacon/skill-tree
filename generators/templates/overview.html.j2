@@ -18,6 +18,9 @@
   .topbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
   .topbar img { height: 34px; }
   .topbar a { color: #1a6fb0; font-size: 14px; text-decoration: none; }
+  .topright { display: flex; align-items: center; gap: 18px; }
+  .topbar a.signoff { display: flex; align-items: center; gap: 8px; color: #2e7d32; font-weight: 700; font-size: 13px; line-height: 1.2; }
+  .topbar a.signoff img { height: 56px; width: 56px; border: 2px solid #2e7d32; border-radius: 6px; }
   h1 {
     font-size: clamp(30px, 5vw, 48px);
     text-transform: uppercase;
@@ -66,6 +69,7 @@
 
   .hybrids { padding: 0 14px 14px; font-size: 15px; }
   details.card .body p.bonus { font-size: 14px; color: #555; }
+  details.card .body p.signoff a { color: #2e7d32; }
   details.card .body p.bonus a { font-weight: 600; }
   .hybrids ul.projects { margin: -6px 0 10px 18px; padding: 0; color: #444; font-size: 14px; }
   .next { margin-top: 8px; background: var(--ink); color: #fff; border-radius: 12px; padding: 14px 18px; font-size: 17px; }
@@ -87,7 +91,10 @@
 <body>
   <div class="topbar">
     <a href="index.html"><img src="assets/lockup-horizontal.svg" alt="Raptacon 3200"></a>
-    <a href="index.html">&larr; All skill trees</a>
+    <span class="topright">
+      {% if signoff_url %}<a class="signoff" href="{{ signoff_url }}"><img src="{{ signoff_qr }}" alt="QR code to the sign-off form"><span>&#9989; Leads &amp; mentors:<br>sign off a skill</span></a>{% endif %}
+      <a href="index.html">&larr; All skill trees</a>
+    </span>
   </div>
 
   <h1>{{ page.name }}</h1>
@@ -139,6 +146,7 @@
           {% if c.description %}{{ c.description }}{% endif %}
           {% for b in c.bonus %}<p class="bonus">&#127871; Bonus: <a href="{{ b.url }}">{{ b.label }}</a></p>{% endfor %}
           {% if c.detail %}<p><a href="{{ c.detail }}">Full details, training and test &rarr;</a></p>{% endif %}
+          {% if c.signoff %}<p class="signoff"><a href="{{ c.signoff }}">&#9989; Leads &amp; mentors: sign off this skill</a></p>{% endif %}
         </div>
       </details>
       {% endfor %}

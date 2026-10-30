@@ -10,7 +10,7 @@ tree:
   authored_by:
     - {name: Chris Hirsch, github: ChrisHirsch}
   created_at: 2026-10-21
-  updated_at: 2026-10-21
+  updated_at: 2026-10-30
   description: >-
     Wire the robot so Programming can control every mechanism: power, CAN,
     sensors and pneumatics - built safely, neatly and to survive a match - then
@@ -316,7 +316,7 @@ items:
     description: Design a small custom circuit board and debug one that isn't working.
     roles: [student]
     kind: check
-    verify: {method: signoff, by: {role: lead-mentor}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-mentor, tree: electronics}, {role: lead-mentor}]}}
     training:
       - {type: doc, label: "KiCad documentation", url: "https://docs.kicad.org/"}
     renews: permanent
@@ -329,7 +329,7 @@ items:
     roles: [student]
     kind: check
     requires: [elec-power-distribution]
-    verify: {method: signoff, by: {role: lead-mentor}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-mentor, tree: electronics}, {role: lead-mentor}]}}
     training:
       - {type: repo, label: "robot-2027 HealthAndStatus subsystem", url: "https://github.com/Raptacon/robot-2027/blob/main/subsystem/health_and_status.py"}
     renews: permanent
@@ -342,7 +342,7 @@ items:
     roles: [student]
     kind: check
     requires: [elec-health-monitoring]
-    verify: {method: signoff, by: {role: lead-mentor}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-mentor, tree: electronics}, {role: lead-mentor}]}}
     training:
       - {type: doc, label: "WPILib: roboRIO brownouts", url: "https://docs.wpilib.org/en/stable/docs/software/roborio-info/roborio-brownouts.html"}
     renews: permanent
@@ -357,7 +357,7 @@ items:
     roles: [student]
     kind: check
     requires: [elec-wiring-harness, elec-can-bus]
-    verify: {method: signoff, by: {role: lead-mentor}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-mentor, tree: electronics}, {role: lead-mentor}]}}
     training:
       - {type: doc, label: "WPILib: Preemptive troubleshooting", url: "https://docs.wpilib.org/en/stable/docs/hardware/hardware-basics/preemptive-troubleshooting.html"}
     renews: season
@@ -371,7 +371,7 @@ items:
     roles: [student]
     kind: check
     requires: [elec-desoldering, elec-oscilloscope]
-    verify: {method: signoff, by: {role: lead-mentor}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-mentor, tree: electronics}, {role: lead-mentor}]}}
     renews: permanent
     visibility: public
 
@@ -382,7 +382,7 @@ items:
       Keep the driver station laptops and team PCs running - diagnose hardware, swap RAM or storage, reinstall the OS.
     roles: [student]
     kind: check
-    verify: {method: signoff, by: {role: lead-mentor}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-mentor, tree: electronics}, {role: lead-mentor}]}}
     renews: permanent
     visibility: public
 
@@ -394,7 +394,7 @@ items:
     roles: [student]
     kind: check
     requires: [elec-power-distribution]
-    verify: {method: signoff, by: {role: lead-mentor}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-mentor, tree: electronics}, {role: lead-mentor}]}}
     training:
       - {type: doc, label: "WPILib: Preemptive troubleshooting", url: "https://docs.wpilib.org/en/stable/docs/hardware/hardware-basics/preemptive-troubleshooting.html"}
     renews: season
@@ -409,7 +409,7 @@ items:
     roles: [student]
     kind: check
     requires: [elec-soldering, elec-multimeter, elec-sensor-wiring]
-    verify: {method: signoff, by: {role: lead-mentor}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-mentor, tree: electronics}, {role: lead-mentor}]}}
     training:
       - {type: doc, label: "Arduino: Getting started", url: "https://docs.arduino.cc/learn/starting-guide/getting-started-arduino/"}
     renews: permanent
@@ -427,7 +427,7 @@ items:
     roles: [student]
     kind: check
     requires: [elec-oscilloscope, elec-microcontrollers]
-    verify: {method: signoff, by: {role: lead-mentor}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-mentor, tree: electronics}, {role: lead-mentor}]}}
     training:
       - {type: doc, label: "PulseView (sigrok) logic analyzer software", url: "https://sigrok.org/wiki/PulseView"}
     practical:
@@ -450,7 +450,7 @@ items:
     description: Own the robot's electrical design and layout for the season, from first wiring plan to competition.
     roles: [student]
     kind: check
-    verify: {method: signoff, by: {role: lead-mentor}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-mentor, tree: electronics}, {role: lead-mentor}]}}
     renews: permanent
     visibility: public
 
@@ -460,6 +460,6 @@ items:
     description: Train others on safe wiring - take a Novice through Safe wiring basics and the robot electrical tour.
     roles: [student]
     kind: check
-    verify: {method: signoff, by: {role: lead-mentor}}
+    verify: {method: signoff, by: {any_of: [{role: subteam-mentor, tree: electronics}, {role: lead-mentor}]}}
     renews: permanent
     visibility: public

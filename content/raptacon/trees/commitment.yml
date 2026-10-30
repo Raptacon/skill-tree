@@ -1,0 +1,76 @@
+# Commitment - hours milestones for everyone on the team: students, parents,
+# mentors, volunteers and board. Total hours from check-in/check-out across
+# every season and subteam; checked automatically, kept for good, never a gate
+# for anything else. Fields as documented in onboarding.yml.
+
+tree:
+  id: commitment
+  name: Commitment
+  kind: commitment
+  authored_by:
+    - {name: Chris Hirsch, github: ChrisHirsch}
+  created_at: 2026-10-30
+  updated_at: 2026-10-30
+  description: >-
+    Hours milestones for everyone on the team - students, parents, mentors,
+    volunteers and board. They count every hour you've checked in, across
+    seasons and subteams, and they never expire. Check in and out every time
+    so your hours count.
+
+sections:
+  - {id: hours, name: Hours}
+
+items:
+  - id: hours-25
+    name: 25 hours
+    section: hours
+    roles: [student, parent, mentor, volunteer, board]
+    kind: hours
+    target: 25
+    verify: {method: auto, source: {tab: CheckIns, sum: "Duration (min)", scope: all-seasons}}
+    renews: permanent
+    visibility: public
+
+  - id: hours-50
+    name: 50 hours
+    section: hours
+    roles: [student, parent, mentor, volunteer, board]
+    kind: hours
+    target: 50
+    requires: [hours-25]
+    verify: {method: auto, source: {tab: CheckIns, sum: "Duration (min)", scope: all-seasons}}
+    renews: permanent
+    visibility: public
+
+  - id: hours-100
+    name: 100 hours
+    section: hours
+    roles: [student, parent, mentor, volunteer, board]
+    kind: hours
+    target: 100
+    requires: [hours-50]
+    verify: {method: auto, source: {tab: CheckIns, sum: "Duration (min)", scope: all-seasons}}
+    renews: permanent
+    visibility: public
+
+  - id: hours-250
+    name: 250 hours
+    section: hours
+    roles: [student, parent, mentor, volunteer, board]
+    kind: hours
+    target: 250
+    requires: [hours-100]
+    verify: {method: auto, source: {tab: CheckIns, sum: "Duration (min)", scope: all-seasons}}
+    renews: permanent
+    visibility: public
+
+  - id: hours-500
+    name: 500 hours
+    section: hours
+    roles: [student, parent, mentor, volunteer, board]
+    kind: hours
+    target: 500
+    requires: [hours-250]
+    verify: {method: auto, source: {tab: CheckIns, sum: "Duration (min)", scope: all-seasons}}
+    renews: permanent
+    visibility: public

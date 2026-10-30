@@ -14,6 +14,10 @@
   a.card { display: block; border: 3px solid #111; border-left: 8px solid #84EC5C; border-radius: 8px; padding: 12px 16px; text-decoration: none; color: #1a1a1a; flex: 1 1 240px; }
   a.card .name { font-weight: 800; font-size: 18px; color: #111; text-transform: uppercase; letter-spacing: 0.04em; }
   a.card .desc { font-size: 12px; color: #555; margin-top: 4px; }
+  a.signoff { display: flex; gap: 16px; align-items: center; margin: 12px 0; padding: 14px 18px; border-radius: 12px; border: 3px solid #2e7d32; background: #f1fbec; color: #111; text-decoration: none; }
+  a.signoff img { width: 120px; height: 120px; flex: none; }
+  a.signoff .name { font-size: 20px; font-weight: 800; color: #2e7d32; }
+  a.signoff .desc { font-size: 15px; color: #333; margin-top: 4px; }
   a.hero { display: block; margin: 18px 0 6px; padding: 18px 20px; border-radius: 12px; background: #111; color: #fff; text-decoration: none; }
   a.hero .name { font-size: 24px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: #84EC5C; }
   a.hero .desc { font-size: 15px; color: #ddd; margin-top: 4px; }
@@ -31,6 +35,14 @@
     <div class="name">The Tech Map</div>
     <div class="desc">Every tree and every tier on one page - from your first day to Master, and the hybrids in between.</div>
   </a>
+
+  {% if signoff_url %}
+  <a class="signoff" href="{{ signoff_url }}">
+    <img src="{{ signoff_qr }}" alt="QR code to the sign-off form">
+    <div><div class="name">&#9989; Leads &amp; mentors: sign off a skill</div>
+    <div class="desc">Watched someone pass a skill's test? Scan or click to record it - on your phone, in about 15 seconds. Use the email or School ID you check in with.</div></div>
+  </a>
+  {% endif %}
 
   <div class="cards side">
     <a class="card" href="bash/"><div class="name">&#128058; Command-line game</div><div class="desc">Bibbidi-Bobbidi-Bash: learn the terminal, Git, PowerShell and more by playing.</div></a>
