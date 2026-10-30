@@ -3,7 +3,7 @@
 # into a matrix, then into a games console: patterns, text, pictures, Pong,
 # Snake, Breakout - played with robot code, Xbox controllers as input and the
 # matrix as the screen, on a cart in the queue and against other teams.
-# Based on Nazeer Zeerak's LED strip-to-matrix project. Fields as documented in
+# Based on Nazeer Zeerak's LED strip-to-matrix project: github.com/Raptacon/pingpongleds. Fields as documented in
 # onboarding.yml; items use `tier` instead of `section`.
 
 tree:
@@ -16,7 +16,7 @@ tree:
     - {name: Nazeer Zeerak, github: nazeermazeer}
     - {name: Chris Hirsch, github: ChrisHirsch}
   created_at: 2026-10-21
-  updated_at: 2026-10-21
+  updated_at: 2026-10-30
   badge:
     name: Arcade Master
     description: From one LED strip to a game you can challenge another team at.
@@ -48,7 +48,8 @@ items:
     description: >-
       Wire an addressable strip - 5V supply, fuse, data line and ground - and work
       out the current budget. A full-white 16x16 matrix can draw about 15 A, so
-      plan power injection and cap brightness.
+      plan power injection and cap brightness. The data line goes to a roboRIO
+      PWM port, not DIO.
     roles: [student]
     kind: check
     requires: [leds-circuit-basics]
@@ -72,6 +73,7 @@ items:
       - {type: repo, label: "State machines step 1: addressable LEDs", url: "https://github.com/Raptacon/Skills-Challenges/tree/main/state_machines/challenge_step_1"}
       - {type: repo, label: "raptacon3200 LED strip helper", url: "https://github.com/Raptacon/raptacon3200/blob/main/raptacon3200/utils/leds.py"}
       - {type: doc, label: "WPILib: Addressable LEDs", url: "https://docs.wpilib.org/en/stable/docs/software/hardware-apis/misc/addressable-leds.html"}
+      - {type: repo, label: "Nazeer's pingpongleds: lighting the whole strip (lightLEDs)", url: "https://github.com/Raptacon/pingpongleds/blob/master/addressableLEDs.py"}
     practical:
       summary: Show it on a real strip.
       steps:
@@ -105,14 +107,17 @@ items:
     description: >-
       Tape the strip back and forth across a board so it becomes a matrix, then
       map (x, y) to the strip's LED number - every other row runs backwards - and
-      skip the LEDs that loop off the board edge.
+      skip the LEDs that loop off the board edge (Nazeer's code calls this dead
+      space).
     roles: [student]
     kind: check
     requires: [leds-strip-effects]
     parts:
       - {id: square, name: "A 16x16 matrix", by: {any_of: [{role: subteam-lead, tree: programming}, {role: subteam-mentor, tree: programming}]}}
-      - {id: rectangle, name: "A non-square matrix (e.g. 8x16) - the math has to work for any size", by: {any_of: [{role: subteam-lead, tree: programming}, {role: subteam-mentor, tree: programming}]}}
+      - {id: rectangle, name: "A non-square matrix (e.g. 18x10, like Nazeer's) - the math has to work for any size", by: {any_of: [{role: subteam-lead, tree: programming}, {role: subteam-mentor, tree: programming}]}}
     verify: {method: signoff}
+    training:
+      - {type: repo, label: "Nazeer's pingpongleds: matrix mapping with dead space (lightMatrix, deadspace, internaloffset)", url: "https://github.com/Raptacon/pingpongleds/blob/master/addressableLEDs.py"}
     practical:
       summary: Prove the mapping on real hardware.
       steps:
@@ -190,6 +195,7 @@ items:
     verify: {method: signoff, by: {role: lead-mentor}}
     training:
       - {type: repo, label: "robot-2027 Xbox controller mapping", url: "https://github.com/Raptacon/robot-2027/blob/main/utils/input/xbox_map.py"}
+      - {type: repo, label: "Nazeer's pingpongleds: Pong on an 18x10 matrix (robot.py, lightPong)", url: "https://github.com/Raptacon/pingpongleds/blob/master/robot.py"}
     practical:
       summary: Two people play a full game on the real matrix.
       steps:
