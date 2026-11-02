@@ -13,7 +13,7 @@ tree:
     - {name: TODO, github: TODO}          # Programming whiteboard session author(s)
     - {name: Chris Hirsch, github: ChrisHirsch}
   created_at: 2026-10-20
-  updated_at: 2026-10-30
+  updated_at: 2026-11-02
   description: >-
     Write the Python that runs the robot: Python first, then sensors, motors,
     subsystems and commands, then the real competition code and the team's
@@ -82,6 +82,33 @@ items:
       - {type: doc, label: "RobotPy: the robot simulator", url: "https://robotpy.readthedocs.io/en/stable/guide/simulator.html"}
     bonus:
       - {label: "What is rubber duck debugging? (MIT OpenCourseWare)", url: "https://www.youtube.com/shorts/jB085P7ktMc"}
+    renews: permanent
+    visibility: public
+
+  - id: prog-command-line
+    tier: 1
+    name: Command line basics
+    description: >-
+      Get around a computer without a mouse: where am I (pwd), what's here (ls),
+      moving around (cd), making, copying, moving and deleting files (mkdir, cp,
+      mv, rm), reading files (cat, less), pipes and redirects (|, >, >>), and
+      getting help (man, --help). The driver station laptops run Windows, so
+      learn the PowerShell versions too.
+    roles: [student]
+    kind: check
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: programming}, {role: subteam-mentor, tree: programming}]}}
+    training:
+      - {type: link, label: "Bibbidi-Bobbidi-Bash: the Terminal module", url: "https://skills.raptacon.com/bash/"}
+      - {type: link, label: "Bibbidi-Bobbidi-Bash: the PowerShell module", url: "https://skills.raptacon.com/bash/"}
+      - {type: doc, label: "Microsoft: PowerShell 101", url: "https://learn.microsoft.com/en-us/powershell/scripting/learn/ps101/00-introduction"}
+    practical:
+      summary: Finish the game's tracks, then show a lead it sticks on a real machine.
+      steps:
+        - "In Bibbidi-Bobbidi-Bash, finish the Terminal module's Beginner track (open the game and choose Terminal, then Beginner)."
+        - Show the lead your progress dashboard (the 📊 button).
+        - On a real laptop, open a terminal and make a folder, a file in it, and a copy of the file.
+        - Pipe a command's output through grep, then redirect it to a file.
+        - Do the same folder and file steps in PowerShell.
     renews: permanent
     visibility: public
 
@@ -218,6 +245,33 @@ items:
     training:
       - {type: repo, label: "State machines step 1: breakbeam and addressable LEDs", url: "https://github.com/Raptacon/Skills-Challenges/tree/main/state_machines/challenge_step_1"}
       - {type: repo, label: "State machines step 2: StatefulAutonomous", url: "https://github.com/Raptacon/Skills-Challenges/tree/main/state_machines/challenge_step_2"}
+    renews: permanent
+    visibility: public
+
+  - id: prog-docker
+    tier: 2
+    name: Docker
+    description: >-
+      What containers and images are and why we use them: everyone gets the same
+      robot-code environment on any laptop. Run, list, log and exec into
+      containers, mount your code into one, and read a Dockerfile - the robot
+      code repo has one.
+    roles: [student]
+    kind: check
+    requires: [prog-command-line, prog-pull-requests]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: programming}, {role: subteam-mentor, tree: programming}]}}
+    training:
+      - {type: link, label: "Bibbidi-Bobbidi-Bash: the Docker module", url: "https://skills.raptacon.com/bash/"}
+      - {type: doc, label: "Docker docs: Get started", url: "https://docs.docker.com/get-started/"}
+      - {type: doc, label: "Docker docs: What is a container?", url: "https://docs.docker.com/get-started/docker-concepts/the-basics/what-is-a-container/"}
+      - {type: repo, label: "robot-2027's Dockerfile", url: "https://github.com/Raptacon/robot-2027/blob/main/Dockerfile"}
+    practical:
+      summary: Finish the game's tracks, then build and use the robot code's container.
+      steps:
+        - "In Bibbidi-Bobbidi-Bash, finish the Docker module's Beginner track."
+        - Clone robot-2027 and run `make docker` - it builds the raptacon2027_build image and opens a shell inside it.
+        - Inside the container, find your code (it's mounted at /src) and run `make test`.
+        - Exit, then use docker to list your images and explain what each line of the Dockerfile does.
     renews: permanent
     visibility: public
 
