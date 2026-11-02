@@ -10,7 +10,7 @@ tree:
   authored_by:
     - {name: Chris Hirsch, github: ChrisHirsch}
   created_at: 2026-10-20
-  updated_at: 2026-10-30
+  updated_at: 2026-11-02
   badge:
     name: Raptor
     description: Tools, git, the team and every subteam - you're ready for a subteam tree.
@@ -76,7 +76,7 @@ items:
       method: signoff
       by: {any_of: [{role: subteam-lead}, {role: lead-mentor}]}
     training:
-      - {type: link, label: "Bibbidi-Bobbidi-Bash: the Git module (start with Beginner)", url: "https://skills.raptacon.com/bash/"}
+      - {type: link, label: "Bibbidi-Bobbidi-Bash: Git, Beginner track", url: "https://skills.raptacon.com/bash/#git/beginner"}
       - {type: doc, label: "GitHub Docs: Hello World", url: "https://docs.github.com/en/get-started/start-your-journey/hello-world"}
       - {type: repo, label: "GitHub Skills: Introduction to GitHub", url: "https://github.com/skills/introduction-to-github"}
     practical:

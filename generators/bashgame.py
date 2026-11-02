@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Publish Bibbidi-Bobbidi-Bash (the bash-game submodule) at <OUT>/bash/ with
+"""Publish Bibbidi-Bobbidi-Bash (the bash-game submodule - Raptacon's fork, branch
+raptacon) at <OUT>/bash/ with
 Raptacon's module config (content/<team>/bash-game.yaml). Mirrors the game's
 own `make build` assembly: copy the sources, embed the config as a script so it
 also works from disk, and version the asset URLs for cache-busting."""
@@ -28,6 +29,8 @@ def main():
     for path in sorted(glob.glob(os.path.join(GAME, "js", "*.js"))):
         shutil.copy(path, os.path.join(dest, "js"))
     shutil.copy(os.path.join(GAME, "VERSION"), dest)
+    if os.path.exists(os.path.join(GAME, "LICENSE")):
+        shutil.copy(os.path.join(GAME, "LICENSE"), dest)
 
     with open(os.path.join(common.DATA, "bash-game.yaml")) as f:
         config = f.read()
