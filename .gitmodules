@@ -3,4 +3,5 @@
 	url = https://github.com/Raptacon/brand-kit.git
 [submodule "bash-game"]
 	path = bash-game
-	url = https://gitlab.com/klevermonicker/bash-game.git
+	url = https://gitlab.com/ChrisHirsch/bash-game.git
+	branch = raptacon

@@ -12,7 +12,7 @@ tree:
   authored_by:
     - {name: Chris Hirsch, github: ChrisHirsch}
   created_at: 2026-10-21
-  updated_at: 2026-10-30
+  updated_at: 2026-11-02
   badge:
     name: Network Wrangler
     description: You can get any robot talking to any driver station - and keep it that way at an event.
@@ -66,7 +66,8 @@ items:
     requires: [net-basics]
     verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: electronics}, {role: subteam-mentor, tree: electronics}, {role: subteam-lead, tree: programming}, {role: subteam-mentor, tree: programming}]}}
     training:
-      - {type: link, label: "Bibbidi-Bobbidi-Bash: Terminal and Linux Admin modules", url: "https://skills.raptacon.com/bash/"}
+      - {type: link, label: "Bibbidi-Bobbidi-Bash: Terminal, Beginner track", url: "https://skills.raptacon.com/bash/#terminal/beginner"}
+      - {type: link, label: "Bibbidi-Bobbidi-Bash: Linux Admin, Beginner track", url: "https://skills.raptacon.com/bash/#linux/beginner"}
       - {type: doc, label: "WPILib: Networking utilities", url: "https://docs.wpilib.org/en/stable/docs/networking/networking-utilities/index.html"}
     renews: permanent
     visibility: public
