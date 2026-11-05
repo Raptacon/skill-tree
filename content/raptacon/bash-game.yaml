@@ -18,6 +18,7 @@ modules:
   - azure: false       # 🔷 Azure CLI
   - terraform: false   # 🏗️ Terraform
   - db: false          # 🗄️ Database (PostgreSQL / psql)
+  - python: true       # 🐍 Python - the language our robot code is written in
 
 modes:
   hardcore: true       # 🔥 no sidebar, no hints, 1.5x pixie dust
