@@ -7,7 +7,7 @@ import glob
 
 class SkillTree(BaseModel):
     tree: Tree
-    items: Item    
+    items: list[Item]
     
 class Tree(BaseModel):
     id: str
@@ -24,11 +24,11 @@ class Item(BaseModel):
     id: str
     name: str
     description: str
-    section: str
-    roles: str
+    section: str | None = None
+    roles: list[str]
     kind: str
-    requires: list[str]
-    verify: dict[str, str]
+    requires: list[str] | None = None
+    verify: dict[str, str | dict[str, str | list[dict[str, str]]]]
     renews: str
     visibility: str
 
