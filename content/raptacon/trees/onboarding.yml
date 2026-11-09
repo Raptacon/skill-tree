@@ -107,7 +107,7 @@ items:
     verify:
       method: auto
       source: {tab: Balances, where: "Category = Dues and Balance Due <= 0"}
-      by: {role: treasurer}    # treasurer records plans/scholarships
+      by: {role: board-treasurer}    # treasurer records plans/scholarships
     renews: season
     visibility: self
     training:
@@ -422,7 +422,7 @@ items:
     section: help
     roles: [board]
     kind: check
-    verify: {method: signoff, by: {role: board-chair}}
+    verify: {method: signoff, by: {role: board-president}}
     renews: season
     visibility: team
     status: draft

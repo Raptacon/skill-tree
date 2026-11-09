@@ -75,9 +75,6 @@ signoff_roles:
   - id: safety-officer
     name: Safety Mentor
     description: Signs off safety tests and shop orientation.
-  - id: treasurer
-    name: Treasurer
-    description: Confirms dues, payment plans and waivers.
   - id: subteam-lead
     name: Subteam Lead
     scoped: tree    # assigned per tree, e.g. {role: subteam-lead, tree: manufacturing}
@@ -94,9 +91,23 @@ signoff_roles:
   - id: food-coordinator
     name: Food Coordinator
     description: Tracks Saturday food sign-ups.
-  - id: board-chair
-    name: Board Chair
-    description: Signs off board-specific onboarding.
+  # The Executive Board (handbook 3.2). Holding any of these this season gives
+  # the member role `board`.
+  - id: board-president
+    name: Board President
+    description: Chairs the Executive Board; signs off board-specific onboarding.
+  - id: board-president-elect
+    name: Board President-Elect
+    description: Executive Board member who will become President.
+  - id: board-treasurer
+    name: Board Treasurer
+    description: Confirms dues, payment plans and waivers.
+  - id: board-secretary
+    name: Board Secretary
+    description: Executive Board member who keeps the board's records.
+  - id: board-at-large
+    name: Board At-Large Member
+    description: Executive Board member at large.
 
 # Who may see a person's status for an item (`visibility:` on each item).
 visibility_levels:
