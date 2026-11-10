@@ -7,7 +7,7 @@ import glob
 
 class SkillTree(BaseModel):
     tree: Tree
-    items: list[Item]
+    items: list[ItemRef | ItemEntry]
     
 class Tree(BaseModel):
     id: str
@@ -20,7 +20,7 @@ class Tree(BaseModel):
     updated_at: date
     description: str
     
-class Item(BaseModel):
+class ItemEntry(BaseModel):
     id: str
     name: str
     description: str
@@ -31,6 +31,10 @@ class Item(BaseModel):
     verify: dict[str, str | dict[str, str | list[dict[str, str]]]]
     renews: str
     visibility: str
+    
+class ItemRef(BaseModel):
+    ref: str
+    tier: int
 
 def validate_yaml():
     for file in glob.glob('content/raptacon/trees/*.yml', recursive=True):
