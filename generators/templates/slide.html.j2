@@ -1,44 +1,45 @@
-<!doctype html>
+{% from "_theme.html.j2" import theme_toggle %}<!doctype html>
 <html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{{ tree.name }} - {{ team.name }} {{ team.number }}</title>
 <style>
-  :root { --green: #84EC5C; --ink: #111; }
   @page { size: 13.333in 7.5in; margin: 0; }
   * { box-sizing: border-box; }
   html, body { margin: 0; background: #222; }
   .slide {
     width: 100vw; max-width: 177.78vh; aspect-ratio: 16 / 9; margin: 0 auto;
-    background: #fff; color: var(--ink); font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+    background: var(--bg); color: var(--fg-strong); font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
     display: grid; grid-template-columns: 1fr auto; grid-template-rows: auto 1fr auto;
     padding: 3.2% 3.6%; gap: 2% 3%;
   }
   header { grid-column: 1 / 3; display: flex; align-items: center; gap: 2.5%; border-bottom: 0.6vw solid var(--green); padding-bottom: 1.2%; }
   header img { height: 3.2vw; }
   h1 { margin: 0; font-size: 3.6vw; text-transform: uppercase; letter-spacing: 0.06em; }
-  .tagline { font-size: 1.45vw; color: #333; margin-top: 0.3vw; }
-  .badge { margin-left: auto; background: var(--ink); color: var(--green); font-weight: 800; font-size: 1.4vw; padding: 0.6vw 1.2vw; border-radius: 0.6vw; white-space: nowrap; }
+  .tagline { font-size: 1.45vw; color: var(--text2); margin-top: 0.3vw; }
+  .badge { margin-left: auto; background: var(--block); color: var(--green); font-weight: 800; font-size: 1.4vw; padding: 0.6vw 1.2vw; border-radius: 0.6vw; white-space: nowrap; }
   .groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(17vw, 1fr)); gap: 1vw; align-content: start; }
-  .group { border: 0.25vw solid var(--ink); border-left: 0.7vw solid var(--green); border-radius: 0.7vw; padding: 0.7vw 1vw; }
+  .group { border: 0.25vw solid var(--fg-strong); border-left: 0.7vw solid var(--green); border-radius: 0.7vw; padding: 0.7vw 1vw; }
   .group h2 { margin: 0 0 0.4vw; overflow-wrap: anywhere; font-size: 1.15vw; text-transform: uppercase; letter-spacing: 0.04em; }
   .skill { font-size: 1.35vw; font-weight: 700; margin-top: 0.3vw; }
-  .who { font-size: 1vw; color: #1a6fb0; margin-top: 0.5vw; }
+  .who { font-size: 1vw; color: var(--link); margin-top: 0.5vw; }
   aside { display: flex; flex-direction: column; gap: 1.2vw; align-items: center; }
-  .qr { text-align: center; font-size: 1vw; font-weight: 700; color: var(--ink); text-decoration: none; }
+  .qr { text-align: center; font-size: 1vw; font-weight: 700; color: var(--fg-strong); text-decoration: none; }
   .slide a { color: inherit; text-decoration: none; }
   .slide a:hover { text-decoration: underline; text-decoration-color: var(--green); text-decoration-thickness: 0.2vw; }
-  .qr img { width: 12vw; height: 12vw; display: block; margin: 0 auto 0.4vw; border: 0.2vw solid var(--ink); border-radius: 0.5vw; }
-  footer { grid-column: 1 / 3; font-size: 1.2vw; background: var(--ink); color: #fff; border-radius: 0.7vw; padding: 0.8vw 1.2vw; }
+  .qr img { width: 12vw; height: 12vw; display: block; margin: 0 auto 0.4vw; border: 0.2vw solid var(--fg-strong); border-radius: 0.5vw; }
+  footer { grid-column: 1 / 3; font-size: 1.2vw; background: var(--block); color: var(--on-block); border-radius: 0.7vw; padding: 0.8vw 1.2vw; }
   footer b { color: var(--green); }
-  @media print { html, body { background: #fff; } .slide { width: 13.333in; height: 7.5in; max-width: none; } }
+  @media print { html, body { background: var(--bg); } .slide { width: 13.333in; height: 7.5in; max-width: none; } }
 </style>
+{% include "_theme.html.j2" %}
 </head>
 <body>
+{{ theme_toggle() }}
   <div class="slide">
     <header>
-      <img src="assets/raptor-mark.svg" alt="">
+      <img class="logo-l" src="assets/raptor-mark.svg" alt=""><img class="logo-d" src="assets/raptor-mark-dark.svg" alt="">
       <div>
         <h1>{{ tree.name }}</h1>
         {% if tree.description %}<div class="tagline">{{ tree.description }}</div>{% endif %}
