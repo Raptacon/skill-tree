@@ -281,14 +281,13 @@ items:
       photo/media release. Use strong passwords and two-factor authentication,
       especially on GitHub and team accounts, and don't fall for phishing. If
       something online feels wrong, tell a mentor. A mentor presents it each
-      season (with some reading on your own), then signs you off.
+      season, then signs you off.
     section: safety
     roles: [student, mentor]
     kind: check
     verify: {method: signoff, by: {any_of: [{role: lead-mentor}, {role: safety-officer}]}}
     training:
       - {type: session, label: Internet safety presentation (a mentor presents it), url: "https://docs.google.com/presentation/d/1KwuuPophGmFwYZWj2zUyAam0F3zoq9Hn/edit"}
-      - {type: doc, label: Internet safety reading}           # TODO link the reading
     renews: season
     visibility: team
 
