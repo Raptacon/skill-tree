@@ -1,0 +1,181 @@
+{% from "_theme.html.j2" import theme_toggle %}<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your path - {{ team.name }} {{ team.number }}</title>
+<style>
+  :root { --leaf: #4caf50; --leaf-edge: #2e7d32; --trail: #e9d9b8; --bud: #c9cfc2; --berry: #e8a33d; --berry-edge: #8a5a1a; }
+  :root[data-theme="dark"] { --leaf: #4fb357; --leaf-edge: #84EC5C; --trail: #3b3326; --bud: #3d4b59; --berry: #f0b65a; --berry-edge: #a0784f; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --leaf: #4fb357; --leaf-edge: #84EC5C; --trail: #3b3326; --bud: #3d4b59; --berry: #f0b65a; --berry-edge: #a0784f; } }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: -apple-system, "Helvetica Neue", Arial, sans-serif; }
+  .topbar { display: flex; align-items: center; gap: 14px; padding: 12px 60px 12px 18px; border-bottom: 4px solid var(--green); flex-wrap: wrap; }
+  .topbar img { height: 30px; }
+  .topbar h1 { margin: 0; font-size: 22px; text-transform: uppercase; letter-spacing: .06em; }
+  .topbar .sub { color: var(--muted); font-size: 13px; }
+  .topbar .sp { flex: 1; }
+  .topbar a.back { color: var(--link); font-size: 14px; text-decoration: none; }
+  .wrap { display: flex; align-items: flex-start; }
+  .stage { flex: 1; min-width: 0; padding-bottom: 40px; }
+  aside.card { position: sticky; top: 0; width: 360px; max-height: 100vh; overflow: auto; background: var(--card); border-left: 3px solid var(--line); padding: 18px; }
+  aside.card h2 { margin: 4px 0 6px; font-size: 22px; }
+  aside.card .chips span { display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px; background: var(--surface); margin: 0 4px 4px 0; }
+  aside.card .chips .side { background: var(--berry); color: #111; }
+  aside.card p { line-height: 1.45; }
+  aside.card h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin: 14px 0 4px; }
+  aside.card ol, aside.card ul { margin: 0 0 0 18px; padding: 0; line-height: 1.5; }
+  aside.card a { color: var(--link); }
+  aside.card .actions { margin-top: 14px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  aside.card a.signoff { background: var(--leaf-edge); color: var(--bg); font-weight: 700; padding: 8px 14px; border-radius: 999px; text-decoration: none; }
+  aside.card .hint { color: var(--muted); font-size: 14px; line-height: 1.45; }
+  aside.card .close { display: none; float: right; background: none; border: 0; color: var(--muted); font-size: 22px; cursor: pointer; }
+  @media (max-width: 800px) {
+    .wrap { display: block; }
+    aside.card { position: fixed; bottom: 0; left: 0; right: 0; width: auto; max-height: 60vh; border-left: none; border-top: 3px solid var(--line); box-shadow: 0 -8px 24px rgba(0,0,0,.25); z-index: 5; }
+    aside.card.empty { display: none; }
+    aside.card .close { display: block; }
+  }
+  .world { position: relative; margin: 0 auto; max-width: 780px; padding: 0 10px; }
+  .world h2 { text-align: center; margin: 30px 0 4px; font-size: 26px; text-transform: uppercase; letter-spacing: .08em; }
+  .world .blurb { text-align: center; color: var(--muted); font-size: 14px; margin: 0 auto 8px; max-width: 560px; line-height: 1.4; }
+  .tabs { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 10px 0 4px; }
+  .tabs button { background: var(--card); color: var(--fg); border: 2px solid var(--line-strong); border-radius: 999px; padding: 6px 14px; font-size: 14px; font-weight: 700; cursor: pointer; }
+  .tabs button[aria-pressed="true"] { background: var(--block); color: var(--green); border-color: var(--block); }
+  .lanes { display: flex; }
+  .lane { position: relative; flex: 1; min-width: 0; }
+  .lane h3 { text-align: center; font-size: 14px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 8px 0 0; }
+  .lane svg { position: absolute; left: 0; top: 0; width: 100%; pointer-events: none; }
+  .stop { position: absolute; width: 60px; height: 60px; margin: -30px 0 0 -30px; border-radius: 50%; border: 4px solid var(--leaf-edge);
+    background: var(--leaf); color: #fff; font-weight: 800; font-size: 19px; display: flex; align-items: center; justify-content: center; cursor: pointer;
+    box-shadow: 0 6px 0 var(--leaf-edge); transition: transform .12s; padding: 0; }
+  .stop:hover, .stop.sel { transform: translateY(-3px) scale(1.06); outline: 3px solid var(--fg); outline-offset: 3px; }
+  .stop.draft { background: var(--bud); border-color: var(--faint); box-shadow: 0 6px 0 var(--faint); color: var(--muted); font-size: 20px; }
+  .stop .name { position: absolute; top: 70px; width: 150px; left: 50%; transform: translateX(-50%); text-align: center; font-size: 12px; font-weight: 700; color: var(--fg); line-height: 1.2; }
+  .stop.start::before { content: 'START'; position: absolute; top: -32px; background: var(--card); color: var(--leaf-edge); border: 2px solid var(--line); border-radius: 8px; padding: 2px 8px; font-size: 11px; letter-spacing: .08em; }
+  .gem { position: absolute; width: 24px; height: 24px; margin: -12px 0 0 -12px; transform: rotate(45deg); background: var(--berry); border: 3px solid var(--berry-edge); cursor: pointer; padding: 0; }
+  .gem:hover, .gem.sel { outline: 3px solid var(--fg); outline-offset: 2px; }
+  .banner { position: absolute; left: 8px; right: 8px; text-align: center; font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); border-top: 2px dashed var(--line); padding-top: 4px; }
+  .legend { text-align: center; color: var(--muted); font-size: 13px; margin: 18px 0 0; }
+  .legend i { display: inline-block; width: 12px; height: 12px; vertical-align: middle; margin: 0 4px 0 14px; }
+</style>
+{% include "_theme.html.j2" %}
+</head>
+<body>
+{{ theme_toggle() }}
+<div class="topbar">
+  <a href="index.html"><img class="logo-l" src="assets/lockup-horizontal.svg" alt="{{ team.name }} {{ team.number }}"><img class="logo-d" src="assets/lockup-horizontal-dark.svg" alt="{{ team.name }} {{ team.number }}"></a>
+  <h1>Your path</h1><span class="sub">{{ season }} season · one stop at a time</span>
+  <span class="sp"></span><a class="back" href="index.html">← All skill trees</a>
+</div>
+<div class="wrap">
+  <div class="stage" id="stage"></div>
+  <aside class="card empty" id="card"><p class="hint">Follow the trail from START: Baseline, then Core Knowledge, then your subteam. Click any stop to see what it is, how to learn it and who signs it off. Diamonds are optional side quests; 🔒 stops are coming soon.</p></aside>
+</div>
+<script>
+  const DATA = {{ data | safe }};
+  const STEP = 120, AMP = 0.27;
+  const ALL = {};
+  const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const card = document.getElementById('card');
+  function show(id) {
+    const s = ALL[id];
+    card.classList.remove('empty');
+    const chips = [s.tree, s.tier ? DATA.tiers[s.tier] : null, s.side ? 'Side quest · optional' : null, s.draft ? 'Coming soon' : null].filter(Boolean)
+      .map((c) => `<span class="${/Side/.test(c) ? 'side' : ''}">${esc(c)}</span>`).join('');
+    const sides = (s.sideQuests || []);
+    card.innerHTML = `<button class="close" onclick="card.classList.add('empty')" aria-label="Close">×</button><div class="chips">${chips}</div><h2>${esc(s.name)}</h2>
+      ${s.description ? `<p>${esc(s.description)}</p>` : `<p class="hint">Not written yet.</p>`}
+      ${s.steps.length ? `<h3>Show a lead or mentor</h3><ol>${s.steps.map((x) => `<li>${esc(x)}</li>`).join('')}</ol>` : ''}
+      ${s.training.length ? `<h3>Learn</h3><ul>${s.training.map((t) => `<li>${t.url ? `<a href="${esc(t.url)}" target="_blank" rel="noopener">${esc(t.label)}</a>` : esc(t.label)}</li>`).join('')}</ul>` : ''}
+      ${s.requires.length ? `<h3>After</h3><p>${s.requires.map(esc).join(', ')}</p>` : ''}
+      ${sides.length ? `<h3>Side quests from here</h3><ul>${sides.map((q) => `<li><a href="#" onclick="show('${q.id}');return false">${esc(q.name)}</a></li>`).join('')}</ul>` : ''}
+      <div class="actions">${s.signoff ? `<a class="signoff" href="${esc(s.signoff)}" target="_blank" rel="noopener">✅ Sign off this skill</a>` : ''}${s.details ? `<a href="${esc(s.details)}">Full details →</a>` : ''}</div>`;
+    document.querySelectorAll('.sel').forEach((n) => n.classList.remove('sel'));
+    document.querySelectorAll(`[data-id="${id}"]`).forEach((n) => n.classList.add('sel'));
+  }
+  let num = 0;
+  function trail(lane, w, stops, opts) {
+    const W = lane.clientWidth || 360;
+    const top = opts.top;
+    // A new tier gets its banner and some breathing room above its first stop.
+    let y = top;
+    const pts = stops.map((st, k) => {
+      if (k) y += STEP + (w.tiers && st.tier && st.tier !== stops[k - 1].tier ? 50 : 0);
+      return [W / 2 + Math.sin(k * 1.1 + (opts.phase || 0)) * W * AMP, y];
+    });
+    const H = y + STEP;
+    lane.style.height = H + 'px';
+    if (pts.length > 1) {
+      let d = `M${pts[0][0]},${pts[0][1]}`;
+      for (let k = 1; k < pts.length; k++) { const [x0, y0] = pts[k - 1], [x1, y1] = pts[k]; d += ` C${x0},${y0 + STEP / 2} ${x1},${y1 - STEP / 2} ${x1},${y1}`; }
+      lane.insertAdjacentHTML('beforeend', `<svg height="${H}" viewBox="0 0 ${W} ${H}"><path d="${d}" fill="none" stroke="var(--trail)" stroke-width="22" stroke-linecap="round"/><path d="${d}" fill="none" stroke="var(--line-strong)" stroke-width="3" stroke-dasharray="2 10" stroke-linecap="round"/></svg>`);
+    }
+    let lastTier = null;
+    stops.forEach((s, k) => {
+      const [x, y] = pts[k];
+      ALL[s.id] = { ...s, tree: w.name, sideQuests: w.side[s.id] || [] };
+      if (w.tiers && s.tier && s.tier !== lastTier) {
+        lastTier = s.tier;
+        lane.insertAdjacentHTML('beforeend', `<div class="banner" style="top:${y - 66}px">${esc(DATA.tiers[s.tier])}</div>`);
+      }
+      const b = document.createElement('button');
+      b.className = 'stop' + (s.draft ? ' draft' : '') + (opts.start && k === 0 ? ' start' : '');
+      b.dataset.id = s.id;
+      b.setAttribute('aria-label', s.name);
+      b.innerHTML = (s.draft ? '🔒' : ++num) + `<span class="name">${esc(s.name)}</span>`;
+      b.style.left = x + 'px'; b.style.top = y + 'px';
+      b.onclick = () => show(s.id);
+      lane.appendChild(b);
+      (w.side[s.id] || []).forEach((q, j) => {
+        ALL[q.id] = { ...q, tree: w.name, side: true };
+        const gx = x + (x < W / 2 ? 1 : -1) * (66 + j * 28), gy = y - 16 + (j % 2) * 22;
+        const g = document.createElement('button');
+        g.className = 'gem'; g.dataset.id = q.id; g.title = 'Side quest: ' + q.name; g.setAttribute('aria-label', 'Side quest: ' + q.name);
+        g.style.left = Math.max(14, Math.min(W - 14, gx)) + 'px'; g.style.top = gy + 'px';
+        g.onclick = () => show(q.id);
+        lane.appendChild(g);
+      });
+    });
+  }
+  function drawWorld(host, w, opts = {}) {
+    const row = document.createElement('div'); row.className = 'lanes'; host.appendChild(row);
+    const named = w.lanes.filter((l) => !l.after);
+    const lanes = named.map((l) => { const d = document.createElement('div'); d.className = 'lane'; if (l.name) d.innerHTML = `<h3>${esc(l.name)}</h3>`; row.appendChild(d); return d; });
+    named.forEach((l, k) => trail(lanes[k], w, l.stops, { top: l.name ? 110 : 70, phase: k * 1.6, start: opts.start && k === 0 }));
+    w.lanes.filter((l) => l.after).forEach((l) => {
+      const r2 = document.createElement('div'); r2.className = 'lanes'; host.appendChild(r2);
+      const d = document.createElement('div'); d.className = 'lane'; r2.appendChild(d);
+      trail(d, w, l.stops, { top: 70, phase: 0.8 });
+    });
+  }
+  const stage = document.getElementById('stage');
+  function section(title, blurb) {
+    const s = document.createElement('section'); s.className = 'world';
+    s.innerHTML = `<h2>${esc(title)}</h2>${blurb ? `<div class="blurb">${esc(blurb)}</div>` : ''}`;
+    stage.appendChild(s); return s;
+  }
+  DATA.start.forEach((w, k) => drawWorld(section(w.name, w.description), w, { start: k === 0 }));
+  const sub = section('Your subteam', 'Pick your track. Each subteam is its own trail; Journeyman and up come after Core Knowledge.');
+  const tabs = document.createElement('div'); tabs.className = 'tabs'; sub.appendChild(tabs);
+  const host = document.createElement('div'); sub.appendChild(host);
+  const startNum = () => DATA.start.reduce((n, w) => n + w.lanes.reduce((m, l) => m + l.stops.filter((s) => !s.draft).length, 0), 0);
+  function pick(id) {
+    const w = DATA.subteams.find((t) => t.id === id) || DATA.subteams[0];
+    host.innerHTML = `<div class="blurb" style="text-align:center;margin-top:10px">${esc(w.description || '')}</div>`;
+    num = startNum();
+    drawWorld(host, w);
+    tabs.querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', b.dataset.id === w.id ? 'true' : 'false'));
+    history.replaceState(null, '', '#' + w.id);
+    try { localStorage.setItem('path-subteam', w.id); } catch (e) {}
+  }
+  DATA.subteams.forEach((w) => {
+    const b = document.createElement('button'); b.textContent = w.name; b.dataset.id = w.id; b.onclick = () => pick(w.id); tabs.appendChild(b);
+  });
+  let first = location.hash.slice(1);
+  if (!first) { try { first = localStorage.getItem('path-subteam'); } catch (e) {} }
+  pick(first);
+  stage.insertAdjacentHTML('beforeend', '<div class="legend"><i style="background:var(--leaf);border-radius:50%"></i>a stop <i style="background:var(--bud);border-radius:50%"></i>coming soon <i style="background:var(--berry);transform:rotate(45deg)"></i>side quest (optional)</div>');
+</script>
+</body>
+</html>
