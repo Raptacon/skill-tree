@@ -1,4 +1,4 @@
-<!doctype html>
+{% from "_theme.html.j2" import theme_toggle %}<!doctype html>
 <html>
 <head>
 <meta charset="utf-8">
@@ -11,14 +11,12 @@
     font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
     margin: 0;
     padding: 20px;
-    color: #1a1a1a;
-    background: #fff;
   }
   h1 { font-size: 28px; margin: 0 0 2px; }
-  .subtitle { color: #666; font-size: 12px; margin-bottom: 14px; }
+  .subtitle { color: var(--muted); font-size: 12px; margin-bottom: 14px; }
 
   .baseline-banner {
-    border: 2px solid #1a1a1a;
+    border: 2px solid var(--fg);
     border-radius: 8px;
     padding: 8px 14px;
     margin-bottom: 14px;
@@ -26,7 +24,7 @@
     align-items: center;
     gap: 10px;
     flex-wrap: wrap;
-    background: #f5f5f5;
+    background: var(--surface);
   }
   .baseline-banner .label {
     font-weight: 700;
@@ -35,23 +33,23 @@
   }
   .chip {
     display: inline-block;
-    background: #fff;
-    border: 1px solid #bbb;
+    background: var(--card);
+    border: 1px solid var(--line-strong);
     border-radius: 999px;
     padding: 2px 9px;
     font-size: 11px;
   }
 
   .example-path {
-    border: 2px dashed #1a6fb0;
+    border: 2px dashed var(--link);
     border-radius: 8px;
     padding: 8px 14px;
     margin-bottom: 14px;
-    background: #f5faff;
+    background: var(--link-bg);
     font-size: 12px;
-    color: #333;
+    color: var(--text2);
   }
-  .example-path b { color: #1a6fb0; }
+  .example-path b { color: var(--link); }
 
   table.grid {
     width: 100%;
@@ -60,30 +58,30 @@
     table-layout: fixed;
   }
   table.grid th, table.grid td {
-    border: 1px solid #ccc;
+    border: 1px solid var(--line-strong);
     vertical-align: top;
     padding: 6px 8px;
   }
   table.grid th {
-    background: #1a1a1a;
-    color: #fff;
+    background: var(--block);
+    color: var(--on-block);
     font-size: 12px;
     text-align: left;
   }
   table.grid td.lane-label {
-    background: #eee;
+    background: var(--surface);
     font-weight: 700;
     font-size: 12px;
     width: 110px;
   }
   table.grid td.lane-label.specialization {
-    background: #f5faff;
+    background: var(--link-bg);
   }
   table.grid td.lane-label .spec-note {
     display: block;
     font-weight: 400;
     font-size: 9px;
-    color: #1a6fb0;
+    color: var(--link);
     margin-top: 2px;
   }
   table.grid td.cell {
@@ -91,8 +89,8 @@
   }
   table.grid td.cell .skill-chip {
     display: block;
-    background: #fafafa;
-    border: 1px solid #ddd;
+    background: var(--card);
+    border: 1px solid var(--line);
     border-radius: 4px;
     padding: 2px 5px;
     margin-bottom: 3px;
@@ -100,31 +98,33 @@
   table.grid td.cell:empty::after,
   table.grid td.cell.no-skills::after {
     content: "-";
-    color: #ccc;
+    color: var(--line-strong);
   }
 
   .hybrids-section h2 { font-size: 15px; margin-bottom: 8px; }
   .hybrid-cards { display: flex; flex-wrap: wrap; gap: 10px; }
   .hybrid-card {
-    border: 2px dashed #1a6fb0;
+    border: 2px dashed var(--link);
     border-radius: 8px;
     padding: 6px 12px;
-    background: #f5faff;
+    background: var(--link-bg);
     font-size: 11px;
   }
-  .hybrid-card .name { font-weight: 700; color: #1a6fb0; }
-  footer { margin-top: 14px; font-size: 9px; color: #999; }
+  .hybrid-card .name { font-weight: 700; color: var(--link); }
+  footer { margin-top: 14px; font-size: 9px; color: var(--faint); }
   .topbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
   .topbar img { height: 30px; }
-  .topbar a { color: #1a6fb0; font-size: 13px; text-decoration: none; }
+  .topbar a { color: var(--link); font-size: 13px; text-decoration: none; }
   .grid-wrap { overflow-x: auto; }
   table.grid td.lane-label a { color: inherit; text-decoration: none; }
   @media print { .topbar a.back { display: none; } }
 </style>
+{% include "_theme.html.j2" %}
 </head>
 <body>
+{{ theme_toggle() }}
   <div class="topbar">
-    <a href="index.html"><img src="assets/lockup-horizontal.svg" alt="Raptacon 3200"></a>
+    <a href="index.html"><img class="logo-l" src="assets/lockup-horizontal.svg" alt="Raptacon 3200"><img class="logo-d" src="assets/lockup-horizontal-dark.svg" alt="Raptacon 3200"></a>
     <a class="back" href="index.html">&larr; All skill trees</a>
   </div>
   <h1>Raptacon 3200 - Skill Tree Map</h1>
@@ -143,7 +143,7 @@
   <div class="grid-wrap">
   <table class="grid">
     <tr>
-      <th style="background:#fff;"></th>
+      <th style="background:var(--bg);"></th>
       {% for t in tier_names %}<th>{{ t }}</th>{% endfor %}
     </tr>
     {% for lane in lanes %}

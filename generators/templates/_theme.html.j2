@@ -1,0 +1,89 @@
+{# Light/dark theme shared by every page: color tokens, the device-following default, a
+   remembered manual override (data-theme on <html>), light for print, and the toggle button.
+   Include inside <head>; put {{ theme_toggle() }} at the top of <body>. #}
+<script>
+  try { var t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t; } catch (e) {}
+</script>
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #fff; --fg: #1a1a1a; --fg-strong: #111; --text2: #333; --muted: #666; --faint: #999;
+    --line: #ddd; --line-strong: #ccc; --line-soft: #eee; --surface: #f3f3f3; --card: #fff;
+    --link: #1a6fb0; --link-bg: #f5faff;
+    --ok: #2e7d32; --ok-bg: #f1fbec; --warn: #8a6d00; --warn-line: #b8860b; --warn-bg: #fff8e1;
+    --danger: #a12a1f; --danger-strong: #c0392b; --danger-bg: #fdecea;
+    --block: #111; --on-block: #fff; --on-block-muted: #ddd;
+    --green: #84EC5C; --on-green: #111;
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #0f1720; --fg: #e6edf3; --fg-strong: #f2f6f9; --text2: #c9d1d9; --muted: #9aa7b3; --faint: #6e7b87;
+    --line: #33414f; --line-strong: #3d4b59; --line-soft: #24303c; --surface: #1b2430; --card: #16202b;
+    --link: #6cb4ff; --link-bg: #13253a;
+    --ok: #7fd88a; --ok-bg: #15291a; --warn: #e3c35a; --warn-line: #a07c1a; --warn-bg: #2c2510;
+    --danger: #ff8a7a; --danger-strong: #ff6b5b; --danger-bg: #3a1b18;
+    --block: #1d2732; --on-block: #e6edf3; --on-block-muted: #b8c3cd;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --bg: #0f1720; --fg: #e6edf3; --fg-strong: #f2f6f9; --text2: #c9d1d9; --muted: #9aa7b3; --faint: #6e7b87;
+      --line: #33414f; --line-strong: #3d4b59; --line-soft: #24303c; --surface: #1b2430; --card: #16202b;
+      --link: #6cb4ff; --link-bg: #13253a;
+      --ok: #7fd88a; --ok-bg: #15291a; --warn: #e3c35a; --warn-line: #a07c1a; --warn-bg: #2c2510;
+      --danger: #ff8a7a; --danger-strong: #ff6b5b; --danger-bg: #3a1b18;
+      --block: #1d2732; --on-block: #e6edf3; --on-block-muted: #b8c3cd;
+    }
+  }
+  body { background: var(--bg); color: var(--fg); }
+  /* QR codes and the logo stay readable on dark pages: they sit on white. */
+  img.qr-img, .qr img, a.signoff img, img.qr { background: #fff; }
+  .logo-d { display: none; }
+  :root[data-theme="dark"] .logo-l { display: none; }
+  :root[data-theme="dark"] .logo-d { display: inline; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .logo-l { display: none; }
+    :root:not([data-theme="light"]) .logo-d { display: inline; }
+  }
+  .theme-toggle {
+    position: fixed; top: 10px; right: 10px; z-index: 10; width: 36px; height: 36px; border-radius: 999px;
+    border: 2px solid var(--line-strong); background: var(--card); color: var(--fg); font-size: 18px; line-height: 1;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+  }
+  .theme-toggle:hover { border-color: var(--green); }
+  @media print {
+    :root, :root[data-theme="dark"] {
+      color-scheme: light;
+      --bg: #fff; --fg: #1a1a1a; --fg-strong: #111; --text2: #333; --muted: #666; --faint: #999;
+      --line: #ddd; --line-strong: #ccc; --line-soft: #eee; --surface: #f3f3f3; --card: #fff;
+      --link: #1a6fb0; --link-bg: #f5faff; --ok: #2e7d32; --ok-bg: #f1fbec; --warn: #8a6d00; --warn-line: #b8860b; --warn-bg: #fff8e1;
+      --danger: #a12a1f; --danger-strong: #c0392b; --danger-bg: #fdecea; --block: #111; --on-block: #fff; --on-block-muted: #ddd;
+    }
+    .logo-d { display: none; }
+  :root[data-theme="dark"] .logo-l { display: none; }
+  :root[data-theme="dark"] .logo-d { display: inline; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .logo-l { display: none; }
+    :root:not([data-theme="light"]) .logo-d { display: inline; }
+  }
+  .theme-toggle { display: none; }
+  }
+</style>
+{% macro theme_toggle() %}
+<button class="theme-toggle" type="button" aria-label="Switch light or dark mode" title="Light or dark mode"></button>
+<script>
+  (function () {
+    var root = document.documentElement, btn = document.currentScript.previousElementSibling;
+    var media = window.matchMedia('(prefers-color-scheme: dark)');
+    var dark = function () { return root.dataset.theme ? root.dataset.theme === 'dark' : media.matches; };
+    var label = function () { btn.textContent = dark() ? '☀️' : '🌙'; };
+    btn.addEventListener('click', function () {
+      root.dataset.theme = dark() ? 'light' : 'dark';
+      try { localStorage.setItem('theme', root.dataset.theme); } catch (e) {}
+      label();
+    });
+    media.addEventListener('change', label);
+    label();
+  })();
+</script>
+{% endmacro %}
