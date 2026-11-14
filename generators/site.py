@@ -31,6 +31,7 @@ def main():
     for tree_id in v2:
         run("overview.py", tree_id)
     run("techmap.py")
+    run("path.py")
     slides = common.load_team().get("slides", [])
     for tree_id in slides:
         run("slide.py", tree_id)
