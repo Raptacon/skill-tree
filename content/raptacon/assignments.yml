@@ -43,3 +43,6 @@ seasons:
     - role: lead-mentor
       holders:
         - {name: Chris Hirsch, github: ChrisHirsch}
+    - role: safety-captain
+      holders:
+        - {name: Aiden Ye, github: TODO}
