@@ -107,7 +107,7 @@ items:
     verify:
       method: auto
       source: {tab: Balances, where: "Category = Dues and Balance Due <= 0"}
-      by: {role: treasurer}    # treasurer records plans/scholarships
+      by: {role: board-treasurer}    # treasurer records plans/scholarships
     renews: season
     visibility: self
     training:
@@ -270,6 +270,28 @@ items:
     renews: season
     visibility: team
 
+  - id: onb-internet-safety
+    name: Internet safety
+    description: >-
+      The internet is forever: what you post now, future colleges, employers -
+      and one day your own kids - can find. Post like a professional. Never share
+      personal details publicly (last names with school or schedule, where you
+      live). Under FIRST Youth Protection, adults and students never message
+      one-on-one in private: keep team talk in team channels. Respect everyone's
+      photo/media release. Use strong passwords and two-factor authentication,
+      especially on GitHub and team accounts, and don't fall for phishing. If
+      something online feels wrong, tell a mentor. A mentor presents it each
+      season (with some reading on your own), then signs you off.
+    section: safety
+    roles: [student, mentor]
+    kind: check
+    verify: {method: signoff, by: {any_of: [{role: lead-mentor}, {role: safety-officer}]}}
+    training:
+      - {type: session, label: Internet safety presentation (a mentor presents it)}   # TODO link the deck
+      - {type: doc, label: Internet safety reading}           # TODO link the reading
+    renews: season
+    visibility: team
+
   - id: onb-safety-test
     name: Safety test passed
     description: Students and mentors take the same test.
@@ -335,6 +357,7 @@ items:
   # ---------------------------------------------------------------- connected
   - id: onb-discord
     name: Join the team Discord
+    description: Students and mentors - do Internet safety first; Discord is where the team talks online.
     section: connected
     roles: [student, parent, mentor, volunteer, board]
     kind: check
@@ -372,6 +395,7 @@ items:
     section: connected
     roles: [student, mentor]
     kind: check
+    requires: [onb-internet-safety]
     verify: {method: auto, source: {tab: "<role roster tab>", columns: [GitHub Username]}}
     renews: permanent
     visibility: team
@@ -422,7 +446,7 @@ items:
     section: help
     roles: [board]
     kind: check
-    verify: {method: signoff, by: {role: board-chair}}
+    verify: {method: signoff, by: {role: board-president}}
     renews: season
     visibility: team
     status: draft

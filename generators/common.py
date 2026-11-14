@@ -116,7 +116,7 @@ def item_roles(item):
     return [(r, None) if isinstance(r, str) else (r["role"], r.get("when")) for r in item.get("roles", [])]
 
 
-BRAND_ASSETS = ["logo/lockup-horizontal.svg", "logo/raptor-mark.svg"]
+BRAND_ASSETS = ["logo/lockup-horizontal.svg", "logo/lockup-horizontal-dark.svg", "logo/raptor-mark.svg", "logo/raptor-mark-dark.svg"]
 
 
 def copy_brand_assets():
