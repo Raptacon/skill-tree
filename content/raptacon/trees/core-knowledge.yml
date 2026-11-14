@@ -41,7 +41,7 @@ items:
   - {ref: des-sketching, section: design}
   - {ref: mfg-measure-layout, section: manufacturing}
   - {ref: mfg-fasteners-rivets, section: manufacturing}
-  - {ref: elec-safe-wiring, section: electronics}
+  - {ref: elec-electric-know-how, section: electronics}
   - {ref: elec-robot-tour, section: electronics}
   - {ref: strat-game-rules-test, section: strategy}
   - {ref: strat-robot-knowledge, section: strategy}

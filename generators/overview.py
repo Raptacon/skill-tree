@@ -96,6 +96,9 @@ def build_v2(tree_id, ctx):
                 meta = tier_meta(tier, hours)
                 meta["after_trees"] = [ctx["tree_names"].get(t, t) for t in meta["after_trees"]]
                 rows.append(row(tier["name"].lower(), tier["name"], tree_id, ctx, cards, meta))
+        side = [v2_card(i, tree_id, home, ctx) for i in items if i.get("side_quest")]
+        if side:
+            rows.append(row("side-quests", "Side quests", tree_id, ctx, side))
     else:
         for section in doc.get("sections", []):
             cards = [v2_card(i, tree_id, home, ctx) for i in items if i.get("section") == section["id"]]

@@ -13,7 +13,8 @@ from datetime import datetime, timezone
 import common
 
 ITEM_FIELDS = ["name", "description", "kind", "target", "runs", "pass_score", "actor", "verify", "parts",
-               "requires", "renews", "visibility", "supervision", "status", "tier", "section", "track"]
+               "requires", "required", "renews", "visibility", "supervision", "status", "tier", "section", "track",
+               "side_quest", "branch"]
 
 
 def commit():
