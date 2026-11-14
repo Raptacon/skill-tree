@@ -149,7 +149,8 @@ def groups(tree_doc, items):
     """[(name, key, value)]: the tree's sections, or its tiers for tiered trees."""
     if not tree_doc.get("sections") and any("tier" in i for i in items):
         tiers = common.load_tiers()
-        return [(tiers[t]["name"], "tier", t) for t in sorted(tiers) if t > 0]
+        side = [("Side quests", "side_quest", True)] if any(i.get("side_quest") for i in items) else []
+        return [(tiers[t]["name"], "tier", t) for t in sorted(tiers) if t > 0] + side
     return [(s["name"], "section", s["id"]) for s in tree_doc.get("sections", [])]
 
 
