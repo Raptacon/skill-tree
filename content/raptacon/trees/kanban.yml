@@ -42,6 +42,7 @@ items:
     training:
       - {type: video, label: "What is Kanban? (Atlassian Agile Coach)", url: "https://www.youtube.com/watch?v=iVaFVa7HYj4"}
       - {type: doc, label: "Kanban guide (Atlassian)", url: "https://www.atlassian.com/agile/kanban"}
+      - {type: link, label: "Bibbidi-Bobbidi-Bash: Kanban, Beginner track", url: "https://skills.raptacon.com/bash/#kanban/beginner"}
 
   - id: kanban-our-board
     name: Using the Raptacon board
@@ -68,3 +69,5 @@ items:
       - {type: link, label: Raptacon board (GitHub Projects), url: "https://github.com/orgs/Raptacon/projects/7"}
       - {type: video, label: "How to use GitHub issues and projects (GitHub for Beginners)", url: "https://www.youtube.com/watch?v=c67GaAkf1BE"}
       - {type: doc, label: "Quickstart for GitHub Projects", url: "https://docs.github.com/en/issues/planning-and-tracking-with-projects/learning-about-projects/quickstart-for-projects"}
+      - {type: link, label: "Bibbidi-Bobbidi-Bash: Kanban, Intermediate track (the board from gh)", url: "https://skills.raptacon.com/bash/#kanban/intermediate"}
+      - {type: link, label: "Bibbidi-Bobbidi-Bash: Kanban, Advanced track (code meets the board)", url: "https://skills.raptacon.com/bash/#kanban/advanced"}
