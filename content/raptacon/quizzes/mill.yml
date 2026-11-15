@@ -1,0 +1,146 @@
+# Milling machine: the written half of tool-mill. Questions 1-11 are the Schoology "Milling
+# Machine Safety Test" (ID 2990); 12-15 were diagram questions on a JET mill photo, rewritten
+# to name the controls instead; 16-20 are new. (Schoology scored this test at 0 points.)
+
+quiz:
+  id: mill
+  name: Milling machine safety quiz
+  item: tool-mill
+  pass: 100
+  authored_by:   # Corey and Marilyn wrote the Schoology originals; Chris added the new questions
+    - {name: Corey Kesler}
+    - {name: Marilyn Kemp}
+    - {name: Chris Hirsch, github: ChrisHirsch}
+  source: Schoology "Milling Machine Safety Test" (ID 2990)
+
+questions:
+  - q: Always make sure the ______ are sharp and in good condition.
+    choices: [wrenches, rags, cutters, hammers]
+    answer: "cutters"
+    why: A dull or chipped cutter grabs, chatters and can break.
+    origin: schoology
+
+  - q: Before turning on the spindle, what do you check?
+    choices: [The draw bar wrench is removed, The tool and stock are held tight, The speed range is set correctly, All of these]
+    answer: "All of these"
+    why: A wrench left on the draw bar flies off when the spindle starts.
+    origin: schoology
+
+  - q: When setting up a job, move the table so the work is as far as possible from the...
+    choices: [cutter, DRO, chuck, lathe]
+    answer: "cutter"
+    why: Set up with room to spare, so your hands are nowhere near the cutter.
+    origin: schoology
+
+  - q: How do you clear chips from the work?
+    choices: [With paper, With the cutter, With a file, With a brush - never your hands]
+    answer: "With a brush - never your hands"
+    why: Mill chips are sharp and hot.
+    origin: schoology
+
+  - q: Never reach over a ______ cutter.
+    choices: [broken, clean, rotating, cold]
+    answer: "rotating"
+    why: Reaching over a spinning cutter puts your arm in its path.
+    origin: schoology
+
+  - q: On our variable-speed mill, the RPM (fine speed) is adjusted while the cutter is...
+    choices: [rotating, stopped, clean, dirty]
+    answer: "rotating"
+    why: The variable-speed drive only changes speed while turning. The high/low range is different - see the next question.
+    origin: schoology
+    review: true   # true for a variable-speed (Reeves) head; confirm for our mill
+
+  - q: The speed range (high/low gear) is changed only while the cutter is...
+    choices: [rotating, stopped, clean, dirty]
+    answer: "stopped"
+    why: Shifting gears while running strips them.
+    origin: schoology
+
+  - q: Never take an excessively ______ cut or feed. It could break the cutter and hurt you.
+    choices: [heavy, light, loud, slow]
+    answer: "heavy"
+    why: Too much at once overloads the cutter. Take several lighter passes.
+    origin: schoology
+
+  - q: Which of these is NOT a proper use of the spindle brake?
+    choices: [Stopping the spindle after switching off, Holding the spindle to loosen the draw bar, Adjusting the spindle speed, They are all proper uses]
+    answer: "Adjusting the spindle speed"
+    why: The brake stops and holds the spindle. Speed is set with the speed controls.
+    origin: schoology
+    review: true   # reworded: "rapidly stopping the spinning tool" became "after switching off"
+
+  - q: Which part do you use to drill a hole straight down?
+    choices: [The quill, The spindle, The table, The power feed]
+    answer: "The quill"
+    why: The quill feed handle moves the spindle up and down for drilling.
+    origin: schoology
+
+  - q: Which axis does the quill move along?
+    choices: [Z, X, Y]
+    answer: "Z"
+    why: Z is up and down. X and Y are the table's left-right and in-out moves.
+    origin: schoology
+
+  - q: What raises and lowers the knee (the whole table)?
+    choices: [The crank on the front of the knee, The quill handle, The table handwheel, The power feed lever]
+    answer: "The crank on the front of the knee"
+    why: The knee crank moves the knee, table and all, for big height changes.
+    origin: schoology
+    review: true   # was a diagram question (answer Q); confirm it matches our mill
+
+  - q: Which handwheel moves the table left and right (the X axis)?
+    choices: [The handwheel at the end of the table, The handwheel on the front of the saddle, The knee crank, The quill handle]
+    answer: "The handwheel at the end of the table"
+    why: The table handwheels move X; the saddle handwheel in front moves Y.
+    origin: schoology
+    review: true   # was a diagram question (answer M)
+
+  - q: Which handwheel moves the table toward and away from you (the Y axis)?
+    choices: [The handwheel on the front of the saddle, The handwheel at the end of the table, The knee crank, The quill handle]
+    answer: "The handwheel on the front of the saddle"
+    why: The saddle moves in and out on the knee.
+    origin: schoology
+    review: true   # was a diagram question (answer T)
+
+  - q: Where do you adjust the spindle speed?
+    choices: [The speed control on the head, The knee crank, The table handwheel, The DRO]
+    answer: "The speed control on the head"
+    why: Speed is set on the head (the variable-speed dial or handwheel), not on the table controls.
+    origin: schoology
+    review: true   # was a diagram question (answer B)
+
+  - q: Who must be in the shop when you run the mill?
+    choices: [A mentor, A teammate, Nobody - you are signed off, Anyone]
+    answer: "A mentor"
+    why: The mill is a mentor-supervised machine, every time.
+    origin: new
+    review: true
+
+  - q: Do you wear gloves while the mill is running?
+    choices: ["No - they can catch in the cutter or spindle", "Yes, always", "Only leather", "Only when cleaning chips"]
+    answer: "No - they can catch in the cutter or spindle"
+    why: A caught glove pulls the hand in.
+    origin: new
+    review: true
+
+  - q: How is the work held?
+    choices: [Clamped tight in the vise or to the table, Held by hand, Resting on the table, Taped down]
+    answer: "Clamped tight in the vise or to the table"
+    why: The cutter pushes hard. Anything loose gets thrown.
+    origin: new
+    review: true
+
+  - q: Can you walk away while the mill runs (for example, on power feed)?
+    choices: ["No - stay at the machine until the spindle stops", "Yes, on power feed", "Yes, for a minute", "Yes, if a teammate watches"]
+    answer: "No - stay at the machine until the spindle stops"
+    why: Something can go wrong at any moment. The operator stays with the machine.
+    origin: new
+    review: true
+
+  - q: Before using the power feed, you...
+    choices: [set the table stops so it can't run into the vise or the end of travel, turn the speed all the way up, take your glasses off to see better, nothing]
+    answer: "set the table stops so it can't run into the vise or the end of travel"
+    why: Power feed doesn't stop by itself. The stops do.
+    origin: new
+    review: true

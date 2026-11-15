@@ -67,6 +67,7 @@ def v2_card(item, tree_id, home, ctx):
         "draft": item.get("status") == "draft",
         "detail": detail,
         "bonus": item.get("bonus", []),
+        "quiz": common.quiz_pages().get(item["id"]),
         "signoff": common.signoff_link(item, ctx["trees"], ctx["team_doc"]),
     }
 

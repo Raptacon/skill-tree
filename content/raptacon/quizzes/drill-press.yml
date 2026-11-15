@@ -1,0 +1,115 @@
+# Drill press: the written half of tool-drill-press. Questions 1-12 are the Schoology
+# "Drill Press Quiz" (ID 5867); 13-16 are new (gloves, speed, center punch, chips).
+
+quiz:
+  id: drill-press
+  name: Drill press safety quiz
+  item: tool-drill-press
+  pass: 100
+  authored_by:   # Corey and Marilyn wrote the Schoology originals; Chris added the new questions
+    - {name: Corey Kesler}
+    - {name: Marilyn Kemp}
+    - {name: Chris Hirsch, github: ChrisHirsch}
+  source: Schoology "Drill Press Quiz" (ID 5867)
+
+questions:
+  - q: What do you do with long hair at the drill press?
+    choices: ["Keep your head back", "Get a haircut", "Tie it back or put it under a cap, and keep your head away from moving parts", "Hold it away with one hand"]
+    answer: "Tie it back or put it under a cap, and keep your head away from moving parts"
+    why: The spindle winds hair in faster than you can react.
+    origin: schoology
+
+  - q: Which protective equipment is absolutely required at the drill press?
+    choices: [Safety glasses, Steel-toed shoes, A leather apron, Leather gloves]
+    answer: "Safety glasses"
+    why: Chips fly off the bit. And no gloves near the spinning chuck.
+    origin: schoology
+
+  - q: Which of these makes the drill press unsafe to use?
+    choices: [Slippery floor from spilled cutting oil, Tools and scrap cluttering the table, A loose belt guard, All of these]
+    answer: "All of these"
+    why: Fix each one before you start.
+    origin: schoology
+
+  - q: The part starts spinning with the bit. What do you do?
+    choices: ["Move the table to block it", "Stop it with your hands", "Tap it with a hammer", "Switch off, let it stop, then free the part"]
+    answer: "Switch off, let it stop, then free the part"
+    why: A spinning part is a blade. Never grab it.
+    origin: schoology
+
+  - q: You are drilling a material you haven't drilled before. You always...
+    choices: [make sure you have the right bit, unplug it and inspect the guide, oil the bit, check with a mentor first]
+    answer: "check with a mentor first"
+    why: Different materials need different bits, speeds and clamping.
+    origin: schoology
+
+  - q: Before turning on the drill press, you...
+    choices: [tighten the table lock, clamp the work in a vise or to the table, remove the chuck key, do all of these]
+    answer: "do all of these"
+    why: A chuck key left in the chuck becomes a projectile when the spindle starts.
+    origin: schoology
+
+  - q: Which is NOT a safe way to hold metal for drilling?
+    choices: [Between stops mounted on the table, A clamp, A drill press vise, Holding it firmly by hand on the table]
+    answer: "Holding it firmly by hand on the table"
+    why: If the bit grabs, a hand-held part spins and cuts you.
+    origin: schoology
+
+  - q: When a bit seizes (grabs), it can...
+    choices: [break the bit, spin the vise, slip in the chuck, do all of these]
+    answer: "do all of these"
+    why: That's why the work is clamped and you ease off the feed.
+    origin: schoology
+
+  - q: When you finish drilling, what do you do first?
+    choices: [Take the part out of the vise, Take the bit out of the chuck, Switch off the drill press, Nothing]
+    answer: "Switch off the drill press"
+    why: Hands near the work only after the spindle has stopped.
+    origin: schoology
+
+  - q: How do you drill a long piece?
+    choices: [Support only the clamped end, Put the long end to your right, Support the far (unclamped) end, Nothing special]
+    answer: "Support the far (unclamped) end"
+    why: An unsupported long piece tips and twists the part out of the vise.
+    origin: schoology
+
+  - q: After drilling, which hazard should you watch for?
+    choices: [Stress in the material, Hot cutting oil, Sharp edges and burrs around the hole, A dull bit]
+    answer: "Sharp edges and burrs around the hole"
+    why: Deburr the hole before handling the part.
+    origin: schoology
+
+  - q: How do you keep the bit from seizing as it goes through?
+    choices: [Put wood under the part, Slow the bit down, Ease off the feed pressure as the bit breaks through, Keep the bit oiled]
+    answer: "Ease off the feed pressure as the bit breaks through"
+    why: The bit grabs most as it breaks through the far side. Ease off there.
+    origin: schoology
+    review: true   # original key said "as the bit begins to cut"; changed to "breaks through"
+
+  - q: Do you wear gloves at the drill press?
+    choices: ["Yes, to protect your hands", "No - a glove can catch on the bit or chuck and pull your hand in", "Only leather gloves", "Only for metal"]
+    answer: "No - a glove can catch on the bit or chuck and pull your hand in"
+    why: Bare hands, clamped work.
+    origin: new
+    review: true
+
+  - q: How does bit size change the spindle speed?
+    choices: [Bigger bits need a slower speed, Bigger bits need a faster speed, Speed doesn't matter, Always use the fastest speed]
+    answer: "Bigger bits need a slower speed"
+    why: A big bit at high speed overheats and grabs. Check the speed chart, or ask a mentor.
+    origin: new
+    review: true
+
+  - q: What do you do before drilling a hole in metal?
+    choices: [Center punch the mark, Nothing, Oil your hands, Heat the metal]
+    answer: "Center punch the mark"
+    why: The punch mark keeps the bit from wandering off your layout line.
+    origin: new
+    review: true
+
+  - q: How do you clear chips from the table?
+    choices: ["With a brush, after the spindle stops", "With your hand while it runs", "Blow them at someone", "Leave them"]
+    answer: "With a brush, after the spindle stops"
+    why: Metal chips are razor sharp, and hot.
+    origin: new
+    review: true

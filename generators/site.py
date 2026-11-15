@@ -32,6 +32,7 @@ def main():
         run("overview.py", tree_id)
     run("techmap.py")
     run("path.py")
+    run("quiz.py")
     slides = common.load_team().get("slides", [])
     for tree_id in slides:
         run("slide.py", tree_id)
@@ -54,6 +55,7 @@ def main():
         slides=[{"id": t, "name": v2[t]["tree"]["name"]} for t in slides if t in v2],
         subteams=sorted([d["tree"] for d in v2.values() if d["tree"].get("kind") == "subteam"],
                         key=lambda t: t["name"]),
+        quizzes=[{"id": qid, "name": q["quiz"]["name"], "count": len(q["questions"])} for qid, q in common.load_quizzes().items()],
     )
 
 

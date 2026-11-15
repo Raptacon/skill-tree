@@ -1,0 +1,113 @@
+# Chop / miter saw: the written half of tool-chop-saw. Questions 1-9 are the Schoology
+# "Compound Miter Saw" quiz (ID 6486); 10-15 are new (aluminum, clamping, small parts).
+
+quiz:
+  id: miter-saw
+  name: Chop / miter saw safety quiz
+  item: tool-chop-saw
+  pass: 100
+  authored_by:   # Corey and Marilyn wrote the Schoology originals; Chris added the new questions
+    - {name: Corey Kesler}
+    - {name: Marilyn Kemp}
+    - {name: Chris Hirsch, github: ChrisHirsch}
+  source: Schoology "Compound Miter Saw" (ID 6486)
+
+questions:
+  - q: When do you need a mentor's permission to use the miter saw?
+    choices: [Always, Never, Sometimes, Only for long cuts]
+    answer: "Always"
+    why: The miter saw is a mentor-supervised machine.
+    origin: schoology
+
+  - q: What is the right way to dress for the miter saw?
+    choices: [Remove jewelry, Secure loose clothing, Tie back long hair, All of these]
+    answer: "All of these"
+    why: A spinning blade catches anything loose.
+    origin: schoology
+
+  - q: When do you wear your safety glasses and hearing protection at the miter saw?
+    choices: [Sometimes, Always, Never, Only when watching someone else]
+    answer: "Always"
+    why: Chips fly and the saw is loud, every cut.
+    origin: schoology
+    review: true   # added hearing protection, which tools.yml requires
+
+  - q: Before changing the blade or doing any maintenance, you...
+    choices: [turn the saw off, turn the saw off and unplug it, lock the arm down, keep the guard in place]
+    answer: "turn the saw off and unplug it"
+    why: "Off isn't enough: unplugged, it can't start while your hands are on the blade."
+    origin: schoology
+
+  - q: Before cutting, check all that apply.
+    choices: [The guard is in place and works, The stock has no defects, The stock is held tight against the fence, The blade is at full speed before it touches the stock]
+    answers: [The guard is in place and works, The stock has no defects, The stock is held tight against the fence, The blade is at full speed before it touches the stock]
+    why: All four, every cut.
+    origin: schoology
+
+  - q: Where do your hands go while cutting?
+    choices: ["Cross-armed, holding the stock on the far side", "At least 6 inches (150 mm) from the blade", "Off the stock entirely", "As close to the blade as possible"]
+    answer: "At least 6 inches (150 mm) from the blade"
+    why: Six inches is the no-hands zone. Clamp the stock if your hand would have to be closer.
+    origin: schoology
+
+  - q: When you finish cutting, what is the next step?
+    choices: [Switch off and wait for the blade to stop completely, Leave the chips and offcuts, Walk away right away, Raise the arm while the blade is still spinning]
+    answer: "Switch off and wait for the blade to stop completely"
+    why: A coasting blade cuts as well as a running one.
+    origin: schoology
+
+  - q: What blade does the saw need?
+    choices: ["Any diameter blade", "The right blade for the material - a non-ferrous blade for aluminum", "A dull blade", "Any blade, even with missing teeth"]
+    answer: "The right blade for the material - a non-ferrous blade for aluminum"
+    why: The wrong blade grabs and kicks. We cut aluminum, so the saw gets a non-ferrous blade.
+    origin: schoology
+    review: true   # original answer "a cross-cut blade"; changed to match tools.yml (aluminum)
+
+  - q: How do you start and finish a cut?
+    choices: ["Start and stop halfway down", "Start with the blade fully up, then let it stop completely in the down position before raising it", "Start and stop in the full upright position", "Start and stop in the full down position"]
+    answer: "Start with the blade fully up, then let it stop completely in the down position before raising it"
+    why: Raising a spinning blade can throw the offcut. Manufacturers say to let it stop first.
+    origin: schoology
+    review: true   # original key said "in the full upright position"; changed to match manufacturer manuals and tools.yml
+
+  - q: How do you hold stock for a cut?
+    choices: [Clamped (or held firmly) flat against the fence and table, Free on the table, Held up in the air, With your other hand on the far side of the blade]
+    answer: "Clamped (or held firmly) flat against the fence and table"
+    why: Stock that can move gets grabbed by the blade and thrown.
+    origin: new
+    review: true
+
+  - q: A piece is too short to keep your hand 6 inches from the blade. What do you do?
+    choices: ["Hold it closer, carefully", "Clamp it, or cut it from a longer piece", "Hold it with pliers", "Push it with a stick while cutting"]
+    answer: "Clamp it, or cut it from a longer piece"
+    why: Short pieces put your hand in the danger zone. Clamp them or cut from longer stock.
+    origin: new
+    review: true
+
+  - q: Where should you never reach while the blade is spinning?
+    choices: [Behind or under the blade, Toward the switch, To the far end of a long board, Nowhere is off limits]
+    answer: "Behind or under the blade"
+    why: Reaching across or under a spinning blade is how serious injuries happen.
+    origin: new
+    review: true
+
+  - q: An offcut is stuck next to the blade. What do you do?
+    choices: ["Flick it away while the blade spins", "Switch off, wait for the blade to stop, then remove it", "Blow it away", "Leave it for the next cut"]
+    answer: "Switch off, wait for the blade to stop, then remove it"
+    why: Never clear offcuts near a spinning blade.
+    origin: new
+    review: true
+
+  - q: How many pieces do you cut at once?
+    choices: [One, As many as fit, Two stacked, Depends on the length]
+    answer: "One"
+    why: Stacked or side-by-side pieces shift and get thrown. One piece, clamped.
+    origin: new
+    review: true
+
+  - q: How do you cut round tube or bar?
+    choices: [Clamped so it can't roll, Held loosely, Rolling it during the cut, Only with a helper holding it]
+    answer: "Clamped so it can't roll"
+    why: The blade spins round stock. Clamped, it stays put.
+    origin: new
+    review: true

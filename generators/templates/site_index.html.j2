@@ -62,6 +62,15 @@
     {% endfor %}
   </div>
 
+  {% if quizzes %}
+  <h2 id="quizzes">Safety quizzes</h2>
+  <div class="cards">
+    {% for q in quizzes %}
+    <a class="card" href="quiz-{{ q.id }}.html"><div class="name">&#128221; {{ q.name | replace(' safety quiz', '') | replace(' quiz', '') }}</div><div class="desc">{{ q.count }} questions. Pass at 100%, then a mentor signs you off.</div></a>
+    {% endfor %}
+  </div>
+
+  {% endif %}
   <h2>Subteam trees</h2>
   <div class="cards">
     {% for t in subteams %}
