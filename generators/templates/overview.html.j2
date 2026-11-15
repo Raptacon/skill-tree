@@ -145,7 +145,7 @@
         <div class="body">
           {% if c.description %}{{ c.description }}{% endif %}
           {% for b in c.bonus %}<p class="bonus">&#127871; Bonus: <a href="{{ b.url }}">{{ b.label }}</a></p>{% endfor %}
-          {% if c.quiz %}<p><a href="{{ c.quiz }}">&#128221; Take the safety quiz &rarr;</a></p>{% endif %}
+          {% if c.quiz %}<p><a href="{{ c.quiz.page }}">&#128221; Take the {{ 'safety quiz' if c.quiz.kind == 'safety' else 'rules test' }} &rarr;</a></p>{% endif %}
           {% if c.detail %}<p><a href="{{ c.detail }}">Full details, training and test &rarr;</a></p>{% endif %}
           {% if c.signoff %}<p class="signoff"><a href="{{ c.signoff }}">&#9989; Leads &amp; mentors: sign off this skill</a></p>{% endif %}
         </div>

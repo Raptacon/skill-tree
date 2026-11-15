@@ -1,0 +1,177 @@
+# Drive team gate: the written half of strat-drive-gate. Rules that carry over from
+# year to year (drive team roles, field safety, cards, the question box, E-stop) plus
+# how our drive team works. Last season's game is the other half: the gate requires
+# strat-game-rules-test (quizzes/game-2026.yml until the 2027 kickoff). Rule
+# numbers cite the 2026 Game Manual; check them against each new manual.
+
+quiz:
+  id: drive-gate
+  name: Drive team gate quiz
+  kind: rules
+  item: strat-drive-gate
+  pass: 100
+  intro: The rules every FRC season shares, and how our drive team works. Pass this and last season's rules test to try out for the drive team.
+  reference: {label: the 2026 Game Manual, url: "https://firstfrc.blob.core.windows.net/frc2026/Manual/2026GameManual.pdf"}
+  authored_by:
+    - {name: Chris Hirsch, github: ChrisHirsch}
+  source: New for the skill tree, from the 2026 Game Manual sections 5-7
+
+questions:
+  # ---- The drive team
+  - q: How many people can be on a drive team for a match?
+    choices: [Up to 3, Up to 4, Up to 5 - and at most 1 can be an adult, As many as fit in the driver station]
+    answer: "Up to 5 - and at most 1 can be an adult"
+    why: A DRIVE TEAM is up to 5 people from one team, and no more than 1 non-student (manual section 6, DRIVE TEAM).
+    origin: new
+    review: true
+
+  - q: Who may operate the robot during a match?
+    choices: [The drivers (and human players where the game allows), The drive coach, Anyone on the drive team, A driver from a partner team]
+    answer: "The drivers (and human players where the game allows)"
+    why: "G422: the coach never touches the controls - only their E-stop or A-stop. Greater than momentary is a red card."
+    origin: new
+    review: true
+
+  - q: What is the drive coach's main job during a match?
+    choices: [Watch the whole field and call strategy so the drivers can focus on driving, Drive when the driver gets tired, Hold the controller as a backup, Talk to the referees during the match]
+    answer: "Watch the whole field and call strategy so the drivers can focus on driving"
+    why: The drivers watch the robot. The coach watches everything else - opponents, time, the score - and makes the calls.
+    origin: new
+    review: true
+
+  - q: During Auto, what may the drive team do?
+    choices: [Stay in their staged areas and keep hands off the controls, Drive if the auto routine fails, Tell the robot what to do by voice, Walk to the other end of the driver station]
+    answer: "Stay in their staged areas and keep hands off the controls"
+    why: "G401 and G402: in Auto the robot runs on its own. Touching the controls is a foul; the A-stop is the only exception."
+    origin: new
+    review: true
+
+  # ---- Before and after the match
+  - q: "Before the match starts, what do you check? (check all that apply)"
+    choices: [A fresh battery is in and strapped down, Bumpers are the right alliance color, The robot is connected to the driver station, The right auto routine is selected]
+    answers: [A fresh battery is in and strapped down, Bumpers are the right alliance color, The robot is connected to the driver station, The right auto routine is selected]
+    why: All four, every match. Each one has lost teams a match.
+    origin: new
+    review: true
+
+  - q: What can you leave on the field when the match starts?
+    choices: [Only your robot, Your robot and a spare battery, Your robot and a tool bag, Anything not touching the robot]
+    answer: "Only your robot"
+    why: "G303 F: the robot must be the only team item left on the field."
+    origin: new
+    review: true
+
+  - q: Your robot's bumpers must...
+    choices: [match your alliance color and show your team number, be any color, be removed for climbing, only be on the front]
+    answer: "match your alliance color and show your team number"
+    why: "G409 D: a robot whose team number or alliance color can't be told is unsafe and gets disabled."
+    origin: new
+    review: true
+
+  - q: The field lights after a match are purple. Can you go get your robot?
+    choices: ["No - purple is for field staff only. Wait for green", "Yes", "Yes, if you are quick", "Only the coach can"]
+    answer: "No - purple is for field staff only. Wait for green"
+    why: Green means the field is safe for everyone; purple is field staff only (Table 5-3).
+    origin: new
+    review: true
+
+  - q: How do you get onto the field?
+    choices: [Only through an open gate, Step over the guardrail where it is closest, Reach over the wall, Climb the driver station]
+    answer: "Only through an open gate"
+    why: "G102: never step over the guardrail. G101: never reach into the field."
+    origin: new
+    review: true
+
+  - q: Queuing calls your match. What happens if the drive team is late?
+    choices: [The match can start without you - and causing delays is a rule violation, They wait as long as you need, Nothing, You get a free time-out]
+    answer: "The match can start without you - and causing delays is a rule violation"
+    why: "G301: be prompt. Know the schedule and be in queue early."
+    origin: new
+    review: true
+
+  - q: When does the drive team go through the pre-match checklist?
+    choices: ["Every match, in queue, before the robot goes on the field", "Only before the first match of the day", "Only after something breaks", "When there's time"]
+    answer: "Every match, in queue, before the robot goes on the field"
+    why: Every match, top to bottom, out loud. The match you skip it is the one the battery falls out.
+    origin: new
+    review: true   # point to the team's own checklist once it is written up
+
+  - q: Going through the checklist in queue, you find the battery strap loose. What do you do?
+    choices: ["Fix it (or get the technician to) before the robot goes on the field", "Leave it - there's no time", "Tell the pit crew after the match", "Drive gently so it holds"]
+    answer: "Fix it (or get the technician to) before the robot goes on the field"
+    why: A loose battery browns out or disconnects the robot mid-match. Queue is the last chance to fix it.
+    origin: new
+    review: true
+
+  # ---- The operator console
+  - q: "Which of these can you use to drive the robot? (check all that apply)"
+    choices: ["A wired Xbox controller", "A Dance Dance Revolution (DDR) mat on USB", "A flight stick", "A Nintendo Power Glove on a USB adapter", "A Microsoft Kinect", "A Bluetooth Xbox controller", "A phone app over Wi-Fi"]
+    answers: ["A wired Xbox controller", "A Dance Dance Revolution (DDR) mat on USB", "A flight stick", "A Nintendo Power Glove on a USB adapter", "A Microsoft Kinect"]
+    why: "Any wired input the Driver Station software reads is fine. R905: no wireless or Bluetooth in the operator console - though it names the Kinect as allowed, since motion sensing isn't wireless communication."
+    origin: new
+    review: true
+
+  - q: "Which of these are NOT allowed in the driver station during a match? (check all that apply)"
+    choices: ["A mech suit that makes the driver 9 feet tall", "A laser pointer to show the driver where to go", "Fake AprilTags held up to confuse other robots", "A walkie-talkie to talk to the scouts in the stands", "A team hat"]
+    answers: ["A mech suit that makes the driver 9 feet tall", "A laser pointer to show the driver where to go", "Fake AprilTags held up to confuse other robots", "A walkie-talkie to talk to the scouts in the stands"]
+    why: "G302: nothing over 78 inches tall (hats are an exception), no talking to anyone outside the arena, and no lasers or fake AprilTags that jam other robots' sensors. R906: nothing unsafe."
+    origin: new
+    review: true
+
+  # ---- Stops, cards and questions
+  - q: When does the drive team press the E-stop?
+    choices: [When the robot is unsafe or out of control, When you are losing, To restart the robot, To pause the match]
+    answer: "When the robot is unsafe or out of control"
+    why: The E-stop disables the robot for the rest of the match. It's a safety button, not a reset.
+    origin: new
+    review: true
+
+  - q: What does the A-stop do?
+    choices: [Disables the robot for the rest of Auto, Disables the robot for the whole match, Restarts the auto routine, Stops the match clock]
+    answer: "Disables the robot for the rest of Auto"
+    why: The A-stop stops a bad auto routine; the robot comes back in Teleop. The E-stop is for the whole match (manual 5, driver station lights).
+    origin: new
+    review: true
+
+  - q: What happens if your team gets a second yellow card?
+    choices: [It becomes a red card, Nothing until a third, The robot is disabled for one match, You lose 5 points]
+    answer: "It becomes a red card"
+    why: Yellow cards add up; a second one turns into a red card (manual 6.6).
+    origin: new
+    review: true
+
+  - q: What does a red card mean in a qualification match?
+    choices: [Your team is disqualified - 0 match points and 0 ranking points, The opponent gets 15 points, A warning, The robot is disabled for the next match]
+    answer: "Your team is disqualified - 0 match points and 0 ranking points"
+    why: DISQUALIFIED means 0 match points and 0 ranking points (Table 6-6).
+    origin: new
+    review: true
+
+  - q: You disagree with a call. What do you do?
+    choices: [Up to 2 drive team members go to the question box and talk to the head referee after the match, Shout at the referee during the match, Bang on the driver station glass, Argue with the other alliance]
+    answer: "Up to 2 drive team members go to the question box and talk to the head referee after the match"
+    why: "Question box, after the field turns green, calmly (manual 6.7.1). G201: be civil. G202: never hit the glass."
+    origin: new
+    review: true
+
+  - q: Your robot lost connection during a match. Who do you talk to about it?
+    choices: [The FTA (field technical advisor), The head referee during the match, The other alliance, Nobody]
+    answer: "The FTA (field technical advisor)"
+    why: Technical questions about the field or robot go to the FTA, who can help find the cause (manual 6.7.1).
+    origin: new
+    review: true
+
+  # ---- Behavior
+  - q: An opponent's robot breaks down in the middle of the field. What do you do?
+    choices: ["Drive around it - deliberately damaging, tipping or pinning a disabled robot is a foul", "Push it out of the way as hard as you can", "Pin it so it can't recover", "Take its game pieces"]
+    answer: "Drive around it - deliberately damaging, tipping or pinning a disabled robot is a foul"
+    why: "G416, G417 and G418 protect every robot, broken or not. This isn't combat robotics."
+    origin: new
+    review: true
+
+  - q: After a match, what does the drive team do?
+    choices: [Check the robot and report any damage to the pit crew, Debrief with the strategy lead and scouts, Swap in a charged battery, All of these]
+    answer: "All of these"
+    why: The next match may be minutes away. Fix what broke, learn what happened, and start charged.
+    origin: new
+    review: true

@@ -17,6 +17,12 @@ RENEWS = {"season": "Every season", "permanent": "Once", "event": "Every trip"}
 PRIVATE = {"self": "Private", "mentors": "Mentors only"}
 
 
+def quiz_entry(q):
+    """The training entry for a skill's quiz page."""
+    what = "Safety quiz" if q["kind"] == "safety" else "Rules test"
+    return {"type": "quiz", "label": f"{what} (pass at {q['pass']}%, then a mentor signs you off)", "url": q["page"]}
+
+
 def describe_by(by, ctx):
     """verify.by -> ["Manufacturing Subteam Lead (Sasha Crouse, Snort Hirsch)", ...]"""
     if not by:
@@ -129,8 +135,7 @@ def build_item(item, roles, conditions, ctx):
         "bonus": item.get("bonus", []),
         "signoff": common.signoff_link(item, ctx["trees"], ctx["team_doc"]),
         "training": [r for r in item.get("training", []) if not r.get("roles") or set(r["roles"]) & set(roles)] +
-                    ([{"type": "quiz", "label": "Safety quiz (pass at 100%, then a mentor signs you off)", "url": ctx["quizzes"][item["id"]]}]
-                     if item["id"] in ctx["quizzes"] else []),
+                    ([quiz_entry(ctx["quizzes"][item["id"]])] if item["id"] in ctx["quizzes"] else []),
         "parts": [{"name": p["name"], "who": " or ".join(describe_by(p.get("by"), ctx))} for p in item.get("parts", [])],
     }
 
