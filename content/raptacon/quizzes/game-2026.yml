@@ -1,0 +1,264 @@
+# 2026 REBUILT rules test: strat-game-rules-test until the 2027 kickoff, and the
+# "last season's game" half of the drive team gate (strat-drive-gate requires it).
+# Questions are from the team's "2026 FRC Driver's Test" Google Form, which had no
+# answer key: the answers and whys come from the 2026 Game Manual (TU22), with the
+# section or rule cited so a mentor can check each one. The form's duplicate
+# Autonomous question is merged, and its two point grids are split into one
+# question per row.
+
+quiz:
+  id: game-2026
+  name: 2026 REBUILT rules test
+  kind: rules
+  item: strat-game-rules-test
+  pass: 100
+  intro: The 2026 game, REBUILT - how a match runs, scoring, ranking points, fouls and the rules drivers break most.
+  reference: {label: the 2026 Game Manual, url: "https://firstfrc.blob.core.windows.net/frc2026/Manual/2026GameManual.pdf"}
+  authored_by:   # questions from the team's 2026 Driver's Test form; Chris added the answers from the manual
+    - {name: Chris Hirsch, github: ChrisHirsch}
+  source: Raptacon "2026 FRC Driver's Test" (Google Form), answered from the 2026 Game Manual TU22
+
+questions:
+  # ---- Match timing (Table 6-2, Table 6-3)
+  - q: How long is the Autonomous period?
+    choices: [10 seconds, 15 seconds, 20 seconds, 30 seconds]
+    answer: "20 seconds"
+    why: AUTO runs 0:20 to 0:00 (manual 6.4, Table 6-3).
+    origin: form
+    review: true
+
+  - q: How long is the Teleop period?
+    choices: [2 minutes, 2 minutes and 15 seconds, 2 minutes and 20 seconds, 2 minutes and 30 seconds]
+    answer: "2 minutes and 20 seconds"
+    why: "TELEOP runs 2:20 to 0:00: the transition shift, four alliance shifts and END GAME (manual 6.4, Table 6-3)."
+    origin: form
+    review: true
+
+  - q: How long is the Transition Shift?
+    choices: [5 seconds, 10 seconds, 15 seconds, 20 seconds]
+    answer: "10 seconds"
+    why: The TRANSITION SHIFT runs 2:20 to 2:10, and both hubs are active (Table 6-3).
+    origin: form
+    review: true
+
+  - q: How long is each alliance shift?
+    choices: [10 seconds, 15 seconds, 20 seconds, 25 seconds]
+    answer: "25 seconds"
+    why: Shifts 1-4 run 2:10-1:45, 1:45-1:20, 1:20-0:55 and 0:55-0:30, 25 seconds each (Table 6-3).
+    origin: form
+    review: true
+
+  - q: How long is the End Game?
+    choices: [15 seconds, 20 seconds, 25 seconds, 30 seconds]
+    answer: "30 seconds"
+    why: END GAME runs 0:30 to 0:00, and both hubs are active again (Table 6-3).
+    origin: form
+    review: true
+
+  - q: "Which hub is active in Shift 1? (check all that apply)"
+    choices: [The alliance that scored the least points in Auto, The alliance that scored the least fuel in Auto, The alliance that scored the least climb points in Auto, Chosen by FMS if the score is tied after Auto, Chosen by FMS if climb points are tied in Auto, Chosen by FMS if the fuel scored in Auto is tied]
+    answers: [The alliance that scored the least fuel in Auto, Chosen by FMS if the fuel scored in Auto is tied]
+    why: The alliance that scored the MOST fuel in Auto has its hub inactive in Shift 1, so the other hub is active. A fuel tie is broken randomly by FMS. Points and climbs don't count (manual 6.4.1).
+    origin: form
+    review: true
+
+  # ---- Hub lights (Table 5-3)
+  - q: The hub shows its alliance color at 100% brightness. What does that mean?
+    choices: [The alliance hub is active, The alliance hub deactivates in 5 seconds, The alliance hub is inactive, The alliance hub deactivates in 3 seconds]
+    answer: "The alliance hub is active"
+    why: Solid alliance color at full brightness means the hub is active. Off means inactive (Table 5-3).
+    origin: form
+    review: true
+
+  - q: The hub is pulsing its alliance color. What does that mean?
+    choices: [The alliance hub is active, The alliance hub deactivates in 5 seconds, The alliance hub is inactive, The alliance hub deactivates in 3 seconds]
+    answer: "The alliance hub deactivates in 3 seconds"
+    why: The pulse is the deactivation warning. It starts 3 seconds before the hub turns off (Table 5-3).
+    origin: form
+    review: true
+
+  - q: How long after a hub deactivates (or the period ends) does fuel still count?
+    choices: [1 second, 2 seconds, 3 seconds, 4 seconds, 5 seconds]
+    answer: "3 seconds"
+    why: Scoring keeps counting for 3 seconds to cover fuel still being processed through the hub (manual 6.5).
+    origin: form
+    review: true
+
+  # ---- Fuel (6.3.4)
+  - q: How much fuel is staged in each Depot?
+    choices: ["24", "28", "32", "36"]
+    answer: "24"
+    why: 24 fuel per depot, not always in a neat layout (manual 6.3.4 A).
+    origin: form
+    review: true
+
+  - q: How much fuel is staged in each Outpost Chute?
+    choices: ["24", "28", "32", "36"]
+    answer: "24"
+    why: 24 fuel per outpost chute (manual 6.3.4 B).
+    origin: form
+    review: true
+
+  - q: How much fuel starts in the Neutral Zone?
+    choices: [350-458, 360-408, 320-368, 420-458]
+    answer: "360-408"
+    why: All 504 fuel minus the depots, chutes and up to 8 preloaded per robot leaves 360 to 408 (manual 6.3.4 D).
+    origin: form
+    review: true
+
+  # ---- Points (Table 6-4)
+  - q: How many points is a fuel in the active hub worth in Auto?
+    choices: ["0", "1", "10", "15", "20", "30"]
+    answer: "1"
+    why: One point per fuel in an active hub, in Auto and Teleop. Fuel in an inactive hub scores nothing (Table 6-4).
+    origin: form
+    review: true
+
+  - q: How many points does a robot get in Auto just for moving (leaving its starting line)?
+    choices: ["0", "1", "10", "15", "20", "30"]
+    answer: "0"
+    why: REBUILT has no points for moving in Auto - Table 6-4 only scores fuel and the tower.
+    origin: form
+    review: true
+
+  - q: How many points is a Level 1 tower climb worth in Auto?
+    choices: ["0", "1", "10", "15", "20", "30"]
+    answer: "15"
+    why: 15 points each, for at most 2 robots in Auto (Table 6-4).
+    origin: form
+    review: true
+
+  - q: How many points is a Level 2 or Level 3 tower climb worth in Auto?
+    choices: ["0", "1", "10", "15", "20", "30"]
+    answer: "0"
+    why: Only Level 1 can score in Auto (manual 6.5.2, Table 6-4).
+    origin: form
+    review: true
+
+  - q: How many points is a fuel in the active hub worth in Teleop?
+    choices: ["0", "1", "10", "20", "30"]
+    answer: "1"
+    why: One point per fuel in an active hub (Table 6-4).
+    origin: form
+    review: true
+
+  - q: How many points is a Level 1 tower climb worth in Teleop?
+    choices: ["0", "1", "10", "20", "30"]
+    answer: "10"
+    why: Level 1 is 10 in Teleop (15 in Auto) (Table 6-4).
+    origin: form
+    review: true
+
+  - q: How many points is a Level 2 tower climb worth in Teleop?
+    choices: ["0", "1", "10", "20", "30"]
+    answer: "20"
+    why: Level 2 is 20 points, bumpers completely above the low rung (Table 6-4, 6.5.2).
+    origin: form
+    review: true
+
+  - q: How many points is a Level 3 tower climb worth in Teleop?
+    choices: ["0", "1", "10", "20", "30"]
+    answer: "30"
+    why: Level 3 is 30 points, bumpers completely above the mid rung (Table 6-4, 6.5.2).
+    origin: form
+    review: true
+
+  # ---- Ranking points (Table 6-5) and fouls (Table 6-6)
+  - q: At a district or regional event, how much fuel earns the Energized RP?
+    choices: ["50", "100", "240", "360"]
+    answer: "100"
+    why: 100 fuel in an active hub. District Championships raise it to 240 and Championship to 360 (Table 6-5).
+    origin: form
+    review: true
+
+  - q: At a district or regional event, how much fuel earns the Supercharged RP?
+    choices: ["50", "100", "240", "360"]
+    answer: "360"
+    why: 360 fuel in an active hub (500 at Championship) (Table 6-5).
+    origin: form
+    review: true
+
+  - q: How many tower points earn the Traversal RP?
+    choices: ["50", "100", "240", "360"]
+    answer: "50"
+    why: 50 tower points across the match, at every event level (Table 6-5).
+    origin: form
+    review: true
+
+  - q: How many ranking points does a win earn in a 2026 qualification match?
+    choices: ["3", "2", "1", "0"]
+    answer: "3"
+    why: A win is 3 RP and a tie is 1, plus up to 3 bonus RPs (Table 6-4). It changes by season - it was 2 RP for a win before 2025.
+    origin: new
+    review: true
+
+  - q: A minor foul gives the opponent how many points?
+    choices: ["3", "5", "10", "15"]
+    answer: "5"
+    why: A minor foul credits 5 points to the opponent (Table 6-6).
+    origin: form
+    review: true
+
+  - q: A major foul gives the opponent how many points?
+    choices: ["3", "5", "10", "15"]
+    answer: "15"
+    why: A major foul credits 15 points to the opponent (Table 6-6).
+    origin: form
+    review: true
+
+  # ---- Rules (section 7)
+  - q: In Auto, a robot may drive completely across the center line.
+    choices: ["True", "False"]
+    answer: "False"
+    why: "G403: completely across (bumpers fully over the line) is a major foul, plus another major foul for each contact with an opponent."
+    origin: form
+    review: true
+
+  - q: A robot may only shoot fuel into its hub from its own alliance zone.
+    choices: ["True", "False"]
+    answer: "True"
+    why: "G407: bumpers must be at least partly in your alliance zone when you launch. Otherwise it's a major foul."
+    origin: form
+    review: true
+
+  - q: "What may a robot do with fuel coming out of the hub? (check all that apply)"
+    choices: [Direct it towards a desired area, Catch it, Gain control of it after it hits the ground or another robot]
+    answers: [Gain control of it after it hits the ground or another robot]
+    why: "G408: no catching and no steering fuel the hub releases, until it touches something other than your robot."
+    origin: form
+    review: true
+
+  - q: A robot may intentionally extend past its frame perimeter in more than one direction at a time.
+    choices: ["True", "False"]
+    answer: "False"
+    why: "R106 and G413: one direction (one side) at a time, and no more than 12 inches (R105)."
+    origin: form
+    review: true
+
+  - q: A robot may climb on (be fully held up by) a partner robot for tower points.
+    choices: ["True", "False"]
+    answer: "False"
+    why: "G414: a robot fully supported by a partner can't earn tower points for the rest of the match."
+    origin: form
+    review: true
+
+  - q: How long may a robot pin an opponent?
+    choices: [1 second, 2 seconds, 3 seconds, 4 seconds, 5 seconds]
+    answer: "3 seconds"
+    why: "G418: a 3-count. Back off 6 feet (72 in) for 3 seconds to end the pin."
+    origin: form
+    review: true
+
+  - q: "What may an alliance block? (check all that apply)"
+    choices: [One trench, One bump, Both trenches, Both bumps]
+    answers: [One trench, One bump]
+    why: "G419: blocking both trenches or both bumps to stop traversal is a major foul, repeated every 3 seconds. One robot blocking one area is normal play."
+    origin: form
+    review: true
+
+  - q: "When does touching an opponent at their tower give them Level 3 climb points? (check all that apply)"
+    choices: [During Auto, Any time during Teleop, During the opponent's scoring shift, During the End Game]
+    answers: [During the End Game]
+    why: "G420: in the last 30 seconds, touching an opponent robot that is touching its tower is a major foul, and Level 3 points if it's off the ground - whoever started the contact."
+    origin: form
+    review: true

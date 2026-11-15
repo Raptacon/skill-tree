@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Render a page per safety quiz (content/<team>/quizzes/*.yml) as quiz-<id>.html:
+"""Render a page per quiz (content/<team>/quizzes/*.yml: safety quizzes and game
+rules tests) as quiz-<id>.html:
 questions and choices shuffled on every attempt, retakes until the pass mark,
 the "why" for each miss, and on a pass a QR code for that skill's pre-filled
 sign-off form - the mentor watches the practical and signs off. The quiz never
@@ -28,7 +29,7 @@ def main():
         questions = [{"q": x["q"], "choices": x["choices"], "answers": x.get("answers") or [x["answer"]], "why": x["why"]} for x in doc["questions"]]
         common.write_html(
             env, "quiz.html.j2", f"quiz-{qid}.html",
-            team=team["team"], season=ctx["season"], quiz=q, item=item, count=len(questions),
+            team=team["team"], season=ctx["season"], quiz=q, item=item, count=len(questions), safety=q.get("kind", "safety") == "safety",
             data=json.dumps({"pass": q.get("pass", 100), "questions": questions}).replace("</", "<\\/"),
             signoff=signoff, signoff_qr=overview.qr_data_uri(signoff) if signoff else None,
             authors=", ".join(a["name"] for a in q.get("authored_by", [])),

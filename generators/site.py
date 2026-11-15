@@ -55,7 +55,8 @@ def main():
         slides=[{"id": t, "name": v2[t]["tree"]["name"]} for t in slides if t in v2],
         subteams=sorted([d["tree"] for d in v2.values() if d["tree"].get("kind") == "subteam"],
                         key=lambda t: t["name"]),
-        quizzes=[{"id": qid, "name": q["quiz"]["name"], "count": len(q["questions"])} for qid, q in common.load_quizzes().items()],
+        quizzes=[{"id": qid, "name": q["quiz"]["name"], "count": len(q["questions"]), "pass": q["quiz"].get("pass", 100),
+                  "kind": q["quiz"].get("kind", "safety")} for qid, q in common.load_quizzes().items()],
     )
 
 

@@ -12,6 +12,7 @@
   h1 { font-size: clamp(24px, 4.5vw, 34px); margin: 16px 0 4px; border-bottom: 5px solid var(--green); display: inline-block; }
   .meta { color: var(--muted); font-size: 13px; margin-bottom: 10px; }
   .intro { font-size: 16px; line-height: 1.5; background: var(--link-bg); border: 2px solid var(--link); border-radius: 10px; padding: 10px 14px; }
+  .intro a { color: var(--link); }
   .q { border: 2px solid var(--line-strong); border-radius: 10px; padding: 12px 14px; margin: 14px 0; background: var(--card); }
   .q.wrong { border-color: var(--danger-strong); background: var(--danger-bg); }
   .q.right { border-color: var(--ok); }
@@ -40,12 +41,18 @@
 {{ theme_toggle() }}
 <div class="topbar">
   <a href="index.html"><img class="logo-l" src="assets/lockup-horizontal.svg" alt="{{ team.name }} {{ team.number }}"><img class="logo-d" src="assets/lockup-horizontal-dark.svg" alt="{{ team.name }} {{ team.number }}"></a>
-  <a href="index.html#quizzes">&larr; All safety quizzes</a>
+  {% if safety %}<a href="index.html#quizzes">&larr; All safety quizzes</a>{% else %}<a href="index.html#rules-tests">&larr; All rules tests</a>{% endif %}
 </div>
 <h1>{{ quiz.name }}</h1>
 <div class="meta">For the skill <b>{{ item.name }}</b> · {{ count }} questions · pass at {{ quiz.pass }}%</div>
+{% if safety %}
 <p class="intro">This is the written half of your sign-off. Answer every question; you can retake it as many times as you need, and it shows
   why for anything you miss. Pass it, then show the pass screen to a mentor: they watch you use the tool safely and sign you off.</p>
+{% else %}
+<p class="intro">{% if quiz.intro %}{{ quiz.intro }} {% endif %}Answer every question; you can retake it as many times as you need, and it shows
+  why for anything you miss. Pass it, then show the pass screen to a mentor to sign you off.{% if quiz.reference %}
+  Everything here is in <a href="{{ quiz.reference.url }}" target="_blank" rel="noopener">{{ quiz.reference.label }}</a>.{% endif %}</p>
+{% endif %}
 <form id="quiz"></form>
 <div id="result"></div>
 <footer>Questions by {{ authors }}. {{ season }} season.</footer>
@@ -92,7 +99,7 @@
       const when = new Date().toLocaleString();
       form.innerHTML = '';
       result.innerHTML = `<div class="result pass"><h2>✅ Passed: ${right} of ${order.length}</h2>
-        <div>Now show this screen to a mentor. They watch you use the tool safely, then sign you off.</div>
+        <div>{{ 'Now show this screen to a mentor. They watch you use the tool safely, then sign you off.' if safety else 'Now show this screen to a mentor, who signs you off.' }}</div>
         <div class="who">Your name: <input id="who" autocomplete="name" placeholder="First and last name"></div>
         <div class="stamp">Passed ${esc(when)}</div>
         ${SIGNOFF ? `<div class="qrbox"><img src="{{ signoff_qr }}" alt="QR code for the sign-off form">

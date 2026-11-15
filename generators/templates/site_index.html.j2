@@ -62,15 +62,18 @@
     {% endfor %}
   </div>
 
-  {% if quizzes %}
-  <h2 id="quizzes">Safety quizzes</h2>
+  {% for kind, title, anchor in [('safety', 'Safety quizzes', 'quizzes'), ('rules', 'Game rules tests', 'rules-tests')] %}
+  {% set list = quizzes | selectattr('kind', 'equalto', kind) | list %}
+  {% if list %}
+  <h2 id="{{ anchor }}">{{ title }}</h2>
   <div class="cards">
-    {% for q in quizzes %}
-    <a class="card" href="quiz-{{ q.id }}.html"><div class="name">&#128221; {{ q.name | replace(' safety quiz', '') | replace(' quiz', '') }}</div><div class="desc">{{ q.count }} questions. Pass at 100%, then a mentor signs you off.</div></a>
+    {% for q in list %}
+    <a class="card" href="quiz-{{ q.id }}.html"><div class="name">&#128221; {{ q.name | replace(' safety quiz', '') | replace(' quiz', '') }}</div><div class="desc">{{ q.count }} questions. Pass at {{ q.pass }}%, then a mentor signs you off.</div></a>
     {% endfor %}
   </div>
 
   {% endif %}
+  {% endfor %}
   <h2>Subteam trees</h2>
   <div class="cards">
     {% for t in subteams %}

@@ -80,8 +80,10 @@ def load_quizzes():
 
 
 def quiz_pages():
-    """{item_id: quiz page file name}: the skills that have a written safety quiz."""
-    return {q["quiz"]["item"]: f"quiz-{qid}.html" for qid, q in load_quizzes().items()}
+    """{item_id: {page, pass, kind}}: the skills that have a written quiz. kind is
+    safety (the written half of a tool sign-off) or rules (a game rules test)."""
+    return {q["quiz"]["item"]: {"page": f"quiz-{qid}.html", "pass": q["quiz"].get("pass", 100), "kind": q["quiz"].get("kind", "safety")}
+            for qid, q in load_quizzes().items()}
 
 
 def signoff_link(item, trees, team):

@@ -12,7 +12,7 @@ tree:
   authored_by:
     - {name: Chris Hirsch, github: ChrisHirsch}
   created_at: 2026-10-20
-  updated_at: 2026-10-30
+  updated_at: 2026-11-15
   description: >-
     Know the game better than anyone, scout every team at an event, and drive
     our robot. Three tracks - Strategy, Scouting and Drive. Drive Team seats
@@ -31,10 +31,10 @@ items:
       kickoff it covers last season's game.
     roles: [student]
     kind: score
-    pass_score: null          # TODO the team's rules test and its pass mark
+    pass_score: 100           # quizzes/game-2026.yml until the 2027 kickoff
     verify: {method: signoff, claim: true, by: {any_of: [{role: subteam-lead, tree: strategy}, {role: subteam-mentor, tree: strategy}]}}
     training:
-      - {type: doc, label: This season's game manual}   # TODO link after kickoff
+      - {type: doc, label: The 2026 Game Manual (REBUILT), url: "https://firstfrc.blob.core.windows.net/frc2026/Manual/2026GameManual.pdf"}
     renews: season
     visibility: public
 
@@ -84,6 +84,22 @@ items:
     verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: strategy}, {role: subteam-mentor, tree: strategy}]}}
     training:
       - {type: session, label: Cone course setup and a practice lap}
+    renews: season
+    visibility: public
+
+  - id: strat-drive-gate
+    tier: 1
+    track: Drive
+    name: Drive team gate
+    description: >-
+      Pass the drive team gate quiz - the rules every season shares, field
+      safety, cards and how our drive team works. Together with last season's
+      game rules test, it's the way in to driving.
+    roles: [student]
+    kind: score
+    pass_score: 100
+    requires: [strat-game-rules-test]
+    verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: strategy}, {role: subteam-mentor, tree: strategy}]}}
     renews: season
     visibility: public
 
@@ -140,7 +156,7 @@ items:
     roles: [student]
     kind: timed
     runs: 3
-    requires: [strat-rc-cone-course, strat-robot-knowledge, strat-game-rules-test]
+    requires: [strat-rc-cone-course, strat-robot-knowledge, strat-drive-gate]
     verify:
       method: signoff
       by: {any_of: [{role: subteam-lead, tree: strategy}, {role: subteam-mentor, tree: strategy}, {role: lead-mentor}]}
