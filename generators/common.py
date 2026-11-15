@@ -1,6 +1,7 @@
 """Shared loading helpers for the generators - keeps content/<team>/*.yml as the
 one source of truth without each script re-deriving the same lookups."""
 
+import glob
 import os
 import shutil
 from urllib.parse import quote
@@ -66,6 +67,21 @@ def resolve_items(tree_doc, items_by_id, include_hidden=False):
         if include_hidden or item.get("status") != "hidden":
             resolved.append(item)
     return resolved
+
+
+def load_quizzes():
+    """{quiz_id: quiz doc} from <team>/quizzes/*.yml (empty if there are none)."""
+    out = {}
+    for path in sorted(glob.glob(os.path.join(DATA, "quizzes", "*.yml"))):
+        with open(path) as f:
+            doc = yaml.safe_load(f)
+        out[doc["quiz"]["id"]] = doc
+    return out
+
+
+def quiz_pages():
+    """{item_id: quiz page file name}: the skills that have a written safety quiz."""
+    return {q["quiz"]["item"]: f"quiz-{qid}.html" for qid, q in load_quizzes().items()}
 
 
 def signoff_link(item, trees, team):

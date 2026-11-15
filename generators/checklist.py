@@ -128,7 +128,9 @@ def build_item(item, roles, conditions, ctx):
         "practical": item.get("practical"),
         "bonus": item.get("bonus", []),
         "signoff": common.signoff_link(item, ctx["trees"], ctx["team_doc"]),
-        "training": [r for r in item.get("training", []) if not r.get("roles") or set(r["roles"]) & set(roles)],
+        "training": [r for r in item.get("training", []) if not r.get("roles") or set(r["roles"]) & set(roles)] +
+                    ([{"type": "quiz", "label": "Safety quiz (pass at 100%, then a mentor signs you off)", "url": ctx["quizzes"][item["id"]]}]
+                     if item["id"] in ctx["quizzes"] else []),
         "parts": [{"name": p["name"], "who": " or ".join(describe_by(p.get("by"), ctx))} for p in item.get("parts", [])],
     }
 
@@ -193,6 +195,7 @@ def load_ctx():
         "all_items": common.own_items(trees),
         "member_roles": {r["id"]: r for r in roles_doc["member_roles"]},
         "signoff_roles": {r["id"]: r for r in roles_doc["signoff_roles"]},
+        "quizzes": common.quiz_pages(),
         "conditions": {c["id"]: c for c in roles_doc["conditions"]},
         "holders": common.role_holders(season),
         "team_doc": team,

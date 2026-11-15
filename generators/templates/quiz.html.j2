@@ -1,0 +1,112 @@
+{% from "_theme.html.j2" import theme_toggle %}<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ quiz.name }} - {{ team.name }} {{ team.number }}</title>
+<style>
+  body { font-family: -apple-system, "Helvetica Neue", Arial, sans-serif; margin: 0 auto; padding: 20px 16px 48px; max-width: 46rem; }
+  .topbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-right: 44px; }
+  .topbar img { height: 30px; }
+  .topbar a { color: var(--link); font-size: 14px; text-decoration: none; }
+  h1 { font-size: clamp(24px, 4.5vw, 34px); margin: 16px 0 4px; border-bottom: 5px solid var(--green); display: inline-block; }
+  .meta { color: var(--muted); font-size: 13px; margin-bottom: 10px; }
+  .intro { font-size: 16px; line-height: 1.5; background: var(--link-bg); border: 2px solid var(--link); border-radius: 10px; padding: 10px 14px; }
+  .q { border: 2px solid var(--line-strong); border-radius: 10px; padding: 12px 14px; margin: 14px 0; background: var(--card); }
+  .q.wrong { border-color: var(--danger-strong); background: var(--danger-bg); }
+  .q.right { border-color: var(--ok); }
+  .q .n { color: var(--muted); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
+  .q .text { font-size: 17px; font-weight: 700; margin: 4px 0 8px; line-height: 1.35; }
+  .q label { display: flex; gap: 10px; align-items: flex-start; padding: 7px 8px; border-radius: 8px; cursor: pointer; font-size: 16px; line-height: 1.35; }
+  .q label:hover { background: var(--surface); }
+  .q input { margin-top: 3px; transform: scale(1.2); flex: none; }
+  .q .why { margin-top: 8px; font-size: 15px; color: var(--danger); font-weight: 600; }
+  .q .all { font-size: 13px; color: var(--muted); font-weight: 400; }
+  button.go { font-size: 18px; font-weight: 800; padding: 12px 22px; border-radius: 999px; border: 0; background: var(--block); color: var(--green); cursor: pointer; }
+  .result { margin: 20px 0; padding: 16px 18px; border-radius: 12px; font-size: 18px; line-height: 1.45; }
+  .result.fail { background: var(--warn-bg); border: 2px solid var(--warn-line); }
+  .result.pass { background: var(--ok-bg); border: 3px solid var(--ok); }
+  .pass h2 { margin: 0 0 6px; color: var(--ok); font-size: 26px; }
+  .pass .who { margin: 10px 0; font-size: 16px; }
+  .pass .who input { font-size: 18px; padding: 6px 10px; border-radius: 8px; border: 2px solid var(--line-strong); background: var(--bg); color: var(--fg); width: min(22rem, 100%); }
+  .pass .qrbox { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; margin-top: 10px; }
+  .pass .qrbox img { width: 180px; height: 180px; background: #fff; border-radius: 8px; padding: 4px; }
+  .pass .stamp { font-size: 14px; color: var(--muted); }
+  footer { margin-top: 30px; font-size: 12px; color: var(--faint); }
+</style>
+{% include "_theme.html.j2" %}
+</head>
+<body>
+{{ theme_toggle() }}
+<div class="topbar">
+  <a href="index.html"><img class="logo-l" src="assets/lockup-horizontal.svg" alt="{{ team.name }} {{ team.number }}"><img class="logo-d" src="assets/lockup-horizontal-dark.svg" alt="{{ team.name }} {{ team.number }}"></a>
+  <a href="index.html#quizzes">&larr; All safety quizzes</a>
+</div>
+<h1>{{ quiz.name }}</h1>
+<div class="meta">For the skill <b>{{ item.name }}</b> · {{ count }} questions · pass at {{ quiz.pass }}%</div>
+<p class="intro">This is the written half of your sign-off. Answer every question; you can retake it as many times as you need, and it shows
+  why for anything you miss. Pass it, then show the pass screen to a mentor: they watch you use the tool safely and sign you off.</p>
+<form id="quiz"></form>
+<div id="result"></div>
+<footer>Questions by {{ authors }}. {{ season }} season.</footer>
+<script>
+  const DATA = {{ data | safe }};
+  const SIGNOFF = {{ (signoff or '') | tojson }};
+  const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const shuffle = (a) => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+  const form = document.getElementById('quiz');
+  const result = document.getElementById('result');
+  let order = [];
+  function start() {
+    // "All of these" and friends only make sense last, after the choices they sum up.
+    const last = (c) => /^(all of (these|the above)|none of (these|the above)|they are all)/i.test(c);
+    order = shuffle(DATA.questions.map((q, i) => ({ ...q, i, choices: [...shuffle(q.choices.filter((c) => !last(c))), ...q.choices.filter(last)] })));
+    result.innerHTML = '';
+    form.innerHTML = order.map((q, k) => {
+      const multi = q.answers.length > 1;
+      return `<div class="q" data-k="${k}"><div class="n">Question ${k + 1} of ${order.length}</div>
+        <div class="text">${esc(q.q)}${multi ? ' <span class="all">(check all that apply)</span>' : ''}</div>` +
+        q.choices.map((c, j) => `<label><input type="${multi ? 'checkbox' : 'radio'}" name="q${k}" value="${j}"> <span>${esc(c)}</span></label>`).join('') +
+        '<div class="why" hidden></div></div>';
+    }).join('') + '<button type="submit" class="go">Check my answers</button>';
+    window.scrollTo(0, 0);
+  }
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    let right = 0;
+    let unanswered = 0;
+    order.forEach((q, k) => {
+      const box = form.querySelector(`.q[data-k="${k}"]`);
+      const picked = [...box.querySelectorAll('input:checked')].map((x) => q.choices[Number(x.value)]);
+      if (!picked.length) unanswered++;
+      const ok = picked.length === q.answers.length && picked.every((p) => q.answers.includes(p));
+      if (ok) right++;
+      box.classList.toggle('wrong', !ok);
+      box.classList.toggle('right', ok);
+      const why = box.querySelector('.why');
+      why.hidden = ok;
+      why.textContent = ok ? '' : `Not quite. ${q.why}`;
+    });
+    const pct = Math.round((100 * right) / order.length);
+    if (pct >= DATA.pass) {
+      const when = new Date().toLocaleString();
+      form.innerHTML = '';
+      result.innerHTML = `<div class="result pass"><h2>✅ Passed: ${right} of ${order.length}</h2>
+        <div>Now show this screen to a mentor. They watch you use the tool safely, then sign you off.</div>
+        <div class="who">Your name: <input id="who" autocomplete="name" placeholder="First and last name"></div>
+        <div class="stamp">Passed ${esc(when)}</div>
+        ${SIGNOFF ? `<div class="qrbox"><img src="{{ signoff_qr }}" alt="QR code for the sign-off form">
+          <div><b>Mentor:</b> scan to sign off <b>{{ item.name }}</b>,<br>or <a href="${esc(SIGNOFF)}" target="_blank" rel="noopener">open the sign-off form</a>.</div></div>` : ''}</div>`;
+      window.scrollTo(0, 0);
+      return;
+    }
+    result.innerHTML = `<div class="result fail"><b>${right} of ${order.length} right</b> (${pct}%). You need ${DATA.pass}%.` +
+      `${unanswered ? ` ${unanswered} question${unanswered > 1 ? 's were' : ' was'} left blank.` : ''} The ones in red say why.` +
+      ' <button type="button" class="go" id="again">Try again</button></div>';
+    document.getElementById('again').addEventListener('click', start);
+    result.scrollIntoView({ behavior: 'smooth' });
+  });
+  start();
+</script>
+</body>
+</html>

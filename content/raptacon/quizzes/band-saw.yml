@@ -1,0 +1,153 @@
+# Band saw: the written half of tool-band-saw. Questions 1-11 are the Schoology "Band Saw
+# Quiz" (ID 5317); 12-16 are new; 17-21 replace the band saw parts diagram worksheet
+# (it had no answer key) with questions about what each part does.
+
+quiz:
+  id: band-saw
+  name: Band saw safety quiz
+  item: tool-band-saw
+  pass: 100
+  authored_by:   # Corey and Marilyn wrote the Schoology originals; Chris added the new questions
+    - {name: Corey Kesler}
+    - {name: Marilyn Kemp}
+    - {name: Chris Hirsch, github: ChrisHirsch}
+  source: Schoology "Band Saw Quiz" (ID 5317) and the band saw parts diagram
+
+questions:
+  - q: How high above the stock should the upper blade guard and guides be set?
+    choices: [1/16 to 1/8 inch, 1/8 to 1/4 inch, 1/4 to 1/2 inch, 1/2 to 1 inch]
+    answer: "1/8 to 1/4 inch"
+    why: Just above the stock, so as little blade as possible is exposed and the blade is supported close to the cut.
+    origin: schoology
+
+  - q: When you cut a small piece, you should always...
+    choices: [use a push stick (ask a mentor to show you how), hold it with your fingertips, use a round guide, get someone to hold it for you]
+    answer: "use a push stick (ask a mentor to show you how)"
+    why: Small parts bring your fingers close to the blade. A push stick keeps them away.
+    origin: schoology
+    review: true   # reworded from "consult a veteran/mentor to learn how to use a push stick"
+
+  - q: Relief cuts on the band saw...
+    choices: [keep the blade from binding in tight curves, are only for hardwood, are cuts made in a hurry, are only for softwood]
+    answer: "keep the blade from binding in tight curves"
+    why: Cutting relief cuts first lets waste fall away, so the blade isn't twisted around a tight curve.
+    origin: schoology
+
+  - q: Before making any cut, you first...
+    choices: ["check the stock is free of nails, screws or other obstructions", "turn the saw on", "take off your safety glasses", "start cutting slowly"]
+    answer: "check the stock is free of nails, screws or other obstructions"
+    why: Hidden metal can break the blade or throw the piece.
+    origin: schoology
+
+  - q: When cutting freehand on the band saw, it is safe to...
+    choices: [force the stock around curves, keep the stock flat on the table, hold round stock in your hand, back out of a curved cut while the saw runs]
+    answer: "keep the stock flat on the table"
+    why: Flat on the table, the blade pushes the stock down. Round or tilted stock can spin and pull your hand in.
+    origin: schoology
+
+  - q: When is it safe to have your hand in line with the blade?
+    choices: [When your hand is more than 2 inches away, When your hand is more than 4 inches away, Only when the saw is off and stopped, When your hand is more than 6 inches away]
+    answer: "Only when the saw is off and stopped"
+    why: If the stock slips, a hand in line with the blade goes straight into it.
+    origin: schoology
+
+  - q: While running the band saw, it is a safe practice to...
+    choices: [reach across the table while the blade is running, keep a balanced stance the whole time, open the wheel covers carefully, leave the scraps until the end of the meeting]
+    answer: "keep a balanced stance the whole time"
+    why: Off balance, a slip pushes your hands toward the blade.
+    origin: schoology
+
+  - q: How do you check that the blade runs in the middle of the wheels (tracking)?
+    choices: [Turn the power on for short bursts, Open the covers while it coasts, Turn the wheel by hand with the power off, Open the covers while braking]
+    answer: "Turn the wheel by hand with the power off"
+    why: The covers only come off with the power off, and turning by hand shows where the blade rides.
+    origin: schoology
+
+  - q: While making a cut, you...
+    choices: [talk to your helper, concentrate on the cut, look around the shop, think about your next job]
+    answer: "concentrate on the cut"
+    why: Your full attention stays on the blade and your hands until the cut is done.
+    origin: schoology
+
+  - q: When do you clear scrap from the band saw table?
+    choices: [While you cut, When a lot has built up, After the saw has stopped, It depends on the job]
+    answer: "After the saw has stopped"
+    why: Reaching near a moving blade to clear scraps is how fingers get cut.
+    origin: schoology
+
+  - q: You need to back the blade out of a cut. What do you do?
+    choices: ["Turn the power off, wait for it to stop, then free the blade", "Leave the power on and loosen the tension", "Leave the power on so it slides out", "Use the brake while it runs"]
+    answer: "Turn the power off, wait for it to stop, then free the blade"
+    why: Backing out of a running cut can pull the blade off the wheels.
+    origin: schoology
+    review: true   # added "wait for it to stop"
+
+  - q: The blade breaks while you are cutting. What do you do?
+    choices: ["Grab the blade", "Step back, switch off, keep the covers closed until the wheels stop, and tell a mentor", "Open the cover to see what happened", "Keep cutting with what is left"]
+    answer: "Step back, switch off, keep the covers closed until the wheels stop, and tell a mentor"
+    why: A broken blade can whip around inside the covers. Let everything stop, then a mentor replaces it.
+    origin: new
+    review: true
+
+  - q: How do you cut round stock (tube, dowel, bar) on the band saw?
+    choices: ["Freehand, held tight", "Clamped in a V-block or vise", "Rolling it into the blade", "Only with a helper holding it"]
+    answer: "Clamped in a V-block or vise"
+    why: The blade spins round stock and can pull your hand in. Clamped, it can't roll.
+    origin: new
+    review: true
+
+  - q: The blade slows down or the cut is drifting. What should you do?
+    choices: [Push harder, Ease off and let the blade cut at its own pace, Twist the stock to steer it, Speed up the feed to finish quickly]
+    answer: "Ease off and let the blade cut at its own pace"
+    why: Forcing the feed bends or breaks the blade. Let the teeth do the work.
+    origin: new
+    review: true
+
+  - q: What do you do before you walk away from the band saw?
+    choices: [Switch off and wait until the blade stops completely, Switch off and leave right away, Leave it running for the next person, Lower the guard and leave it running]
+    answer: "Switch off and wait until the blade stops completely"
+    why: A coasting blade is silent and nearly invisible to the next person.
+    origin: new
+    review: true
+
+  - q: Where do you stand while cutting?
+    choices: [Directly behind the blade, Slightly to one side of the blade's path, On the right side reaching around, Wherever is comfortable]
+    answer: "Slightly to one side of the blade's path"
+    why: If the blade breaks or the stock kicks, you are out of its line.
+    origin: new
+    review: true
+
+  - q: What does the blade tensioning knob (on top of the saw) do?
+    choices: [Raises the blade guard, Tightens or loosens the blade on the wheels, Tilts the table, Turns on the light]
+    answer: "Tightens or loosens the blade on the wheels"
+    why: Correct tension keeps the blade tracking and cutting straight. Only adjust it with the power off.
+    origin: new
+    review: true
+
+  - q: What is the guide post for?
+    choices: [Raising or lowering the upper guard and blade guides to just above the stock, Tilting the table, Holding the stock, Changing the speed]
+    answer: "Raising or lowering the upper guard and blade guides to just above the stock"
+    why: Set it, then lock it with the guide post locking knob before cutting.
+    origin: new
+    review: true
+
+  - q: What do the blade guides and the thrust bearing do?
+    choices: [Keep the blade from twisting and from being pushed back during the cut, Sharpen the blade, Hold the stock flat, Adjust the speed]
+    answer: "Keep the blade from twisting and from being pushed back during the cut"
+    why: The guides stop side-to-side twist; the thrust bearing behind the blade takes the push of the feed.
+    origin: new
+    review: true
+
+  - q: What is the table insert (the plate around the blade in the table) for?
+    choices: [Supporting the stock right next to the blade so small pieces don't fall in, Locking the table angle, Holding the blade guard, Catching sawdust only]
+    answer: "Supporting the stock right next to the blade so small pieces don't fall in"
+    why: A missing or worn insert lets offcuts drop into the saw and jam the blade.
+    origin: new
+    review: true
+
+  - q: Where is the power switch, and how do you use it in an emergency?
+    choices: [On the front of the base - you switch it off right away, There isn't one, Behind the saw - you unplug it, On the guide post]
+    answer: "On the front of the base - you switch it off right away"
+    why: Know where the switch is before you start, so you can hit it without looking.
+    origin: new
+    review: true   # check against our saw's switch location

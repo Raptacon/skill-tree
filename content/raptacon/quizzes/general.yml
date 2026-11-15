@@ -1,0 +1,145 @@
+# General shop safety: the written half of onb-safety-test. Questions 1-11 are the
+# Schoology "General Safety Quiz" (ID 8399), reworded for a shuffled quiz; 12-20 are new.
+
+quiz:
+  id: general
+  name: General shop safety quiz
+  item: onb-safety-test
+  pass: 100
+  authored_by:   # Corey and Marilyn wrote the Schoology originals; Chris added the new questions
+    - {name: Corey Kesler}
+    - {name: Marilyn Kemp}
+    - {name: Chris Hirsch, github: ChrisHirsch}
+  source: Schoology "General Safety Quiz" (ID 8399)
+
+questions:
+  - q: Which of these is never allowed in the shop?
+    choices: [Working and cleaning, Carelessness and horseplay, Thinking and planning, Asking for help]
+    answer: "Carelessness and horseplay"
+    why: Horseplay around tools and machines is how people get hurt. Everything else is exactly what we want.
+    origin: schoology
+
+  - q: A tool or machine is damaged or not working right. What do you do?
+    choices: [Fix it yourself, Tell a mentor and put an "out of order" tag on it, Keep using it carefully, Put it back so someone else can deal with it]
+    answer: "Tell a mentor and put an \"out of order\" tag on it"
+    why: A mentor decides how it gets fixed, and the tag stops the next person from using it.
+    origin: schoology
+    review: true   # the original answer was "only b and c" (report it, and tag it)
+
+  - q: While you work in the shop, you should not...
+    choices: [listen, shout, think, plan your next step]
+    answer: "shout"
+    why: Shouting startles people who are using tools. Get close and talk normally, or wait until they stop.
+    origin: schoology
+
+  - q: A teammate shows up under the influence of drugs or alcohol. What do you do to keep them safe?
+    choices: [Tell a mentor, Keep them away from power tools and machines, Tell a mentor and keep them away from power tools and machines, Nothing - it is not your business]
+    answer: "Tell a mentor and keep them away from power tools and machines"
+    why: They can't work safely, so they stay off the tools, and a mentor needs to know right away.
+    origin: schoology
+    review: true   # the original answer was "both a and b"
+
+  - q: Before you use a power tool for the first time, you should...
+    choices: [plan what you are going to do before you start, take a rest, find another student to run it for you, start and figure it out as you go]
+    answer: "plan what you are going to do before you start"
+    why: Know the cut, where your hands go and how you'll stop before the tool is running.
+    origin: schoology
+
+  - q: A visitor walks into the shop. What should happen first?
+    choices: [Give them a pair of safety glasses, Make them leave, Show them what you are doing on a machine, Have them take the safety quiz]
+    answer: "Give them a pair of safety glasses"
+    why: Everyone in the shop wears eye protection, visitors included.
+    origin: schoology
+
+  - q: Loud noises in the shop make other people...
+    choices: [annoyed, happy, more likely to have an accident, work faster]
+    answer: "more likely to have an accident"
+    why: A sudden noise makes people flinch, and a flinch next to a blade is how accidents happen.
+    origin: schoology
+
+  - q: Which of these do you report to a mentor right away?
+    choices: [An accident, An injury, A broken or damaged tool, All of these]
+    answer: "All of these"
+    why: Mentors need to know about every accident, injury and broken tool, every time.
+    origin: schoology
+
+  - q: When do you wear safety glasses in the shop?
+    choices: ["Only with chemicals", "Only in hazardous areas", "At all times, unless a mentor says other face protection is needed", "Only when using power tools"]
+    answer: "At all times, unless a mentor says other face protection is needed"
+    why: Chips and debris fly from other people's work too. Glasses on the whole time you are in the shop.
+    origin: schoology
+
+  - q: Shop clothing is unsafe if it is...
+    choices: [loose, baggy, flammable, all of these]
+    answer: "all of these"
+    why: Loose or baggy clothes catch in moving parts, and flammable fabric is dangerous around sparks.
+    origin: schoology
+
+  - q: While you work in the shop, you should never...
+    choices: [use tools you are signed off on, get the tools you need yourself, put tools and supplies back where they belong, distract or disturb other people while they work]
+    answer: "distract or disturb other people while they work"
+    why: Someone running a tool needs all their attention on it.
+    origin: schoology
+
+  - q: Can you use a tool or machine you haven't been signed off on?
+    choices: ["Yes, if you are careful", "Yes, if a teammate shows you how", "No - only tools you are signed off on", "Only if no mentor is around to ask"]
+    answer: "No - only tools you are signed off on"
+    why: Team handbook rule. The sign-off is how we know you have been trained on that tool.
+    origin: new
+    review: true
+
+  - q: What shoes do you wear in the shop?
+    choices: [Sandals or flip-flops, Closed-toe shoes, Any shoes, Socks are fine on clean floors]
+    answer: "Closed-toe shoes"
+    why: Dropped parts, tools and stock land on feet. Closed toes, every time.
+    origin: new
+    review: true
+
+  - q: You're about to use a drill press. Which of these do you do first?
+    choices: ["Tie back long hair", "Take off rings, watches and bracelets", "Roll up or secure loose sleeves", "All of these"]
+    answer: "All of these"
+    why: Rotating tools grab hair, jewelry and sleeves and pull you in.
+    origin: new
+    review: true
+
+  - q: Which of these should you know where to find before you start working?
+    choices: [The first aid kit, The fire extinguisher, The eyewash station, All of these]
+    answer: "All of these"
+    why: In an emergency there is no time to look for them. Your shop orientation shows you each one.
+    origin: new
+    review: true
+
+  - q: You get a small cut that barely bleeds. What do you do?
+    choices: [Ignore it, Tell a mentor and clean it with the first aid kit, Keep working and wash it at home, Wrap it in tape]
+    answer: "Tell a mentor and clean it with the first aid kit"
+    why: Every injury gets reported and cleaned, even small ones. Mentors have to record it.
+    origin: new
+    review: true
+
+  - q: Before you reach into the robot to work on a mechanism, you should...
+    choices: [Make sure it is disabled, Make sure it is disabled and the main breaker is off (or the battery unplugged), Ask the driver to go slowly, Nothing - it is safe when nobody is driving]
+    answer: "Make sure it is disabled and the main breaker is off (or the battery unplugged)"
+    why: A robot can move unexpectedly while it has power. No power, no surprise.
+    origin: new
+    review: true
+
+  - q: Is it OK to use compressed air to blow dust off your clothes or at a teammate?
+    choices: ["Yes, it is just air", "Only on low pressure", "No, never", "Only on clothes, not skin"]
+    answer: "No, never"
+    why: Compressed air can push debris into eyes or skin, and through skin into the blood.
+    origin: new
+    review: true
+
+  - q: Should you wear gloves when using a drill press, lathe, mill or other rotating machine?
+    choices: ["Yes, always", "No - gloves can catch and pull your hand in", "Only leather gloves", "Only for metal"]
+    answer: "No - gloves can catch and pull your hand in"
+    why: A glove caught by a spinning bit or chuck drags the hand in with it.
+    origin: new
+    review: true
+
+  - q: Can you use power tools in the shop when no mentor is there?
+    choices: ["Yes, if you are signed off", "No - power tools only with a mentor or approved adult present", "Yes, for quick cuts", "Only hand power tools"]
+    answer: "No - power tools only with a mentor or approved adult present"
+    why: Someone trained has to be there to help if something goes wrong.
+    origin: new
+    review: true   # confirm the exact team rule

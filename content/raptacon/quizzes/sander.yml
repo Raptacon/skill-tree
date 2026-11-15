@@ -1,0 +1,112 @@
+# Belt and disc sander: the written half of tool-sander. The Schoology "Sander Safety Test"
+# (ID 2207) had one question (1 below); 2-14 are new, following the sign-off steps in
+# tools.yml and common sander safety rules.
+
+quiz:
+  id: sander
+  name: Belt and disc sander safety quiz
+  item: tool-sander
+  pass: 100
+  authored_by:   # Corey and Marilyn wrote the Schoology originals; Chris added the new questions
+    - {name: Corey Kesler}
+    - {name: Marilyn Kemp}
+    - {name: Chris Hirsch, github: ChrisHirsch}
+  source: Schoology "Sander Safety Test" (ID 2207), expanded
+
+questions:
+  - q: Is it safe to use a sanding belt or disc with torn edges?
+    choices: ["Yes, if you are careful", "No - pieces can tear off and hit you", "Yes, on low speed", "Only for wood"]
+    answer: "No - pieces can tear off and hit you"
+    why: A torn belt can come apart at full speed. Tell a mentor so it gets replaced.
+    origin: schoology
+
+  - q: How big should the gap be between the table (or tool rest) and the belt or disc?
+    choices: [No more than 1/16 inch, About 1/4 inch, About 1/2 inch, It doesn't matter]
+    answer: "No more than 1/16 inch"
+    why: A bigger gap can grab the part and pull it - and your fingers - in between.
+    origin: new
+    review: true
+
+  - q: When can you adjust the table or tool rest?
+    choices: [While the sander runs, Only with the sander off and stopped, Any time, Only on low speed]
+    answer: "Only with the sander off and stopped"
+    why: Adjusting next to a moving belt or disc puts your hands where they can be pulled in.
+    origin: new
+    review: true
+
+  - q: On the disc sander, which side of the disc do you sand on?
+    choices: [The side moving down toward the table, The side moving up away from the table, Either side, The center]
+    answer: "The side moving down toward the table"
+    why: On the down side the disc pushes the part into the table. On the up side it lifts and throws it.
+    origin: new
+    review: true
+
+  - q: How do you sand a very small part?
+    choices: ["Hold it with your fingertips", "Hold it in a clamp or holder, or don't sand it on the machine", "Push it with your thumb", "Let it go and catch it"]
+    answer: "Hold it in a clamp or holder, or don't sand it on the machine"
+    why: Small parts put your fingertips right against the abrasive. Use a holder, or file it by hand.
+    origin: new
+    review: true
+
+  - q: How much pressure do you use?
+    choices: ["Light pressure, keeping the part moving", "As hard as you can", "Hold it still in one spot", "Push until it stops the belt"]
+    answer: "Light pressure, keeping the part moving"
+    why: Heavy pressure overheats the part and can stall the belt or tear it. Let the abrasive work.
+    origin: new
+    review: true
+
+  - q: Why do we keep aluminum and wood sanding separate (and empty the dust collector)?
+    choices: [It doesn't matter, Sparks and hot metal dust can set wood dust on fire, Aluminum dulls the belt faster, Wood dust ruins aluminum parts]
+    answer: "Sparks and hot metal dust can set wood dust on fire"
+    why: Metal dust and sparks plus wood dust in the collector is a real fire risk.
+    origin: new
+    review: true
+
+  - q: A metal part gets hot while you sand it. What do you do?
+    choices: ["Keep going, it's fine", "Stop and let it cool (or cool it), using short passes", "Hold it with gloves", "Grab it with a rag"]
+    answer: "Stop and let it cool (or cool it), using short passes"
+    why: Metal heats fast on a sander and burns fingers. Gloves near a moving belt are a catch hazard.
+    origin: new
+    review: true
+
+  - q: What do you check and set up before turning the sander on?
+    choices: [Belt or disc is in good shape and the table is locked with a tiny gap, Dust collection is on, You know where the switch is, All of these]
+    answer: "All of these"
+    why: Good abrasive, locked table, dust collection and a known off switch, every time.
+    origin: new
+    review: true
+
+  - q: What do you wear and remove before sanding?
+    choices: ["Safety glasses on", "Hair tied back", "No loose sleeves, gloves or jewelry", "All of these"]
+    answer: "All of these"
+    why: The belt grabs loose things. Eyes need protecting from dust and grit.
+    origin: new
+    review: true
+
+  - q: The sander grabs your part and pulls it. What do you do?
+    choices: [Hold on tight, Let go and switch the sander off, Pull it back out while it runs, Reach in to get it]
+    answer: "Let go and switch the sander off"
+    why: Fighting the machine pulls your hand in. Let go; parts are replaceable, fingers aren't.
+    origin: new
+    review: true
+
+  - q: Which part of the belt do you sand against?
+    choices: [The flat section backed by the platen (the metal plate behind the belt), The curved part over the rollers, The top edge, Anywhere on the belt]
+    answer: "The flat section backed by the platen (the metal plate behind the belt)"
+    why: Backed by the platen the belt is supported. Over the rollers or unsupported, the part can be thrown.
+    origin: new
+    review: true
+
+  - q: How do you clean up when you are done?
+    choices: ["Switch off, wait for it to stop, then brush the dust away", "Wipe the belt with your hand while it runs", "Blow the dust off with compressed air at your face", "Leave it for the next person"]
+    answer: "Switch off, wait for it to stop, then brush the dust away"
+    why: Never near a moving belt, and brushes - not hands - for dust and metal slivers.
+    origin: new
+    review: true
+
+  - q: Where do you keep your fingers while sanding?
+    choices: [At least 2 inches from the belt or disc, Touching the table next to the belt, Wherever they hold the part best, Under the part]
+    answer: "At least 2 inches from the belt or disc"
+    why: Keep a gap so a slip doesn't put a fingertip on the abrasive.
+    origin: new
+    review: true   # check our team's distance rule

@@ -297,16 +297,15 @@ items:
     section: safety
     roles: [student, mentor]
     kind: score
-    pass_score: null        # TODO
+    pass_score: 100         # the general safety quiz (quizzes/general.yml); retakes are unlimited
     verify:
-      method: signoff       # v1: mentor confirms the Schoology result; v2 = auto-graded team quiz
+      method: signoff       # a mentor sees the quiz pass screen and signs off
       claim: true
       by: {any_of: [{role: safety-officer}, {role: lead-mentor}]}
     renews: season
     visibility: team
     training:
       - {type: doc, label: "FIRST Safety Manual", url: "https://www.firstinspires.org/hubfs/web/program/all/safety-manual.pdf?hsLang=en"}
-      - {type: link, label: Safety test (Schoology)}   # TODO link
 
   - id: onb-shop-orientation
     name: Shop safety orientation
