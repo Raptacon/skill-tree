@@ -1,6 +1,7 @@
 # Drive team gate: the written half of strat-drive-gate. Rules that carry over from
 # year to year (drive team roles, field safety, cards, the question box, E-stop) plus
-# how our drive team works. Last season's game is the other half: the gate requires
+# how our drive team works - its checklist questions follow the drive team checklist
+# (strat-drive-checklist). Last season's game is the other half: the gate requires
 # strat-game-rules-test (quizzes/game-2026.yml until the 2027 kickoff). Rule
 # numbers cite the 2026 Game Manual; check them against each new manual.
 
@@ -47,10 +48,24 @@ questions:
     review: true
 
   # ---- Before and after the match
-  - q: "Before the match starts, what do you check? (check all that apply)"
-    choices: [A fresh battery is in and strapped down, Bumpers are the right alliance color, The robot is connected to the driver station, The right auto routine is selected]
-    answers: [A fresh battery is in and strapped down, Bumpers are the right alliance color, The robot is connected to the driver station, The right auto routine is selected]
-    why: All four, every match. Each one has lost teams a match.
+  - q: "Before queueing, what does our checklist have you do? (check all that apply)"
+    choices: ["Check the Git branch in Shuffleboard is main or the latest release", "Run the smoke test", "Install a freshly charged green-labeled battery, checked with the Battery Beak", "Log the battery", "Check the bumpers are the right alliance color", "Deploy whatever branch was last on your laptop"]
+    answers: ["Check the Git branch in Shuffleboard is main or the latest release", "Run the smoke test", "Install a freshly charged green-labeled battery, checked with the Battery Beak", "Log the battery", "Check the bumpers are the right alliance color"]
+    why: "The drive team checklist, Before Queueing: the right code, a smoke test, a charged and logged comp battery, the right bumpers - then go over the strategy for this game."
+    origin: new
+    review: true
+
+  - q: Shuffleboard shows the robot is running a branch that isn't main or the latest release. What do you do?
+    choices: ["Check with programming, and deploy main if needed", "Play the match anyway", "Deploy your own fix in queue", "Ignore it if the robot drives"]
+    answer: "Check with programming, and deploy main if needed"
+    why: Untested code is how a robot that worked in practice fails on the field. The checklist says to consult programming and/or deploy main.
+    origin: new
+    review: true
+
+  - q: Which battery powers the driver station's converter in the pit?
+    choices: ["A non-competition battery", "The freshly charged competition battery", "Whatever battery is closest", "The spare from the robot cart"]
+    answer: "A non-competition battery"
+    why: Charged green-labeled batteries are saved for the robot. Leftovers go on the charger.
     origin: new
     review: true
 
@@ -89,17 +104,31 @@ questions:
     origin: new
     review: true
 
-  - q: When does the drive team go through the pre-match checklist?
-    choices: ["Every match, in queue, before the robot goes on the field", "Only before the first match of the day", "Only after something breaks", "When there's time"]
-    answer: "Every match, in queue, before the robot goes on the field"
-    why: Every match, top to bottom, out loud. The match you skip it is the one the battery falls out.
+  - q: When does the drive team go through the drive team checklist?
+    choices: ["Every match - before queueing, in queue, on the field, at the driver station and after the round", "Only before the first match of the day", "Only after something breaks", "When there's time"]
+    answer: "Every match - before queueing, in queue, on the field, at the driver station and after the round"
+    why: Every match, every section. The match you skip it is the one the battery falls out.
     origin: new
-    review: true   # point to the team's own checklist once it is written up
+    review: true
 
-  - q: Going through the checklist in queue, you find the battery strap loose. What do you do?
-    choices: ["Fix it (or get the technician to) before the robot goes on the field", "Leave it - there's no time", "Tell the pit crew after the match", "Drive gently so it holds"]
-    answer: "Fix it (or get the technician to) before the robot goes on the field"
-    why: A loose battery browns out or disconnects the robot mid-match. Queue is the last chance to fix it.
+  - q: On the field, the battery connector feels loose. What do you do?
+    choices: ["Fix it before the match starts", "Leave it - there's no time", "Tell the pit crew after the match", "Drive gently so it holds"]
+    answer: "Fix it before the match starts"
+    why: A loose connector browns out or disconnects the robot mid-match. On the field is the last chance to fix it.
+    origin: new
+    review: true
+
+  - q: On the field, the PDH shows a low battery voltage. What do you do?
+    choices: ["Switch to the spare battery", "Play the match - it will probably last", "Turn the robot off and on", "Tell the driver to drive slowly"]
+    answer: "Switch to the spare battery"
+    why: The checklist has you check the voltage on the PDH and switch if necessary. That's why the spare's charge is checked in queue.
+    origin: new
+    review: true
+
+  - q: "At the driver station, what do you check before the match? (check all that apply)"
+    choices: ["Controllers", "The Ethernet cable", "The auto selector, confirmed with the field crew", "Camera visibility", "Your phone for messages"]
+    answers: ["Controllers", "The Ethernet cable", "The auto selector, confirmed with the field crew", "Camera visibility"]
+    why: The checklist's At Drivestation section - then confirm the strategy one last time.
     origin: new
     review: true
 
@@ -169,9 +198,16 @@ questions:
     origin: new
     review: true
 
-  - q: After a match, what does the drive team do?
-    choices: [Check the robot and report any damage to the pit crew, Debrief with the strategy lead and scouts, Swap in a charged battery, All of these]
+  - q: The match is over and the field is green. What is the first thing you do with the robot?
+    choices: ["Power it down", "Lift it onto the cart", "Unplug the battery while it's on", "Drive it off the field"]
+    answer: "Power it down"
+    why: Power down first, then lift it - don't drop it - and move the cart off quickly so the next match can set up.
+    origin: new
+    review: true
+
+  - q: Back in the pit after a match, what does the drive team do?
+    choices: ["Review the battery log and flag any issues", "Tell the pit crew what broke", "Debrief with the strategy lead and scouts", "All of these"]
     answer: "All of these"
-    why: The next match may be minutes away. Fix what broke, learn what happened, and start charged.
+    why: The next match may be minutes away. Fix what broke, catch a bad battery, and learn what happened.
     origin: new
     review: true

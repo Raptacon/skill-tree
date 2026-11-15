@@ -100,6 +100,8 @@ items:
     pass_score: 100
     requires: [strat-game-rules-test]
     verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: strategy}, {role: subteam-mentor, tree: strategy}]}}
+    training:
+      - {type: doc, label: The drive team checklist, url: "https://docs.google.com/document/d/1K9Gcvyovt-huFC-B3mxIss-pujtFLUHwXVgj2CyBPFY/edit"}
     renews: season
     visibility: public
 
@@ -142,6 +144,8 @@ items:
     kind: check
     requires: [strat-game-rules-test]
     verify: {method: signoff, by: {any_of: [{role: subteam-lead, tree: strategy}, {role: subteam-mentor, tree: strategy}]}}
+    training:
+      - {type: doc, label: The drive team checklist, url: "https://docs.google.com/document/d/1K9Gcvyovt-huFC-B3mxIss-pujtFLUHwXVgj2CyBPFY/edit"}
     renews: season
     visibility: public
 
@@ -166,6 +170,29 @@ items:
     visibility: public
 
   # ---------------------------------------------------------------- Expert
+  - id: strat-drive-checklist
+    tier: 3
+    track: Drive
+    name: Season drive team checklist
+    description: >-
+      Update the drive team checklist for this season's robot and game - before
+      queueing, in queue, on the field, at the driver station and after the
+      round - and get the drive team using it every match.
+    roles: [student]
+    kind: check
+    requires: [strat-robot-cone-course]
+    verify: {method: signoff, by: {any_of: [{role: subteam-mentor, tree: strategy}, {role: lead-mentor}]}}
+    practical:
+      summary: Own the checklist the drive team runs every match.
+      steps:
+        - After kickoff, go through last season's checklist with the drive team and programming
+        - Add what this robot and game need (battery, code version, auto selection, game pieces)
+        - Run it in practice matches and fix what the drive team skips or trips on
+    training:
+      - {type: doc, label: The drive team checklist, url: "https://docs.google.com/document/d/1K9Gcvyovt-huFC-B3mxIss-pujtFLUHwXVgj2CyBPFY/edit"}
+    renews: season
+    visibility: public
+
   - id: strat-pick-list
     tier: 3
     track: Strategy
